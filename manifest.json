@@ -1,0 +1,9 @@
+{
+  "name": "AvnLookalike",
+  "short_name": "AvnLookalike",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0284c7",
+  "description": "Visual avian identification, species-pair disambiguation, and field eliminator"
+}

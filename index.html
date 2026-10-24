@@ -230,18 +230,32 @@
     function updateFilterButtons() {
       const allBtn = document.getElementById('f-all');
       if (activeFilters.size === 0) {
+        allBtn.textContent = 'All 11';
         allBtn.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition";
       } else {
-        allBtn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        allBtn.textContent = `Reset (${activeFilters.size})`;
+        allBtn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-700/60 hover:border-amber-600 shrink-0 transition";
       }
 
-      ['streaked', 'unstreaked', 'eyering', 'pink_bill', 'rufous_cap', 'yellow_lores'].forEach(trait => {
+      const labels = {
+        'streaked': 'Streaked Breast',
+        'unstreaked': 'Unstreaked Breast',
+        'eyering': 'Eye-Ring',
+        'pink_bill': 'Pink Bill',
+        'rufous_cap': 'Rufous Cap',
+        'yellow_lores': 'Yellow Lores'
+      };
+
+      Object.keys(labels).forEach(trait => {
         const btn = document.getElementById(`f-${trait}`);
         if (!btn) return;
+        const baseLabel = labels[trait];
         if (activeFilters.has(trait)) {
-          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white border border-sky-500 shrink-0 transition shadow-sm";
+          btn.innerHTML = `&#10003; ${baseLabel}`;
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
         } else {
-          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+          btn.textContent = baseLabel;
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
         }
       });
     }
@@ -276,7 +290,9 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        navigator.serviceWorker.register('sw.js?v=5').then(reg => {
+          reg.update();
+        }).catch(() => {});
       });
     }
 

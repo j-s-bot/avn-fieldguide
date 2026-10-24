@@ -1,4 +1,4 @@
-const CACHE_NAME = 'avn-lookalike-v1';
+const CACHE_NAME = 'avn-lookalike-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -21,8 +21,17 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
+// Network-First with Cache Fallback for instant updates and offline resilience
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request)
+      .then((networkRes) => {
+        if (networkRes && networkRes.status === 200) {
+          const resClone = networkRes.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, resClone));
+        }
+        return networkRes;
+      })
+      .catch(() => caches.match(e.request))
   );
 });

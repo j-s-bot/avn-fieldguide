@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>AvnLookalike | Waterfowl & Duck Disambiguation Guide</title>
-  <meta name="description" content="Visual waterfowl identification and sexually dimorphic drake vs hen lookalike species elimination with scientific hand-drawn plates.">
+  <meta name="description" content="Visual waterfowl identification, eBird seasonal frequency tiers, and sexually dimorphic drake vs hen lookalike species elimination with scientific hand-drawn plates.">
   <meta name="theme-color" content="#030712">
   <link rel="manifest" href="manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,7 @@
             Sparrows (11)
           </a>
           <span class="px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white shadow-sm ring-1 ring-sky-400/50 transition">
-            Ducks (25)
+            Ducks (29)
           </span>
         </nav>
       </div>
@@ -43,36 +43,44 @@
       <!-- Dynamic Results Counter -->
       <div class="flex items-center gap-2 shrink-0 text-xs">
         <span id="matchCounter" class="text-xs font-semibold tabular-nums text-slate-300 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
-          25 variants shown
+          29 variants shown
         </span>
       </div>
 
     </div>
 
-    <!-- Horizontal Multi-Select Trait & Sex Filter Bar -->
+    <!-- Horizontal Multi-Select Trait, Rarity & Sex Filter Bar -->
     <div class="max-w-6xl mx-auto mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
       <!-- Sex filters -->
-      <button onclick="toggleSex('all')" id="f-sex-all" title="Show all 25 drake and hen cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 25</button>
+      <button onclick="toggleSex('all')" id="f-sex-all" title="Show all 29 drake and hen cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 29</button>
       <button onclick="toggleSex('drake')" id="f-sex-drake" title="Filter to male / drake variants only" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Drake (Male)</button>
       <button onclick="toggleSex('hen')" id="f-sex-hen" title="Filter to female / hen variants only (isolates confusing brown hens)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Hen (Female)</button>
 
       <span class="text-slate-700">|</span>
 
+      <!-- eBird Rarity Tiers -->
+      <button onclick="toggleRarity('all')" id="f-rarity-all" title="Show all eBird status levels (Common, Uncommon, and Rare)" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition">All Status</button>
+      <button onclick="toggleRarity('common')" id="f-rarity-common" title="eBird Common: Expected, high-frequency species (>15% checklists) in Central MD late fall" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Common</button>
+      <button onclick="toggleRarity('uncommon')" id="f-rarity-uncommon" title="eBird Uncommon: Regular seasonal migrants or localized winter arrivals (1% - 15% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Uncommon</button>
+      <button onclick="toggleRarity('rare')" id="f-rarity-rare" title="eBird Rare / Review Species: Eurasian vagrants requiring documentation (Tufted Duck & Eurasian Wigeon)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help">&#9733; Rares Only</button>
+
+      <span class="text-slate-700">|</span>
+
       <!-- Guild filters -->
       <button onclick="toggleTrait('dabbler')" id="f-dabbler" title="Dabbler: Puddle ducks that feed on the surface or tip tail-up in shallow water (Mallard, Gadwall, Shoveler, Pintail, Teal, Wigeon, Wood Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Dabbler</button>
-      <button onclick="toggleTrait('diver')" id="f-diver" title="Diver: Diving ducks that completely submerge to feed in deeper water (Ring-necked, Scaup, Bufflehead, Merganser, Ruddy)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Diver</button>
+      <button onclick="toggleTrait('diver')" id="f-diver" title="Diver: Diving ducks that completely submerge to feed in deeper water (Ring-necked, Scaup, Bufflehead, Merganser, Ruddy, Tufted Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Diver</button>
 
       <span class="text-slate-700">|</span>
 
       <!-- Diagnostic Crux Trait Filters with Tooltips -->
       <button onclick="toggleTrait('spatulate_bill')" id="f-spatulate_bill" title="Spatulate Bill: Broad, flattened spoon-shaped bill with fine straining lamellae (Northern Shoveler)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Spatulate Bill</button>
       <button onclick="toggleTrait('white_bill_ring')" id="f-white_bill_ring" title="White Bill Ring: Distinct white band encircling the bill near the black tip (Ring-necked Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Bill Ring</button>
-      <button onclick="toggleTrait('crested_head')" id="f-crested_head" title="Crested Head: Elongated crown feathers forming a fan, bushy crest, or sweeping tuft (Wood Duck, Hooded Merganser)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Crested Head</button>
+      <button onclick="toggleTrait('crested_head')" id="f-crested_head" title="Crested Head / Tuft: Elongated crown feathers forming a fan, drooping crest, or tuft (Wood Duck, Hooded Merganser, Tufted Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Crested / Tufted</button>
       <button onclick="toggleTrait('green_head')" id="f-green_head" title="Green Head / Patch: Iridescent bottle-green or emerald crown, facial patch, or speculum" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Green Head/Patch</button>
       <button onclick="toggleTrait('white_cheek_patch')" id="f-white_cheek_patch" title="White Cheek Patch: Distinct stark white patch on cheek or behind eye (Bufflehead, Ruddy Duck, Hooded Merganser)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Cheek Patch</button>
       <button onclick="toggleTrait('white_speculum')" id="f-white_speculum" title="White Speculum: Brilliant white secondary wing patch (100% diagnostic crux for Gadwall)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Speculum</button>
       <button onclick="toggleTrait('stiff_tail')" id="f-stiff_tail" title="Stiff Upright Tail: Pointed spiky tail feathers held cocked vertically upright above water (Ruddy Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Stiff Tail</button>
-      <button onclick="toggleTrait('white_bill_base')" id="f-white_bill_base" title="White at Bill Base: Crisp white facial mask or ring encircling base of bill (Lesser Scaup Hen, Ring-necked Hen)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White at Bill Base</button>
+      <button onclick="toggleTrait('white_bill_base')" id="f-white_bill_base" title="White at Bill Base: Crisp white facial mask or ring encircling base of bill (Lesser Scaup Hen, Ring-necked Hen, Tufted Hen)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White at Bill Base</button>
       
       <div class="ml-auto pl-2 flex items-center gap-1 border-l border-slate-800 shrink-0">
         <button onclick="setViewMode('both')" id="vm-both" class="view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white">Both</button>
@@ -121,7 +129,8 @@
         "mark": "Deep purplish-chestnut breast; white tail with diagnostic black upward-curled central feathers."
       }
     ],
-    "rule_out": "Bottle-green head + crisp white neck ring + yellow bill + curled black tail coverts = Mallard Drake."
+    "rule_out": "Bottle-green head + crisp white neck ring + yellow bill + curled black tail coverts = Mallard Drake.",
+    "rarity": "common"
   },
   {
     "id": "mallard_hen",
@@ -154,7 +163,8 @@
         "mark": "Contrasting pale whitish tail; dark eyeline cutting across buffy face from bill to nape."
       }
     ],
-    "rule_out": "Dull orange bill with dark central saddle + two white bars flanking blue speculum + pale tail = Mallard Hen."
+    "rule_out": "Dull orange bill with dark central saddle + two white bars flanking blue speculum + pale tail = Mallard Hen.",
+    "rarity": "common"
   },
   {
     "id": "black_duck",
@@ -187,7 +197,8 @@
         "mark": "Violet-purple speculum bordered in black; lacks the bold white leading edge bar of Mallard."
       }
     ],
-    "rule_out": "Sooty black-brown body + pale contrasting gray head + unspotted olive bill + no white in speculum = American Black Duck."
+    "rule_out": "Sooty black-brown body + pale contrasting gray head + unspotted olive bill + no white in speculum = American Black Duck.",
+    "rarity": "common"
   },
   {
     "id": "gadwall_drake",
@@ -221,7 +232,8 @@
         "mark": "Plain sandy grayish-brown head with steep forehead; relatively small, all-dark slate bill."
       }
     ],
-    "rule_out": "Finely vermiculated gray body + jet-black stern + plain sandy head + white speculum patch = Gadwall Drake."
+    "rule_out": "Finely vermiculated gray body + jet-black stern + plain sandy head + white speculum patch = Gadwall Drake.",
+    "rarity": "common"
   },
   {
     "id": "gadwall_hen",
@@ -255,7 +267,8 @@
         "mark": "Noticeably smaller, sleeker, and steeper-foreheaded than Hen Mallard; plain grayish-buff face."
       }
     ],
-    "rule_out": "Bright white speculum patch + orange bill sides with dark center ridge + steep forehead = Gadwall Hen."
+    "rule_out": "Bright white speculum patch + orange bill sides with dark center ridge + steep forehead = Gadwall Hen.",
+    "rarity": "common"
   },
   {
     "id": "wood_duck_drake",
@@ -290,7 +303,8 @@
         "mark": "Rich burgundy-chestnut breast flecked with white triangles; delicate golden-buff flanks."
       }
     ],
-    "rule_out": "Sweeping crested green head + white facial bridles + fiery red eye + chestnut breast = Wood Duck Drake."
+    "rule_out": "Sweeping crested green head + white facial bridles + fiery red eye + chestnut breast = Wood Duck Drake.",
+    "rarity": "common"
   },
   {
     "id": "wood_duck_hen",
@@ -324,7 +338,8 @@
         "mark": "Warm brownish-gray chest neatly mottled with soft buffy-white teardrop spots."
       }
     ],
-    "rule_out": "Bold white teardrop eye spectacle + swept-back crest + dark slender bill = Wood Duck Hen."
+    "rule_out": "Bold white teardrop eye spectacle + swept-back crest + dark slender bill = Wood Duck Hen.",
+    "rarity": "common"
   },
   {
     "id": "teal_drake",
@@ -358,7 +373,8 @@
         "mark": "Bright creamy yellowish-buff patch on undertail coverts; smallest North American dabbling duck."
       }
     ],
-    "rule_out": "Tiny body + chestnut head with green eye swoosh + vertical white shoulder bar = Green-winged Teal Drake."
+    "rule_out": "Tiny body + chestnut head with green eye swoosh + vertical white shoulder bar = Green-winged Teal Drake.",
+    "rarity": "common"
   },
   {
     "id": "teal_hen",
@@ -391,7 +407,8 @@
         "mark": "Dark horizontal eyeline across buff face; small, slender, all-dark slate-black bill."
       }
     ],
-    "rule_out": "Very tiny size + petite dark bill + bright green speculum flash + mottled brown plumage = Green-winged Teal Hen."
+    "rule_out": "Very tiny size + petite dark bill + bright green speculum flash + mottled brown plumage = Green-winged Teal Hen.",
+    "rarity": "common"
   },
   {
     "id": "ring_necked_drake",
@@ -425,7 +442,8 @@
         "mark": "Jet-black back contrasting with pale gray flanks; prominent white vertical spur rising up front of flank."
       }
     ],
-    "rule_out": "Peaked angular crown + jet-black back + white vertical flank spur + bold white bill ring = Ring-necked Drake."
+    "rule_out": "Peaked angular crown + jet-black back + white vertical flank spur + bold white bill ring = Ring-necked Drake.",
+    "rarity": "common"
   },
   {
     "id": "ring_necked_hen",
@@ -460,7 +478,8 @@
         "mark": "Angular, peaked crown shape identical to drake; warm chocolate-brown body with paler flanks."
       }
     ],
-    "rule_out": "Peaked crown + white eye-ring with trailing line + white bill band near black tip = Ring-necked Duck Hen."
+    "rule_out": "Peaked crown + white eye-ring with trailing line + white bill band near black tip = Ring-necked Duck Hen.",
+    "rarity": "common"
   },
   {
     "id": "ruddy_duck_male",
@@ -495,7 +514,8 @@
         "mark": "Diagnostic stiff, pointed, spiky tail feathers, frequently held cocked vertically upright."
       }
     ],
-    "rule_out": "Solid dark cap + pure white cheek + cocked stiff spiky tail + scooped bill = Ruddy Duck (Winter Male)."
+    "rule_out": "Solid dark cap + pure white cheek + cocked stiff spiky tail + scooped bill = Ruddy Duck (Winter Male).",
+    "rarity": "uncommon"
   },
   {
     "id": "ruddy_duck_female",
@@ -529,7 +549,8 @@
         "mark": "Stiff spiky tail often cocked straight up; low, buoyant swimming profile with thick neck."
       }
     ],
-    "rule_out": "Dark cap + horizontal dark stripe bisecting pale cheek + cocked stiff spiky tail = Ruddy Duck (Hen / Immature)."
+    "rule_out": "Dark cap + horizontal dark stripe bisecting pale cheek + cocked stiff spiky tail = Ruddy Duck (Hen / Immature).",
+    "rarity": "uncommon"
   },
   {
     "id": "bufflehead_drake",
@@ -563,7 +584,8 @@
         "mark": "Very small, buoyant diving duck; gleaming pure white flanks and belly contrasting with black back."
       }
     ],
-    "rule_out": "Enormous white wedge on puffy dark head + gleaming white body + tiny compact diving build = Bufflehead Drake."
+    "rule_out": "Enormous white wedge on puffy dark head + gleaming white body + tiny compact diving build = Bufflehead Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "bufflehead_hen",
@@ -597,7 +619,8 @@
         "mark": "One of the smallest North American diving ducks; continually pops to surface like a buoyant cork."
       }
     ],
-    "rule_out": "Tiny dark diver + neat single oval white cheek patch behind eye + stubby bill = Bufflehead Hen."
+    "rule_out": "Tiny dark diver + neat single oval white cheek patch behind eye + stubby bill = Bufflehead Hen.",
+    "rarity": "uncommon"
   },
   {
     "id": "hooded_merganser_drake",
@@ -632,7 +655,8 @@
         "mark": "Warm reddish-tawny / cinnamon flanks; two black breast spurs; piercing yellow eye."
       }
     ],
-    "rule_out": "Massive white fan crest outlined in black + narrow serrated bill + tawny flanks = Hooded Merganser Drake."
+    "rule_out": "Massive white fan crest outlined in black + narrow serrated bill + tawny flanks = Hooded Merganser Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "hooded_merganser_hen",
@@ -666,7 +690,8 @@
         "mark": "Overall dark sooty grayish-brown body with white wing bar; dark brown eye (unlike drake's yellow)."
       }
     ],
-    "rule_out": "Ragged bushy cinnamon crest + slender serrated bill with orange edge + dark brown eye = Hooded Merganser Hen."
+    "rule_out": "Ragged bushy cinnamon crest + slender serrated bill with orange edge + dark brown eye = Hooded Merganser Hen.",
+    "rarity": "uncommon"
   },
   {
     "id": "pintail_drake",
@@ -699,7 +724,8 @@
         "mark": "Extremely long, graceful, slender neck and exceptionally elongated needle-point central tail feathers."
       }
     ],
-    "rule_out": "Chocolate head + clean white neck stripe + long slender neck + needle-point tail = Northern Pintail Drake."
+    "rule_out": "Chocolate head + clean white neck stripe + long slender neck + needle-point tail = Northern Pintail Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "pintail_hen",
@@ -732,7 +758,8 @@
         "mark": "Plain, warm buffy-tan head without bold dark eyeline; pointed central tail feathers."
       }
     ],
-    "rule_out": "Long slender neck + plain unmarked tan head + solid dark slate bill + pointed tail = Northern Pintail Hen."
+    "rule_out": "Long slender neck + plain unmarked tan head + solid dark slate bill + pointed tail = Northern Pintail Hen.",
+    "rarity": "uncommon"
   },
   {
     "id": "shoveler_drake",
@@ -767,7 +794,8 @@
         "mark": "Bright, piercing lemon-yellow eye set against the dark green head."
       }
     ],
-    "rule_out": "Massive black spoon-shaped bill + green head + white breast + chestnut sides = Northern Shoveler Drake."
+    "rule_out": "Massive black spoon-shaped bill + green head + white breast + chestnut sides = Northern Shoveler Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "shoveler_hen",
@@ -801,7 +829,8 @@
         "mark": "Coarsely mottled grayish-brown plumage with bright orange legs and feet."
       }
     ],
-    "rule_out": "Massive spoon-shaped bill (larger than head) + dull orange bill edges + mottled brown body = Northern Shoveler Hen."
+    "rule_out": "Massive spoon-shaped bill (larger than head) + dull orange bill edges + mottled brown body = Northern Shoveler Hen.",
+    "rarity": "uncommon"
   },
   {
     "id": "wigeon_drake",
@@ -835,7 +864,8 @@
         "mark": "Warm pinkish-cinnamon flanks contrasting with clean white belly patch and black undertail coverts."
       }
     ],
-    "rule_out": "White forehead stripe + green eye patch + small pale blue bill with black tip = American Wigeon Drake."
+    "rule_out": "White forehead stripe + green eye patch + small pale blue bill with black tip = American Wigeon Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "wigeon_hen",
@@ -868,7 +898,8 @@
         "mark": "Distinct dark dusky smudge or 'mascara' around the dark eye on a rounded head with steep forehead."
       }
     ],
-    "rule_out": "Small pale blue bill with black tip + gray head contrasting with warm cinnamon flanks = American Wigeon Hen."
+    "rule_out": "Small pale blue bill with black tip + gray head contrasting with warm cinnamon flanks = American Wigeon Hen.",
+    "rarity": "uncommon"
   },
   {
     "id": "scaup_drake",
@@ -901,7 +932,8 @@
         "mark": "Purplish gloss on black head (in good sun); pale grayish-white back with fine dark vermiculations."
       }
     ],
-    "rule_out": "Peaked rear crown bump + pale blue bill with small nail + vermiculated whitish back = Lesser Scaup Drake."
+    "rule_out": "Peaked rear crown bump + pale blue bill with small nail + vermiculated whitish back = Lesser Scaup Drake.",
+    "rarity": "uncommon"
   },
   {
     "id": "scaup_hen",
@@ -935,11 +967,152 @@
         "mark": "Pale bluish-gray bill with narrow dark nail; bright lemon-yellow eye set in dark brown face."
       }
     ],
-    "rule_out": "Stark white patch around bill base + peaked rear crown + pale blue bill + yellow eye = Lesser Scaup Hen."
+    "rule_out": "Stark white patch around bill base + peaked rear crown + pale blue bill + yellow eye = Lesser Scaup Hen.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "tufted_duck_drake",
+    "rank": "R1",
+    "name": "Tufted Duck (Drake)",
+    "sci": "Aythya fuligula",
+    "prob": "<0.1%",
+    "rarity": "rare",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "crested_head",
+      "diver"
+    ],
+    "plate": "assets/duck_plates/tufted_duck_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Long drooping nape tuft, solid black back, gleaming stark white flanks, blue bill with black tip",
+    "photo": "assets/ducks/tufted_duck_drake_1.jpg",
+    "photo_caption": "Field profile: Eurasian vagrant in MD; prominent drooping head tuft, stark white sides, yellow eye",
+    "crux_photo": "assets/ducks/tufted_duck_drake_2.jpg",
+    "crux_caption": "Flock comparison: Black back like Ring-necked Duck, but clean white flanks like Scaup; no white bill ring",
+    "diagnostics": [
+      {
+        "tract": "Crest / Tuft",
+        "mark": "Diagnostic long, slender, drooping black tuft hanging off the rear of the crown down the nape."
+      },
+      {
+        "tract": "Back & Flanks",
+        "mark": "Solid jet-black back (like Ring-necked) combined with gleaming pure snow-white flanks (like Scaup)."
+      },
+      {
+        "tract": "Bill & Eye",
+        "mark": "Pale bluish-gray bill with a broad black tip and small pale line behind nail; bright golden-yellow eye."
+      }
+    ],
+    "rule_out": "Long drooping nape crest + solid black back + gleaming white flanks + plain blue bill (no white ring) = Tufted Duck Drake [RARE]."
+  },
+  {
+    "id": "tufted_duck_female",
+    "rank": "R2",
+    "name": "Tufted Duck (Hen)",
+    "sci": "Aythya fuligula",
+    "prob": "<0.1%",
+    "rarity": "rare",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "crested_head",
+      "white_bill_base",
+      "diver"
+    ],
+    "plate": "assets/duck_plates/tufted_duck_female_plate.jpg",
+    "plate_caption": "Diagnostic plate: Chocolate-brown diving duck, distinct rear crown tuft/bump, variable white at bill base",
+    "photo": "assets/ducks/tufted_duck_female_1.jpg",
+    "photo_caption": "Field profile: Dark brown diver with distinct short tuft at rear crown, pale flank wash, yellow eye",
+    "crux_photo": "assets/ducks/tufted_duck_female_2.jpg",
+    "crux_caption": "Resting view: Narrow pale feathers around bill base (can mimic Scaup, but note rear crown tuft and dark back)",
+    "diagnostics": [
+      {
+        "tract": "Crown Tuft",
+        "mark": "Short but distinct pointed tuft or swept-back crest bump at the rear of the crown."
+      },
+      {
+        "tract": "Bill Base",
+        "mark": "Variable, narrow white feathering encircling the base of the bill (less extensive/stark than Scaup Hen)."
+      },
+      {
+        "tract": "Coloration",
+        "mark": "Overall dark sooty-brown plumage; darker back than Lesser Scaup; bright yellow eye."
+      }
+    ],
+    "rule_out": "Dark brown diving duck + short rear crown tuft + narrow pale bill base + yellow eye = Tufted Duck Hen [RARE]."
+  },
+  {
+    "id": "eurasian_wigeon_drake",
+    "rank": "R3",
+    "name": "Eurasian Wigeon (Drake)",
+    "sci": "Mareca penelope",
+    "prob": "<0.5%",
+    "rarity": "rare",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "plate": "assets/duck_plates/eurasian_wigeon_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Rich cinnamon-rufous head, contrasting buff-yellow cream forehead, vermiculated silver-gray body",
+    "photo": "assets/ducks/eurasian_wigeon_drake_1.jpg",
+    "photo_caption": "Field profile: Regular Eurasian rarity in MD; bright buff-cream crown stripe, rich reddish head, gray flanks",
+    "crux_photo": "assets/ducks/eurasian_wigeon_drake_1.jpg",
+    "crux_caption": "Comparison crux: Lacks the white baldpate and green mask of American Wigeon; flanks are silver-gray, not pink-brown",
+    "diagnostics": [
+      {
+        "tract": "Head & Crown",
+        "mark": "Rich cinnamon-chestnut / rufous head with a contrasting bright buff-yellow cream forehead stripe."
+      },
+      {
+        "tract": "Flanks & Breast",
+        "mark": "Finely vermiculated silver-gray flanks (completely lacks American Wigeon's warm pinkish-cinnamon wash)."
+      },
+      {
+        "tract": "Underwing",
+        "mark": "Dusky grayish axillaries (underwing armpit feathers), contrasting with pure white axillaries of American Wigeon."
+      }
+    ],
+    "rule_out": "Rich chestnut-red head + buff/yellow cream forehead + silver-gray flanks = Eurasian Wigeon Drake [RARE]."
+  },
+  {
+    "id": "eurasian_wigeon_female",
+    "rank": "R4",
+    "name": "Eurasian Wigeon (Hen)",
+    "sci": "Mareca penelope",
+    "prob": "<0.5%",
+    "rarity": "rare",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "plate": "assets/duck_plates/eurasian_wigeon_female_plate.jpg",
+    "plate_caption": "Diagnostic plate: Warm rufous wash across head and breast, low contrast with flanks, lead-blue bill, white belly",
+    "photo": "assets/ducks/eurasian_wigeon_female_1.jpg",
+    "photo_caption": "Field profile: Overall warmer, more uniform reddish-brown tone than American Wigeon hen",
+    "crux_photo": "assets/ducks/eurasian_wigeon_female_1.jpg",
+    "crux_caption": "Crux check: Grayish axillaries (underwing); head and flanks blend without the frosty gray vs cinnamon clash",
+    "diagnostics": [
+      {
+        "tract": "Color Balance",
+        "mark": "Warm reddish-buff / rufous wash across entire head and neck, blending smoothly into the rufous flanks."
+      },
+      {
+        "tract": "Separation Crux",
+        "mark": "Lacks the distinct clash between frosty gray head and warm cinnamon flanks of American Wigeon hen."
+      },
+      {
+        "tract": "Underwing",
+        "mark": "Dusky grayish axillaries / underwing coverts (American Wigeon has clean pure white axillaries)."
+      }
+    ],
+    "rule_out": "Uniform warm reddish wash across head and flanks (no frosty gray head contrast) + gray underwing = Eurasian Wigeon Hen [RARE]."
   }
 ];
 
     let activeSex = 'all'; // 'all', 'drake', 'hen'
+    let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     const activeTraits = new Set();
     let currentViewMode = 'both'; // 'both', 'plates', 'photos'
     const photoModes = {}; // cardId -> 'primary' or 'crux'
@@ -952,6 +1125,11 @@
         // Sex filter
         if (activeSex === 'drake' && d.sex !== 'drake' && d.sex !== 'both') return false;
         if (activeSex === 'hen' && d.sex !== 'hen' && d.sex !== 'both') return false;
+
+        // Rarity filter
+        if (activeRarity === 'common' && d.rarity !== 'common') return false;
+        if (activeRarity === 'uncommon' && d.rarity !== 'uncommon') return false;
+        if (activeRarity === 'rare' && d.rarity !== 'rare') return false;
 
         // Trait filters (AND logic: must match all selected traits)
         for (const trait of activeTraits) {
@@ -966,13 +1144,12 @@
       // Update match counter
       const counter = document.getElementById('matchCounter');
       let label = `${filtered.length} variants shown`;
-      if (filtered.length === 1) {
-        if (activeSex === 'drake') label = '1 drake shown';
-        else if (activeSex === 'hen') label = '1 hen shown';
-        else label = '1 variant shown';
-      } else {
-        if (activeSex === 'drake') label = `${filtered.length} drakes shown`;
-        else if (activeSex === 'hen') label = `${filtered.length} hens shown`;
+      if (activeRarity === 'rare') {
+        label = `${filtered.length} rare vagrants shown`;
+      } else if (activeSex === 'drake') {
+        label = `${filtered.length} drakes shown`;
+      } else if (activeSex === 'hen') {
+        label = `${filtered.length} hens shown`;
       }
       counter.textContent = label;
 
@@ -980,7 +1157,7 @@
         container.innerHTML = `
           <div class="text-center py-16 px-4 bg-slate-900/50 border border-slate-800 rounded-xl">
             <h3 class="text-base font-semibold text-slate-200">No waterfowl match the active combination</h3>
-            <p class="text-xs text-slate-400 mt-1.5">Try deselecting some traits or resetting the sex filter to view more species.</p>
+            <p class="text-xs text-slate-400 mt-1.5">Try deselecting some traits or resetting the filters to view more species.</p>
             <button onclick="resetAllFilters()" class="mt-4 px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-600 text-white hover:bg-sky-500 transition">
               Reset All Filters
             </button>
@@ -992,7 +1169,13 @@
       filtered.forEach(d => {
         const card = document.createElement('article');
         card.id = `duck-${d.id}`;
-        card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+        
+        // Distinctive container styling: highlighted border for Rares
+        if (d.rarity === 'rare') {
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl p-3 sm:p-4 transition hover:border-amber-400 shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30";
+        } else {
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+        }
 
         // Diagnostics HTML
         const diagHtml = d.diagnostics.map(diag => `
@@ -1017,6 +1200,30 @@
         const guildBadge = d.guild === 'dabbler' ? 
           '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Dabbler</span>' :
           '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/40">Diver</span>';
+
+        // Frequency / Rarity Badge
+        let frequencyBadge = '';
+        let rarityCallout = '';
+        if (d.rarity === 'rare') {
+          frequencyBadge = `
+            <span class="text-[11px] font-black px-2 py-0.5 rounded border border-amber-500/80 bg-amber-500/20 text-amber-300 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <span class="bg-amber-400 text-slate-950 font-black px-1 rounded-[2px] text-[10px]">R</span>
+              Rare Vagrant
+            </span>
+          `;
+          rarityCallout = `
+            <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
+              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare Eurasian vagrant in Mid-Atlantic & Maryland. Detailed description/photo required.</span>
+              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.1% eBird freq</span>
+            </div>
+          `;
+        } else {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD late fall">
+              ${d.prob} freq
+            </span>
+          `;
+        }
 
         // Photo toggle state (primary vs crux)
         const currentPhotoMode = photoModes[d.id] || 'primary';
@@ -1105,11 +1312,12 @@
             </div>
             
             <div class="flex items-center gap-1.5 shrink-0">
-              <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD late fall">
-                ${d.prob} freq
-              </span>
+              ${frequencyBadge}
             </div>
           </div>
+
+          <!-- Rarity Callout for Review Species -->
+          ${rarityCallout}
 
           <!-- Visual Plates & Photos -->
           ${visualsHtml}
@@ -1136,9 +1344,19 @@
 
     function toggleSex(sex) {
       if (activeSex === sex) {
-        activeSex = 'all'; // toggle back to all if clicked again
+        activeSex = 'all';
       } else {
         activeSex = sex;
+      }
+      updateFilterButtons();
+      renderFeed();
+    }
+
+    function toggleRarity(rarity) {
+      if (activeRarity === rarity) {
+        activeRarity = 'all';
+      } else {
+        activeRarity = rarity;
       }
       updateFilterButtons();
       renderFeed();
@@ -1163,6 +1381,7 @@
 
     function resetAllFilters() {
       activeSex = 'all';
+      activeRarity = 'all';
       activeTraits.clear();
       updateFilterButtons();
       renderFeed();
@@ -1178,7 +1397,7 @@
         sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition";
         sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
-        sexAll.textContent = "All 25";
+        sexAll.textContent = "All 29";
         sexDrake.textContent = "Drake (Male)";
         sexHen.textContent = "Hen (Female)";
       } else if (activeSex === 'drake') {
@@ -1197,13 +1416,34 @@
         sexHen.innerHTML = "&#10003; Hen (Female)";
       }
 
+      // Rarity buttons
+      const rAll = document.getElementById('f-rarity-all');
+      const rCommon = document.getElementById('f-rarity-common');
+      const rUncommon = document.getElementById('f-rarity-uncommon');
+      const rRare = document.getElementById('f-rarity-rare');
+
+      [rAll, rCommon, rUncommon].forEach(b => {
+        b.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
+      });
+      rRare.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help";
+
+      if (activeRarity === 'all') {
+        rAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition";
+      } else if (activeRarity === 'common') {
+        rCommon.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+      } else if (activeRarity === 'uncommon') {
+        rUncommon.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+      } else if (activeRarity === 'rare') {
+        rRare.className = "filter-chip px-2.5 py-1 rounded text-xs font-black bg-amber-500 text-slate-950 border border-amber-400 shrink-0 transition shadow-sm ring-1 ring-amber-400/60";
+      }
+
       // Trait buttons
       const traitLabels = {
         'dabbler': 'Dabbler',
         'diver': 'Diver',
         'spatulate_bill': 'Spatulate Bill',
         'white_bill_ring': 'White Bill Ring',
-        'crested_head': 'Crested Head',
+        'crested_head': 'Crested / Tufted',
         'green_head': 'Green Head/Patch',
         'white_cheek_patch': 'White Cheek Patch',
         'white_speculum': 'White Speculum',
@@ -1238,7 +1478,7 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=7').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=8').then(reg => {
           reg.update();
         }).catch(() => {});
       });

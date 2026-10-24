@@ -42,13 +42,13 @@
 
     <!-- Horizontal Multi-Select Trait Filter Bar -->
     <div class="max-w-6xl mx-auto mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-      <button onclick="toggleFilter('all')" id="f-all" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 11</button>
-      <button onclick="toggleFilter('streaked')" id="f-streaked" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Streaked Breast</button>
-      <button onclick="toggleFilter('unstreaked')" id="f-unstreaked" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Unstreaked Breast</button>
-      <button onclick="toggleFilter('eyering')" id="f-eyering" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Eye-Ring</button>
-      <button onclick="toggleFilter('pink_bill')" id="f-pink_bill" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Pink Bill</button>
-      <button onclick="toggleFilter('rusty_cap')" id="f-rusty_cap" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Rusty Cap</button>
-      <button onclick="toggleFilter('yellow')" id="f-yellow" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Yellow on Face</button>
+      <button onclick="toggleFilter('all')" id="f-all" title="Show all 11 confusing late-October sparrows" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 11</button>
+      <button onclick="toggleFilter('streaked')" id="f-streaked" title="Underparts marked with dark vertical stripes, spots, or chevrons (e.g. Song, Savannah, Lincoln's, Fox, Vesper)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Streaked Breast</button>
+      <button onclick="toggleFilter('unstreaked')" id="f-unstreaked" title="Plain, smooth, unstreaked underparts with zero vertical stripes (e.g. White-throated, Swamp, Chipping, Field, White-crowned)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Unstreaked Breast</button>
+      <button onclick="toggleFilter('eyering')" id="f-eyering" title="Eye-Ring: A prominent ring of pale or white feathers completely encircling the eye (e.g. Field, Vesper)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Eye-Ring</button>
+      <button onclick="toggleFilter('pink_bill')" id="f-pink_bill" title="Candy-pink or bubblegum-pink bill on both upper and lower mandibles (diagnostic for Field Sparrow)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Pink Bill</button>
+      <button onclick="toggleFilter('rufous_cap')" id="f-rufous_cap" title="Rufous: Ornithological term for rusty reddish-brown color on the crown (e.g. Swamp, Chipping, Field)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Rufous Cap</button>
+      <button onclick="toggleFilter('yellow_lores')" id="f-yellow_lores" title="Lores: The facial area between the eye and the bill base; marked with yellow dots in White-throated & Savannah" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Yellow Lores</button>
       
       <div class="ml-auto pl-2 flex items-center gap-1 border-l border-slate-800 shrink-0">
         <button onclick="setViewMode('split')" id="vm-split" class="view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white">Both</button>
@@ -81,9 +81,9 @@
         if (activeFilters.has('streaked') && s.breast !== 'streaked') return false;
         if (activeFilters.has('unstreaked') && s.breast !== 'unstreaked') return false;
         if (activeFilters.has('eyering') && !s.eyering) return false;
-        if (activeFilters.has('yellow') && !s.yellow) return false;
+        if (activeFilters.has('yellow_lores') && !s.yellow) return false;
         if (activeFilters.has('pink_bill') && !s.pink_bill) return false;
-        if (activeFilters.has('rusty_cap') && !s.rufous_crown) return false;
+        if (activeFilters.has('rufous_cap') && !s.rufous_crown) return false;
         return true;
       });
 
@@ -235,7 +235,7 @@
         allBtn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
       }
 
-      ['streaked', 'unstreaked', 'eyering', 'pink_bill', 'rusty_cap', 'yellow'].forEach(trait => {
+      ['streaked', 'unstreaked', 'eyering', 'pink_bill', 'rufous_cap', 'yellow_lores'].forEach(trait => {
         const btn = document.getElementById(`f-${trait}`);
         if (!btn) return;
         if (activeFilters.has(trait)) {

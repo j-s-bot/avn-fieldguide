@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>AvnLookalike | Waterfowl & Duck Disambiguation Guide</title>
-  <meta name="description" content="Visual waterfowl identification and sexually dimorphic drake vs hen lookalike species elimination.">
+  <meta name="description" content="Visual waterfowl identification and sexually dimorphic drake vs hen lookalike species elimination with scientific hand-drawn plates.">
   <meta name="theme-color" content="#030712">
   <link rel="manifest" href="manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -76,8 +76,8 @@
       
       <div class="ml-auto pl-2 flex items-center gap-1 border-l border-slate-800 shrink-0">
         <button onclick="setViewMode('both')" id="vm-both" class="view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white">Both</button>
-        <button onclick="setViewMode('profile')" id="vm-profile" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Profile</button>
-        <button onclick="setViewMode('crux')" id="vm-crux" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Crux</button>
+        <button onclick="setViewMode('plates')" id="vm-plates" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Plates</button>
+        <button onclick="setViewMode('photos')" id="vm-photos" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Photos</button>
       </div>
     </div>
   </header>
@@ -101,10 +101,12 @@
       "green_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/mallard_drake_1.jpg",
-    "img1_caption": "Iridescent bottle-green head, white neck ring, rich chestnut chest, bright yellow bill",
-    "img2": "assets/ducks/mallard_drake_2.jpg",
-    "img2_caption": "Flight view: royal blue-violet speculum bordered by two clean, stark white bars",
+    "plate": "assets/duck_plates/mallard_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Iridescent bottle-green head, crisp white collar ring, bright yellow bill, curled black tail coverts",
+    "photo": "assets/ducks/mallard_drake_1.jpg",
+    "photo_caption": "Field profile: Unspotted yellow bill, deep chestnut chest, silver-gray flanks",
+    "crux_photo": "assets/ducks/mallard_drake_2.jpg",
+    "crux_caption": "Wing in flight: Royal blue-violet speculum bordered by two clean white bars",
     "diagnostics": [
       {
         "tract": "Head & Neck",
@@ -132,10 +134,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/mallard_hen_1.jpg",
-    "img1_caption": "Mottled drab brown body, dark eyeline, orange bill with dark saddle on culmen",
-    "img2": "assets/ducks/mallard_hen_2.jpg",
-    "img2_caption": "Swimming profile: contrasting whitish tail, bold orange-and-black bill, mottled flank pattern",
+    "plate": "assets/duck_plates/mallard_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Mottled drab brown body, orange bill with dark culmen saddle, blue speculum with two white bars",
+    "photo": "assets/ducks/mallard_hen_1.jpg",
+    "photo_caption": "Field profile: Orange bill with dark central saddle, transocular dark eyeline, mottled brown flanks",
+    "crux_photo": "assets/ducks/mallard_hen_2.jpg",
+    "crux_caption": "Flank & tail: Contrasting pale whitish tail, bold orange-and-black bill, mottled plumage",
     "diagnostics": [
       {
         "tract": "Bill",
@@ -163,10 +167,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/black_duck_1.jpg",
-    "img1_caption": "Very dark sooty-brown body contrasting with pale grayish-buff head and olive bill",
-    "img2": "assets/ducks/black_duck_2.jpg",
-    "img2_caption": "Speculum view: rich violet-blue speculum with clean black borders and NO white front bar",
+    "plate": "assets/duck_plates/black_duck_plate.jpg",
+    "plate_caption": "Diagnostic plate: Deep sooty blackish-brown body, pale grayish-buff neck, unspotted olive bill, violet speculum",
+    "photo": "assets/ducks/black_duck_1.jpg",
+    "photo_caption": "Field profile: Substantially darker than hen Mallard; pale head sharply contrasts with dark sooty body",
+    "crux_photo": "assets/ducks/black_duck_2.jpg",
+    "crux_caption": "Wing speculum: Rich violet-blue speculum with black borders and NO white leading edge bar",
     "diagnostics": [
       {
         "tract": "Body Color",
@@ -195,10 +201,12 @@
       "white_speculum",
       "dabbler"
     ],
-    "img1": "assets/ducks/gadwall_drake_1.jpg",
-    "img1_caption": "Intricately vermiculated gray body, plain grayish-brown head, jet-black rump/undertail",
-    "img2": "assets/ducks/gadwall_drake_2.jpg",
-    "img2_caption": "Profile view showing square head, thin black bill, and bright white speculum patch visible on flank",
+    "plate": "assets/duck_plates/gadwall_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Vermiculated gray body, sandy head with steep forehead, dark slate bill, jet-black stern, white speculum",
+    "photo": "assets/ducks/gadwall_drake_1.jpg",
+    "photo_caption": "Field profile: Intricately patterned gray flanks, plain brownish head, jet-black rear rump/undertail",
+    "crux_photo": "assets/ducks/gadwall_drake_2.jpg",
+    "crux_caption": "Flank view: Square head shape, dark bill, and bright white speculum patch visible on lower flank",
     "diagnostics": [
       {
         "tract": "Rump & Rear",
@@ -227,10 +235,12 @@
       "white_speculum",
       "dabbler"
     ],
-    "img1": "assets/ducks/gadwall_hen_1.jpg",
-    "img1_caption": "Wing flap revealing diagnostic pure white speculum square (crux vs Hen Mallard)",
-    "img2": "assets/ducks/gadwall_hen_2.jpg",
-    "img2_caption": "Swimming profile: slender build, steep forehead, orange-edged bill with neat dark culmen line",
+    "plate": "assets/duck_plates/gadwall_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Steep forehead, two-tone bill with orange sides and dark center, white rectangular speculum patch",
+    "photo": "assets/ducks/gadwall_hen_1.jpg",
+    "photo_caption": "Wing flap: Diagnostic clean white speculum square (crucial crux separating from Hen Mallard)",
+    "crux_photo": "assets/ducks/gadwall_hen_2.jpg",
+    "crux_caption": "Field profile: Sleek build, steep forehead, orange-edged bill with neat dark culmen line",
     "diagnostics": [
       {
         "tract": "Speculum",
@@ -260,10 +270,12 @@
       "green_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/wood_duck_drake_1.jpg",
-    "img1_caption": "Extravagant iridescent green/purple crested head, ornate white facial bridles, scarlet eye and bill base",
-    "img2": "assets/ducks/wood_duck_drake_2.jpg",
-    "img2_caption": "Close-up of ornate head crest, crimson eye, white chin patch, and golden-buff vermiculated flanks",
+    "plate": "assets/duck_plates/wood_duck_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Sweeping green-purple crest, ornate white bridle stripes, scarlet eye, burgundy chest, buff flanks",
+    "photo": "assets/ducks/wood_duck_drake_1.jpg",
+    "photo_caption": "Field profile: Extravagant crested head, scarlet eye and bill base, golden-buff vermiculated flanks",
+    "crux_photo": "assets/ducks/wood_duck_drake_2.jpg",
+    "crux_caption": "Head close-up: Ornate white facial bridles, crimson eye, white chin patch, patterned bill",
     "diagnostics": [
       {
         "tract": "Head & Crest",
@@ -292,10 +304,12 @@
       "crested_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/wood_duck_hen_1.jpg",
-    "img1_caption": "Sleek crested grayish-brown body, bold snow-white teardrop patch around eye, white belly",
-    "img2": "assets/ducks/wood_duck_hen_2.jpg",
-    "img2_caption": "Swimming view showing bushy crest, teardrop spectacle, and iridescent bronze-blue wing flashes",
+    "plate": "assets/duck_plates/wood_duck_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Bold snow-white teardrop eye spectacle, bushy drooping crest, dark bill with pale basal line",
+    "photo": "assets/ducks/wood_duck_hen_1.jpg",
+    "photo_caption": "Field profile: Sleek crested grayish-brown body, bold snow-white teardrop patch around eye",
+    "crux_photo": "assets/ducks/wood_duck_hen_2.jpg",
+    "crux_caption": "Swimming posture: Bushy crest, teardrop spectacle, iridescent bronze-blue wing flashes",
     "diagnostics": [
       {
         "tract": "Eye Patch",
@@ -324,10 +338,12 @@
       "green_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/teal_drake_1.jpg",
-    "img1_caption": "Tiny size, rich chestnut head with broad iridescent green swoosh, vertical white shoulder bar",
-    "img2": "assets/ducks/teal_drake_2.jpg",
-    "img2_caption": "Resting view showing creamy yellowish-buff triangle under tail, finely vermiculated gray body",
+    "plate": "assets/duck_plates/teal_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Chestnut head with iridescent green swoosh, vertical white breast bar, yellow buff undertail patch",
+    "photo": "assets/ducks/teal_drake_1.jpg",
+    "photo_caption": "Field profile: Tiny compact size, rich chestnut head with green eye swoosh, vertical white shoulder bar",
+    "crux_photo": "assets/ducks/teal_drake_2.jpg",
+    "crux_caption": "Resting view: Creamy yellowish-buff triangle under tail, finely vermiculated gray body",
     "diagnostics": [
       {
         "tract": "Head Pattern",
@@ -355,10 +371,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/teal_hen_1.jpg",
-    "img1_caption": "Petite compact body, mottled brown plumage, dark eyeline, small neat blackish bill",
-    "img2": "assets/ducks/teal_hen_2.jpg",
-    "img2_caption": "Profile view: diminutive size, steep forehead, bright iridescent green speculum flash",
+    "plate": "assets/duck_plates/teal_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Petite dove-like build, mottled brown plumage, dark eyeline, small dark bill, green speculum flash",
+    "photo": "assets/ducks/teal_hen_1.jpg",
+    "photo_caption": "Field profile: Petite compact body, mottled brown plumage, dark eyeline, small neat blackish bill",
+    "crux_photo": "assets/ducks/teal_hen_2.jpg",
+    "crux_caption": "Close profile: Diminutive size, steep forehead, bright iridescent green speculum flash",
     "diagnostics": [
       {
         "tract": "Size & Build",
@@ -387,10 +405,12 @@
       "white_bill_ring",
       "diver"
     ],
-    "img1": "assets/ducks/ring_necked_drake_1.jpg",
-    "img1_caption": "Angular peaked head, jet-black back, white breast spur/crescent, bold white bill ring near black tip",
-    "img2": "assets/ducks/ring_necked_drake_2.jpg",
-    "img2_caption": "Swimming profile: contrasting pale gray flanks, peaked crown, bright yellow eye, white bill base and ring",
+    "plate": "assets/duck_plates/ring_necked_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Peaked angular crown, solid black back, white vertical breast spur, two white bill rings, yellow eye",
+    "photo": "assets/ducks/ring_necked_drake_1.jpg",
+    "photo_caption": "Field profile: Peaked angular head, jet-black back, white breast crescent, bold white bill ring near black tip",
+    "crux_photo": "assets/ducks/ring_necked_drake_2.jpg",
+    "crux_caption": "Swimming view: Pale gray flanks, peaked crown bump, bright yellow eye, white bill base and subterminal ring",
     "diagnostics": [
       {
         "tract": "Bill Pattern",
@@ -420,10 +440,12 @@
       "white_bill_base",
       "diver"
     ],
-    "img1": "assets/ducks/ring_necked_hen_1.jpg",
-    "img1_caption": "Warm brown body, peaked crown, prominent white eye-ring with trailing streak, subterminal white bill band",
-    "img2": "assets/ducks/ring_necked_hen_2.jpg",
-    "img2_caption": "Swimming profile showing diffuse pale bill base, peaked rear crown, and pale eye-ring",
+    "plate": "assets/duck_plates/ring_necked_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Peaked crown, white eye-ring with postocular line, subterminal white bill band, pale bill base",
+    "photo": "assets/ducks/ring_necked_hen_1.jpg",
+    "photo_caption": "Field profile: Warm brown body, peaked crown, prominent white eye-ring with trailing streak",
+    "crux_photo": "assets/ducks/ring_necked_hen_2.jpg",
+    "crux_caption": "Head detail: Diffuse pale bill base, peaked rear crown, subterminal white bill band near black tip",
     "diagnostics": [
       {
         "tract": "Eye & Face",
@@ -453,10 +475,12 @@
       "stiff_tail",
       "diver"
     ],
-    "img1": "assets/ducks/ruddy_duck_male_1.jpg",
-    "img1_caption": "Winter basic plumage: stark clean white cheek patch, solid dark cap to eye, cocked stiff spiky tail",
-    "img2": "assets/ducks/ruddy_duck_male_2.jpg",
-    "img2_caption": "Resting posture: compact dumpy body, scooped dark bill, diagnostic pure white cheek",
+    "plate": "assets/duck_plates/ruddy_duck_male_plate.jpg",
+    "plate_caption": "Diagnostic plate: Solid dark cap to eye level, stark pure white cheek, scooped dusky bill, cocked stiff spiky tail",
+    "photo": "assets/ducks/ruddy_duck_male_1.jpg",
+    "photo_caption": "Field profile: Winter basic plumage showing stark clean white cheek patch and cocked stiff spiky tail",
+    "crux_photo": "assets/ducks/ruddy_duck_male_2.jpg",
+    "crux_caption": "Resting posture: Compact dumpy body, scooped dark bill, diagnostic pure white cheek",
     "diagnostics": [
       {
         "tract": "Cheek Pattern",
@@ -485,10 +509,12 @@
       "stiff_tail",
       "diver"
     ],
-    "img1": "assets/ducks/ruddy_duck_female_1.jpg",
-    "img1_caption": "Dark cap, dirty whitish cheek bisected by a prominent dark horizontal cheek stripe, stiff tail",
-    "img2": "assets/ducks/ruddy_duck_female_2.jpg",
-    "img2_caption": "Swimming profile: compact body, scooped bill, horizontal dark stripe cutting across pale cheek",
+    "plate": "assets/duck_plates/ruddy_duck_female_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dark cap, pale cheek bisected by horizontal dark cheek stripe, scooped bill, stiff upright tail",
+    "photo": "assets/ducks/ruddy_duck_female_1.jpg",
+    "photo_caption": "Field profile: Dark cap, dirty whitish cheek bisected by a prominent dark horizontal cheek stripe, stiff tail",
+    "crux_photo": "assets/ducks/ruddy_duck_female_2.jpg",
+    "crux_caption": "Swimming profile: Compact body, scooped bill, horizontal dark stripe cutting across pale cheek",
     "diagnostics": [
       {
         "tract": "Cheek Stripe",
@@ -517,10 +543,12 @@
       "white_cheek_patch",
       "diver"
     ],
-    "img1": "assets/ducks/bufflehead_drake_1.jpg",
-    "img1_caption": "Puffy head with giant brilliant white pie-wedge patch from eye to nape, gleaming white body, black back",
-    "img2": "assets/ducks/bufflehead_drake_2.jpg",
-    "img2_caption": "Active swimming profile: tiny compact diver, iridescent green/purple sheen on front of puffy head",
+    "plate": "assets/duck_plates/bufflehead_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Puffy bulbous head, giant snow-white pie-wedge patch from eye across nape, black back, white flanks",
+    "photo": "assets/ducks/bufflehead_drake_1.jpg",
+    "photo_caption": "Field profile: Puffy head with giant brilliant white pie-wedge patch, gleaming white body, black back",
+    "crux_photo": "assets/ducks/bufflehead_drake_2.jpg",
+    "crux_caption": "Active swimming view: Tiny compact diver, iridescent green/purple sheen on front of puffy head",
     "diagnostics": [
       {
         "tract": "Head Pattern",
@@ -549,10 +577,12 @@
       "white_cheek_patch",
       "diver"
     ],
-    "img1": "assets/ducks/bufflehead_hen_1.jpg",
-    "img1_caption": "Diminutive dark gray-brown diver, neat clean white oval cheek patch behind eye, small stubby bill",
-    "img2": "assets/ducks/bufflehead_hen_2.jpg",
-    "img2_caption": "Swimming profile: petite size, round puffy head, distinct single white cheek slash",
+    "plate": "assets/duck_plates/bufflehead_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Tiny dark diver, rounded puffy head with neat single horizontal oval white cheek patch, stubby bill",
+    "photo": "assets/ducks/bufflehead_hen_1.jpg",
+    "photo_caption": "Field profile: Diminutive dark gray-brown diver, neat clean white oval cheek patch behind eye",
+    "crux_photo": "assets/ducks/bufflehead_hen_2.jpg",
+    "crux_caption": "Swimming posture: Petite size, round puffy head, distinct single white cheek slash",
     "diagnostics": [
       {
         "tract": "Cheek Patch",
@@ -582,10 +612,12 @@
       "white_cheek_patch",
       "diver"
     ],
-    "img1": "assets/ducks/hooded_merganser_drake_1.jpg",
-    "img1_caption": "Enormous fan-shaped crest with giant white patch outlined in black, thin serrated bill, rich tawny flanks",
-    "img2": "assets/ducks/hooded_merganser_drake_2.jpg",
-    "img2_caption": "Swimming view showing vertical black-and-white breast spurs, yellow eye, and ornate collapsible crest",
+    "plate": "assets/duck_plates/hooded_merganser_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Massive circular white fan-crest outlined in black, thin serrated bill, yellow eye, cinnamon flanks",
+    "photo": "assets/ducks/hooded_merganser_drake_1.jpg",
+    "photo_caption": "Field profile: Enormous fan-shaped crest with giant white patch, thin serrated bill, rich tawny flanks",
+    "crux_photo": "assets/ducks/hooded_merganser_drake_2.jpg",
+    "crux_caption": "Swimming profile: Vertical black-and-white breast spurs, yellow eye, ornate collapsible crest",
     "diagnostics": [
       {
         "tract": "Crest",
@@ -614,10 +646,12 @@
       "crested_head",
       "diver"
     ],
-    "img1": "assets/ducks/hooded_merganser_hen_1.jpg",
-    "img1_caption": "Shaggy bushy cinnamon-rufous crest, slender dark serrated bill with yellow/orange base, dark body",
-    "img2": "assets/ducks/hooded_merganser_hen_2.jpg",
-    "img2_caption": "Profile view: punk-rock bushy cinnamon crest, slender serrated bill, dark brown eye and flanks",
+    "plate": "assets/duck_plates/hooded_merganser_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Bushy ragged cinnamon-rufous crest, slender serrated bill with orange edge, dark brown eye",
+    "photo": "assets/ducks/hooded_merganser_hen_1.jpg",
+    "photo_caption": "Field profile: Shaggy bushy cinnamon-rufous crest, slender dark serrated bill with orange base, dark body",
+    "crux_photo": "assets/ducks/hooded_merganser_hen_2.jpg",
+    "crux_caption": "Swimming view: Bushy cinnamon crest, slender serrated bill, dark brown eye and flanks",
     "diagnostics": [
       {
         "tract": "Crest",
@@ -645,10 +679,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/pintail_drake_1.jpg",
-    "img1_caption": "Chocolate-brown head, snow-white breast extending up neck in crisp finger stripe, needle-like tail",
-    "img2": "assets/ducks/pintail_drake_2.jpg",
-    "img2_caption": "Elegant slender profile: very long graceful neck, vermiculated gray sides, extremely long pointed tail",
+    "plate": "assets/duck_plates/pintail_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Chocolate-brown head, snow-white neck stripe, very long slender neck, needle-point tail",
+    "photo": "assets/ducks/pintail_drake_1.jpg",
+    "photo_caption": "Field profile: Chocolate-brown head, snow-white breast extending up neck in crisp finger stripe, needle tail",
+    "crux_photo": "assets/ducks/pintail_drake_2.jpg",
+    "crux_caption": "Swimming posture: Slender graceful neck, vermiculated gray sides, extremely long pointed tail",
     "diagnostics": [
       {
         "tract": "Neck Stripe",
@@ -676,10 +712,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/pintail_hen_1.jpg",
-    "img1_caption": "Slender graceful neck, plain unmarked tan head, dark slate-gray bill (not orange!), pointed tail",
-    "img2": "assets/ducks/pintail_hen_2.jpg",
-    "img2_caption": "Profile view: elegant long neck, warm buffy throat, all-dark slate bill, pointed central tail",
+    "plate": "assets/duck_plates/pintail_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Long slender graceful neck, plain unmarked tan head, solid dark slate bill, pointed central tail",
+    "photo": "assets/ducks/pintail_hen_1.jpg",
+    "photo_caption": "Field profile: Slender graceful neck, plain unmarked tan head, dark slate-gray bill (not orange!)",
+    "crux_photo": "assets/ducks/pintail_hen_2.jpg",
+    "crux_caption": "Swimming view: Elegant long neck, warm buffy throat, all-dark slate bill, pointed central tail",
     "diagnostics": [
       {
         "tract": "Neck & Posture",
@@ -709,10 +747,12 @@
       "green_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/shoveler_drake_1.jpg",
-    "img1_caption": "Massive spatulate black spoon bill, iridescent dark green head, white chest, rich chestnut flanks",
-    "img2": "assets/ducks/shoveler_drake_2.jpg",
-    "img2_caption": "Resting view showing huge spatulate bill, bright yellow eye, white breast, chestnut belly",
+    "plate": "assets/duck_plates/shoveler_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Massive black spoon bill, iridescent bottle-green head, white chest, rich chestnut flanks",
+    "photo": "assets/ducks/shoveler_drake_1.jpg",
+    "photo_caption": "Field profile: Massive spatulate black spoon bill, green head, white chest, rich chestnut flanks",
+    "crux_photo": "assets/ducks/shoveler_drake_2.jpg",
+    "crux_caption": "Resting view: Giant spatulate bill, bright yellow eye, white breast, chestnut belly",
     "diagnostics": [
       {
         "tract": "Bill",
@@ -741,10 +781,12 @@
       "spatulate_bill",
       "dabbler"
     ],
-    "img1": "assets/ducks/shoveler_hen_1.jpg",
-    "img1_caption": "Massive spatulate orange-and-brown spoon bill, mottled brown body, orange legs (100% diagnostic bill)",
-    "img2": "assets/ducks/shoveler_hen_2.jpg",
-    "img2_caption": "Profile view: giant spoon bill with comb-like filtering lamellae, warm buffy-brown plumage",
+    "plate": "assets/duck_plates/shoveler_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Enormous spoon-shaped bill with orange sides and fine straining lamellae, front-heavy build",
+    "photo": "assets/ducks/shoveler_hen_1.jpg",
+    "photo_caption": "Field profile: Massive spatulate orange-and-brown spoon bill, mottled brown body, orange legs (100% diagnostic)",
+    "crux_photo": "assets/ducks/shoveler_hen_2.jpg",
+    "crux_caption": "Bill close-up: Giant spoon bill with comb-like filtering lamellae, warm buffy-brown plumage",
     "diagnostics": [
       {
         "tract": "Bill",
@@ -773,10 +815,12 @@
       "green_head",
       "dabbler"
     ],
-    "img1": "assets/ducks/wigeon_drake_1.jpg",
-    "img1_caption": "Bright white forehead ('baldpate'), broad iridescent green eye patch, pinkish-brown body, small blue bill",
-    "img2": "assets/ducks/wigeon_drake_2.jpg",
-    "img2_caption": "Swimming profile: small pale blue bill with black tip, gray speckled neck, clean white flank patch",
+    "plate": "assets/duck_plates/wigeon_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: White forehead ('baldpate'), iridescent green eye patch, small lead-blue bill, pinkish flanks",
+    "photo": "assets/ducks/wigeon_drake_1.jpg",
+    "photo_caption": "Field profile: Bright white forehead ('baldpate'), broad green eye patch, small pale blue bill with black tip",
+    "crux_photo": "assets/ducks/wigeon_drake_2.jpg",
+    "crux_caption": "Swimming view: Small blue bill with black tip, speckled gray neck, clean white flank patch",
     "diagnostics": [
       {
         "tract": "Crown & Face",
@@ -804,10 +848,12 @@
     "traits": [
       "dabbler"
     ],
-    "img1": "assets/ducks/wigeon_hen_1.jpg",
-    "img1_caption": "Round head, small pale blue bill with black tip, warm reddish-cinnamon flanks contrasting with grayish head",
-    "img2": "assets/ducks/wigeon_hen_2.jpg",
-    "img2_caption": "Resting view: dark smudge around eye, steep forehead, small blue bill, clean white belly",
+    "plate": "assets/duck_plates/wigeon_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Round head, dark eye smudge, small lead-blue black-tipped bill, warm cinnamon flanks",
+    "photo": "assets/ducks/wigeon_hen_1.jpg",
+    "photo_caption": "Field profile: Round head, small pale blue bill with black tip, warm reddish-cinnamon flanks",
+    "crux_photo": "assets/ducks/wigeon_hen_2.jpg",
+    "crux_caption": "Resting view: Dark smudge around eye, steep forehead, small blue bill, clean white belly",
     "diagnostics": [
       {
         "tract": "Bill",
@@ -835,10 +881,12 @@
     "traits": [
       "diver"
     ],
-    "img1": "assets/ducks/scaup_drake_1.jpg",
-    "img1_caption": "Purplish-black head with peaked rear crown bump, finely barred white/gray back, black chest, blue bill",
-    "img2": "assets/ducks/scaup_drake_2.jpg",
-    "img2_caption": "Swimming profile: pale blue bill ('bluebill'), steep rear head peak, bright white flanks",
+    "plate": "assets/duck_plates/scaup_drake_plate.jpg",
+    "plate_caption": "Diagnostic plate: Peaked rear crown bump, purplish head sheen, blue bill with small nail, vermiculated gray back",
+    "photo": "assets/ducks/scaup_drake_1.jpg",
+    "photo_caption": "Field profile: Purplish-black head with peaked rear crown bump, finely barred white/gray back, blue bill",
+    "crux_photo": "assets/ducks/scaup_drake_2.jpg",
+    "crux_caption": "Swimming profile: Pale blue bill ('bluebill'), steep rear head peak, bright white flanks",
     "diagnostics": [
       {
         "tract": "Crown Profile",
@@ -867,10 +915,12 @@
       "white_bill_base",
       "diver"
     ],
-    "img1": "assets/ducks/scaup_hen_1.jpg",
-    "img1_caption": "Dark brown diver, peaked rear crown, diagnostic stark white patch/mask encircling base of bill",
-    "img2": "assets/ducks/scaup_hen_2.jpg",
-    "img2_caption": "Profile view showing crisp white face patch against pale blue bill, peaked crown, yellow eye",
+    "plate": "assets/duck_plates/scaup_hen_plate.jpg",
+    "plate_caption": "Diagnostic plate: Stark white patch encircling bill base, peaked rear crown bump, lead-blue bill, yellow eye",
+    "photo": "assets/ducks/scaup_hen_1.jpg",
+    "photo_caption": "Field profile: Dark brown diver, peaked rear crown, diagnostic stark white patch encircling base of bill",
+    "crux_photo": "assets/ducks/scaup_hen_2.jpg",
+    "crux_caption": "Profile view: Crisp white face patch against pale blue bill, peaked crown, yellow eye",
     "diagnostics": [
       {
         "tract": "Face Patch",
@@ -891,7 +941,8 @@
 
     let activeSex = 'all'; // 'all', 'drake', 'hen'
     const activeTraits = new Set();
-    let currentViewMode = 'both'; // 'both', 'profile', 'crux'
+    let currentViewMode = 'both'; // 'both', 'plates', 'photos'
+    const photoModes = {}; // cardId -> 'primary' or 'crux'
 
     function renderFeed() {
       const container = document.getElementById('duckFeed');
@@ -967,52 +1018,75 @@
           '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Dabbler</span>' :
           '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/40">Diver</span>';
 
-        // Visual layout based on currentViewMode
+        // Photo toggle state (primary vs crux)
+        const currentPhotoMode = photoModes[d.id] || 'primary';
+        const activePhotoUrl = currentPhotoMode === 'primary' ? d.photo : d.crux_photo;
+        const activePhotoCaption = currentPhotoMode === 'primary' ? d.photo_caption : d.crux_caption;
+
+        const photoToggleHtml = `
+          <div class="flex items-center gap-1 mt-1.5 justify-end">
+            <button onclick="toggleCardPhoto('${d.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
+            <button onclick="toggleCardPhoto('${d.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          </div>
+        `;
+
+        // Visual layout based on currentViewMode (Both = Hand-drawn Plate on Left, Field Photo on Right)
         let visualsHtml = '';
         if (currentViewMode === 'both') {
           visualsHtml = `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <!-- Visual 1: Profile -->
+              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
               <div class="flex flex-col">
                 <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-sky-400 uppercase tracking-wide">Lateral Profile</span>
-                  <span class="text-slate-500 text-[10px]">Photo</span>
+                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
                 </div>
                 <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${d.img1}" alt="${d.name} Lateral Profile" loading="lazy" class="max-h-full max-w-full object-contain">
+                  <img src="${d.plate}" alt="${d.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img1_caption}</p>
+                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.plate_caption}</p>
               </div>
 
-              <!-- Visual 2: Crux / Speculum / Detail -->
+              <!-- Visual 2: Field Photograph (with Toggle) -->
               <div class="flex flex-col">
                 <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-amber-400 uppercase tracking-wide">Diagnostic Crux / Detail</span>
-                  <span class="text-slate-500 text-[10px]">Close-up</span>
+                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
                 </div>
                 <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${d.img2}" alt="${d.name} Crux Detail" loading="lazy" class="max-h-full max-w-full object-contain">
+                  <img src="${activePhotoUrl}" alt="${d.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img2_caption}</p>
+                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
+                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
+                  ${photoToggleHtml}
+                </div>
               </div>
             </div>
           `;
-        } else if (currentViewMode === 'profile') {
+        } else if (currentViewMode === 'plates') {
           visualsHtml = `
             <div class="mt-3">
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${d.img1}" alt="${d.name} Lateral Profile" loading="lazy" class="max-h-full max-w-full object-contain">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img1_caption}</p>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${d.plate}" alt="${d.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.plate_caption}</p>
             </div>
           `;
-        } else if (currentViewMode === 'crux') {
+        } else if (currentViewMode === 'photos') {
           visualsHtml = `
             <div class="mt-3">
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${d.img2}" alt="${d.name} Crux Detail" loading="lazy" class="max-h-full max-w-full object-contain">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                ${photoToggleHtml}
               </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img2_caption}</p>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${activePhotoUrl}" alt="${d.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
@@ -1053,6 +1127,11 @@
 
         container.appendChild(card);
       });
+    }
+
+    function toggleCardPhoto(cardId, mode) {
+      photoModes[cardId] = mode;
+      renderFeed();
     }
 
     function toggleSex(sex) {
@@ -1159,7 +1238,7 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=6').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=7').then(reg => {
           reg.update();
         }).catch(() => {});
       });

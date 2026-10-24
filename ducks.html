@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>AvnLookalike | Waterfowl & Duck Disambiguation Guide</title>
+  <meta name="description" content="Visual waterfowl identification and sexually dimorphic drake vs hen lookalike species elimination.">
+  <meta name="theme-color" content="#030712">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #030712;
+      color: #f8fafc;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Slim, Restrained Header (Under 60px height total) -->
+  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Brand & Navigation Switcher -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <span class="font-black text-sm tracking-tight text-white uppercase">AvnLookalike</span>
+        
+        <!-- Navigation Tabs between Guides -->
+        <nav class="flex items-center gap-1.5 ml-2 border-l border-slate-800 pl-2.5">
+          <a href="index.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Sparrow Disambiguation Guide">
+            Sparrows (11)
+          </a>
+          <span class="px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white shadow-sm ring-1 ring-sky-400/50 transition">
+            Ducks (25)
+          </span>
+        </nav>
+      </div>
+
+      <!-- Dynamic Results Counter -->
+      <div class="flex items-center gap-2 shrink-0 text-xs">
+        <span id="matchCounter" class="text-xs font-semibold tabular-nums text-slate-300 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
+          25 variants shown
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Horizontal Multi-Select Trait & Sex Filter Bar -->
+    <div class="max-w-6xl mx-auto mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+      <!-- Sex filters -->
+      <button onclick="toggleSex('all')" id="f-sex-all" title="Show all 25 drake and hen cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 25</button>
+      <button onclick="toggleSex('drake')" id="f-sex-drake" title="Filter to male / drake variants only" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Drake (Male)</button>
+      <button onclick="toggleSex('hen')" id="f-sex-hen" title="Filter to female / hen variants only (isolates confusing brown hens)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Hen (Female)</button>
+
+      <span class="text-slate-700">|</span>
+
+      <!-- Guild filters -->
+      <button onclick="toggleTrait('dabbler')" id="f-dabbler" title="Dabbler: Puddle ducks that feed on the surface or tip tail-up in shallow water (Mallard, Gadwall, Shoveler, Pintail, Teal, Wigeon, Wood Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Dabbler</button>
+      <button onclick="toggleTrait('diver')" id="f-diver" title="Diver: Diving ducks that completely submerge to feed in deeper water (Ring-necked, Scaup, Bufflehead, Merganser, Ruddy)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Diver</button>
+
+      <span class="text-slate-700">|</span>
+
+      <!-- Diagnostic Crux Trait Filters with Tooltips -->
+      <button onclick="toggleTrait('spatulate_bill')" id="f-spatulate_bill" title="Spatulate Bill: Broad, flattened spoon-shaped bill with fine straining lamellae (Northern Shoveler)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Spatulate Bill</button>
+      <button onclick="toggleTrait('white_bill_ring')" id="f-white_bill_ring" title="White Bill Ring: Distinct white band encircling the bill near the black tip (Ring-necked Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Bill Ring</button>
+      <button onclick="toggleTrait('crested_head')" id="f-crested_head" title="Crested Head: Elongated crown feathers forming a fan, bushy crest, or sweeping tuft (Wood Duck, Hooded Merganser)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Crested Head</button>
+      <button onclick="toggleTrait('green_head')" id="f-green_head" title="Green Head / Patch: Iridescent bottle-green or emerald crown, facial patch, or speculum" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Green Head/Patch</button>
+      <button onclick="toggleTrait('white_cheek_patch')" id="f-white_cheek_patch" title="White Cheek Patch: Distinct stark white patch on cheek or behind eye (Bufflehead, Ruddy Duck, Hooded Merganser)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Cheek Patch</button>
+      <button onclick="toggleTrait('white_speculum')" id="f-white_speculum" title="White Speculum: Brilliant white secondary wing patch (100% diagnostic crux for Gadwall)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Speculum</button>
+      <button onclick="toggleTrait('stiff_tail')" id="f-stiff_tail" title="Stiff Upright Tail: Pointed spiky tail feathers held cocked vertically upright above water (Ruddy Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Stiff Tail</button>
+      <button onclick="toggleTrait('white_bill_base')" id="f-white_bill_base" title="White at Bill Base: Crisp white facial mask or ring encircling base of bill (Lesser Scaup Hen, Ring-necked Hen)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White at Bill Base</button>
+      
+      <div class="ml-auto pl-2 flex items-center gap-1 border-l border-slate-800 shrink-0">
+        <button onclick="setViewMode('both')" id="vm-both" class="view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white">Both</button>
+        <button onclick="setViewMode('profile')" id="vm-profile" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Profile</button>
+        <button onclick="setViewMode('crux')" id="vm-crux" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Crux</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Immediate Duck Feed (Starts immediately below header) -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="duckFeed">
+    <!-- Rendered via JS -->
+  </main>
+
+  <script>
+    const ducks = [
+  {
+    "id": "mallard_drake",
+    "rank": 1,
+    "name": "Mallard (Drake)",
+    "sci": "Anas platyrhynchos",
+    "prob": "85%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "green_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/mallard_drake_1.jpg",
+    "img1_caption": "Iridescent bottle-green head, white neck ring, rich chestnut chest, bright yellow bill",
+    "img2": "assets/ducks/mallard_drake_2.jpg",
+    "img2_caption": "Flight view: royal blue-violet speculum bordered by two clean, stark white bars",
+    "diagnostics": [
+      {
+        "tract": "Head & Neck",
+        "mark": "Iridescent bottle-green head separated from chest by a neat, crisp white neck ring."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Bright greenish-yellow to yellow bill, unspotted and contrasting with dark head."
+      },
+      {
+        "tract": "Chest & Tail",
+        "mark": "Deep purplish-chestnut breast; white tail with diagnostic black upward-curled central feathers."
+      }
+    ],
+    "rule_out": "Bottle-green head + crisp white neck ring + yellow bill + curled black tail coverts = Mallard Drake."
+  },
+  {
+    "id": "mallard_hen",
+    "rank": 2,
+    "name": "Mallard (Hen)",
+    "sci": "Anas platyrhynchos",
+    "prob": "85%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/mallard_hen_1.jpg",
+    "img1_caption": "Mottled drab brown body, dark eyeline, orange bill with dark saddle on culmen",
+    "img2": "assets/ducks/mallard_hen_2.jpg",
+    "img2_caption": "Swimming profile: contrasting whitish tail, bold orange-and-black bill, mottled flank pattern",
+    "diagnostics": [
+      {
+        "tract": "Bill",
+        "mark": "Dull orange with a variable dark dusky saddle or splotches concentrated along the culmen ridge."
+      },
+      {
+        "tract": "Speculum",
+        "mark": "Bright iridescent blue-violet speculum bordered by two bold, stark white stripes (front and rear)."
+      },
+      {
+        "tract": "Tail & Face",
+        "mark": "Contrasting pale whitish tail; dark eyeline cutting across buffy face from bill to nape."
+      }
+    ],
+    "rule_out": "Dull orange bill with dark central saddle + two white bars flanking blue speculum + pale tail = Mallard Hen."
+  },
+  {
+    "id": "black_duck",
+    "rank": 3,
+    "name": "American Black Duck",
+    "sci": "Anas rubripes",
+    "prob": "28%",
+    "sex": "both",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/black_duck_1.jpg",
+    "img1_caption": "Very dark sooty-brown body contrasting with pale grayish-buff head and olive bill",
+    "img2": "assets/ducks/black_duck_2.jpg",
+    "img2_caption": "Speculum view: rich violet-blue speculum with clean black borders and NO white front bar",
+    "diagnostics": [
+      {
+        "tract": "Body Color",
+        "mark": "Substantially darker than hen Mallard; overall deep sooty blackish-brown body without pale tail."
+      },
+      {
+        "tract": "Head Contrast",
+        "mark": "Pale grayish-buff, finely-streaked head and neck sharply contrasting with the dark body."
+      },
+      {
+        "tract": "Speculum",
+        "mark": "Violet-purple speculum bordered in black; lacks the bold white leading edge bar of Mallard."
+      }
+    ],
+    "rule_out": "Sooty black-brown body + pale contrasting gray head + unspotted olive bill + no white in speculum = American Black Duck."
+  },
+  {
+    "id": "gadwall_drake",
+    "rank": 4,
+    "name": "Gadwall (Drake)",
+    "sci": "Mareca strepera",
+    "prob": "22%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "white_speculum",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/gadwall_drake_1.jpg",
+    "img1_caption": "Intricately vermiculated gray body, plain grayish-brown head, jet-black rump/undertail",
+    "img2": "assets/ducks/gadwall_drake_2.jpg",
+    "img2_caption": "Profile view showing square head, thin black bill, and bright white speculum patch visible on flank",
+    "diagnostics": [
+      {
+        "tract": "Rump & Rear",
+        "mark": "Jet-black rump, uppertail, and undertail coverts forming a crisp black stern against gray flanks."
+      },
+      {
+        "tract": "Speculum",
+        "mark": "Diagnostic clean white rectangular speculum patch bordered by black and chestnut (often visible at rest)."
+      },
+      {
+        "tract": "Head & Bill",
+        "mark": "Plain sandy grayish-brown head with steep forehead; relatively small, all-dark slate bill."
+      }
+    ],
+    "rule_out": "Finely vermiculated gray body + jet-black stern + plain sandy head + white speculum patch = Gadwall Drake."
+  },
+  {
+    "id": "gadwall_hen",
+    "rank": 5,
+    "name": "Gadwall (Hen)",
+    "sci": "Mareca strepera",
+    "prob": "22%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "white_speculum",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/gadwall_hen_1.jpg",
+    "img1_caption": "Wing flap revealing diagnostic pure white speculum square (crux vs Hen Mallard)",
+    "img2": "assets/ducks/gadwall_hen_2.jpg",
+    "img2_caption": "Swimming profile: slender build, steep forehead, orange-edged bill with neat dark culmen line",
+    "diagnostics": [
+      {
+        "tract": "Speculum",
+        "mark": "Crucial crux: Brilliant white speculum patch (Hen Mallard has blue; Black Duck has dark violet)."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Neat yellow-orange edges along the sides with a well-defined dark slate culmen stripe down center."
+      },
+      {
+        "tract": "Structure",
+        "mark": "Noticeably smaller, sleeker, and steeper-foreheaded than Hen Mallard; plain grayish-buff face."
+      }
+    ],
+    "rule_out": "Bright white speculum patch + orange bill sides with dark center ridge + steep forehead = Gadwall Hen."
+  },
+  {
+    "id": "wood_duck_drake",
+    "rank": 6,
+    "name": "Wood Duck (Drake)",
+    "sci": "Aix sponsa",
+    "prob": "20%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "crested_head",
+      "green_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/wood_duck_drake_1.jpg",
+    "img1_caption": "Extravagant iridescent green/purple crested head, ornate white facial bridles, scarlet eye and bill base",
+    "img2": "assets/ducks/wood_duck_drake_2.jpg",
+    "img2_caption": "Close-up of ornate head crest, crimson eye, white chin patch, and golden-buff vermiculated flanks",
+    "diagnostics": [
+      {
+        "tract": "Head & Crest",
+        "mark": "Sweeping iridescent green-and-purple crest with bold, crisp white accent lines extending back."
+      },
+      {
+        "tract": "Bill & Eye",
+        "mark": "Bright fiery-red eye and matching red-and-white base to bill with black tip."
+      },
+      {
+        "tract": "Flanks & Chest",
+        "mark": "Rich burgundy-chestnut breast flecked with white triangles; delicate golden-buff flanks."
+      }
+    ],
+    "rule_out": "Sweeping crested green head + white facial bridles + fiery red eye + chestnut breast = Wood Duck Drake."
+  },
+  {
+    "id": "wood_duck_hen",
+    "rank": 7,
+    "name": "Wood Duck (Hen)",
+    "sci": "Aix sponsa",
+    "prob": "20%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "crested_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/wood_duck_hen_1.jpg",
+    "img1_caption": "Sleek crested grayish-brown body, bold snow-white teardrop patch around eye, white belly",
+    "img2": "assets/ducks/wood_duck_hen_2.jpg",
+    "img2_caption": "Swimming view showing bushy crest, teardrop spectacle, and iridescent bronze-blue wing flashes",
+    "diagnostics": [
+      {
+        "tract": "Eye Patch",
+        "mark": "Diagnostic bold, teardrop-shaped snow-white spectacle completely encircling eye and tapering rearward."
+      },
+      {
+        "tract": "Head & Crest",
+        "mark": "Muted grayish head with a distinct, slightly drooped bushy crest at rear of crown."
+      },
+      {
+        "tract": "Breast",
+        "mark": "Warm brownish-gray chest neatly mottled with soft buffy-white teardrop spots."
+      }
+    ],
+    "rule_out": "Bold white teardrop eye spectacle + swept-back crest + dark slender bill = Wood Duck Hen."
+  },
+  {
+    "id": "teal_drake",
+    "rank": 8,
+    "name": "Green-winged Teal (Drake)",
+    "sci": "Anas crecca",
+    "prob": "18%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "green_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/teal_drake_1.jpg",
+    "img1_caption": "Tiny size, rich chestnut head with broad iridescent green swoosh, vertical white shoulder bar",
+    "img2": "assets/ducks/teal_drake_2.jpg",
+    "img2_caption": "Resting view showing creamy yellowish-buff triangle under tail, finely vermiculated gray body",
+    "diagnostics": [
+      {
+        "tract": "Head Pattern",
+        "mark": "Rich cinnamon-chestnut head marked with a broad, curving iridescent emerald-green swoosh through eye."
+      },
+      {
+        "tract": "Shoulder",
+        "mark": "Prominent, crisp vertical white crescent bar on the side of the breast in front of the wing."
+      },
+      {
+        "tract": "Stern & Size",
+        "mark": "Bright creamy yellowish-buff patch on undertail coverts; smallest North American dabbling duck."
+      }
+    ],
+    "rule_out": "Tiny body + chestnut head with green eye swoosh + vertical white shoulder bar = Green-winged Teal Drake."
+  },
+  {
+    "id": "teal_hen",
+    "rank": 9,
+    "name": "Green-winged Teal (Hen)",
+    "sci": "Anas crecca",
+    "prob": "18%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/teal_hen_1.jpg",
+    "img1_caption": "Petite compact body, mottled brown plumage, dark eyeline, small neat blackish bill",
+    "img2": "assets/ducks/teal_hen_2.jpg",
+    "img2_caption": "Profile view: diminutive size, steep forehead, bright iridescent green speculum flash",
+    "diagnostics": [
+      {
+        "tract": "Size & Build",
+        "mark": "Diminutive, compact, dove-like size (roughly half the bulk of a Mallard Hen)."
+      },
+      {
+        "tract": "Speculum",
+        "mark": "Bright metallic green speculum bordered by buffy-white bars (often visible as a bright flash)."
+      },
+      {
+        "tract": "Head & Bill",
+        "mark": "Dark horizontal eyeline across buff face; small, slender, all-dark slate-black bill."
+      }
+    ],
+    "rule_out": "Very tiny size + petite dark bill + bright green speculum flash + mottled brown plumage = Green-winged Teal Hen."
+  },
+  {
+    "id": "ring_necked_drake",
+    "rank": 10,
+    "name": "Ring-necked Duck (Drake)",
+    "sci": "Aythya collaris",
+    "prob": "15%",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "white_bill_ring",
+      "diver"
+    ],
+    "img1": "assets/ducks/ring_necked_drake_1.jpg",
+    "img1_caption": "Angular peaked head, jet-black back, white breast spur/crescent, bold white bill ring near black tip",
+    "img2": "assets/ducks/ring_necked_drake_2.jpg",
+    "img2_caption": "Swimming profile: contrasting pale gray flanks, peaked crown, bright yellow eye, white bill base and ring",
+    "diagnostics": [
+      {
+        "tract": "Bill Pattern",
+        "mark": "Two distinct white bands: a bold white ring near the black tip AND a white outline at the bill base."
+      },
+      {
+        "tract": "Head Profile",
+        "mark": "Tall, angular peaked crown (highest point behind center of head); purplish-black sheen."
+      },
+      {
+        "tract": "Flanks & Back",
+        "mark": "Jet-black back contrasting with pale gray flanks; prominent white vertical spur rising up front of flank."
+      }
+    ],
+    "rule_out": "Peaked angular crown + jet-black back + white vertical flank spur + bold white bill ring = Ring-necked Drake."
+  },
+  {
+    "id": "ring_necked_hen",
+    "rank": 11,
+    "name": "Ring-necked Duck (Hen)",
+    "sci": "Aythya collaris",
+    "prob": "15%",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "white_bill_ring",
+      "white_bill_base",
+      "diver"
+    ],
+    "img1": "assets/ducks/ring_necked_hen_1.jpg",
+    "img1_caption": "Warm brown body, peaked crown, prominent white eye-ring with trailing streak, subterminal white bill band",
+    "img2": "assets/ducks/ring_necked_hen_2.jpg",
+    "img2_caption": "Swimming profile showing diffuse pale bill base, peaked rear crown, and pale eye-ring",
+    "diagnostics": [
+      {
+        "tract": "Eye & Face",
+        "mark": "Crisp white eye-ring with a faint pale white line extending rearward toward the nape."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Subterminal white band across bill near the black tip; diffuse pale whitish area around base of bill."
+      },
+      {
+        "tract": "Head Shape",
+        "mark": "Angular, peaked crown shape identical to drake; warm chocolate-brown body with paler flanks."
+      }
+    ],
+    "rule_out": "Peaked crown + white eye-ring with trailing line + white bill band near black tip = Ring-necked Duck Hen."
+  },
+  {
+    "id": "ruddy_duck_male",
+    "rank": 12,
+    "name": "Ruddy Duck (Winter Male)",
+    "sci": "Oxyura jamaicensis",
+    "prob": "14%",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "white_cheek_patch",
+      "stiff_tail",
+      "diver"
+    ],
+    "img1": "assets/ducks/ruddy_duck_male_1.jpg",
+    "img1_caption": "Winter basic plumage: stark clean white cheek patch, solid dark cap to eye, cocked stiff spiky tail",
+    "img2": "assets/ducks/ruddy_duck_male_2.jpg",
+    "img2_caption": "Resting posture: compact dumpy body, scooped dark bill, diagnostic pure white cheek",
+    "diagnostics": [
+      {
+        "tract": "Cheek Pattern",
+        "mark": "Stark, completely clean, uninterrupted snow-white cheek patch (from bill to nape, below eye)."
+      },
+      {
+        "tract": "Cap & Bill",
+        "mark": "Solid dark blackish cap extending straight across head at eye level; large scooped dusky-gray bill."
+      },
+      {
+        "tract": "Tail",
+        "mark": "Diagnostic stiff, pointed, spiky tail feathers, frequently held cocked vertically upright."
+      }
+    ],
+    "rule_out": "Solid dark cap + pure white cheek + cocked stiff spiky tail + scooped bill = Ruddy Duck (Winter Male)."
+  },
+  {
+    "id": "ruddy_duck_female",
+    "rank": 13,
+    "name": "Ruddy Duck (Hen / Imm)",
+    "sci": "Oxyura jamaicensis",
+    "prob": "14%",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "stiff_tail",
+      "diver"
+    ],
+    "img1": "assets/ducks/ruddy_duck_female_1.jpg",
+    "img1_caption": "Dark cap, dirty whitish cheek bisected by a prominent dark horizontal cheek stripe, stiff tail",
+    "img2": "assets/ducks/ruddy_duck_female_2.jpg",
+    "img2_caption": "Swimming profile: compact body, scooped bill, horizontal dark stripe cutting across pale cheek",
+    "diagnostics": [
+      {
+        "tract": "Cheek Stripe",
+        "mark": "Diagnostic dark dusky horizontal stripe cutting right through the middle of the pale cheek."
+      },
+      {
+        "tract": "Cap",
+        "mark": "Dark brownish-gray cap with less sharp contrast than winter male; mottled grayish body."
+      },
+      {
+        "tract": "Tail & Habit",
+        "mark": "Stiff spiky tail often cocked straight up; low, buoyant swimming profile with thick neck."
+      }
+    ],
+    "rule_out": "Dark cap + horizontal dark stripe bisecting pale cheek + cocked stiff spiky tail = Ruddy Duck (Hen / Immature)."
+  },
+  {
+    "id": "bufflehead_drake",
+    "rank": 14,
+    "name": "Bufflehead (Drake)",
+    "sci": "Bucephala albeola",
+    "prob": "12%",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "white_cheek_patch",
+      "diver"
+    ],
+    "img1": "assets/ducks/bufflehead_drake_1.jpg",
+    "img1_caption": "Puffy head with giant brilliant white pie-wedge patch from eye to nape, gleaming white body, black back",
+    "img2": "assets/ducks/bufflehead_drake_2.jpg",
+    "img2_caption": "Active swimming profile: tiny compact diver, iridescent green/purple sheen on front of puffy head",
+    "diagnostics": [
+      {
+        "tract": "Head Pattern",
+        "mark": "Giant, unmistakable snow-white wedge wrapping from behind the eye completely across the nape."
+      },
+      {
+        "tract": "Head Sheen",
+        "mark": "Puffy, bulbous head with rich iridescent violet, green, and bronze sheen on black face."
+      },
+      {
+        "tract": "Body & Size",
+        "mark": "Very small, buoyant diving duck; gleaming pure white flanks and belly contrasting with black back."
+      }
+    ],
+    "rule_out": "Enormous white wedge on puffy dark head + gleaming white body + tiny compact diving build = Bufflehead Drake."
+  },
+  {
+    "id": "bufflehead_hen",
+    "rank": 15,
+    "name": "Bufflehead (Hen)",
+    "sci": "Bucephala albeola",
+    "prob": "12%",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "white_cheek_patch",
+      "diver"
+    ],
+    "img1": "assets/ducks/bufflehead_hen_1.jpg",
+    "img1_caption": "Diminutive dark gray-brown diver, neat clean white oval cheek patch behind eye, small stubby bill",
+    "img2": "assets/ducks/bufflehead_hen_2.jpg",
+    "img2_caption": "Swimming profile: petite size, round puffy head, distinct single white cheek slash",
+    "diagnostics": [
+      {
+        "tract": "Cheek Patch",
+        "mark": "Diagnostic single, neat, horizontal oval white patch or slash centered directly behind the eye."
+      },
+      {
+        "tract": "Body & Bill",
+        "mark": "Dark brownish-gray upperparts and paler gray breast/flanks; small, stubby slate bill."
+      },
+      {
+        "tract": "Size",
+        "mark": "One of the smallest North American diving ducks; continually pops to surface like a buoyant cork."
+      }
+    ],
+    "rule_out": "Tiny dark diver + neat single oval white cheek patch behind eye + stubby bill = Bufflehead Hen."
+  },
+  {
+    "id": "hooded_merganser_drake",
+    "rank": 16,
+    "name": "Hooded Merganser (Drake)",
+    "sci": "Lophodytes cucullatus",
+    "prob": "10%",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "crested_head",
+      "white_cheek_patch",
+      "diver"
+    ],
+    "img1": "assets/ducks/hooded_merganser_drake_1.jpg",
+    "img1_caption": "Enormous fan-shaped crest with giant white patch outlined in black, thin serrated bill, rich tawny flanks",
+    "img2": "assets/ducks/hooded_merganser_drake_2.jpg",
+    "img2_caption": "Swimming view showing vertical black-and-white breast spurs, yellow eye, and ornate collapsible crest",
+    "diagnostics": [
+      {
+        "tract": "Crest",
+        "mark": "Massive circular fan-shaped crest dominated by a huge white patch crisply framed in black."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Slender, narrow, black saw-toothed (serrated) bill specialized for grasping small fish."
+      },
+      {
+        "tract": "Flanks & Eyes",
+        "mark": "Warm reddish-tawny / cinnamon flanks; two black breast spurs; piercing yellow eye."
+      }
+    ],
+    "rule_out": "Massive white fan crest outlined in black + narrow serrated bill + tawny flanks = Hooded Merganser Drake."
+  },
+  {
+    "id": "hooded_merganser_hen",
+    "rank": 17,
+    "name": "Hooded Merganser (Hen)",
+    "sci": "Lophodytes cucullatus",
+    "prob": "10%",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "crested_head",
+      "diver"
+    ],
+    "img1": "assets/ducks/hooded_merganser_hen_1.jpg",
+    "img1_caption": "Shaggy bushy cinnamon-rufous crest, slender dark serrated bill with yellow/orange base, dark body",
+    "img2": "assets/ducks/hooded_merganser_hen_2.jpg",
+    "img2_caption": "Profile view: punk-rock bushy cinnamon crest, slender serrated bill, dark brown eye and flanks",
+    "diagnostics": [
+      {
+        "tract": "Crest",
+        "mark": "Distinctive bushy, ragged, punk-rock cinnamon-rufous / golden crest projecting from rear of head."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Slender, narrow, serrated bill with dark upper culmen and dull yellow-orange lower mandible."
+      },
+      {
+        "tract": "Body & Eyes",
+        "mark": "Overall dark sooty grayish-brown body with white wing bar; dark brown eye (unlike drake's yellow)."
+      }
+    ],
+    "rule_out": "Ragged bushy cinnamon crest + slender serrated bill with orange edge + dark brown eye = Hooded Merganser Hen."
+  },
+  {
+    "id": "pintail_drake",
+    "rank": 18,
+    "name": "Northern Pintail (Drake)",
+    "sci": "Anas acuta",
+    "prob": "8%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/pintail_drake_1.jpg",
+    "img1_caption": "Chocolate-brown head, snow-white breast extending up neck in crisp finger stripe, needle-like tail",
+    "img2": "assets/ducks/pintail_drake_2.jpg",
+    "img2_caption": "Elegant slender profile: very long graceful neck, vermiculated gray sides, extremely long pointed tail",
+    "diagnostics": [
+      {
+        "tract": "Neck Stripe",
+        "mark": "Snow-white breast extends up the sides of the neck in a thin, elegant, clean white finger stripe."
+      },
+      {
+        "tract": "Head & Bill",
+        "mark": "Warm chocolate-brown head; two-tone bill (blue-gray sides with black central stripe)."
+      },
+      {
+        "tract": "Tail & Build",
+        "mark": "Extremely long, graceful, slender neck and exceptionally elongated needle-point central tail feathers."
+      }
+    ],
+    "rule_out": "Chocolate head + clean white neck stripe + long slender neck + needle-point tail = Northern Pintail Drake."
+  },
+  {
+    "id": "pintail_hen",
+    "rank": 19,
+    "name": "Northern Pintail (Hen)",
+    "sci": "Anas acuta",
+    "prob": "8%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/pintail_hen_1.jpg",
+    "img1_caption": "Slender graceful neck, plain unmarked tan head, dark slate-gray bill (not orange!), pointed tail",
+    "img2": "assets/ducks/pintail_hen_2.jpg",
+    "img2_caption": "Profile view: elegant long neck, warm buffy throat, all-dark slate bill, pointed central tail",
+    "diagnostics": [
+      {
+        "tract": "Neck & Posture",
+        "mark": "Noticeably long, slender, graceful swan-like neck held upright while swimming."
+      },
+      {
+        "tract": "Bill",
+        "mark": "All-dark slate-gray / blackish bill (completely lacks the orange/yellow tones of Hen Mallard & Gadwall)."
+      },
+      {
+        "tract": "Head & Tail",
+        "mark": "Plain, warm buffy-tan head without bold dark eyeline; pointed central tail feathers."
+      }
+    ],
+    "rule_out": "Long slender neck + plain unmarked tan head + solid dark slate bill + pointed tail = Northern Pintail Hen."
+  },
+  {
+    "id": "shoveler_drake",
+    "rank": 20,
+    "name": "Northern Shoveler (Drake)",
+    "sci": "Spatula clypeata",
+    "prob": "7%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "spatulate_bill",
+      "green_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/shoveler_drake_1.jpg",
+    "img1_caption": "Massive spatulate black spoon bill, iridescent dark green head, white chest, rich chestnut flanks",
+    "img2": "assets/ducks/shoveler_drake_2.jpg",
+    "img2_caption": "Resting view showing huge spatulate bill, bright yellow eye, white breast, chestnut belly",
+    "diagnostics": [
+      {
+        "tract": "Bill",
+        "mark": "Massive, disproportionately large spatulate (spoon-shaped) black bill, wider at the tip than at the base."
+      },
+      {
+        "tract": "Color Pattern",
+        "mark": "High-contrast tri-color: iridescent green head, snow-white breast, and rich rufous/chestnut sides."
+      },
+      {
+        "tract": "Eye",
+        "mark": "Bright, piercing lemon-yellow eye set against the dark green head."
+      }
+    ],
+    "rule_out": "Massive black spoon-shaped bill + green head + white breast + chestnut sides = Northern Shoveler Drake."
+  },
+  {
+    "id": "shoveler_hen",
+    "rank": 21,
+    "name": "Northern Shoveler (Hen)",
+    "sci": "Spatula clypeata",
+    "prob": "7%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "spatulate_bill",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/shoveler_hen_1.jpg",
+    "img1_caption": "Massive spatulate orange-and-brown spoon bill, mottled brown body, orange legs (100% diagnostic bill)",
+    "img2": "assets/ducks/shoveler_hen_2.jpg",
+    "img2_caption": "Profile view: giant spoon bill with comb-like filtering lamellae, warm buffy-brown plumage",
+    "diagnostics": [
+      {
+        "tract": "Bill",
+        "mark": "Diagnostic massive spoon-shaped bill with dull orange sides and fine comb-like straining lamellae visible."
+      },
+      {
+        "tract": "Posture",
+        "mark": "Swims low in front, appearing front-heavy and slouched due to the enormous weight of the bill."
+      },
+      {
+        "tract": "Plumage",
+        "mark": "Coarsely mottled grayish-brown plumage with bright orange legs and feet."
+      }
+    ],
+    "rule_out": "Massive spoon-shaped bill (larger than head) + dull orange bill edges + mottled brown body = Northern Shoveler Hen."
+  },
+  {
+    "id": "wigeon_drake",
+    "rank": 22,
+    "name": "American Wigeon (Drake)",
+    "sci": "Mareca americana",
+    "prob": "6%",
+    "sex": "drake",
+    "guild": "dabbler",
+    "traits": [
+      "green_head",
+      "dabbler"
+    ],
+    "img1": "assets/ducks/wigeon_drake_1.jpg",
+    "img1_caption": "Bright white forehead ('baldpate'), broad iridescent green eye patch, pinkish-brown body, small blue bill",
+    "img2": "assets/ducks/wigeon_drake_2.jpg",
+    "img2_caption": "Swimming profile: small pale blue bill with black tip, gray speckled neck, clean white flank patch",
+    "diagnostics": [
+      {
+        "tract": "Crown & Face",
+        "mark": "Bright shining white to creamy forehead and crown ('baldpate') bordered by a broad iridescent green patch."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Small, stubby, pale grayish-blue bill with a clean, well-defined black tip."
+      },
+      {
+        "tract": "Flanks & Rump",
+        "mark": "Warm pinkish-cinnamon flanks contrasting with clean white belly patch and black undertail coverts."
+      }
+    ],
+    "rule_out": "White forehead stripe + green eye patch + small pale blue bill with black tip = American Wigeon Drake."
+  },
+  {
+    "id": "wigeon_hen",
+    "rank": 23,
+    "name": "American Wigeon (Hen)",
+    "sci": "Mareca americana",
+    "prob": "6%",
+    "sex": "hen",
+    "guild": "dabbler",
+    "traits": [
+      "dabbler"
+    ],
+    "img1": "assets/ducks/wigeon_hen_1.jpg",
+    "img1_caption": "Round head, small pale blue bill with black tip, warm reddish-cinnamon flanks contrasting with grayish head",
+    "img2": "assets/ducks/wigeon_hen_2.jpg",
+    "img2_caption": "Resting view: dark smudge around eye, steep forehead, small blue bill, clean white belly",
+    "diagnostics": [
+      {
+        "tract": "Bill",
+        "mark": "Small, stubby, pale lead-blue bill with a sharp black tip (identical to drake; separates from Mallard/Gadwall)."
+      },
+      {
+        "tract": "Head & Neck",
+        "mark": "Finely speckled grayish head and neck contrasting sharply with warm reddish-cinnamon flanks."
+      },
+      {
+        "tract": "Eye",
+        "mark": "Distinct dark dusky smudge or 'mascara' around the dark eye on a rounded head with steep forehead."
+      }
+    ],
+    "rule_out": "Small pale blue bill with black tip + gray head contrasting with warm cinnamon flanks = American Wigeon Hen."
+  },
+  {
+    "id": "scaup_drake",
+    "rank": 24,
+    "name": "Lesser Scaup (Drake)",
+    "sci": "Aythya affinis",
+    "prob": "5%",
+    "sex": "drake",
+    "guild": "diver",
+    "traits": [
+      "diver"
+    ],
+    "img1": "assets/ducks/scaup_drake_1.jpg",
+    "img1_caption": "Purplish-black head with peaked rear crown bump, finely barred white/gray back, black chest, blue bill",
+    "img2": "assets/ducks/scaup_drake_2.jpg",
+    "img2_caption": "Swimming profile: pale blue bill ('bluebill'), steep rear head peak, bright white flanks",
+    "diagnostics": [
+      {
+        "tract": "Crown Profile",
+        "mark": "Distinct angular crown with a peaked bump or corner at the rear of the head (Greater Scaup is smoothly rounded)."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Pale bluish-gray bill ('bluebill') with a small, narrow black nail at the tip."
+      },
+      {
+        "tract": "Head Sheen & Back",
+        "mark": "Purplish gloss on black head (in good sun); pale grayish-white back with fine dark vermiculations."
+      }
+    ],
+    "rule_out": "Peaked rear crown bump + pale blue bill with small nail + vermiculated whitish back = Lesser Scaup Drake."
+  },
+  {
+    "id": "scaup_hen",
+    "rank": 25,
+    "name": "Lesser Scaup (Hen)",
+    "sci": "Aythya affinis",
+    "prob": "5%",
+    "sex": "hen",
+    "guild": "diver",
+    "traits": [
+      "white_bill_base",
+      "diver"
+    ],
+    "img1": "assets/ducks/scaup_hen_1.jpg",
+    "img1_caption": "Dark brown diver, peaked rear crown, diagnostic stark white patch/mask encircling base of bill",
+    "img2": "assets/ducks/scaup_hen_2.jpg",
+    "img2_caption": "Profile view showing crisp white face patch against pale blue bill, peaked crown, yellow eye",
+    "diagnostics": [
+      {
+        "tract": "Face Patch",
+        "mark": "Diagnostic crisp, stark snow-white patch completely encircling the base of the bill."
+      },
+      {
+        "tract": "Head Shape",
+        "mark": "Noticeable peak or angular bump at the rear of the crown (unlike smoothly rounded Greater Scaup)."
+      },
+      {
+        "tract": "Bill & Eye",
+        "mark": "Pale bluish-gray bill with narrow dark nail; bright lemon-yellow eye set in dark brown face."
+      }
+    ],
+    "rule_out": "Stark white patch around bill base + peaked rear crown + pale blue bill + yellow eye = Lesser Scaup Hen."
+  }
+];
+
+    let activeSex = 'all'; // 'all', 'drake', 'hen'
+    const activeTraits = new Set();
+    let currentViewMode = 'both'; // 'both', 'profile', 'crux'
+
+    function renderFeed() {
+      const container = document.getElementById('duckFeed');
+      container.innerHTML = '';
+
+      const filtered = ducks.filter(d => {
+        // Sex filter
+        if (activeSex === 'drake' && d.sex !== 'drake' && d.sex !== 'both') return false;
+        if (activeSex === 'hen' && d.sex !== 'hen' && d.sex !== 'both') return false;
+
+        // Trait filters (AND logic: must match all selected traits)
+        for (const trait of activeTraits) {
+          if (trait === 'dabbler' && d.guild !== 'dabbler') return false;
+          if (trait === 'diver' && d.guild !== 'diver') return false;
+          if (trait !== 'dabbler' && trait !== 'diver' && !d.traits.includes(trait)) return false;
+        }
+
+        return true;
+      });
+
+      // Update match counter
+      const counter = document.getElementById('matchCounter');
+      let label = `${filtered.length} variants shown`;
+      if (filtered.length === 1) {
+        if (activeSex === 'drake') label = '1 drake shown';
+        else if (activeSex === 'hen') label = '1 hen shown';
+        else label = '1 variant shown';
+      } else {
+        if (activeSex === 'drake') label = `${filtered.length} drakes shown`;
+        else if (activeSex === 'hen') label = `${filtered.length} hens shown`;
+      }
+      counter.textContent = label;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 px-4 bg-slate-900/50 border border-slate-800 rounded-xl">
+            <h3 class="text-base font-semibold text-slate-200">No waterfowl match the active combination</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Try deselecting some traits or resetting the sex filter to view more species.</p>
+            <button onclick="resetAllFilters()" class="mt-4 px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-600 text-white hover:bg-sky-500 transition">
+              Reset All Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(d => {
+        const card = document.createElement('article');
+        card.id = `duck-${d.id}`;
+        card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+
+        // Diagnostics HTML
+        const diagHtml = d.diagnostics.map(diag => `
+          <div class="flex items-baseline gap-2 text-xs leading-relaxed">
+            <span class="font-bold text-[11px] uppercase tracking-wider text-sky-400 shrink-0 w-24 sm:w-28">${diag.tract}</span>
+            <span class="text-slate-200">${diag.mark}</span>
+          </div>
+        `).join('');
+
+        // Sex Badge color & label
+        let sexBadgeClass = "bg-sky-950/80 text-sky-400 border-sky-800/60";
+        let sexLabel = "Drake (Male)";
+        if (d.sex === 'hen') {
+          sexBadgeClass = "bg-amber-950/80 text-amber-400 border-amber-800/60";
+          sexLabel = "Hen (Female)";
+        } else if (d.sex === 'both') {
+          sexBadgeClass = "bg-slate-800 text-slate-300 border-slate-700";
+          sexLabel = "Drake & Hen Similar";
+        }
+
+        // Guild badge
+        const guildBadge = d.guild === 'dabbler' ? 
+          '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">Dabbler</span>' :
+          '<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/40">Diver</span>';
+
+        // Visual layout based on currentViewMode
+        let visualsHtml = '';
+        if (currentViewMode === 'both') {
+          visualsHtml = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+              <!-- Visual 1: Profile -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-sky-400 uppercase tracking-wide">Lateral Profile</span>
+                  <span class="text-slate-500 text-[10px]">Photo</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${d.img1}" alt="${d.name} Lateral Profile" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img1_caption}</p>
+              </div>
+
+              <!-- Visual 2: Crux / Speculum / Detail -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-amber-400 uppercase tracking-wide">Diagnostic Crux / Detail</span>
+                  <span class="text-slate-500 text-[10px]">Close-up</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${d.img2}" alt="${d.name} Crux Detail" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img2_caption}</p>
+              </div>
+            </div>
+          `;
+        } else if (currentViewMode === 'profile') {
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${d.img1}" alt="${d.name} Lateral Profile" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img1_caption}</p>
+            </div>
+          `;
+        } else if (currentViewMode === 'crux') {
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${d.img2}" alt="${d.name} Crux Detail" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${d.img2_caption}</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-black text-slate-400 tabular-nums">#${d.rank}</span>
+                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${d.name}</h2>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border ${sexBadgeClass}">${sexLabel}</span>
+                ${guildBadge}
+              </div>
+              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${d.sci}</p>
+            </div>
+            
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD late fall">
+                ${d.prob} freq
+              </span>
+            </div>
+          </div>
+
+          <!-- Visual Plates & Photos -->
+          ${visualsHtml}
+
+          <!-- Diagnostic Feather Tract Checklist -->
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
+            ${diagHtml}
+          </div>
+
+          <!-- Single-line Elimination Rule -->
+          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
+            <strong class="text-amber-300 font-bold">Rule:</strong> ${d.rule_out}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function toggleSex(sex) {
+      if (activeSex === sex) {
+        activeSex = 'all'; // toggle back to all if clicked again
+      } else {
+        activeSex = sex;
+      }
+      updateFilterButtons();
+      renderFeed();
+    }
+
+    function toggleTrait(trait) {
+      // Handle mutually exclusive guild filters
+      if (trait === 'dabbler') {
+        activeTraits.delete('diver');
+      } else if (trait === 'diver') {
+        activeTraits.delete('dabbler');
+      }
+
+      if (activeTraits.has(trait)) {
+        activeTraits.delete(trait);
+      } else {
+        activeTraits.add(trait);
+      }
+      updateFilterButtons();
+      renderFeed();
+    }
+
+    function resetAllFilters() {
+      activeSex = 'all';
+      activeTraits.clear();
+      updateFilterButtons();
+      renderFeed();
+    }
+
+    function updateFilterButtons() {
+      // Sex buttons
+      const sexAll = document.getElementById('f-sex-all');
+      const sexDrake = document.getElementById('f-sex-drake');
+      const sexHen = document.getElementById('f-sex-hen');
+
+      if (activeSex === 'all') {
+        sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition";
+        sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexAll.textContent = "All 25";
+        sexDrake.textContent = "Drake (Male)";
+        sexHen.textContent = "Hen (Female)";
+      } else if (activeSex === 'drake') {
+        sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+        sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexAll.textContent = "Reset Sex";
+        sexDrake.innerHTML = "&#10003; Drake (Male)";
+        sexHen.textContent = "Hen (Female)";
+      } else if (activeSex === 'hen') {
+        sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
+        sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-amber-600 text-white border border-amber-400 shrink-0 transition shadow-sm ring-1 ring-amber-400/50";
+        sexAll.textContent = "Reset Sex";
+        sexDrake.textContent = "Drake (Male)";
+        sexHen.innerHTML = "&#10003; Hen (Female)";
+      }
+
+      // Trait buttons
+      const traitLabels = {
+        'dabbler': 'Dabbler',
+        'diver': 'Diver',
+        'spatulate_bill': 'Spatulate Bill',
+        'white_bill_ring': 'White Bill Ring',
+        'crested_head': 'Crested Head',
+        'green_head': 'Green Head/Patch',
+        'white_cheek_patch': 'White Cheek Patch',
+        'white_speculum': 'White Speculum',
+        'stiff_tail': 'Stiff Tail',
+        'white_bill_base': 'White at Bill Base'
+      };
+
+      Object.keys(traitLabels).forEach(t => {
+        const btn = document.getElementById(`f-${t}`);
+        if (!btn) return;
+        const base = traitLabels[t];
+        if (activeTraits.has(t)) {
+          btn.innerHTML = `&#10003; ${base}`;
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+        } else {
+          btn.textContent = base;
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
+        }
+      });
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      document.querySelectorAll('.view-btn').forEach(b => {
+        b.className = "view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white";
+      });
+      const active = document.getElementById(`vm-${mode}`);
+      if (active) active.className = "view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white";
+      renderFeed();
+    }
+
+    // Service Worker for offline PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js?v=6').then(reg => {
+          reg.update();
+        }).catch(() => {});
+      });
+    }
+
+    // Initial render
+    renderFeed();
+  </script>
+</body>
+</html>

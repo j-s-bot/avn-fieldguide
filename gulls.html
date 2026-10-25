@@ -9,9 +9,8 @@
   <meta name="theme-color" content="#030712">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #030712;
       color: #f3f4f6;
       -webkit-font-smoothing: antialiased;
@@ -19,26 +18,9 @@
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .card-transition {
-      transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease;
-    }
-    .card-transition:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
-    }
-    .rare-card {
-      border-color: #d97706;
-    }
-    .rare-card:hover {
-      border-color: #f59e0b;
-    }
-    .rare-badge {
-      background: #b45309;
-      border: 1px solid #f59e0b;
-    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white pb-12">
 
   <!-- Instrument Header -->
   <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5">
@@ -53,7 +35,7 @@
           <a href="index.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Sparrow Disambiguation Guide">
             Sparrows (11)
           </a>
-          <a href="ducks.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Waterfowl & Ducks Disambiguation Guide">
+          <a href="ducks.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Waterfowl & Duck Disambiguation Guide">
             Ducks (29)
           </a>
           <span class="px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white shadow-sm ring-1 ring-sky-400/50 transition">
@@ -138,27 +120,14 @@
     </div>
   </header>
 
-  <!-- Main Feed Area -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6">
-    <div id="cardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cards rendered dynamically via JS -->
-    </div>
+  <!-- Immediate Gull Feed (1 card per row, identical to ducks.html) -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="gullFeed">
+    <!-- Rendered via JS -->
   </main>
-
-  <!-- Fullscreen Modal for High-Res Inspection -->
-  <div id="imageModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeModal()">
-    <div class="relative max-w-4xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
-      <button onclick="closeModal()" class="absolute -top-10 right-0 text-slate-400 hover:text-white text-sm font-semibold flex items-center gap-1">
-        <span>Close</span> &times;
-      </button>
-      <img id="modalImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="High-Res Inspection" class="max-h-[80vh] w-auto rounded-lg border border-slate-800 shadow-2xl object-contain">
-      <div id="modalCaption" class="mt-3 text-center text-xs text-slate-300 font-medium max-w-xl"></div>
-    </div>
-  </div>
 
   <!-- Client-Side State & Multi-Select Engine -->
   <script>
-    const GULLS = [
+    const gulls = [
   {
     "id": "ring_billed_gull_adult",
     "rank": 1,
@@ -886,6 +855,7 @@
     let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     let activeTraits = new Set();
     let currentViewMode = 'both'; // 'both', 'plates', 'photos'
+    const photoModes = {}; // cardId -> 'primary' | 'crux'
 
     // Mutually exclusive trait pairings
     const EXCLUSIVE_PAIRS = [
@@ -911,12 +881,14 @@
     ];
 
     function toggleAge(age) {
-      activeAge = age;
+      activeAge = (activeAge === age) ? 'all' : age;
+      updateFilterButtons();
       renderFeed();
     }
 
     function toggleRarity(rarity) {
-      activeRarity = rarity;
+      activeRarity = (activeRarity === rarity) ? 'all' : rarity;
+      updateFilterButtons();
       renderFeed();
     }
 
@@ -931,16 +903,32 @@
         });
         activeTraits.add(trait);
       }
+      updateFilterButtons();
+      renderFeed();
+    }
+
+    function toggleCardPhoto(cardId, mode) {
+      photoModes[cardId] = mode;
+      renderFeed();
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      document.querySelectorAll('.view-btn').forEach(b => {
+        b.className = "view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white";
+      });
+      const active = document.getElementById(`vm-${mode}`);
+      if (active) active.className = "view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white";
       renderFeed();
     }
 
     function renderFeed() {
-      const grid = document.getElementById('cardGrid');
-      grid.innerHTML = '';
+      const container = document.getElementById('gullFeed');
+      container.innerHTML = '';
 
       let matches = 0;
 
-      GULLS.forEach(g => {
+      gulls.forEach(g => {
         // Filter by Age
         if (activeAge !== 'all' && g.age !== activeAge) return;
 
@@ -958,111 +946,174 @@
         const isRare = g.rarity === 'rare';
         const isUncommon = g.rarity === 'uncommon';
 
-        const borderClass = isRare 
-          ? "border-amber-500/70 rare-card bg-gradient-to-b from-slate-900/90 to-amber-950/20" 
-          : (isUncommon ? "border-slate-700/80 bg-slate-900/70" : "border-slate-800/80 bg-slate-900/40");
+        // Distinctive container styling: highlighted border for Rares
+        if (isRare) {
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl p-3 sm:p-4 transition hover:border-amber-400 shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30";
+        } else {
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+        }
 
-        card.className = `card-transition rounded-xl border ${borderClass} p-4 flex flex-col justify-between overflow-hidden relative`;
+        // Diagnostics HTML
+        const diagHtml = g.diagnostics.map(diag => `
+          <div class="flex items-baseline gap-2 text-xs leading-relaxed">
+            <span class="font-bold text-[11px] uppercase tracking-wider text-sky-400 shrink-0 w-24 sm:w-28">${diag.tract}</span>
+            <span class="text-slate-200">${diag.mark}</span>
+          </div>
+        `).join('');
 
-        // Image Section based on currentViewMode
-        let imageHtml = '';
+        // Age Badge color & label
+        let ageBadgeClass = "bg-sky-950/80 text-sky-400 border-sky-800/60";
+        let ageLabel = "Adult (Definitive)";
+        if (g.age === 'immature') {
+          ageBadgeClass = "bg-amber-950/80 text-amber-400 border-amber-800/60";
+          ageLabel = "1st-Winter (Immature)";
+        }
+
+        // Frequency / Rarity Badge
+        let frequencyBadge = '';
+        let rarityCallout = '';
+        if (isRare) {
+          frequencyBadge = `
+            <span class="text-[11px] font-black px-2 py-0.5 rounded border border-amber-500/80 bg-amber-500/20 text-amber-300 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <span class="bg-amber-400 text-slate-950 font-black px-1 rounded-[2px] text-[10px]">R</span>
+              Rare Vagrant
+            </span>
+          `;
+          rarityCallout = `
+            <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
+              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare pelagic/Eurasian vagrant in Mid-Atlantic & MD. Detailed notes/photo required.</span>
+              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.5% eBird freq</span>
+            </div>
+          `;
+        } else if (isUncommon) {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD & East Coast">
+              ${g.prob} freq (Uncommon)
+            </span>
+          `;
+        } else {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD & East Coast">
+              ${g.prob} freq (Common)
+            </span>
+          `;
+        }
+
+        // Photo toggle state (primary vs crux)
+        const currentPhotoMode = photoModes[g.id] || 'primary';
+        const activePhotoUrl = currentPhotoMode === 'primary' ? g.photo : g.crux_photo;
+        const activePhotoCaption = currentPhotoMode === 'primary' ? g.photo_caption : g.crux_caption;
+
+        const photoToggleHtml = `
+          <div class="flex items-center gap-1 mt-1.5 justify-end">
+            <button onclick="toggleCardPhoto('${g.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
+            <button onclick="toggleCardPhoto('${g.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          </div>
+        `;
+
+        // Visual layout based on currentViewMode (Both = Hand-drawn Plate on Left, Field Photo on Right)
+        let visualsHtml = '';
         if (currentViewMode === 'both') {
-          imageHtml = `
-            <div class="grid grid-cols-2 gap-2 mb-3">
-              <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 aspect-[4/3] flex items-center justify-center" onclick="openModal('${g.plate}', '${g.plate_caption}')">
-                <img src="${g.plate}" alt="${g.name} plate" class="w-full h-full object-contain p-1 group-hover:scale-105 transition duration-200">
-                <span class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-950/80 text-sky-400 border border-sky-500/30 uppercase tracking-wider backdrop-blur-sm">Plate</span>
+          visualsHtml = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
               </div>
-              <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 aspect-[4/3] flex items-center justify-center" onclick="openModal('${g.photo}', '${g.photo_caption}')">
-                <img src="${g.photo}" alt="${g.name} field photo" class="w-full h-full object-cover group-hover:scale-105 transition duration-200">
-                <span class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-950/80 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider backdrop-blur-sm">Field</span>
+
+              <!-- Visual 2: Field Photograph (with Toggle) -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
+                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
+                  ${photoToggleHtml}
+                </div>
               </div>
             </div>
           `;
         } else if (currentViewMode === 'plates') {
-          imageHtml = `
-            <div class="mb-3">
-              <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 aspect-[16/10] flex items-center justify-center" onclick="openModal('${g.plate}', '${g.plate_caption}')">
-                <img src="${g.plate}" alt="${g.name} plate" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-200">
-                <span class="absolute bottom-1.5 left-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-950/80 text-sky-400 border border-sky-500/30 uppercase tracking-wider backdrop-blur-sm">Scientific Plate</span>
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
               </div>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
             </div>
           `;
         } else if (currentViewMode === 'photos') {
-          imageHtml = `
-            <div class="grid grid-cols-2 gap-2 mb-3">
-              <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 aspect-[4/3] flex items-center justify-center" onclick="openModal('${g.photo}', '${g.photo_caption}')">
-                <img src="${g.photo}" alt="${g.name} field photo 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-200">
-                <span class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-950/80 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider backdrop-blur-sm">Profile</span>
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                ${photoToggleHtml}
               </div>
-              <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 aspect-[4/3] flex items-center justify-center" onclick="openModal('${g.crux_photo}', '${g.crux_caption}')">
-                <img src="${g.crux_photo}" alt="${g.name} field photo 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-200">
-                <span class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-950/80 text-amber-400 border border-amber-500/30 uppercase tracking-wider backdrop-blur-sm">Crux View</span>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
               </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
 
-        // Diagnostics list
-        const diagList = g.diagnostics.map(d => `
-          <div class="text-xs mb-1.5">
-            <span class="font-bold text-slate-300">${d.tract}:</span>
-            <span class="text-slate-400 leading-relaxed">${d.mark}</span>
-          </div>
-        `).join('');
-
-        // Rarity Badge Markup
-        let rarityBadge = '';
-        if (isRare) {
-          rarityBadge = `<span class="rare-badge px-2 py-0.5 rounded text-[10px] font-black text-slate-950 uppercase tracking-wider shrink-0">[R] Rare Vagrant</span>`;
-        } else if (isUncommon) {
-          rarityBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300 border border-slate-700 shrink-0">Uncommon</span>`;
-        } else {
-          rarityBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-800/50 shrink-0">Common</span>`;
-        }
-
         card.innerHTML = `
-          <div>
-            <!-- Header row: Rank, Name, Badges -->
-            <div class="flex items-start justify-between gap-2 mb-1.5">
-              <div>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs font-mono font-bold text-slate-500">#${g.rank}</span>
-                  <h3 class="text-sm font-bold text-white tracking-tight leading-snug">${g.name}</h3>
-                </div>
-                <div class="text-[11px] text-slate-400 italic">${g.sci}</div>
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-black text-slate-400 tabular-nums">#${g.rank}</span>
+                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${g.name}</h2>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border ${ageBadgeClass}">${ageLabel}</span>
               </div>
-              <div class="flex flex-col items-end gap-1">
-                ${rarityBadge}
-                <span class="text-[10px] font-mono text-slate-500 tabular-nums">freq ~${g.prob}</span>
-              </div>
+              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${g.sci}</p>
             </div>
-
-            <!-- Media Section -->
-            ${imageHtml}
-
-            <!-- Diagnostics -->
-            <div class="space-y-1 mb-3 pt-1 border-t border-slate-800/80">
-              ${diagList}
+            
+            <div class="flex items-center gap-1.5 shrink-0">
+              ${frequencyBadge}
             </div>
           </div>
 
-          <!-- Bottom Crux Box -->
-          <div class="mt-2 pt-2 border-t border-slate-800/60 text-[11px] bg-slate-950/50 p-2 rounded border border-slate-800/50">
-            <span class="font-bold text-sky-400 uppercase text-[9px] tracking-wider block mb-0.5">Disambiguation Crux:</span>
-            <p class="text-slate-300 leading-snug font-medium">${g.rule_out}</p>
+          <!-- Rarity Callout for Review Species -->
+          ${rarityCallout}
+
+          <!-- Visual Plates & Photos -->
+          ${visualsHtml}
+
+          <!-- Diagnostic Feather Tract Checklist -->
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
+            ${diagHtml}
+          </div>
+
+          <!-- Single-line Elimination Rule -->
+          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
+            <strong class="text-amber-300 font-bold">Rule:</strong> ${g.rule_out}
           </div>
         `;
 
-        grid.appendChild(card);
+        container.appendChild(card);
       });
 
       // Update counter
       document.getElementById('matchCounter').textContent = `${matches} of 19 variants shown`;
-      updateFilterButtonsUI();
     }
 
-    function updateFilterButtonsUI() {
+    function updateFilterButtons() {
       // Age buttons
       const ageAll = document.getElementById('f-age-all');
       const ageAdult = document.getElementById('f-age-adult');
@@ -1146,30 +1197,6 @@
         }
       });
     }
-
-    function setViewMode(mode) {
-      currentViewMode = mode;
-      document.querySelectorAll('.view-btn').forEach(b => {
-        b.className = "view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white";
-      });
-      const active = document.getElementById(`vm-${mode}`);
-      if (active) active.className = "view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white";
-      renderFeed();
-    }
-
-    function openModal(src, caption) {
-      document.getElementById('modalImg').src = src;
-      document.getElementById('modalCaption').textContent = caption;
-      document.getElementById('imageModal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('imageModal').classList.add('hidden');
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
 
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {

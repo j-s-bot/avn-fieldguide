@@ -48,6 +48,10 @@
 
       <!-- Dynamic Results Counter -->
       <div class="flex items-center gap-2 shrink-0 text-xs">
+        <button id="unhideBtn" onclick="unhideAll()" class="hidden px-2 py-0.5 rounded text-xs font-semibold bg-rose-950/80 text-rose-300 border border-rose-800/80 hover:bg-rose-900/80 hover:border-rose-600 transition flex items-center gap-1.5 shadow-sm cursor-pointer" title="Restore all dismissed species">
+          <span>Unhide All</span>
+          <span id="unhideCount" class="bg-rose-900 text-rose-200 px-1 rounded text-[10px] tabular-nums font-bold">0</span>
+        </button>
         <span id="matchCounter" class="text-xs font-semibold tabular-nums text-slate-300 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
           29 variants shown
         </span>
@@ -1120,7 +1124,18 @@
     let activeSex = 'all'; // 'all', 'drake', 'hen'
     let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     const activeTraits = new Set();
-    let currentViewMode = 'both'; // 'both', 'plates', 'photos'
+    let currentViewMode = 'both';
+    const dismissedCards = new Set();
+
+    function dismissSpecies(id) {
+      dismissedCards.add(id);
+      renderFeed();
+    }
+
+    function unhideAll() {
+      dismissedCards.clear();
+      renderFeed();
+    } // 'both', 'plates', 'photos'
     const photoModes = {}; // cardId -> 'primary' or 'crux'
 
     function renderFeed() {
@@ -1128,6 +1143,9 @@
       container.innerHTML = '';
 
       const filtered = ducks.filter(d => {
+        // Dismiss filter
+        if (dismissedCards.has(d.id)) return false;
+
         // Sex filter
         if (activeSex === 'drake' && d.sex !== 'drake' && d.sex !== 'both') return false;
         if (activeSex === 'hen' && d.sex !== 'hen' && d.sex !== 'both') return false;
@@ -1147,8 +1165,10 @@
         return true;
       });
 
-      // Update match counter
+      // Update match counter & unhide button
       const counter = document.getElementById('matchCounter');
+      const unhideBtn = document.getElementById('unhideBtn');
+      const unhideCount = document.getElementById('unhideCount');
       let label = `${filtered.length} variants shown`;
       if (activeRarity === 'rare') {
         label = `${filtered.length} rare vagrants shown`;
@@ -1157,7 +1177,19 @@
       } else if (activeSex === 'hen') {
         label = `${filtered.length} hens shown`;
       }
-      counter.textContent = label;
+
+      if (counter) {
+        if (dismissedCards.size > 0) {
+          counter.textContent = `${label} (${dismissedCards.size} hidden)`;
+          if (unhideBtn) {
+            unhideBtn.classList.remove('hidden');
+            if (unhideCount) unhideCount.textContent = dismissedCards.size;
+          }
+        } else {
+          counter.textContent = label;
+          if (unhideBtn) unhideBtn.classList.add('hidden');
+        }
+      }
 
       if (filtered.length === 0) {
         container.innerHTML = `
@@ -1319,6 +1351,11 @@
             
             <div class="flex items-center gap-1.5 shrink-0">
               ${frequencyBadge}
+              <button onclick="dismissSpecies('${d.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${d.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
             </div>
           </div>
 

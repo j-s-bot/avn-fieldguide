@@ -32,7 +32,11 @@
       }
     ],
     "rule_out": "Two complete black breast bands + bright orange-rufous rump + red eye-ring = Killdeer.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 26.0,
+    "bill_mm": 20.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "20 mm"
   },
   {
     "id": "semipalmated_plover",
@@ -68,7 +72,11 @@
       }
     ],
     "rule_out": "Single complete dark breast band + dark brown upperparts + bright orange legs + stubby bill = Semipalmated Plover.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 18.0,
+    "bill_mm": 13.0,
+    "size_display": "18 cm (7.0\")",
+    "bill_display": "13 mm"
   },
   {
     "id": "piping_plover",
@@ -104,7 +112,11 @@
       }
     ],
     "rule_out": "Ghostly pale sandy-white mantle + narrow/broken breast band + orange legs = Piping Plover.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 18.0,
+    "bill_mm": 12.0,
+    "size_display": "18 cm (7.0\")",
+    "bill_display": "12 mm"
   },
   {
     "id": "black_bellied_plover",
@@ -141,7 +153,11 @@
       }
     ],
     "rule_out": "Large stout plover + cold silver-gray spangling + heavy black bill + jet-black underwing 'armpits' = Black-bellied Plover.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 29.0,
+    "bill_mm": 29.0,
+    "size_display": "29 cm (11.5\")",
+    "bill_display": "29 mm"
   },
   {
     "id": "american_golden_plover",
@@ -176,7 +192,11 @@
       }
     ],
     "rule_out": "Slender plover + warm golden spangles + long primary projection + dusky underwings (no black armpits) = American Golden-Plover.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 26.0,
+    "bill_mm": 22.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "22 mm"
   },
   {
     "id": "greater_yellowlegs",
@@ -211,7 +231,11 @@
       }
     ],
     "rule_out": "Heavy upturned bill 1.5x head length + bright yellow legs + 3-4 note call = Greater Yellowlegs.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 36.0,
+    "bill_mm": 56.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "56 mm"
   },
   {
     "id": "lesser_yellowlegs",
@@ -246,7 +270,11 @@
       }
     ],
     "rule_out": "Straight needle-like bill equal to head length + dainty build + bright yellow legs = Lesser Yellowlegs.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 26.0,
+    "bill_mm": 37.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "37 mm"
   },
   {
     "id": "solitary_sandpiper",
@@ -282,7 +310,11 @@
       }
     ],
     "rule_out": "Bold white eye-ring + dark white-speckled back + unstriped dark wings + olive legs = Solitary Sandpiper.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 21.0,
+    "bill_mm": 30.0,
+    "size_display": "21 cm (8.5\")",
+    "bill_display": "30 mm"
   },
   {
     "id": "spotted_sandpiper_breeding",
@@ -317,7 +349,11 @@
       }
     ],
     "rule_out": "Dense bold round belly spots + perpetual teetering + orange bill = Breeding Spotted Sandpiper.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 19.0,
+    "bill_mm": 24.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "spotted_sandpiper_nonbreeding",
@@ -352,7 +388,11 @@
       }
     ],
     "rule_out": "Plain white underparts + crisp white shoulder spur in front of wing + compulsive tail teetering = Non-Breeding Spotted Sandpiper.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 19.0,
+    "bill_mm": 24.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "least_sandpiper",
@@ -387,7 +427,11 @@
       }
     ],
     "rule_out": "Tiny peep + pale yellowish-green legs + fine drooping bill + warm brown tones = Least Sandpiper.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 14.0,
+    "bill_mm": 18.0,
+    "size_display": "14 cm (5.5\")",
+    "bill_display": "18 mm"
   },
   {
     "id": "semipalmated_sandpiper",
@@ -422,7 +466,11 @@
       }
     ],
     "rule_out": "Small peep + solid black legs + short straight blunt-tipped bill + cold gray mantle = Semipalmated Sandpiper.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 15.0,
+    "bill_mm": 19.0,
+    "size_display": "15 cm (6.0\")",
+    "bill_display": "19 mm"
   },
   {
     "id": "western_sandpiper",
@@ -457,7 +505,11 @@
       }
     ],
     "rule_out": "Peep with black legs + longer droop-tipped bill with thick base + rufous upper scapulars = Western Sandpiper.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 16.0,
+    "bill_mm": 25.0,
+    "size_display": "16 cm (6.3\")",
+    "bill_display": "25 mm"
   },
   {
     "id": "white_rumped_sandpiper",
@@ -493,7 +545,11 @@
       }
     ],
     "rule_out": "Pure white horseshoe rump in flight + long primary projection past tail + pale base to lower mandible = White-rumped Sandpiper.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 19.0,
+    "bill_mm": 23.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "23 mm"
   },
   {
     "id": "sanderling",
@@ -529,7 +585,11 @@
       }
     ],
     "rule_out": "Dazzling white beach runner + black shoulder patch + stout black bill + wave-chasing behavior = Sanderling.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 20.0,
+    "bill_mm": 25.0,
+    "size_display": "20 cm (8.0\")",
+    "bill_display": "25 mm"
   },
   {
     "id": "dunlin",
@@ -564,7 +624,11 @@
       }
     ],
     "rule_out": "Hunched posture + long heavy bill with drooping tip + uniform drab gray plumage = Dunlin.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 21.0,
+    "bill_mm": 38.0,
+    "size_display": "21 cm (8.5\")",
+    "bill_display": "38 mm"
   },
   {
     "id": "short_billed_dowitcher",
@@ -600,7 +664,11 @@
       }
     ],
     "rule_out": "Sewing-machine probing + white back wedge in flight + flat forehead + coastal saltmarsh + 3-note 'tut-tut-tut' = Short-billed Dowitcher.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 28.0,
+    "bill_mm": 60.0,
+    "size_display": "28 cm (11.0\")",
+    "bill_display": "60 mm"
   },
   {
     "id": "long_billed_dowitcher",
@@ -636,7 +704,11 @@
       }
     ],
     "rule_out": "Sewing-machine probing + steep forehead + very long bill + sharp single 'keek!' call + freshwater = Long-billed Dowitcher.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 29.0,
+    "bill_mm": 70.0,
+    "size_display": "29 cm (11.5\")",
+    "bill_display": "70 mm"
   },
   {
     "id": "stilt_sandpiper",
@@ -672,7 +744,11 @@
       }
     ],
     "rule_out": "Long greenish-yellow legs + decurved/droop-tipped bill + bold white supercilium + sewing-machine probing in deep water = Stilt Sandpiper.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 22.0,
+    "bill_mm": 39.0,
+    "size_display": "22 cm (8.7\")",
+    "bill_display": "39 mm"
   },
   {
     "id": "willet",
@@ -708,7 +784,11 @@
       }
     ],
     "rule_out": "Plain battleship-gray body + heavy straight bill + shocking black-and-white 'piano key' wings in flight = Willet.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 38.0,
+    "bill_mm": 57.0,
+    "size_display": "38 cm (15.0\")",
+    "bill_display": "57 mm"
   },
   {
     "id": "hudsonian_godwit",
@@ -745,6 +825,10 @@
       }
     ],
     "rule_out": "Long upturned two-toned pink/black bill + jet-black underwings + white rump & black tail = Hudsonian Godwit.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 39.0,
+    "bill_mm": 80.0,
+    "size_display": "39 cm (15.5\")",
+    "bill_display": "80 mm"
   }
 ]

@@ -36,7 +36,11 @@
       }
     ],
     "rule_out": "Slender yellow bill with complete black ring + bright yellow legs + pale gray mantle = Adult Ring-billed Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 45.0,
+    "bill_mm": 40.0,
+    "size_display": "45 cm (17.5\")",
+    "bill_display": "40 mm"
   },
   {
     "id": "ring_billed_gull_immature",
@@ -73,7 +77,11 @@
       }
     ],
     "rule_out": "Pink bill with crisp black tip + narrow clean black tail band + pink legs = 1st-Winter Ring-billed Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 45.0,
+    "bill_mm": 40.0,
+    "size_display": "45 cm (17.5\")",
+    "bill_display": "40 mm"
   },
   {
     "id": "herring_gull_adult",
@@ -112,7 +120,11 @@
       }
     ],
     "rule_out": "Heavy build + pale gray mantle + bubblegum-pink legs + red spot on heavy yellow bill = Adult Herring Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 61.0,
+    "bill_mm": 56.0,
+    "size_display": "61 cm (24.0\")",
+    "bill_display": "56 mm"
   },
   {
     "id": "herring_gull_immature",
@@ -148,7 +160,11 @@
       }
     ],
     "rule_out": "Bulky brown gull + heavy dark bill + solid dark brown tail + pale inner primary window = 1st-Winter Herring Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 61.0,
+    "bill_mm": 56.0,
+    "size_display": "61 cm (24.0\")",
+    "bill_display": "56 mm"
   },
   {
     "id": "great_black_backed_gull_adult",
@@ -186,7 +202,11 @@
       }
     ],
     "rule_out": "Giant size + jet-black mantle + pale pink legs + massive brutal bill = Adult Great Black-backed Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 75.0,
+    "bill_mm": 65.0,
+    "size_display": "75 cm (30.0\")",
+    "bill_display": "65 mm"
   },
   {
     "id": "great_black_backed_gull_immature",
@@ -222,7 +242,11 @@
       }
     ],
     "rule_out": "Massive bull-necked size + strikingly white head/underparts + crisp checkered black-brown mantle = 1st-Winter Great Black-backed Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 75.0,
+    "bill_mm": 65.0,
+    "size_display": "75 cm (30.0\")",
+    "bill_display": "65 mm"
   },
   {
     "id": "laughing_gull_breeding",
@@ -260,7 +284,11 @@
       }
     ],
     "rule_out": "Full black hood + bold white eye-arcs + deep slate-gray mantle + drooping reddish bill = Breeding Adult Laughing Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 41.0,
+    "bill_mm": 41.0,
+    "size_display": "41 cm (16.0\")",
+    "bill_display": "41 mm"
   },
   {
     "id": "laughing_gull_winter",
@@ -298,7 +326,11 @@
       }
     ],
     "rule_out": "Deep slate-gray mantle + dusky nape smudge + long drooping dark bill + solid black wingtips = Winter Adult Laughing Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 41.0,
+    "bill_mm": 41.0,
+    "size_display": "41 cm (16.0\")",
+    "bill_display": "41 mm"
   },
   {
     "id": "bonapartes_gull_adult",
@@ -337,7 +369,11 @@
       }
     ],
     "rule_out": "Petite tern-like build + needle-thin black bill + stark black ear spot + bright pink-orange legs = Winter Adult Bonaparte's Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 33.0,
+    "bill_mm": 24.0,
+    "size_display": "33 cm (13.0\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "bonapartes_gull_immature",
@@ -375,7 +411,11 @@
       }
     ],
     "rule_out": "Petite dainty size + slender black bill + black ear spot + brown diagonal wing bar + black tail band = 1st-Winter Bonaparte's Gull.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 33.0,
+    "bill_mm": 24.0,
+    "size_display": "33 cm (13.0\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "lesser_black_backed_gull_adult",
@@ -414,7 +454,11 @@
       }
     ],
     "rule_out": "Dark slate mantle + bright yellow legs + long primary projection + red spot on yellow bill = Adult Lesser Black-backed Gull.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 53.0,
+    "bill_mm": 52.0,
+    "size_display": "53 cm (21.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "lesser_black_backed_gull_immature",
@@ -451,7 +495,11 @@
       }
     ],
     "rule_out": "Very dark sooty-brown coverts + slender all-black bill + long primary projection + dark eye mask = 1st-Winter Lesser Black-backed Gull.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 53.0,
+    "bill_mm": 52.0,
+    "size_display": "53 cm (21.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "iceland_gull_adult",
@@ -490,7 +538,11 @@
       }
     ],
     "rule_out": "Gentle rounded dove-like head + small delicate bill + pale gray/frosted wingtips with NO solid black = Adult Iceland Gull (Kumlien's).",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 55.0,
+    "bill_mm": 42.0,
+    "size_display": "55 cm (21.5\")",
+    "bill_display": "42 mm"
   },
   {
     "id": "iceland_gull_immature",
@@ -527,7 +579,11 @@
       }
     ],
     "rule_out": "Frosted creamy-biscuit body + pale wingtips lacking dark pigment + gentle rounded head + petite slender bill = 1st-Winter Iceland Gull.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 55.0,
+    "bill_mm": 42.0,
+    "size_display": "55 cm (21.5\")",
+    "bill_display": "42 mm"
   },
   {
     "id": "glaucous_gull_adult",
@@ -565,7 +621,11 @@
       }
     ],
     "rule_out": "Massive apex size + extremely pale mantle + pure chalk-white wingtips with zero black + heavy yellow bill = Adult Glaucous Gull.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 68.0,
+    "bill_mm": 60.0,
+    "size_display": "68 cm (27.0\")",
+    "bill_display": "60 mm"
   },
   {
     "id": "glaucous_gull_immature",
@@ -603,7 +663,11 @@
       }
     ],
     "rule_out": "Massive size + pure white wingtips + heavy two-toned pink-and-black bill = 1st-Winter Glaucous Gull.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 68.0,
+    "bill_mm": 60.0,
+    "size_display": "68 cm (27.0\")",
+    "bill_display": "60 mm"
   },
   {
     "id": "black_headed_gull_adult",
@@ -641,7 +705,11 @@
       }
     ],
     "rule_out": "Bonaparte's lookalike with dark smoky-black underwing + dull reddish bill + dull red legs = Adult Black-headed Gull.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 37.0,
+    "bill_mm": 34.0,
+    "size_display": "37 cm (14.5\")",
+    "bill_display": "34 mm"
   },
   {
     "id": "black_legged_kittiwake_adult",
@@ -679,7 +747,11 @@
       }
     ],
     "rule_out": "Plain greenish-yellow bill + short jet-black legs + ink-dipped wingtips with no white mirrors = Adult Black-legged Kittiwake.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 41.0,
+    "bill_mm": 36.0,
+    "size_display": "41 cm (16.0\")",
+    "bill_display": "36 mm"
   },
   {
     "id": "black_legged_kittiwake_immature",
@@ -718,6 +790,10 @@
       }
     ],
     "rule_out": "Black 'tar collar' on nape + bold black 'M' zigzag on upperwing + solid black bill + short black legs = 1st-Winter Black-legged Kittiwake.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 41.0,
+    "bill_mm": 36.0,
+    "size_display": "41 cm (16.0\")",
+    "bill_display": "36 mm"
   }
 ]

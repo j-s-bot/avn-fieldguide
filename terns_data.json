@@ -35,7 +35,11 @@
       }
     ],
     "rule_out": "Orange bill with black tip + frosted silvery outer primaries + pure white underparts = Breeding Forster's Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 36.0,
+    "bill_mm": 39.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "39 mm"
   },
   {
     "id": "forsters_tern_nonbreeding",
@@ -73,7 +77,11 @@
       }
     ],
     "rule_out": "Isolated black comma eye patch + completely white nape + frosty primaries = Non-Breeding Forster's Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 36.0,
+    "bill_mm": 39.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "39 mm"
   },
   {
     "id": "royal_tern",
@@ -112,7 +120,11 @@
       }
     ],
     "rule_out": "Massive carrot-orange bill + extensive white forehead + shaggy black rear crest + pale underwing = Royal Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 50.0,
+    "bill_mm": 63.0,
+    "size_display": "50 cm (20.0\")",
+    "bill_display": "63 mm"
   },
   {
     "id": "common_tern_breeding",
@@ -150,7 +162,11 @@
       }
     ],
     "rule_out": "Coral-red bill with black tip + smoky gray breast + dark primary wedge + dark outer tail webs = Breeding Common Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 35.0,
+    "bill_mm": 36.0,
+    "size_display": "35 cm (13.5\")",
+    "bill_display": "36 mm"
   },
   {
     "id": "common_tern_nonbreeding",
@@ -189,7 +205,11 @@
       }
     ],
     "rule_out": "Continuous dark nape band connecting across hindneck + dark carpal bar on wing + dark primaries = Non-Breeding Common Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 35.0,
+    "bill_mm": 36.0,
+    "size_display": "35 cm (13.5\")",
+    "bill_display": "36 mm"
   },
   {
     "id": "caspian_tern",
@@ -227,7 +247,11 @@
       }
     ],
     "rule_out": "Massive gull size + huge blood-red bill with dark tip + solid blackish underwing patch = Caspian Tern.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 53.0,
+    "bill_mm": 68.0,
+    "size_display": "53 cm (21.0\")",
+    "bill_display": "68 mm"
   },
   {
     "id": "least_tern",
@@ -265,7 +289,11 @@
       }
     ],
     "rule_out": "Tiny size + yellow bill with black tip + white triangular forehead patch + yellow legs = Least Tern.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 23.0,
+    "bill_mm": 28.0,
+    "size_display": "23 cm (9.0\")",
+    "bill_display": "28 mm"
   },
   {
     "id": "black_skimmer",
@@ -303,7 +331,11 @@
       }
     ],
     "rule_out": "Blade-like red bill with elongated lower mandible + black back + white underparts = Black Skimmer.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 46.0,
+    "bill_mm": 75.0,
+    "size_display": "46 cm (18.0\")",
+    "bill_display": "75 mm"
   },
   {
     "id": "black_tern_breeding",
@@ -340,7 +372,11 @@
       }
     ],
     "rule_out": "Solid soot-black head and body + slate-gray wings + white undertail = Breeding Black Tern.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 24.0,
+    "bill_mm": 27.0,
+    "size_display": "24 cm (9.5\")",
+    "bill_display": "27 mm"
   },
   {
     "id": "black_tern_nonbreeding",
@@ -376,7 +412,11 @@
       }
     ],
     "rule_out": "Tiny marsh tern + white underparts with dark side-breast smudge + dark cap/ear spot = Non-Breeding Black Tern.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 24.0,
+    "bill_mm": 27.0,
+    "size_display": "24 cm (9.5\")",
+    "bill_display": "27 mm"
   },
   {
     "id": "gull_billed_tern",
@@ -413,7 +453,11 @@
       }
     ],
     "rule_out": "Heavy, thick stubby black gull-like bill + pale plumage + insect-hawking marsh flight = Gull-billed Tern.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 36.0,
+    "bill_mm": 34.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "34 mm"
   },
   {
     "id": "sandwich_tern",
@@ -452,7 +496,11 @@
       }
     ],
     "rule_out": "Long slender black bill with crisp yellow tip + shaggy black crest = Sandwich Tern.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 41.0,
+    "bill_mm": 52.0,
+    "size_display": "41 cm (16.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "roseate_tern",
@@ -490,7 +538,11 @@
       }
     ],
     "rule_out": "Tail streamers extending far beyond wingtips at rest + all-black slender bill + frosty pale mantle = Roseate Tern.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 36.0,
+    "bill_mm": 38.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "38 mm"
   },
   {
     "id": "arctic_tern",
@@ -529,7 +581,11 @@
       }
     ],
     "rule_out": "Exceptionally short legs + all-red short bill with no black tip + translucent flight feathers = Arctic Tern.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 36.0,
+    "bill_mm": 31.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "31 mm"
   },
   {
     "id": "sooty_tern",
@@ -567,7 +623,11 @@
       }
     ],
     "rule_out": "Jet-black back + pure white underparts + white forehead ending before eye = Sooty Tern.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 42.0,
+    "bill_mm": 44.0,
+    "size_display": "42 cm (16.5\")",
+    "bill_display": "44 mm"
   },
   {
     "id": "bridled_tern",
@@ -604,6 +664,10 @@
       }
     ],
     "rule_out": "Smoky brown back + white collar on hindneck + white eyebrow extending past eye = Bridled Tern.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 37.0,
+    "bill_mm": 40.0,
+    "size_display": "37 cm (14.5\")",
+    "bill_display": "40 mm"
   }
 ]

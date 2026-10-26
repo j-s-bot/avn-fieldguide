@@ -34,7 +34,11 @@
       }
     ],
     "rule_out": "Stocky brown body + pale unbanded chicken bill + dark eye + solitary freshwater habit = Non-Breeding Pied-billed Grebe.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 34.0,
+    "bill_mm": 23.0,
+    "size_display": "34 cm (13.5\")",
+    "bill_display": "23 mm"
   },
   {
     "id": "horned_grebe_nonbreeding",
@@ -71,7 +75,11 @@
       }
     ],
     "rule_out": "Stark snow-white cheek up to eye level + flat black cap + ruby-red eye + pale-tipped straight bill = Non-Breeding Horned Grebe.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 35.0,
+    "bill_mm": 23.0,
+    "size_display": "35 cm (14.0\")",
+    "bill_display": "23 mm"
   },
   {
     "id": "pied_billed_grebe_breeding",
@@ -108,7 +116,11 @@
       }
     ],
     "rule_out": "Stout arched whitish bill with vertical black ring + black throat bib = Breeding Pied-billed Grebe.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 34.0,
+    "bill_mm": 23.0,
+    "size_display": "34 cm (13.5\")",
+    "bill_display": "23 mm"
   },
   {
     "id": "common_loon_nonbreeding",
@@ -145,7 +157,11 @@
       }
     ],
     "rule_out": "Large bulky diver + heavy horizontal dagger bill + jagged white neck notch from behind = Non-Breeding Common Loon.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 81.0,
+    "bill_mm": 82.0,
+    "size_display": "81 cm (32.0\")",
+    "bill_display": "82 mm"
   },
   {
     "id": "red_throated_loon_nonbreeding",
@@ -182,7 +198,11 @@
       }
     ],
     "rule_out": "Slender uptilted bill held at an angle + extensive white face above eye + speckled white back = Non-Breeding Red-throated Loon.",
-    "rarity": "common"
+    "rarity": "common",
+    "length_cm": 63.0,
+    "bill_mm": 52.0,
+    "size_display": "63 cm (25.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "common_loon_breeding",
@@ -220,7 +240,11 @@
       }
     ],
     "rule_out": "Velvet black head + striped white necklace + checkerboard back + heavy black dagger bill = Breeding Common Loon.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 81.0,
+    "bill_mm": 82.0,
+    "size_display": "81 cm (32.0\")",
+    "bill_display": "82 mm"
   },
   {
     "id": "horned_grebe_breeding",
@@ -257,7 +281,11 @@
       }
     ],
     "rule_out": "Bright golden horns + black puffy hood + rich chestnut-rufous neck and flanks = Breeding Horned Grebe.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 35.0,
+    "bill_mm": 23.0,
+    "size_display": "35 cm (14.0\")",
+    "bill_display": "23 mm"
   },
   {
     "id": "red_necked_grebe_nonbreeding",
@@ -293,7 +321,11 @@
       }
     ],
     "rule_out": "Large heavy grebe + stout yellow-based dagger bill + dingy dusky-gray cheek = Non-Breeding Red-necked Grebe.",
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "length_cm": 48.0,
+    "bill_mm": 52.0,
+    "size_display": "48 cm (19.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "red_throated_loon_breeding",
@@ -330,7 +362,11 @@
       }
     ],
     "rule_out": "Chestnut-red throat patch + velvet slate-gray head + pinstriped hindneck + uptilted bill = Breeding Red-throated Loon.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 63.0,
+    "bill_mm": 52.0,
+    "size_display": "63 cm (25.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "red_necked_grebe_breeding",
@@ -367,7 +403,11 @@
       }
     ],
     "rule_out": "Rich chestnut neck + stark silvery-white cheeks + heavy yellow dagger bill = Breeding Red-necked Grebe.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 48.0,
+    "bill_mm": 52.0,
+    "size_display": "48 cm (19.0\")",
+    "bill_display": "52 mm"
   },
   {
     "id": "eared_grebe_nonbreeding",
@@ -404,7 +444,11 @@
       }
     ],
     "rule_out": "Peaked forehead crown + thin upturned bill + diffuse dusky cheek smudge = Non-Breeding Eared Grebe.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 33.0,
+    "bill_mm": 24.0,
+    "size_display": "33 cm (13.0\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "eared_grebe_breeding",
@@ -442,7 +486,11 @@
       }
     ],
     "rule_out": "Solid black neck + radiating golden cheek plumes + peaked forehead + thin upturned bill = Breeding Eared Grebe.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 33.0,
+    "bill_mm": 24.0,
+    "size_display": "33 cm (13.0\")",
+    "bill_display": "24 mm"
   },
   {
     "id": "western_grebe",
@@ -480,7 +528,11 @@
       }
     ],
     "rule_out": "Long swan-like neck + bright yellow needle bill + red eye completely enclosed in black cap = Western Grebe.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 63.0,
+    "bill_mm": 75.0,
+    "size_display": "63 cm (25.0\")",
+    "bill_display": "75 mm"
   },
   {
     "id": "pacific_loon_nonbreeding",
@@ -517,6 +569,10 @@
       }
     ],
     "rule_out": "Slender straight bill held level + velvety silvery-gray nape + clean straight neck demarcation + dark chinstrap = Non-Breeding Pacific Loon.",
-    "rarity": "rare"
+    "rarity": "rare",
+    "length_cm": 66.0,
+    "bill_mm": 54.0,
+    "size_display": "66 cm (26.0\")",
+    "bill_display": "54 mm"
   }
 ]

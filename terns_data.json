@@ -1,0 +1,609 @@
+[
+  {
+    "id": "forsters_tern_breeding",
+    "rank": 1,
+    "name": "Forster's Tern (Breeding)",
+    "sci": "Sterna forsteri",
+    "prob": "58%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "orange_black_bill",
+      "black_cap",
+      "pale_primaries",
+      "forked_tail",
+      "orange_red_legs"
+    ],
+    "plate": "assets/tern_plates/forsters_tern_breeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Stout orange bill with sharp black tip, solid black cap down to bill, frosty silvery-white outer primaries (paler than mantle), deeply forked tail with white outer webs, orange-red legs",
+    "photo": "assets/terns/forsters_tern_breeding_1.jpg",
+    "photo_caption": "Field profile: Orange bill with black tip, pristine white breast and belly, frosty silvery-white wingtips, long tail streamers",
+    "crux_photo": "assets/terns/forsters_tern_breeding_2.jpg",
+    "crux_caption": "Head closeup: Orange bill base contrasting with distinct black tip, solid velvet black cap down to lower eye level",
+    "diagnostics": [
+      {
+        "tract": "Bill Color & Shape",
+        "mark": "Bright orange bill with a distinct black tip; noticeably stouter and heavier-based than Common Tern."
+      },
+      {
+        "tract": "Primary Frosting",
+        "mark": "Outer primary flight feathers are frosted silvery-white on the upper surface, appearing paler than the back (never a dark wedge)."
+      },
+      {
+        "tract": "Underparts & Tail",
+        "mark": "Pure snow-white breast and belly; deeply forked tail where outer webs are white and inner webs are gray (reverse of Common Tern)."
+      }
+    ],
+    "rule_out": "Orange bill with black tip + frosted silvery outer primaries + pure white underparts = Breeding Forster's Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "forsters_tern_nonbreeding",
+    "rank": 2,
+    "name": "Forster's Tern (Fall / Non-Breeding)",
+    "sci": "Sterna forsteri",
+    "prob": "55%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "all_black_bill",
+      "isolated_eye_mask",
+      "pale_primaries",
+      "forked_tail",
+      "orange_red_legs"
+    ],
+    "plate": "assets/tern_plates/forsters_tern_nonbreeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Distinctive black 'comma' or bandit eye-mask through eye, pure white nape and crown (no dark band across back of head), all-black bill, frosty silvery mantle and primaries",
+    "photo": "assets/terns/forsters_tern_nonbreeding_1.jpg",
+    "photo_caption": "Field profile: Isolated jet-black comma eye patch surrounded by stark white head and nape, dark bill, silvery-gray back",
+    "crux_photo": "assets/terns/forsters_tern_nonbreeding_2.jpg",
+    "crux_caption": "Head closeup: Diagnostic isolated black eye-mask ending sharply behind eye; nape and hindneck remain entirely pure white",
+    "diagnostics": [
+      {
+        "tract": "Head Pattern (The Crux)",
+        "mark": "Bold black comma-shaped mask through the eye that terminates behind ear coverts; nape and crown are entirely clean white."
+      },
+      {
+        "tract": "Bill",
+        "mark": "All-black or black with faint dull reddish tinge at the extreme base during late fall/winter."
+      },
+      {
+        "tract": "Wing Pattern",
+        "mark": "Frosty silvery-white outer primaries lacking a dark carpal bar along the leading wing edge."
+      }
+    ],
+    "rule_out": "Isolated black comma eye patch + completely white nape + frosty primaries = Non-Breeding Forster's Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "royal_tern",
+    "rank": 3,
+    "name": "Royal Tern",
+    "sci": "Thalasseus maximus",
+    "prob": "48%",
+    "group": "crested_tern",
+    "traits": [
+      "crested_tern",
+      "carrot_orange_bill",
+      "white_forehead",
+      "shaggy_crest",
+      "large_crested",
+      "forked_tail",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/royal_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Large crested tern, massive stout carrot-orange bill, shaggy rear black crest, bald white forehead extending far back onto crown, pale gray mantle, black legs",
+    "photo": "assets/terns/royal_tern_1.jpg",
+    "photo_caption": "Beach flock view: Huge carrot-orange bill, shaggy black crest, extensive white forehead, pure white underparts",
+    "crux_photo": "assets/terns/royal_tern_2.jpg",
+    "crux_caption": "Head closeup: Massive, slightly decurved carrot-orange bill and shaggy crest; forehead is cleanly white to mid-crown",
+    "diagnostics": [
+      {
+        "tract": "Bill",
+        "mark": "Massive, stout carrot-orange to yellowish-orange dagger bill, slightly decurved along culmen."
+      },
+      {
+        "tract": "Forehead & Crest",
+        "mark": "In almost all plumages seen post-spring, forehead is stark white extending back to mid-crown, leaving a shaggy black rear crest."
+      },
+      {
+        "tract": "Underwing",
+        "mark": "Underside of outer primaries is translucent whitish with only narrow dark tips (never solid blackish like Caspian)."
+      }
+    ],
+    "rule_out": "Massive carrot-orange bill + extensive white forehead + shaggy black rear crest + pale underwing = Royal Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "common_tern_breeding",
+    "rank": 4,
+    "name": "Common Tern (Breeding)",
+    "sci": "Sterna hirundo",
+    "prob": "42%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "red_black_bill",
+      "black_cap",
+      "dark_primaries",
+      "forked_tail",
+      "orange_red_legs"
+    ],
+    "plate": "assets/tern_plates/common_tern_breeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender blood-red to coral-red bill with black tip, solid black cap, dusky grayish wash across breast/belly contrasting with white cheeks, dark translucent wedge on outer primaries",
+    "photo": "assets/terns/common_tern_breeding_1.jpg",
+    "photo_caption": "Field profile: Coral-red bill with black tip, pale smoky-gray underparts, sharp black cap, deeply forked tail with dark outer streamers",
+    "crux_photo": "assets/terns/common_tern_breeding_2.jpg",
+    "crux_caption": "Head & bill: Coral-red bill with crisp black tip, slender tapered bill profile, duskier throat/breast than Forster's",
+    "diagnostics": [
+      {
+        "tract": "Bill & Underparts",
+        "mark": "Slender coral-red to blood-red bill with black tip; breast and belly have an unmistakable smoky-gray wash."
+      },
+      {
+        "tract": "Outer Primaries",
+        "mark": "Upper outer primaries show a dark grayish wedge that becomes translucent when backlit in flight."
+      },
+      {
+        "tract": "Tail Webbing",
+        "mark": "Outer webs of outermost tail streamers are dark grayish-black (contrasting with white inner webs)."
+      }
+    ],
+    "rule_out": "Coral-red bill with black tip + smoky gray breast + dark primary wedge + dark outer tail webs = Breeding Common Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "common_tern_nonbreeding",
+    "rank": 5,
+    "name": "Common Tern (Fall / Non-Breeding)",
+    "sci": "Sterna hirundo",
+    "prob": "38%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "all_black_bill",
+      "dark_nape_band",
+      "carpal_bar",
+      "dark_primaries",
+      "forked_tail",
+      "orange_red_legs"
+    ],
+    "plate": "assets/tern_plates/common_tern_nonbreeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Black bill, dark blackish-gray nape band connecting continuously across back of head from ear to ear, white forehead, prominent dark carpal bar on leading edge of inner wing",
+    "photo": "assets/terns/common_tern_nonbreeding_1.jpg",
+    "photo_caption": "Field view: Dark nape band wrapping behind head, white forehead, dark carpal shoulder bar, black bill",
+    "crux_photo": "assets/terns/common_tern_nonbreeding_2.jpg",
+    "crux_caption": "Head & nape: Dark eye mask extends continuously across the nape (forming a solid dark collar, unlike Forster's isolated comma)",
+    "diagnostics": [
+      {
+        "tract": "Nape Band (The Crux)",
+        "mark": "Dark eye mask connects continuously across the nape/hindneck, forming a complete dark horseshoe/band around back of head."
+      },
+      {
+        "tract": "Carpal Bar",
+        "mark": "Prominent dark brownish-black bar along the leading edge (carpal joint) of the inner wing (never present on adult Forster's)."
+      },
+      {
+        "tract": "Outer Primaries",
+        "mark": "Outer primaries are dusky gray to blackish (darker than inner wing, never frosty white)."
+      }
+    ],
+    "rule_out": "Continuous dark nape band connecting across hindneck + dark carpal bar on wing + dark primaries = Non-Breeding Common Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "caspian_tern",
+    "rank": 6,
+    "name": "Caspian Tern",
+    "sci": "Hydroprogne caspia",
+    "prob": "35%",
+    "group": "crested_tern",
+    "traits": [
+      "crested_tern",
+      "blood_red_bill",
+      "dark_underwing_wedge",
+      "large_crested",
+      "black_cap",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/caspian_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: World's largest tern (gull-sized), massive thick blood-red bill with dark dusky tip, full black cap (finely streaked white in fall), shallow notched tail, solid blackish underwing primary patch",
+    "photo": "assets/terns/caspian_tern_1.jpg",
+    "photo_caption": "Field view: Huge bulky gull-like structure, deep coral/blood-red bill with dark smudge, full black cap, shallow tail fork",
+    "crux_photo": "assets/terns/caspian_tern_2.jpg",
+    "crux_caption": "Head & bill: Massive heavy blood-red bill with dark subterminal smudge, black cap extending down to lower eye rim",
+    "diagnostics": [
+      {
+        "tract": "Size & Bill",
+        "mark": "Massive, gull-sized body; huge, thick blood-red to deep coral bill with a dark dusky smudge near tip."
+      },
+      {
+        "tract": "Underwing Primaries",
+        "mark": "Underside of outer primaries shows an extensive, solid dusky-black wedge/patch (boldly contrasting in flight)."
+      },
+      {
+        "tract": "Cap & Tail",
+        "mark": "Full black cap (streaked white on forehead in winter, but never bald white like Royal); shallowly notched tail."
+      }
+    ],
+    "rule_out": "Massive gull size + huge blood-red bill with dark tip + solid blackish underwing patch = Caspian Tern.",
+    "rarity": "common"
+  },
+  {
+    "id": "least_tern",
+    "rank": 7,
+    "name": "Least Tern",
+    "sci": "Sternula antillarum",
+    "prob": "28%",
+    "group": "small_tern",
+    "traits": [
+      "small_tern",
+      "yellow_black_bill",
+      "white_triangle",
+      "tiny_size",
+      "yellow_legs",
+      "black_cap"
+    ],
+    "plate": "assets/tern_plates/least_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Tiny petite structure (smallest NA tern), bright yellow bill with sharp black tip, stark white triangular forehead patch against black cap, bright yellow legs, buoyant fluttery flight",
+    "photo": "assets/terns/least_tern_1.jpg",
+    "photo_caption": "Beach nesting profile: Tiny size, yellow bill with black tip, white forehead chevron, yellow legs",
+    "crux_photo": "assets/terns/least_tern_2.jpg",
+    "crux_caption": "Head closeup: Crisp white forehead triangle contrasting with jet-black cap and black lores line, yellow bill",
+    "diagnostics": [
+      {
+        "tract": "Size & Flight",
+        "mark": "Smallest North American tern (only 8.5-9 inches); quick, buoyant, erratic swallow-like wingbeats."
+      },
+      {
+        "tract": "Bill & Forehead",
+        "mark": "Bright yellow bill with a sharp black tip; prominent stark white triangular patch on forehead."
+      },
+      {
+        "tract": "Legs",
+        "mark": "Short, bright yellow to orange-yellow legs (all other small/medium Sterna have reddish or black legs)."
+      }
+    ],
+    "rule_out": "Tiny size + yellow bill with black tip + white triangular forehead patch + yellow legs = Least Tern.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "black_skimmer",
+    "rank": 8,
+    "name": "Black Skimmer",
+    "sci": "Rynchops niger",
+    "prob": "15%",
+    "group": "skimmer",
+    "traits": [
+      "skimmer",
+      "knife_bill",
+      "red_black_bill",
+      "black_body",
+      "orange_red_legs",
+      "black_cap"
+    ],
+    "plate": "assets/tern_plates/black_skimmer_plate.jpg",
+    "plate_caption": "Diagnostic plate: Bizarre knife-like laterally compressed red-and-black bill with lower mandible far longer than upper, jet-black upperparts, snow-white face and underparts, bright reddish-orange legs",
+    "photo": "assets/terns/black_skimmer_1.jpg",
+    "photo_caption": "Field profile: Unique knife bill, black cap and back, white underparts, long pointed black wings",
+    "crux_photo": "assets/terns/black_skimmer_2.jpg",
+    "crux_caption": "Bill closeup: Massive knife-thin red bill base with jet black tip; lower mandible extends significantly beyond upper mandible",
+    "diagnostics": [
+      {
+        "tract": "Bill (Unique)",
+        "mark": "Huge laterally compressed blade-like bill; lower mandible is up to an inch longer than upper mandible for water-skimming."
+      },
+      {
+        "tract": "Plumage",
+        "mark": "Solid jet-black crown, nape, back, and wings; brilliant pure snow-white forehead, cheeks, and underparts."
+      },
+      {
+        "tract": "Foraging Action",
+        "mark": "Flies low over calm water with lower mandible cutting the surface, snapping shut on contact with fish."
+      }
+    ],
+    "rule_out": "Blade-like red bill with elongated lower mandible + black back + white underparts = Black Skimmer.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "black_tern_breeding",
+    "rank": 9,
+    "name": "Black Tern (Breeding)",
+    "sci": "Chlidonias niger",
+    "prob": "12%",
+    "group": "marsh_tern",
+    "traits": [
+      "marsh_tern",
+      "black_body",
+      "all_black_bill",
+      "tiny_size",
+      "black_cap"
+    ],
+    "plate": "assets/tern_plates/black_tern_breeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Small marsh tern, entirely jet-black head, neck, breast, and belly, contrasting slate-gray mantle and wings, crisp white undertail coverts, small black bill, dark legs",
+    "photo": "assets/terns/black_tern_breeding_1.jpg",
+    "photo_caption": "Perched marsh profile: Solid soot-black head and underparts, slate-gray wings, white vent, erratic flight",
+    "crux_photo": "assets/terns/black_tern_breeding_2.jpg",
+    "crux_caption": "Field view: Jet-black underparts contrasting sharply with pure white undertail coverts and silver-gray underwing lining",
+    "diagnostics": [
+      {
+        "tract": "Underparts & Head",
+        "mark": "Solid velvety soot-black head, neck, breast, and belly (completely unique among North American terns)."
+      },
+      {
+        "tract": "Wings & Tail",
+        "mark": "Contrasting medium slate-gray mantle and wings; short, shallowly notched gray tail with crisp white undertail coverts."
+      },
+      {
+        "tract": "Structure & Habitat",
+        "mark": "Small, delicate marsh tern with fluttery butterfly-like flight, dipping to pick insects from water and marshes."
+      }
+    ],
+    "rule_out": "Solid soot-black head and body + slate-gray wings + white undertail = Breeding Black Tern.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "black_tern_nonbreeding",
+    "rank": 10,
+    "name": "Black Tern (Fall / Non-Breeding)",
+    "sci": "Chlidonias niger",
+    "prob": "10%",
+    "group": "marsh_tern",
+    "traits": [
+      "marsh_tern",
+      "all_black_bill",
+      "breast_smudge",
+      "tiny_size"
+    ],
+    "plate": "assets/tern_plates/black_tern_nonbreeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Small delicate build, white underparts and head, dark blackish-gray cap with dark ear spot, diagnostic dark smudge on side of white breast in front of wing bend, pale gray back",
+    "photo": "assets/terns/black_tern_nonbreeding_1.jpg",
+    "photo_caption": "Fall field view: White head and underparts, dark cap, diagnostic dark chest smudge at shoulder, fluttery flight",
+    "crux_photo": "assets/terns/black_tern_nonbreeding_2.jpg",
+    "crux_caption": "Chest closeup: Diagnostic downward dark gray spur/smudge on side of breast in front of folded wing bend",
+    "diagnostics": [
+      {
+        "tract": "Breast Smudge (The Crux)",
+        "mark": "Dark dusky gray vertical patch/smudge extending downward on the side of the white breast just in front of the wing bend."
+      },
+      {
+        "tract": "Head Pattern",
+        "mark": "White face and throat with a dark grayish-black cap that connects to an ear spot behind the eye."
+      },
+      {
+        "tract": "Size & Build",
+        "mark": "Tiny, delicate marsh tern structure with short shallowly notched tail and slender needle-sharp black bill."
+      }
+    ],
+    "rule_out": "Tiny marsh tern + white underparts with dark side-breast smudge + dark cap/ear spot = Non-Breeding Black Tern.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "gull_billed_tern",
+    "rank": 11,
+    "name": "Gull-billed Tern",
+    "sci": "Gelochelidon nilotica",
+    "prob": "9%",
+    "group": "marsh_tern",
+    "traits": [
+      "marsh_tern",
+      "thick_black_bill",
+      "all_black_bill",
+      "black_cap",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/gull_billed_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Stout gull-like structure, heavy thick stubby black bill (gull-like, blunt, not needle-sharp), full black cap, pale silver-gray mantle, pure white underparts, long black legs",
+    "photo": "assets/terns/gull_billed_tern_1.jpg",
+    "photo_caption": "Field profile: Unmistakable thick stubby black bill, sturdy body, broad rounded wings, long black legs",
+    "crux_photo": "assets/terns/gull_billed_tern_2.jpg",
+    "crux_caption": "Bill closeup: Heavy, thick, blunt black bill lacking needle-sharp tip; hunts insects and crabs over saltmarshes",
+    "diagnostics": [
+      {
+        "tract": "Bill (The Crux)",
+        "mark": "Exceptionally thick, heavy, stubby black bill; blunt and gull-like rather than long and needle-sharp."
+      },
+      {
+        "tract": "Wings & Tail",
+        "mark": "Broader, more rounded wings and shorter, less deeply forked tail than typical Sterna terns."
+      },
+      {
+        "tract": "Feeding Behavior",
+        "mark": "Hawks insects over marshes and plucks fiddler crabs from mudflats; rarely or never plunge-dives into open water."
+      }
+    ],
+    "rule_out": "Heavy, thick stubby black gull-like bill + pale plumage + insect-hawking marsh flight = Gull-billed Tern.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "sandwich_tern",
+    "rank": 12,
+    "name": "Sandwich Tern",
+    "sci": "Thalasseus sandvicensis",
+    "prob": "8%",
+    "group": "crested_tern",
+    "traits": [
+      "crested_tern",
+      "yellow_tip_bill",
+      "all_black_bill",
+      "shaggy_crest",
+      "large_crested",
+      "forked_tail",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/sandwich_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender crested tern, long slender black bill with a sharply defined lemon-yellow tip, shaggy black crest on back of crown, pale gray mantle, white underparts, black legs with yellow soles",
+    "photo": "assets/terns/sandwich_tern_1.jpg",
+    "photo_caption": "Field profile: Long black bill with brilliant yellow tip, shaggy rear crest, slender build, black legs",
+    "crux_photo": "assets/terns/sandwich_tern_2.jpg",
+    "crux_caption": "Bill closeup: Sharp, narrow pencil-like black bill tipped distinctly with pale lemon-yellow",
+    "diagnostics": [
+      {
+        "tract": "Bill (The Crux)",
+        "mark": "Long, slender black bill with a sharply demarcated pale yellow to ivory tip ('pencil dipped in yellow paint')."
+      },
+      {
+        "tract": "Crest & Build",
+        "mark": "Slender, attenuated crested tern structure with a shaggy black crest projecting from the rear crown."
+      },
+      {
+        "tract": "Plumage & Legs",
+        "mark": "Very pale, bleached silver-gray mantle and white underparts; black legs with distinctive yellowish soles."
+      }
+    ],
+    "rule_out": "Long slender black bill with crisp yellow tip + shaggy black crest = Sandwich Tern.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "roseate_tern",
+    "rank": 13,
+    "name": "Roseate Tern",
+    "sci": "Sterna dougallii",
+    "prob": "2%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "all_black_bill",
+      "long_streamers",
+      "pale_primaries",
+      "orange_red_legs",
+      "black_cap"
+    ],
+    "plate": "assets/tern_plates/roseate_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Very pale frosty silvery-white mantle, solid black cap, all-black slender bill, exceptionally long white tail streamers extending far beyond folded wingtips at rest, red legs",
+    "photo": "assets/terns/roseate_tern_1.jpg",
+    "photo_caption": "Field profile: Extremely long white tail streamers extending well past folded wings, all-black bill, pale ghostly plumage",
+    "crux_photo": "assets/terns/roseate_tern_2.jpg",
+    "crux_caption": "Tail & bill view: Slender black bill (red base only in late summer), streamers exceeding wingtips by 2-3 inches",
+    "diagnostics": [
+      {
+        "tract": "Tail Streamers (The Crux)",
+        "mark": "Extremely long, pure white outer tail streamers that project 2 to 3 inches beyond the folded wingtips at rest."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Slender, needle-sharp all-black bill in early summer (developing red at the extreme base only by late breeding season)."
+      },
+      {
+        "tract": "Mantle & Underparts",
+        "mark": "Palest of all medium terns\u2014frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."
+      }
+    ],
+    "rule_out": "Tail streamers extending far beyond wingtips at rest + all-black slender bill + frosty pale mantle = Roseate Tern.",
+    "rarity": "rare"
+  },
+  {
+    "id": "arctic_tern",
+    "rank": 14,
+    "name": "Arctic Tern",
+    "sci": "Sterna paradisaea",
+    "prob": "1%",
+    "group": "typical_sterna",
+    "traits": [
+      "typical_sterna",
+      "blood_red_bill",
+      "short_legs",
+      "long_streamers",
+      "translucent_primaries",
+      "orange_red_legs",
+      "black_cap"
+    ],
+    "plate": "assets/tern_plates/arctic_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Compact body sitting very low to ground on diagnostic exceptionally short coral-red legs, short blood-red bill (entirely red with no black tip), solid black cap, translucent primaries with thin black trailing edge",
+    "photo": "assets/terns/arctic_tern_1.jpg",
+    "photo_caption": "Field view: Extremely short legs (sits nearly flat on ground), short blood-red bill with no black, white cheek stripe",
+    "crux_photo": "assets/terns/arctic_tern_2.jpg",
+    "crux_caption": "Head & bill: Short, slender, all-red bill without black tip, crisp white cheek line separating black cap from gray throat",
+    "diagnostics": [
+      {
+        "tract": "Leg Length (The Crux)",
+        "mark": "Diagnostic exceptionally short legs (tarsus only 15-16 mm); bird stands very low and appears to sit on its belly."
+      },
+      {
+        "tract": "Bill",
+        "mark": "Short, delicate, deep blood-red bill with NO black tip whatsoever (contrast with Common and Forster's)."
+      },
+      {
+        "tract": "Flight Feathers",
+        "mark": "All primaries are uniform translucent white when backlit in flight, edged beneath with a narrow, crisp pencil-thin black line."
+      }
+    ],
+    "rule_out": "Exceptionally short legs + all-red short bill with no black tip + translucent flight feathers = Arctic Tern.",
+    "rarity": "rare"
+  },
+  {
+    "id": "sooty_tern",
+    "rank": 15,
+    "name": "Sooty Tern",
+    "sci": "Onychoprion fuscatus",
+    "prob": "0.5%",
+    "group": "pelagic_vagrant",
+    "traits": [
+      "pelagic_vagrant",
+      "black_body",
+      "white_triangle",
+      "all_black_bill",
+      "forked_tail",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/sooty_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Stark jet-black upperparts (crown, nape, back, and wings), pure crisp snow-white underparts, white forehead patch ending strictly before the eye, deeply forked tail with white outer margins, black bill and legs",
+    "photo": "assets/terns/sooty_tern_1.jpg",
+    "photo_caption": "Pelagic view: Pitch-black upperparts contrasting with pure snow-white underparts, white forehead triangle, black bill",
+    "crux_photo": "assets/terns/sooty_tern_2.jpg",
+    "crux_caption": "Face pattern: White forehead patch ends sharply in front of eye (does NOT extend past eye into an eyebrow)",
+    "diagnostics": [
+      {
+        "tract": "Upperparts",
+        "mark": "Stark, pitch-black crown, nape, back, and wings sharply contrasting with pristine snow-white underparts."
+      },
+      {
+        "tract": "Forehead Patch",
+        "mark": "White triangular forehead patch ends squarely BEFORE the eye; black lores line connects directly to dark eye."
+      },
+      {
+        "tract": "Tail",
+        "mark": "Long, deeply forked tail with prominent white outer margins; oceanic pelagic wanderer brought by tropical storms."
+      }
+    ],
+    "rule_out": "Jet-black back + pure white underparts + white forehead ending before eye = Sooty Tern.",
+    "rarity": "rare"
+  },
+  {
+    "id": "bridled_tern",
+    "rank": 16,
+    "name": "Bridled Tern",
+    "sci": "Onychoprion anaethetus",
+    "prob": "0.5%",
+    "group": "pelagic_vagrant",
+    "traits": [
+      "pelagic_vagrant",
+      "white_collar",
+      "all_black_bill",
+      "forked_tail",
+      "black_legs"
+    ],
+    "plate": "assets/tern_plates/bridled_tern_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dark smoky grayish-brown mantle and wings (not jet black), black cap separated from mantle by a distinct pale whitish collar across the hindneck, white forehead patch extending as a narrow white eyebrow past the eye, white underparts",
+    "photo": "assets/terns/bridled_tern_1.jpg",
+    "photo_caption": "Pelagic profile: Brownish-gray back, distinct white collar on hindneck, white eyebrow extending behind eye, black bill",
+    "crux_photo": "assets/terns/bridled_tern_2.jpg",
+    "crux_caption": "Head closeup: White forehead continues backward as a distinct narrow white supercilium trailing past the eye",
+    "diagnostics": [
+      {
+        "tract": "Hindneck Collar (The Crux)",
+        "mark": "Distinct pale whitish collar on the nape and hindneck cleanly separating the black cap from the dark mantle."
+      },
+      {
+        "tract": "Supercilium / Eyebrow",
+        "mark": "White forehead continues as a narrow white stripe (eyebrow) extending backward beyond the eye (the 'bridle')."
+      },
+      {
+        "tract": "Mantle Tone",
+        "mark": "Upperparts are dark smoky grayish-brown, visibly paler and browner than the solid jet-black of Sooty Tern."
+      }
+    ],
+    "rule_out": "Smoky brown back + white collar on hindneck + white eyebrow extending past eye = Bridled Tern.",
+    "rarity": "rare"
+  }
+]

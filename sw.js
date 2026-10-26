@@ -1,4 +1,4 @@
-const CACHE_NAME = 'avn-lookalike-v13';
+const CACHE_NAME = 'avn-lookalike-v14';
 const ASSETS = [
   './',
   './index.html',

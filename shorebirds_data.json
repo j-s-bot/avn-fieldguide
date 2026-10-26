@@ -639,8 +639,44 @@
     "rarity": "uncommon"
   },
   {
-    "id": "willet",
+    "id": "stilt_sandpiper",
     "rank": 19,
+    "name": "Stilt Sandpiper",
+    "sci": "Calidris himantopus",
+    "prob": "9%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "droop_bill",
+      "yellow_legs",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/stilt_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender medium sandpiper, diagnostic long greenish-yellow stilt legs, slender black bill with distinct gentle droop at tip, bold white supercilium, whitish underparts with fine streaking, white rump",
+    "photo": "assets/shorebirds/stilt_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Long greenish-yellow legs, slender bill drooping slightly at tip, bold white eyebrow, deep wading posture",
+    "crux_photo": "assets/shorebirds/stilt_sandpiper_2.jpg",
+    "crux_caption": "Feeding crux: Decurved bill tip and long legs; often wades belly-deep with rapid vertical sewing-machine probing motion",
+    "diagnostics": [
+      {
+        "tract": "Bill & Feeding Action",
+        "mark": "Long, slender, dark bill that gently decurved/droops towards the tip; probes with a rapid vertical 'sewing-machine' motion while wading belly-deep in water."
+      },
+      {
+        "tract": "Legs & Stance",
+        "mark": "Diagnostic long, spindly, greenish-yellow to dull olive legs ('stilt legs'); frequently wades in deeper water than peeps or yellowlegs."
+      },
+      {
+        "tract": "Head Pattern & Rump",
+        "mark": "Prominent bold white supercilium (eyebrow) extending far behind the dark eye; flashes a solid white rump patch in flight (lacks dowitcher's white back wedge)."
+      }
+    ],
+    "rule_out": "Long greenish-yellow legs + decurved/droop-tipped bill + bold white supercilium + sewing-machine probing in deep water = Stilt Sandpiper.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "willet",
+    "rank": 20,
     "name": "Willet",
     "sci": "Tringa semipalmata",
     "prob": "36%",
@@ -676,7 +712,7 @@
   },
   {
     "id": "hudsonian_godwit",
-    "rank": 20,
+    "rank": 21,
     "name": "Hudsonian Godwit",
     "sci": "Limosa haemastica",
     "prob": "0.3%",

@@ -42,7 +42,7 @@
             Gulls (19)
           </a>
           <span class="px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white shadow-sm ring-1 ring-sky-400/50 transition">
-            Shorebirds (20)
+            Shorebirds (21)
           </span>
           <a href="terns.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Terns & Skimmers Disambiguation Guide">
             Terns (16)
@@ -60,7 +60,7 @@
           <span id="unhideCount" class="bg-rose-900 text-rose-200 px-1 rounded text-[10px] tabular-nums font-bold">0</span>
         </button>
         <span id="matchCounter" class="text-xs font-semibold tabular-nums text-slate-300 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
-          20 variants shown
+          21 variants shown
         </span>
       </div>
 
@@ -69,12 +69,12 @@
     <!-- Filter Rail 1: Family / Guild & eBird Rarity -->
     <div class="max-w-6xl mx-auto mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
       <!-- Family / Guild filters -->
-      <button onclick="toggleGroup('all')" id="f-group-all" title="Show all 20 shorebird cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 20</button>
+      <button onclick="toggleGroup('all')" id="f-group-all" title="Show all 20 shorebird cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 21</button>
       <button onclick="toggleGroup('plover')" id="f-group-plover" title="Plovers: Big-eyed, short stout bills, horizontal run-stop-peck foraging (Killdeer, Semipalmated, Piping, Black-bellied, Golden-Plover)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Plovers (5)</button>
       <button onclick="toggleGroup('peep')" id="f-group-peep" title="Peeps (Tiny Calidris): Smallest shorebirds, rapid mudflat probers (Least, Semipalmated, Western, White-rumped)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Peeps (4)</button>
       <button onclick="toggleGroup('yellowlegs')" id="f-group-yellowlegs" title="Yellowlegs & Tringa: Long bright yellow/olive legs, active nodding and walking (Greater, Lesser, Solitary, Willet)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Yellowlegs (4)</button>
       <button onclick="toggleGroup('dowitcher')" id="f-group-dowitcher" title="Dowitchers: Long straight snipe-like bills, rapid vertical up-and-down sewing-machine probing" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Dowitchers (2)</button>
-      <button onclick="toggleGroup('medium_sandpiper')" id="f-group-medium_sandpiper" title="Medium-Large Sandpipers: Sanderling, Dunlin, Spotted Sandpiper, Hudsonian Godwit" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Sandpipers & Godwits (5)</button>
+      <button onclick="toggleGroup('medium_sandpiper')" id="f-group-medium_sandpiper" title="Medium-Large Sandpipers: Sanderling, Dunlin, Spotted Sandpiper, Hudsonian Godwit" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Sandpipers & Godwits (6)</button>
 
       <span class="text-slate-700">|</span>
 
@@ -770,8 +770,44 @@
     "rarity": "uncommon"
   },
   {
-    "id": "willet",
+    "id": "stilt_sandpiper",
     "rank": 19,
+    "name": "Stilt Sandpiper",
+    "sci": "Calidris himantopus",
+    "prob": "9%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "droop_bill",
+      "yellow_legs",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/stilt_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender medium sandpiper, diagnostic long greenish-yellow stilt legs, slender black bill with distinct gentle droop at tip, bold white supercilium, whitish underparts with fine streaking, white rump",
+    "photo": "assets/shorebirds/stilt_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Long greenish-yellow legs, slender bill drooping slightly at tip, bold white eyebrow, deep wading posture",
+    "crux_photo": "assets/shorebirds/stilt_sandpiper_2.jpg",
+    "crux_caption": "Feeding crux: Decurved bill tip and long legs; often wades belly-deep with rapid vertical sewing-machine probing motion",
+    "diagnostics": [
+      {
+        "tract": "Bill & Feeding Action",
+        "mark": "Long, slender, dark bill that gently decurved/droops towards the tip; probes with a rapid vertical 'sewing-machine' motion while wading belly-deep in water."
+      },
+      {
+        "tract": "Legs & Stance",
+        "mark": "Diagnostic long, spindly, greenish-yellow to dull olive legs ('stilt legs'); frequently wades in deeper water than peeps or yellowlegs."
+      },
+      {
+        "tract": "Head Pattern & Rump",
+        "mark": "Prominent bold white supercilium (eyebrow) extending far behind the dark eye; flashes a solid white rump patch in flight (lacks dowitcher's white back wedge)."
+      }
+    ],
+    "rule_out": "Long greenish-yellow legs + decurved/droop-tipped bill + bold white supercilium + sewing-machine probing in deep water = Stilt Sandpiper.",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "willet",
+    "rank": 20,
     "name": "Willet",
     "sci": "Tringa semipalmata",
     "prob": "36%",
@@ -807,7 +843,7 @@
   },
   {
     "id": "hudsonian_godwit",
-    "rank": 20,
+    "rank": 21,
     "name": "Hudsonian Godwit",
     "sci": "Limosa haemastica",
     "prob": "0.3%",
@@ -941,6 +977,7 @@
         matches++;
 
         const card = document.createElement('div');
+        card.id = `sp-${s.id}`;
         const isRare = s.rarity === 'rare';
         const isUncommon = s.rarity === 'uncommon';
 
@@ -1120,13 +1157,13 @@
       const unhideCount = document.getElementById('unhideCount');
       if (counter) {
         if (dismissedCards.size > 0) {
-          counter.textContent = `${matches} of 20 shown (${dismissedCards.size} hidden)`;
+          counter.textContent = `${matches} of 21 shown (${dismissedCards.size} hidden)`;
           if (unhideBtn) {
             unhideBtn.classList.remove('hidden');
             if (unhideCount) unhideCount.textContent = dismissedCards.size;
           }
         } else {
-          counter.textContent = `${matches} of 20 variants shown`;
+          counter.textContent = `${matches} of 21 variants shown`;
           if (unhideBtn) unhideBtn.classList.add('hidden');
         }
       }
@@ -1201,7 +1238,7 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=13').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=14').then(reg => {
           reg.update();
         }).catch(() => {});
       });

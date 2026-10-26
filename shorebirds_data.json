@@ -160,7 +160,7 @@
     "photo": "assets/shorebirds/american_golden_plover_1.jpg",
     "photo_caption": "Field profile: Slender graceful structure, warm yellowish-gold spangled mantle, bold pale eyebrow, long wings extending well past tail",
     "crux_photo": "assets/shorebirds/american_golden_plover_2.jpg",
-    "crux_caption": "Comparison view: In flight shows uniform dusky gray axillaries (NO black armpits!) and dark unpatterned rump",
+    "crux_caption": "Comparison view: Direct side-by-side comparison with Black-bellied Plover (left); Golden-Plover (right) is slimmer with warm golden spangling, smaller bill, and wings extending far past tail tip",
     "diagnostics": [
       {
         "tract": "Flight Underwing",
@@ -266,7 +266,7 @@
     "photo": "assets/shorebirds/solitary_sandpiper_1.jpg",
     "photo_caption": "Field profile: Prominent white eye-ring on dark face, fine white speckling across dark back, dull olive legs, woodland pool habitat",
     "crux_photo": "assets/shorebirds/solitary_sandpiper_2.jpg",
-    "crux_caption": "Tail & wing: Wings completely dark unstriped in flight; outer tail feathers boldly barred black and white",
+    "crux_caption": "Eye-ring & back detail: Bold white eye-ring contrasting with dark face, fine neat white speckling across slate-brown mantle, dull greenish legs",
     "diagnostics": [
       {
         "tract": "Eye & Face",
@@ -477,7 +477,7 @@
     "photo": "assets/shorebirds/white_rumped_sandpiper_1.jpg",
     "photo_caption": "Field profile: Long elegant wings extending well beyond tail tip, pale base to lower mandible, neat flank streaks",
     "crux_photo": "assets/shorebirds/white_rumped_sandpiper_2.jpg",
-    "crux_caption": "Flight crux: Diagnostic pure snow-white band completely crossing uppertail coverts (white horseshoe rump)",
+    "crux_caption": "Breeding plumage profile: Rich rufous-edged upper scapulars, fine dark chevron streaks along flanks, and long wingtips projecting past tail",
     "diagnostics": [
       {
         "tract": "Flight Crux",

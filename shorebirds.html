@@ -1057,56 +1057,24 @@
     let currentSort = 'freq-desc';
     let urlSpeciesFilter = null; // Set of allowed species IDs/codes
 
-    function initUrlFilter() {
-      const params = new URLSearchParams(window.location.search);
-      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
-      if (filterParam) {
-        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
-        const matched = new Set();
-        tokens.forEach(tok => {
-          const found = shorebirds.find(s => 
-            s.id.toLowerCase() === tok ||
-            (s.ebird_code && s.ebird_code.toLowerCase() === tok) ||
-            s.id.toLowerCase().replace(/_/g, '') === tok.replace(/_/g, '') ||
-            s.id.toLowerCase().replace(/_/g, '-') === tok ||
-            s.name.toLowerCase().includes(tok)
-          );
-          if (found) {
-            matched.add(found.id);
-          }
-        });
-
-        if (matched.size > 0) {
-          urlSpeciesFilter = matched;
-        }
-      }
-    }
-
-    function copyCurrentShareLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = document.getElementById('copyShareBtn');
-        if (btn) {
-          const original = btn.innerHTML;
-          btn.innerHTML = '<span>✓ Copied!</span>';
-          setTimeout(() => { btn.innerHTML = original; }, 2000);
-        }
-      }).catch(() => {
-        alert('Share URL: ' + window.location.href);
-      });
-    }
-
-    function clearUrlFilter() {
-      urlSpeciesFilter = null;
-      if (window.history && window.history.pushState) {
-        window.history.pushState({}, '', window.location.pathname);
-      }
-      renderFeed();
-    }
+    const SORT_LABELS = {
+      'freq-desc': 'Frequency (Common → Rare)',
+      'freq-asc': 'Rarity (Rarest First)',
+      'size-asc': 'Size (Small → Large)',
+      'size-desc': 'Size (Large → Small)',
+      'bill-asc': 'Beak (Short → Long)',
+      'bill-desc': 'Beak (Long → Short)',
+      'name-asc': 'Alphabetical (A-Z)'
+    };
 
     function setSort(mode) {
       currentSort = mode;
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect && sortSelect.value !== mode) sortSelect.value = mode;
+      updateUrlParams();
       renderFeed();
     }
+
     const dismissedCards = new Set();
 
     function dismissSpecies(id) {
@@ -1173,6 +1141,117 @@
       });
       const active = document.getElementById(`vm-${mode}`);
       if (active) active.className = "view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white";
+      renderFeed();
+    }
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      // 1. Sort parameter support (?sort=size-asc, ?sort=bill-asc, etc.)
+      const sortParam = params.get('sort') || params.get('order') || params.get('orderby');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'rarity': 'freq-asc',
+          'rare': 'freq-asc',
+          'size-asc': 'size-asc',
+          'size-desc': 'size-desc',
+          'size': 'size-asc',
+          'smallest': 'size-asc',
+          'largest': 'size-desc',
+          'bill-asc': 'bill-asc',
+          'bill-desc': 'bill-desc',
+          'bill': 'bill-asc',
+          'beak-asc': 'bill-asc',
+          'beak-desc': 'bill-desc',
+          'beak': 'bill-asc',
+          'name-asc': 'name-asc',
+          'name': 'name-asc',
+          'az': 'name-asc',
+          'alpha': 'name-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      // 2. Species checklist filter support (?species=bkbplo,amgplo,etc.)
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+        tokens.forEach(tok => {
+          const found = shorebirds.find(s => 
+            s.id.toLowerCase() === tok ||
+            (s.ebird_code && s.ebird_code.toLowerCase() === tok) ||
+            s.id.toLowerCase().replace(/_/g, '') === tok.replace(/_/g, '') ||
+            s.id.toLowerCase().replace(/_/g, '-') === tok ||
+            s.name.toLowerCase().includes(tok)
+          );
+          if (found) {
+            matched.add(found.id);
+          }
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function updateUrlParams() {
+      if (!window.history || !window.history.replaceState) return;
+      const url = new URL(window.location.href);
+
+      // Keep or update sort parameter
+      if (currentSort && currentSort !== 'freq-desc') {
+        url.searchParams.set('sort', currentSort);
+      } else {
+        url.searchParams.delete('sort');
+      }
+
+      // Keep or delete species filter
+      if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+        let paramName = 'species';
+        for (const p of ['species', 'filter', 'include', 'checklist']) {
+          if (url.searchParams.has(p)) { paramName = p; break; }
+        }
+        url.searchParams.set(paramName, Array.from(urlSpeciesFilter).map(id => {
+          const s = shorebirds.find(sb => sb.id === id);
+          return (s && s.ebird_code) ? s.ebird_code : id;
+        }).join(','));
+      } else {
+        url.searchParams.delete('species');
+        url.searchParams.delete('filter');
+        url.searchParams.delete('include');
+        url.searchParams.delete('checklist');
+      }
+
+      window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+    }
+
+    function copyCurrentShareLink() {
+      updateUrlParams();
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('copyShareBtn');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<span>✓ Copied!</span>';
+          setTimeout(() => { btn.innerHTML = original; }, 2000);
+        }
+      }).catch(() => {
+        alert('Share URL: ' + window.location.href);
+      });
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      updateUrlParams();
       renderFeed();
     }
 

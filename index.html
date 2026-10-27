@@ -799,8 +799,84 @@
       drawer.classList.toggle('hidden');
     }
 
+    let urlSpeciesFilter = null;
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      // Sort parameter
+      const sortParam = params.get('sort') || params.get('order');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'rarity': 'freq-asc',
+          'rare': 'freq-asc',
+          'size-asc': 'size-asc',
+          'size': 'size-asc',
+          'smallest': 'size-asc',
+          'bill-asc': 'bill-asc',
+          'beak-asc': 'bill-asc',
+          'bill': 'bill-asc',
+          'beak': 'bill-asc',
+          'name-asc': 'name-asc',
+          'name': 'name-asc',
+          'az': 'name-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      // Species parameter
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+        tokens.forEach(tok => {
+          const found = sparrows.find(s => 
+            s.id.toLowerCase() === tok ||
+            s.id.toLowerCase().replace(/_/g, '') === tok.replace(/_/g, '') ||
+            s.id.toLowerCase().replace(/_/g, '-') === tok ||
+            s.name.toLowerCase().includes(tok)
+          );
+          if (found) matched.add(found.id);
+        });
+        if (matched.size > 0) urlSpeciesFilter = matched;
+      }
+    }
+
+    function updateUrlParams() {
+      if (!window.history || !window.history.replaceState) return;
+      const url = new URL(window.location.href);
+
+      if (currentSort && currentSort !== 'freq-desc') {
+        url.searchParams.set('sort', currentSort);
+      } else {
+        url.searchParams.delete('sort');
+      }
+
+      if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+        url.searchParams.set('species', Array.from(urlSpeciesFilter).join(','));
+      } else {
+        url.searchParams.delete('species');
+        url.searchParams.delete('filter');
+        url.searchParams.delete('include');
+        url.searchParams.delete('checklist');
+      }
+
+      window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+    }
+
     function setSort(val) {
       currentSort = val;
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect && sortSelect.value !== val) sortSelect.value = val;
+      updateUrlParams();
       renderFeed();
     }
 
@@ -1217,7 +1293,10 @@
       const container = document.getElementById('sparrowFeed');
       if (!container || !sparrows.length) return;
 
-      let filtered = sparrows.filter(s => !dismissedIds.has(s.id));
+      let filtered = sparrows.filter(s => {
+        if (urlSpeciesFilter && !urlSpeciesFilter.has(s.id)) return false;
+        return !dismissedIds.has(s.id);
+      });
       if (currentBreastFork === 'streaked') {
         filtered = filtered.filter(s => s.breast === 'streaked');
       } else if (currentBreastFork === 'unstreaked') {
@@ -1436,6 +1515,7 @@
       });
     }
 
+    initUrlFilter();
     updateGridButtons();
     renderFeed();
   </script>

@@ -1349,27 +1349,38 @@
         }
       });
 
+      const maxCategoryLength = Math.max(...shorebirds.map(b => b.length_cm || 0), 40.0);
+      const maxCategoryBill = Math.max(...shorebirds.map(b => b.bill_mm || 0), 80.0);
+
       let matches = filtered.length;
       filtered.forEach(s => {
         const card = document.createElement('div');
         card.id = `sp-${s.id}`;
         const isRare = s.rarity === 'rare';
         const isUncommon = s.rarity === 'uncommon';
+        const lenPct = Math.min(100, Math.round(((s.length_cm || 0) / maxCategoryLength) * 100));
+        const billPct = Math.min(100, Math.round(((s.bill_mm || 0) / maxCategoryBill) * 100));
 
-        // Distinctive container styling: highlighted border for Rares
+        // Distinctive container styling: highlighted border for Rares + Full-Card Caliper Flex Container
         if (isRare) {
-          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl p-3 sm:p-4 transition hover:border-amber-400 shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30";
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl overflow-hidden shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30 transition hover:border-amber-400 flex flex-col group";
         } else {
-          card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
         }
 
-        // Diagnostics HTML
-        const diagHtml = s.diagnostics.map(diag => `
-          <div class="flex items-baseline gap-2 text-xs leading-relaxed">
-            <span class="font-bold text-[11px] uppercase tracking-wider text-sky-400 shrink-0 w-24 sm:w-28">${diag.tract}</span>
-            <span class="text-slate-200">${diag.mark}</span>
-          </div>
-        `).join('');
+        // Diagnostics HTML (Compact 3-column inline grid)
+        const diagHtml = s.diagnostics.map(diag => {
+          let label = diag.tract;
+          if (label.toLowerCase().includes('bill')) label = 'Bill';
+          else if (label.toLowerCase().includes('leg')) label = 'Legs';
+          else if (label.toLowerCase().includes('voice')) label = 'Voice';
+          return `
+            <div class="flex items-baseline gap-1.5 min-w-0">
+              <span class="text-[10px] font-black uppercase tracking-wider text-sky-400 bg-sky-950/60 px-1 py-0.5 rounded border border-sky-800/40 shrink-0">${label}</span>
+              <span class="text-slate-300 text-[11px] truncate" title="${diag.mark}">${diag.mark}</span>
+            </div>
+          `;
+        }).join('');
 
         // Group Badge label
         const groupLabels = {
@@ -1417,9 +1428,9 @@
         const activePhotoCaption = currentPhotoMode === 'primary' ? s.photo_caption : s.crux_caption;
 
         const photoToggleHtml = `
-          <div class="flex items-center gap-1 mt-1.5 justify-end">
-            <button onclick="toggleCardPhoto('${s.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
-            <button onclick="toggleCardPhoto('${s.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          <div class="flex items-center gap-0.5 bg-slate-900/90 p-0.5 rounded border border-slate-700/80 shadow">
+            <button onclick="toggleCardPhoto('${s.id}', 'primary')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Profile</button>
+            <button onclick="toggleCardPhoto('${s.id}', 'crux')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Crux</button>
           </div>
         `;
 
@@ -1427,101 +1438,138 @@
         let visualsHtml = '';
         if (currentViewMode === 'both') {
           visualsHtml = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-2.5">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate with Inset Badges -->
+              <div class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-500 bg-slate-950/80 px-1.5 py-0.5 rounded">Scale: 1:1 lateral</span>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2">
                   <img src="${s.plate}" alt="${s.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${s.plate_caption}</p>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${s.plate_caption}">
+                  ${s.plate_caption}
+                </div>
               </div>
 
-              <!-- Visual 2: Field Photograph (with Toggle) -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+              <!-- Visual 2: Field Photograph (with Inset Toggle Overlay) -->
+              <div class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40">Field Photograph</span>
+                  ${photoToggleHtml}
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2">
                   <img src="${activePhotoUrl}" alt="${s.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
                 </div>
-                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
-                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
-                  ${photoToggleHtml}
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
                 </div>
               </div>
             </div>
           `;
         } else if (currentViewMode === 'plates') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="mt-2.5">
+              <div class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-500 bg-slate-950/80 px-1.5 py-0.5 rounded">Scale: 1:1 lateral</span>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2">
+                  <img src="${s.plate}" alt="${s.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${s.plate_caption}">
+                  ${s.plate_caption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${s.plate}" alt="${s.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${s.plate_caption}</p>
             </div>
           `;
         } else if (currentViewMode === 'photos') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                ${photoToggleHtml}
+            <div class="mt-2.5">
+              <div class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40">Field Photograph</span>
+                  ${photoToggleHtml}
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2">
+                  <img src="${activePhotoUrl}" alt="${s.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${activePhotoUrl}" alt="${s.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
 
         card.innerHTML = `
-          <!-- Card Header -->
-          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5 flex-wrap">
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs font-black text-slate-400 tabular-nums">#${s.rank}</span>
-                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${s.name}</h2>
-                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+          <!-- Main Card Row (Left Height Rail + Content) -->
+          <div class="flex flex-1">
+            <!-- Left Vertical Height Rail (Fills based on standing height) -->
+            <div class="w-2.5 bg-slate-950 border-r border-slate-800 flex flex-col justify-end shrink-0 relative" title="Standing Stature: ${s.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}%)">
+              <div class="absolute inset-y-0 right-0 flex flex-col justify-between py-4 pointer-events-none opacity-30 z-10">
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
               </div>
-              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${s.sci}</p>
+              <div class="bg-gradient-to-t from-sky-500 via-sky-400 to-cyan-300 w-full rounded-t-sm shadow-[0_0_10px_rgba(56,189,248,0.4)]" style="height: ${lenPct}%;"></div>
             </div>
-            
-            <div class="flex items-center gap-1.5 flex-wrap">
-              ${frequencyBadge}
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${s.size_display}</span>
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${s.bill_display} beak</span>
-              <button onclick="dismissSpecies('${s.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${s.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
+
+            <!-- Card Content Body -->
+            <div class="p-3 sm:p-3.5 flex-1 min-w-0">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between gap-2 border-b border-slate-800/60 pb-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="text-xs font-black text-slate-400 font-mono-num">#${s.rank}</span>
+                  <h2 class="text-base sm:text-lg font-bold tracking-tight text-white truncate">${s.name}</h2>
+                  <span class="text-[11px] italic font-serif text-slate-400 hidden sm:inline">${s.sci}</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+                </div>
+                
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${frequencyBadge}
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${s.size_display}</span>
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${s.bill_display} beak</span>
+                  <span class="text-[10px] font-mono-num font-bold text-sky-400/90 bg-sky-950/90 border border-sky-800/50 px-1.5 py-0.5 rounded-full hidden sm:inline" title="Proportion of Category Maximum Stature">${lenPct}% Max</span>
+                  <button onclick="dismissSpecies('${s.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${s.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-0.5 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rarity Callout for Review Species -->
+              ${rarityCallout}
+
+              <!-- Visual Plates & Photos -->
+              ${visualsHtml}
+
+              <!-- Compact Diagnostic Grid -->
+              <div class="mt-2.5 pt-2 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                ${diagHtml}
+              </div>
+
+              <!-- Single-line Elimination Rule -->
+              <div class="mt-2 text-xs text-amber-200/90 bg-amber-950/20 border-l-2 border-amber-500 rounded-r px-2.5 py-1 flex items-center justify-between">
+                <span><strong class="text-amber-300 font-bold">Rule:</strong> ${s.rule_out}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Rarity Callout for Review Species -->
-          ${rarityCallout}
-
-          <!-- Visual Plates & Photos -->
-          ${visualsHtml}
-
-          <!-- Diagnostic Feather Tract Checklist -->
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
-            ${diagHtml}
-          </div>
-
-          <!-- Single-line Elimination Rule -->
-          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
-            <strong class="text-amber-300 font-bold">Rule:</strong> ${s.rule_out}
+          <!-- Bottom Horizontal Length Rail (Spans the FULL Card Width!) -->
+          <div class="h-2.5 bg-slate-950 border-t border-slate-800 flex items-center relative w-full" title="Total Body Length: ${s.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}% full-width)">
+            <div class="absolute inset-x-0 top-0 flex justify-between px-6 pointer-events-none opacity-30 z-10">
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+            </div>
+            <div class="bg-gradient-to-r from-sky-500 via-sky-400 to-cyan-300 h-full rounded-r-sm shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-all" style="width: ${lenPct}%;"></div>
+            <span class="absolute right-2 text-[9px] font-mono-num font-bold text-slate-500 uppercase tracking-widest hidden sm:inline">${lenPct}% Category Scale</span>
           </div>
         `;
 

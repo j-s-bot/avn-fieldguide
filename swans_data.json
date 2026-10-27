@@ -1,0 +1,590 @@
+[
+  {
+    "id": "tundra_swan_adult",
+    "rank": 1,
+    "name": "Tundra Swan (Adult)",
+    "sci": "Cygnus columbianus columbianus",
+    "prob": "65%",
+    "group": "native",
+    "traits": [
+      "native",
+      "black_bill_yellow_spot",
+      "concave_dip_rounded_crown",
+      "eye_separated_from_bill",
+      "straight_or_c_curve",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/tundra_swan_adult_plate.jpg",
+    "plate_caption": "Diagnostic plate: Snow-white plumage, rounded crown, subtle concave dip at bill base, black bill with distinct small yellow teardrop on lores in front of eye, eye cleanly separated from bill skin, neck held upright with gentle C-curve",
+    "photo": "assets/swans/tundra_swan_adult_1.jpg",
+    "photo_caption": "Winter flock view: Classic Chesapeake winter resident on tidal waters, rounded crown profile, yellow loral spot",
+    "crux_photo": "assets/swans/tundra_swan_adult_2.jpg",
+    "crux_caption": "Head closeup: Teardrop yellow loral spot; rounded forehead slope creates a distinct dip; eye is set off from bill",
+    "diagnostics": [
+      {
+        "tract": "Bill & Loral Spot (The Crux)",
+        "mark": "Black bill with a small, distinct yellow spot/teardrop on the lores directly in front of the eye (present in ~85-90% of individuals)."
+      },
+      {
+        "tract": "Head Profile & Eye Junction",
+        "mark": "Forehead slopes gently into the culmen with a subtle concave dip; crown is smoothly rounded; dark eye is clearly separated from black bill skin by white feathering."
+      },
+      {
+        "tract": "Neck Carriage & Voice",
+        "mark": "Neck held straight upright or with a gentle basal C-curve kink; voice is a musical high-pitched barking bugle ('kwoo-kwoo' or 'who-who')."
+      }
+    ],
+    "rule_out": "Snow-white body + small yellow loral spot + rounded crown with forehead dip + eye distinct from bill = Adult Tundra Swan.",
+    "rarity": "common",
+    "length_cm": 132.0,
+    "bill_mm": 95.0,
+    "size_display": "132 cm (52.0\")",
+    "bill_display": "95 mm"
+  },
+  {
+    "id": "mute_swan_adult",
+    "rank": 2,
+    "name": "Mute Swan (Adult)",
+    "sci": "Cygnus olor",
+    "prob": "55%",
+    "group": "introduced",
+    "traits": [
+      "introduced",
+      "orange_bill_black_knob",
+      "black_basal_knob",
+      "s_curve_neck_downward_bill",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/mute_swan_adult_plate.jpg",
+    "plate_caption": "Diagnostic plate: Pure white body with bushed/arched secondary feathers, vivid reddish-orange bill with large black fleshy basal knob, black triangular lores, elegant S-curve neck with bill angled downward",
+    "photo": "assets/swans/mute_swan_adult_1.jpg",
+    "photo_caption": "Bay resident view: Graceful S-curve neck with downward-pointing reddish-orange bill, prominent black knob, arched wings",
+    "crux_photo": "assets/swans/mute_swan_adult_2.jpg",
+    "crux_caption": "Head closeup: Massive black fleshy knob at base of culmen, bright reddish-orange bill, triangular black loral patch",
+    "diagnostics": [
+      {
+        "tract": "Bill Color & Knob (The Crux)",
+        "mark": "Vivid reddish-orange bill with a prominent black fleshy basal knob (tubercle) and black cutting edges and nail."
+      },
+      {
+        "tract": "Neck Posture & Carriage",
+        "mark": "Carries neck in a graceful, exaggerated S-curve with the head and bill tilted downward toward the water."
+      },
+      {
+        "tract": "Aggressive Posturing & Voice",
+        "mark": "Frequently arches secondary flight feathers upward ('bushel-basket' display); largely silent except for explosive hissing and snorting."
+      }
+    ],
+    "rule_out": "Reddish-orange bill + prominent black basal knob + graceful S-curve neck with downward bill = Adult Mute Swan.",
+    "rarity": "common",
+    "length_cm": 150.0,
+    "bill_mm": 88.0,
+    "size_display": "150 cm (59.0\")",
+    "bill_display": "88 mm"
+  },
+  {
+    "id": "tundra_swan_juvenile",
+    "rank": 3,
+    "name": "Tundra Swan (Juvenile / 1st Winter)",
+    "sci": "Cygnus columbianus columbianus",
+    "prob": "45%",
+    "group": "native",
+    "traits": [
+      "native",
+      "pink_and_dark_bill",
+      "concave_dip_rounded_crown",
+      "mottled_gray_brown",
+      "straight_or_c_curve"
+    ],
+    "plate": "assets/swan_plates/tundra_swan_juvenile_plate.jpg",
+    "plate_caption": "Diagnostic plate: Mottled dingy brownish-gray plumage on head, neck, and upperparts; dull pinkish bill with contrasting black tip and black base/lores; rounded crown profile",
+    "photo": "assets/swans/tundra_swan_juvenile_1.jpg",
+    "photo_caption": "Winter marsh profile: Mottled grayish-buff plumage, pink bill with dark tip, accompanying adult Tundra flock",
+    "crux_photo": "assets/swans/tundra_swan_juvenile_2.jpg",
+    "crux_caption": "Bill closeup: Pinkish-flesh saddle across center of bill, bordered by black at tip and base; rounded crown",
+    "diagnostics": [
+      {
+        "tract": "Bill Coloration",
+        "mark": "Dull pinkish-flesh central saddle on bill, sharply framed by black at the bill tip and black across the lores and base."
+      },
+      {
+        "tract": "Plumage Tone",
+        "mark": "Mottled brownish-gray to pale silvery-buff overall, with lighter chin and throat (paler than sooty juvenile Trumpeter)."
+      },
+      {
+        "tract": "Head Contour",
+        "mark": "Rounded crown and forehead dip identical to adult Tundra Swan; noticeably smaller and shorter-necked than juvenile Trumpeter."
+      }
+    ],
+    "rule_out": "Mottled brownish-gray swan + pink bill with black tip and base + rounded crown = Juvenile Tundra Swan.",
+    "rarity": "common",
+    "length_cm": 125.0,
+    "bill_mm": 90.0,
+    "size_display": "125 cm (49.0\")",
+    "bill_display": "90 mm"
+  },
+  {
+    "id": "mute_swan_juvenile",
+    "rank": 4,
+    "name": "Mute Swan (Juvenile / 1st Year)",
+    "sci": "Cygnus olor",
+    "prob": "35%",
+    "group": "introduced",
+    "traits": [
+      "introduced",
+      "pink_and_dark_bill",
+      "s_curve_neck_downward_bill",
+      "mottled_gray_brown"
+    ],
+    "plate": "assets/swan_plates/mute_swan_juvenile_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dingy grayish-brown plumage, dull flesh-gray or pinkish-gray bill lacking basal knob, feathered indentation at bill base, downward-pointing bill on S-curve neck",
+    "photo": "assets/swans/mute_swan_juvenile_1.jpg",
+    "photo_caption": "Subadult view: Uniformly dingy brownish-gray body, dull flesh bill without knob, S-curve neck held downward",
+    "crux_photo": "assets/swans/mute_swan_juvenile_2.jpg",
+    "crux_caption": "Bill & lores: Dull pinkish-gray bill lacking knob; rounded forehead feather indentation projecting onto culmen",
+    "diagnostics": [
+      {
+        "tract": "Bill Shape & Color",
+        "mark": "Dull grayish-pink or flesh bill with black tip and edges, lacking any basal knob (knob develops late in first year)."
+      },
+      {
+        "tract": "Feather Margin at Bill Base",
+        "mark": "Feather line at base of upper mandible forms a rounded forward-pointing indentation onto the culmen."
+      },
+      {
+        "tract": "Silhouette & Posture",
+        "mark": "Maintains the classic Mute Swan S-curved neck and downward bill tilt even in immature plumage."
+      }
+    ],
+    "rule_out": "Dingy grayish-brown swan + dull pink-gray bill without knob + S-curve neck held downward = Juvenile Mute Swan.",
+    "rarity": "common",
+    "length_cm": 140.0,
+    "bill_mm": 84.0,
+    "size_display": "140 cm (55.0\")",
+    "bill_display": "84 mm"
+  },
+  {
+    "id": "trumpeter_swan_adult",
+    "rank": 5,
+    "name": "Trumpeter Swan (Adult)",
+    "sci": "Cygnus buccinator",
+    "prob": "12%",
+    "group": "native",
+    "traits": [
+      "native",
+      "all_black_wedge_bill",
+      "straight_wedge_profile",
+      "eye_engulfed_in_black",
+      "salmon_lipstick_line",
+      "vertical_neck_column",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/trumpeter_swan_adult_plate.jpg",
+    "plate_caption": "Diagnostic plate: Massive snow-white body, huge all-black wedge bill forming unbroken straight diagonal line with flat forehead, solid black lores engulfing eye, salmon lipstick line on tomia, straight vertical neck",
+    "photo": "assets/swans/trumpeter_swan_adult_1.jpg",
+    "photo_caption": "Winter migrant profile: North America's heaviest native bird; massive straight wedge bill, solid black lores engulfing eye",
+    "crux_photo": "assets/swans/trumpeter_swan_adult_2.jpg",
+    "crux_caption": "Bill & eye crux: Straight culmen seamlessly merging into flat forehead; eye completely engulfed in black; salmon lipstick streak",
+    "diagnostics": [
+      {
+        "tract": "Bill Profile & Culmen (The Crux)",
+        "mark": "Massive, entirely black wedge-shaped bill; culmen forms an unbroken, perfectly straight line continuous with the flat forehead."
+      },
+      {
+        "tract": "Eye & Lores Junction",
+        "mark": "Loral skin is broad, solid jet-black, and completely engulfs the dark eye with no visible demarcation or yellow spot."
+      },
+      {
+        "tract": "Salmon 'Lipstick' Line",
+        "mark": "Bright salmon-pink or reddish fleshy line runs along the cutting edge (tomia) of the upper bill, visible at close range."
+      },
+      {
+        "tract": "Neck Carriage & Voice",
+        "mark": "Carries neck in a massive, straight vertical pillar; vocalization is a deep, resonant brassy french horn bugle ('oh-OH')."
+      }
+    ],
+    "rule_out": "Massive size + straight unbroken wedge bill & forehead + eye engulfed in black lores + salmon lipstick line = Adult Trumpeter Swan.",
+    "rarity": "uncommon",
+    "length_cm": 158.0,
+    "bill_mm": 115.0,
+    "size_display": "158 cm (62.0\")",
+    "bill_display": "115 mm"
+  },
+  {
+    "id": "tundra_swan_black_lores",
+    "rank": 6,
+    "name": "Tundra Swan (Adult - Black-Lored Morph)",
+    "sci": "Cygnus columbianus columbianus",
+    "prob": "10%",
+    "group": "native",
+    "traits": [
+      "native",
+      "all_black_wedge_bill",
+      "concave_dip_rounded_crown",
+      "eye_separated_from_bill",
+      "straight_or_c_curve",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/tundra_swan_black_lores_plate.jpg",
+    "plate_caption": "Diagnostic plate: Identification pitfall: All-black bill with NO yellow spot (~10-15% of Tundras). Separated from Trumpeter by rounded crown, concave forehead dip, distinct eye boundary, and smaller size",
+    "photo": "assets/swans/tundra_swan_black_lores_1.jpg",
+    "photo_caption": "Identification trap: Adult Tundra Swan lacking yellow on lores; note rounded crown contour and forehead dip",
+    "crux_photo": "assets/swans/tundra_swan_black_lores_2.jpg",
+    "crux_caption": "Head closeup: Solid black bill without yellow, but forehead curves downward creating a notch; eye distinctly set off",
+    "diagnostics": [
+      {
+        "tract": "The Identification Trap",
+        "mark": "Approximately 10-15% of North American Tundra Swans have completely black lores with NO yellow spot, leading to frequent false Trumpeter reports."
+      },
+      {
+        "tract": "Separating Mark: Forehead & Head Contour",
+        "mark": "Head is smoothly rounded; forehead dips in a gentle concave curve at the base of the bill (Trumpeter is a flat straight wedge)."
+      },
+      {
+        "tract": "Separating Mark: Eye Boundary",
+        "mark": "Dark eye is visibly set off from the black bill skin by a small pinch/notch of white feathering (Trumpeter eye is swallowed by black)."
+      }
+    ],
+    "rule_out": "All-black bill without yellow + rounded crown with forehead dip + distinct eye boundary = Black-Lored Adult Tundra Swan.",
+    "rarity": "uncommon",
+    "length_cm": 132.0,
+    "bill_mm": 95.0,
+    "size_display": "132 cm (52.0\")",
+    "bill_display": "95 mm"
+  },
+  {
+    "id": "trumpeter_swan_juvenile",
+    "rank": 7,
+    "name": "Trumpeter Swan (Juvenile / 1st Winter)",
+    "sci": "Cygnus buccinator",
+    "prob": "6%",
+    "group": "native",
+    "traits": [
+      "native",
+      "pink_and_dark_bill",
+      "straight_wedge_profile",
+      "eye_engulfed_in_black",
+      "vertical_neck_column",
+      "mottled_gray_brown"
+    ],
+    "plate": "assets/swan_plates/trumpeter_swan_juvenile_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dark sooty brownish-gray plumage (darker than juvenile Tundra), massive straight wedge-shaped bill profile, pinkish saddle in center of culmen with black base/tip, eye engulfed in dark lores",
+    "photo": "assets/swans/trumpeter_swan_juvenile_1.jpg",
+    "photo_caption": "Immature winter profile: Dark sooty body, massive straight wedge bill profile, straight vertical neck",
+    "crux_photo": "assets/swans/trumpeter_swan_juvenile_2.jpg",
+    "crux_caption": "Head & bill detail: Flat continuous slope from forehead to tip; pinkish central bill saddle with black base",
+    "diagnostics": [
+      {
+        "tract": "Plumage Shade (Sooty Gray)",
+        "mark": "Uniformly darker and more sooty brownish-gray across body and neck than juvenile Tundra Swan, especially on head."
+      },
+      {
+        "tract": "Bill Profile & Color",
+        "mark": "Retains the adult's massive, straight wedge profile; center of bill has a pale pinkish-flesh saddle with solid black base and tip."
+      },
+      {
+        "tract": "Loral Feathering & Eye",
+        "mark": "Dark lores swallow the eye without separation; massive straight vertical neck column."
+      }
+    ],
+    "rule_out": "Dark sooty gray plumage + massive straight wedge bill & flat forehead + eye engulfed by lores = Juvenile Trumpeter Swan.",
+    "rarity": "rare",
+    "length_cm": 145.0,
+    "bill_mm": 110.0,
+    "size_display": "145 cm (57.0\")",
+    "bill_display": "110 mm"
+  },
+  {
+    "id": "trumpeter_swan_yellow_fleck",
+    "rank": 8,
+    "name": "Trumpeter Swan (Adult - Yellow-Flecked Variant)",
+    "sci": "Cygnus buccinator",
+    "prob": "1.5%",
+    "group": "native",
+    "traits": [
+      "native",
+      "black_bill_yellow_spot",
+      "straight_wedge_profile",
+      "eye_engulfed_in_black",
+      "salmon_lipstick_line",
+      "vertical_neck_column",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/trumpeter_swan_yellow_fleck_plate.jpg",
+    "plate_caption": "Diagnostic plate: Identification pitfall: ~1-2% of Trumpeter Swans display a small yellowish fleck on lores. Diagnosed by massive straight wedge bill, flat forehead slope, salmon lipstick line, and huge size",
+    "photo": "assets/swans/trumpeter_swan_yellow_fleck_1.jpg",
+    "photo_caption": "Identification trap: Trumpeter with aberrant yellow loral fleck; straight wedge culmen confirms Trumpeter",
+    "crux_photo": "assets/swans/trumpeter_swan_yellow_fleck_2.jpg",
+    "crux_caption": "Bill & forehead profile: Flat unbroken wedge slope and salmon lipstick line override the misleading yellow fleck",
+    "diagnostics": [
+      {
+        "tract": "The Aberrant Pitfall",
+        "mark": "A small fraction (~1-2%) of adult Trumpeter Swans display a tiny yellowish or orange fleck on the lores, causing erroneous Tundra Swan reports."
+      },
+      {
+        "tract": "Diagnostic Trumpeter Overrides",
+        "mark": "Culmen remains completely straight and flat with the forehead (no dip); salmon lipstick line is prominent; head is elongated and wedge-shaped."
+      },
+      {
+        "tract": "Size & Proportions",
+        "mark": "Massive bird with heavy vertical neck column and bill measuring >110 mm (vs ~95 mm in Tundra Swan)."
+      }
+    ],
+    "rule_out": "Yellow loral fleck BUT massive straight wedge bill + flat forehead slope + salmon lipstick line = Yellow-Flecked Trumpeter Swan.",
+    "rarity": "rare",
+    "length_cm": 158.0,
+    "bill_mm": 115.0,
+    "size_display": "158 cm (62.0\")",
+    "bill_display": "115 mm"
+  },
+  {
+    "id": "whooper_swan",
+    "rank": 9,
+    "name": "Whooper Swan (Adult - Eurasian Vagrant)",
+    "sci": "Cygnus cygnus",
+    "prob": "0.8%",
+    "group": "vagrant",
+    "traits": [
+      "vagrant",
+      "yellow_wedge_past_nostril",
+      "straight_wedge_profile",
+      "vertical_neck_column",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/whooper_swan_plate.jpg",
+    "plate_caption": "Diagnostic plate: Large pure white swan, striking bright yellow wedge covering more than half the bill and extending past the nostril in an acute point, black bill tip and culmen ridge, straight erect neck",
+    "photo": "assets/swans/whooper_swan_1.jpg",
+    "photo_caption": "Review vagrant view: Large wedge of bright yellow covering base of bill past nostril; straight neck carriage",
+    "crux_photo": "assets/swans/whooper_swan_2.jpg",
+    "crux_caption": "Bill crux: Brilliant yellow wedge extends past the nostril into a sharp pointed tip; black anterior culmen and tip",
+    "diagnostics": [
+      {
+        "tract": "Bill Pattern (The Crux)",
+        "mark": "Extensive bright lemon-yellow wedge covers more than 50% of the upper mandible, extending forward past the nostril in an acute point."
+      },
+      {
+        "tract": "Bill Tip & Ridge",
+        "mark": "Anterior portion of the bill, nail, and cutting edges are solid black, creating sharp diagonal yellow-black contrast."
+      },
+      {
+        "tract": "Head & Neck Posture",
+        "mark": "Angular, wedge-shaped head with a straight culmen; neck held in an upright, erect posture like a Trumpeter Swan."
+      }
+    ],
+    "rule_out": "Snow-white swan + yellow wedge on bill extending PAST the nostril in a sharp point = Adult Whooper Swan.",
+    "rarity": "rare",
+    "length_cm": 152.0,
+    "bill_mm": 105.0,
+    "size_display": "152 cm (60.0\")",
+    "bill_display": "105 mm"
+  },
+  {
+    "id": "bewicks_swan",
+    "rank": 10,
+    "name": "Bewick's Swan (Adult - Eurasian Subspecies)",
+    "sci": "Cygnus columbianus bewickii",
+    "prob": "0.5%",
+    "group": "vagrant",
+    "traits": [
+      "vagrant",
+      "yellow_patch_behind_nostril",
+      "concave_dip_rounded_crown",
+      "straight_or_c_curve",
+      "all_white_body",
+      "black_legs"
+    ],
+    "plate": "assets/swan_plates/bewicks_swan_plate.jpg",
+    "plate_caption": "Diagnostic plate: Eurasian subspecies of Tundra Swan: Bright yellow patch on base of bill is rounded or blunt and terminates behind the nostril (<40% of bill), rounded head crown, upright neck",
+    "photo": "assets/swans/bewicks_swan_1.jpg",
+    "photo_caption": "Rare vagrant profile: Rounded yellow patch on bill base terminating behind nostril; compact Tundra proportions",
+    "crux_photo": "assets/swans/bewicks_swan_2.jpg",
+    "crux_caption": "Bill comparison: Yellow patch stops bluntly behind nostril (never reaching or passing nostril like Whooper Swan)",
+    "diagnostics": [
+      {
+        "tract": "Bill Pattern vs. Whooper (The Crux)",
+        "mark": "Bright yellow patch is restricted to the base of the bill, terminating bluntly behind the nostril (covering less than 40% of the bill)."
+      },
+      {
+        "tract": "Bill Pattern vs. Whistling Swan",
+        "mark": "Shows vastly more yellow than North American Tundra Swan (which only has a tiny teardrop spot), but less than Whooper."
+      },
+      {
+        "tract": "Size & Head Contour",
+        "mark": "Exact same size and rounded crown contour as North American Tundra Swan (Whistling Swan); smaller than Whooper."
+      }
+    ],
+    "rule_out": "Tundra Swan size/shape + blunt yellow patch on bill terminating BEHIND nostril = Adult Bewick's Swan.",
+    "rarity": "rare",
+    "length_cm": 127.0,
+    "bill_mm": 90.0,
+    "size_display": "127 cm (50.0\")",
+    "bill_display": "90 mm"
+  },
+  {
+    "id": "black_swan",
+    "rank": 11,
+    "name": "Black Swan (Adult - Feral / Exotic)",
+    "sci": "Cygnus atratus",
+    "prob": "2%",
+    "group": "introduced",
+    "traits": [
+      "introduced",
+      "red_bill_white_band",
+      "solid_black_body",
+      "s_curve_neck_downward_bill"
+    ],
+    "plate": "assets/swan_plates/black_swan_plate.jpg",
+    "plate_caption": "Diagnostic plate: Solid soot-black body plumage with curly ruffled mantle feathers, bright crimson-red bill with narrow white subterminal band and pale tip, glowing ruby-red eye, long slender curved neck",
+    "photo": "assets/swans/black_swan_1.jpg",
+    "photo_caption": "Urban pond escapee view: Striking all-black plumage, vivid red bill with white tip band, curly wing feathers",
+    "crux_photo": "assets/swans/black_swan_2.jpg",
+    "crux_caption": "Bill & eye detail: Bright crimson-red bill with white subterminal band across tip; glowing ruby-red eye",
+    "diagnostics": [
+      {
+        "tract": "Body Plumage",
+        "mark": "Solid sooty charcoal-black body plumage with curly, ruffled scapulars; shows brilliant snow-white primary and secondary flight feathers in flight."
+      },
+      {
+        "tract": "Bill & Eye (The Crux)",
+        "mark": "Vivid crimson-red bill with a crisp white subterminal band across the tip and pale nail; eye is bright glowing ruby-red."
+      },
+      {
+        "tract": "Neck & Provenance",
+        "mark": "Exceptionally long and slender neck; native to Australia but widespread in waterfowl collections and feral park escapees."
+      }
+    ],
+    "rule_out": "Solid soot-black body + crimson-red bill with white band + ruby-red eye = Black Swan.",
+    "rarity": "rare",
+    "length_cm": 130.0,
+    "bill_mm": 72.0,
+    "size_display": "130 cm (51.0\")",
+    "bill_display": "72 mm"
+  },
+  {
+    "id": "mute_swan_polish",
+    "rank": 12,
+    "name": "Mute Swan ('Polish Swan' White Morph Juvenile)",
+    "sci": "Cygnus olor immutabilis",
+    "prob": "1.0%",
+    "group": "introduced",
+    "traits": [
+      "introduced",
+      "pink_and_dark_bill",
+      "s_curve_neck_downward_bill",
+      "all_white_body"
+    ],
+    "plate": "assets/swan_plates/mute_swan_polish_plate.jpg",
+    "plate_caption": "Diagnostic plate: Leucistic morph occurring in ~20% of Mute Swan broods: Hatches pure white; all-white juvenile plumage, pale pinkish feet and dull pinkish-flesh bill lacking basal knob, S-curve neck",
+    "photo": "assets/swans/mute_swan_polish_1.jpg",
+    "photo_caption": "White juvenile trap: Pure white juvenile mute swan, dull flesh-pink bill without knob, pinkish-gray feet",
+    "crux_photo": "assets/swans/mute_swan_polish_2.jpg",
+    "crux_caption": "Bill & leg detail: Pale flesh bill without knob; pale pinkish-gray legs and feet (wild native swans have black legs)",
+    "diagnostics": [
+      {
+        "tract": "The 'White Juvenile' Trap",
+        "mark": "Genetic leucistic morph ('immutabilis') that hatches with pure white down and fledges into clean snow-white plumage without a gray phase."
+      },
+      {
+        "tract": "Bill Separation from Adult",
+        "mark": "Bill is dull pinkish-flesh or grayish-pink and completely lacks the adult's black basal knob."
+      },
+      {
+        "tract": "Leg Color Separation from Native Swans",
+        "mark": "Legs and webbed feet are pale grayish-pink or flesh (adult and juvenile Tundra/Trumpeter swans have solid black legs)."
+      }
+    ],
+    "rule_out": "All-white plumage + dull pink bill lacking knob + pale pinkish legs + S-curve neck = Polish Morph Juvenile Mute Swan.",
+    "rarity": "rare",
+    "length_cm": 140.0,
+    "bill_mm": 84.0,
+    "size_display": "140 cm (55.0\")",
+    "bill_display": "84 mm"
+  },
+  {
+    "id": "snow_goose",
+    "rank": 13,
+    "name": "Snow Goose (White Morph Adult - Lookalike Trap)",
+    "sci": "Anser caerulescens",
+    "prob": "40%",
+    "group": "lookalike",
+    "traits": [
+      "lookalike",
+      "pink_bill_grinning_patch",
+      "black_wingtips",
+      "short_thick_neck",
+      "all_white_body"
+    ],
+    "plate": "assets/swan_plates/snow_goose_plate.jpg",
+    "plate_caption": "Diagnostic plate: Lookalike trap: Often associates with Tundra Swan flocks. Dramatically smaller (half swan size), short thick neck, stout pink bill with black grinning patch, black primary wingtips folded over white tail",
+    "photo": "assets/swans/snow_goose_1.jpg",
+    "photo_caption": "Comparison view: Compact white goose, stout pink bill with black grinning patch, jet-black wingtips visible at rest",
+    "crux_photo": "assets/swans/snow_goose_2.jpg",
+    "crux_caption": "Head & bill detail: Stout pink bill with heavy black grinning patch along tomia; dark eye and pink legs",
+    "diagnostics": [
+      {
+        "tract": "Size Contrast vs. Swans",
+        "mark": "Much smaller and lighter than any swan (~70 cm vs >130 cm; half the length and one-third the weight of a Tundra Swan)."
+      },
+      {
+        "tract": "Black Wingtips (The Crux)",
+        "mark": "Conspicuous jet-black primary flight feathers visible folded over the tail at rest and forming striking black wingtips in flight (swans have ALL white wings)."
+      },
+      {
+        "tract": "Bill & Grinning Patch",
+        "mark": "Stout, high-based pink bill with a prominent black 'grinning patch' (smile patch) along the cutting edge of the mandibles."
+      }
+    ],
+    "rule_out": "Small white waterfowl + black wingtips + stout pink bill with black grinning patch = Adult Snow Goose.",
+    "rarity": "common",
+    "length_cm": 71.0,
+    "bill_mm": 58.0,
+    "size_display": "71 cm (28.0\")",
+    "bill_display": "58 mm"
+  },
+  {
+    "id": "domestic_white_goose",
+    "rank": 14,
+    "name": "Domestic White Goose (Greylag Derivative - Trap)",
+    "sci": "Anser anser f. domesticus",
+    "prob": "30%",
+    "group": "lookalike",
+    "traits": [
+      "lookalike",
+      "heavy_orange_bill",
+      "short_thick_neck",
+      "all_white_body"
+    ],
+    "plate": "assets/swan_plates/domestic_white_goose_plate.jpg",
+    "plate_caption": "Diagnostic plate: Common beginner confusion: Chunky rear-heavy body, thick bulky neck, stout bright orange bill without knob or grinning patch, bright orange legs and feet, pure white plumage",
+    "photo": "assets/swans/domestic_white_goose_1.jpg",
+    "photo_caption": "Park pond view: Chunky barnyard build, short thick neck, bright orange bill and feet, heavy abdominal paunch",
+    "crux_photo": "assets/swans/domestic_white_goose_2.jpg",
+    "crux_caption": "Head closeup: Thick stout bright orange bill without any basal knob or black patch; bright orange eye-ring",
+    "diagnostics": [
+      {
+        "tract": "Build & Paunch",
+        "mark": "Chunky, heavy, rear-heavy barnyard body with prominent abdominal fat paunch (keel lobes) floating high in the water."
+      },
+      {
+        "tract": "Bill & Leg Color",
+        "mark": "Stout, thick, entirely bright orange bill lacking any black knob or grinning patch; bright orange legs and feet."
+      },
+      {
+        "tract": "Neck & Voice",
+        "mark": "Short, thick upright neck (much shorter than any swan); loud, harsh barnyard gaggle and honking."
+      }
+    ],
+    "rule_out": "Chunky barnyard build + thick orange bill without knob + orange legs + short neck = Domestic White Goose.",
+    "rarity": "common",
+    "length_cm": 80.0,
+    "bill_mm": 65.0,
+    "size_display": "80 cm (31.5\")",
+    "bill_display": "65 mm"
+  }
+]

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AvnLookalike | Swans & Lookalikes Disambiguation Guide</title>
+  <meta name="description" content="Instrument-grade field disambiguation guide for confusing swans, morphs, immatures, and lookalikes in the Mid-Atlantic, Chesapeake Bay, and East Coast, featuring standardized scientific plates and high-res field photos.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#030712">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white pb-12 overflow-x-hidden">
+
+  <!-- Instrument Header -->
+  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5">
+    <div class="max-w-6xl mx-auto w-full max-w-full flex items-center justify-between gap-3 overflow-x-auto no-scrollbar">
+      
+      <!-- Brand & Navigation Switcher -->
+      <div class="flex items-center gap-2.5 min-w-0 flex-1">
+        <span class="font-black text-sm tracking-tight text-white uppercase">AvnLookalike</span>
+        
+        <!-- Navigation Tabs between Guides -->
+        <nav class="flex items-center gap-1.5 ml-2 border-l border-slate-800 pl-2.5 overflow-x-auto no-scrollbar">
+          <a href="index.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Sparrow Disambiguation Guide">
+            Sparrows (11)
+          </a>
+          <a href="ducks.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Waterfowl & Duck Disambiguation Guide">
+            Ducks (29)
+          </a>
+          <a href="gulls.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Seagulls & Laridae Disambiguation Guide">
+            Gulls (19)
+          </a>
+          <a href="shorebirds.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Shorebirds & Plovers Disambiguation Guide">
+            Shorebirds (21)
+          </a>
+          <a href="terns.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Terns & Skimmers Disambiguation Guide">
+            Terns (16)
+          </a>
+          <a href="grebes.html" class="px-2.5 py-1 rounded text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition" title="Switch to Grebes & Loons Disambiguation Guide">
+            Grebes & Loons (14)
+          </a>
+          <span class="px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white shadow-sm ring-1 ring-sky-400/50 transition">
+            Swans (14)
+          </span>
+        </nav>
+      </div>
+
+      <!-- Dynamic Results Counter -->
+      <div class="flex items-center gap-2 shrink-0 text-xs">
+        <button id="unhideBtn" onclick="unhideAll()" class="hidden px-2 py-0.5 rounded text-xs font-semibold bg-rose-950/80 text-rose-300 border border-rose-800/80 hover:bg-rose-900/80 hover:border-rose-600 transition flex items-center gap-1.5 shadow-sm cursor-pointer" title="Restore all dismissed species">
+          <span>Unhide All</span>
+          <span id="unhideCount" class="bg-rose-900 text-rose-200 px-1 rounded text-[10px] tabular-nums font-bold">0</span>
+        </button>
+        <span id="matchCounter" class="text-xs font-semibold tabular-nums text-slate-300 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
+          14 variants shown
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Filter Rail 1: Group / Guild & eBird Rarity -->
+    <div class="max-w-6xl mx-auto w-full max-w-full mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+      <!-- Group filters -->
+      <button onclick="toggleGroup('all')" id="f-group-all" title="Show all 14 swan & lookalike cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 14</button>
+      <button onclick="toggleGroup('native')" id="f-group-native" title="Native Wild Swans: Tundra Swan (Adult, Immature, Black-Lores) & Trumpeter Swan (Adult, Immature, Yellow-Fleck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Native Swans (6)</button>
+      <button onclick="toggleGroup('introduced')" id="f-group-introduced" title="Introduced & Exotic Swans: Mute Swan (Adult, Immature, Polish White Morph) & Australian Black Swan" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Introduced / Exotic (4)</button>
+      <button onclick="toggleGroup('vagrant')" id="f-group-vagrant" title="Eurasian Vagrants: Whooper Swan & Bewick's Swan" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Vagrants (2)</button>
+      <button onclick="toggleGroup('lookalike')" id="f-group-lookalike" title="Common Lookalike Traps: Snow Goose & Domestic White Goose" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Lookalike Traps (2)</button>
+
+      <span class="text-slate-700">|</span>
+
+      <!-- eBird Rarity Tiers -->
+      <button onclick="toggleRarity('all')" id="f-rarity-all" title="Show all eBird status levels (Common, Uncommon, and Rare)" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition">All Status</button>
+      <button onclick="toggleRarity('common')" id="f-rarity-common" title="eBird Common: Expected fall/winter residents on Chesapeake & Mid-Atlantic waters (>30% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Common (6)</button>
+      <button onclick="toggleRarity('uncommon')" id="f-rarity-uncommon" title="eBird Uncommon: Regular winter migrants or atypical morphs (10% - 25% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Uncommon (2)</button>
+      <button onclick="toggleRarity('rare')" id="f-rarity-rare" title="eBird Rare / Review Species: Rare review vagrants, escapees, or scarce plumage morphs (<5% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help">&#9733; Rares (6)</button>
+
+      <div class="ml-auto pl-2 flex items-center gap-2 border-l border-slate-800 shrink-0">
+        <!-- Sort Selector -->
+        <div class="flex items-center gap-1.5">
+          <label for="sortSelect" class="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0">Sort:</label>
+          <select id="sortSelect" onchange="setSort(this.value)" class="bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-200 text-xs rounded px-2 py-1 font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer">
+            <option value="freq-desc">Frequency (Most Common)</option>
+            <option value="freq-asc">Frequency (Rarest First)</option>
+            <option value="size-asc">Size (Smallest &rarr; Largest)</option>
+            <option value="size-desc">Size (Largest &rarr; Smallest)</option>
+            <option value="bill-asc">Beak (Shortest &rarr; Longest)</option>
+            <option value="bill-desc">Beak (Longest &rarr; Shortest)</option>
+            <option value="name-asc">Name (A &rarr; Z)</option>
+          </select>
+        </div>
+        <!-- View Mode -->
+        <div class="flex items-center gap-1 border-l border-slate-800 pl-2">
+          <button onclick="setViewMode('both')" id="vm-both" class="view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white">Both</button>
+          <button onclick="setViewMode('plates')" id="vm-plates" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Plates</button>
+          <button onclick="setViewMode('photos')" id="vm-photos" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Photos</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Rail 2: Diagnostic Anatomy (Bill, Head, Eye, Neck & Body) -->
+    <div class="max-w-6xl mx-auto w-full max-w-full mt-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
+      <!-- Bill Shape & Color -->
+      <span class="text-slate-500 font-semibold uppercase text-[10px] tracking-wider shrink-0">Bill:</span>
+      <button onclick="toggleTrait('black_bill_yellow_spot')" id="f-black_bill_yellow_spot" title="Black Bill with Yellow Loral Spot: Adult Tundra Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Yellow Loral Spot</button>
+      <button onclick="toggleTrait('all_black_wedge_bill')" id="f-all_black_wedge_bill" title="Massive All-Black Wedge Bill: Adult Trumpeter Swan & Black-Lored Tundra" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">All-Black Wedge Bill</button>
+      <button onclick="toggleTrait('orange_bill_black_knob')" id="f-orange_bill_black_knob" title="Vivid Orange Bill with Black Basal Knob: Adult Mute Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Orange Bill + Knob</button>
+      <button onclick="toggleTrait('pink_and_dark_bill')" id="f-pink_and_dark_bill" title="Pinkish Bill with Dark Base or Tip: Juvenile Tundra, Trumpeter, & Mute Swans" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Pink & Dark Bill</button>
+      <button onclick="toggleTrait('yellow_wedge_past_nostril')" id="f-yellow_wedge_past_nostril" title="Extensive Yellow Wedge Extending PAST Nostril in Acute Point: Adult Whooper Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Yellow Past Nostril</button>
+      <button onclick="toggleTrait('yellow_patch_behind_nostril')" id="f-yellow_patch_behind_nostril" title="Blunt Yellow Patch Terminating Strictly BEHIND Nostril: Adult Bewick's Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Yellow Behind Nostril</button>
+      <button onclick="toggleTrait('red_bill_white_band')" id="f-red_bill_white_band" title="Crimson-Red Bill with White Subterminal Band: Adult Black Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Red Bill + White Band</button>
+      <button onclick="toggleTrait('pink_bill_grinning_patch')" id="f-pink_bill_grinning_patch" title="Stout Pink Bill with Black Grinning Patch: Adult Snow Goose" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Pink + Grinning Patch</button>
+      <button onclick="toggleTrait('heavy_orange_bill')" id="f-heavy_orange_bill" title="Heavy Stout Plain Orange Bill without Knob: Domestic White Goose" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Heavy Orange Bill</button>
+
+      <span class="text-slate-700">|</span>
+
+      <!-- Head & Eye -->
+      <span class="text-slate-500 font-semibold uppercase text-[10px] tracking-wider shrink-0">Head / Eye:</span>
+      <button onclick="toggleTrait('straight_wedge_profile')" id="f-straight_wedge_profile" title="Straight Wedge Profile: Culmen forms an unbroken straight diagonal line with flat forehead (Trumpeter Swan)" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Straight Wedge Slope</button>
+      <button onclick="toggleTrait('concave_dip_rounded_crown')" id="f-concave_dip_rounded_crown" title="Forehead Dip & Rounded Crown: Crown curves smoothly with a subtle concave dip at bill base (Tundra Swan)" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Forehead Dip / Round Crown</button>
+      <button onclick="toggleTrait('eye_engulfed_in_black')" id="f-eye_engulfed_in_black" title="Eye Completely Engulfed in Black Loral Skin without Boundary: Trumpeter Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Eye In Black Lores</button>
+      <button onclick="toggleTrait('eye_separated_from_bill')" id="f-eye_separated_from_bill" title="Eye Visibly Set Off from Bill Skin by Feathering: Tundra Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Eye Distinct from Bill</button>
+      <button onclick="toggleTrait('salmon_lipstick_line')" id="f-salmon_lipstick_line" title="Salmon-Pink 'Lipstick' Line along cutting edge (tomia) of upper bill: Trumpeter Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Salmon Lipstick Line</button>
+      <button onclick="toggleTrait('black_basal_knob')" id="f-black_basal_knob" title="Prominent Black Fleshy Knob at base of bill: Adult Mute Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Black Basal Knob</button>
+
+      <span class="text-slate-700">|</span>
+
+      <!-- Neck & Plumage Crux -->
+      <span class="text-slate-500 font-semibold uppercase text-[10px] tracking-wider shrink-0">Neck & Body:</span>
+      <button onclick="toggleTrait('s_curve_neck_downward_bill')" id="f-s_curve_neck_downward_bill" title="Graceful S-Curved Neck with Downward-Angled Bill: Mute Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">S-Curve Neck + Downward Bill</button>
+      <button onclick="toggleTrait('vertical_neck_column')" id="f-vertical_neck_column" title="Massive Straight Vertical Neck Column: Trumpeter Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Vertical Neck Column</button>
+      <button onclick="toggleTrait('straight_or_c_curve')" id="f-straight_or_c_curve" title="Upright Neck with Slight Basal C-Curve Kink: Tundra Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Straight / C-Curve Neck</button>
+      <button onclick="toggleTrait('black_wingtips')" id="f-black_wingtips" title="Conspicuous Jet-Black Wingtips (Primaries): Snow Goose (Swans have ALL white wings)" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Black Wingtips</button>
+      <button onclick="toggleTrait('mottled_gray_brown')" id="f-mottled_gray_brown" title="Mottled Grayish-Brown Immature Plumage: Juvenile Tundra, Trumpeter, & Mute Swans" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Mottled Gray-Brown</button>
+      <button onclick="toggleTrait('solid_black_body')" id="f-solid_black_body" title="Entirely Solid Soot-Black Body Plumage: Australian Black Swan" class="filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Solid Black Body</button>
+    </div>
+  </header>
+
+  <!-- Immediate Swans Feed (1 card per row, matching all other guides) -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="swanFeed">
+    <!-- Rendered via JS -->
+  </main>
+
+  <!-- Client-Side State & Multi-Select Engine -->
+  <script>
+    const swans = [{"id": "tundra_swan_adult", "rank": 1, "name": "Tundra Swan (Adult)", "sci": "Cygnus columbianus columbianus", "prob": "65%", "group": "native", "traits": ["native", "black_bill_yellow_spot", "concave_dip_rounded_crown", "eye_separated_from_bill", "straight_or_c_curve", "all_white_body", "black_legs"], "plate": "assets/swan_plates/tundra_swan_adult_plate.jpg", "plate_caption": "Diagnostic plate: Snow-white plumage, rounded crown, subtle concave dip at bill base, black bill with distinct small yellow teardrop on lores in front of eye, eye cleanly separated from bill skin, neck held upright with gentle C-curve", "photo": "assets/swans/tundra_swan_adult_1.jpg", "photo_caption": "Winter flock view: Classic Chesapeake winter resident on tidal waters, rounded crown profile, yellow loral spot", "crux_photo": "assets/swans/tundra_swan_adult_2.jpg", "crux_caption": "Head closeup: Teardrop yellow loral spot; rounded forehead slope creates a distinct dip; eye is set off from bill", "diagnostics": [{"tract": "Bill & Loral Spot (The Crux)", "mark": "Black bill with a small, distinct yellow spot/teardrop on the lores directly in front of the eye (present in ~85-90% of individuals)."}, {"tract": "Head Profile & Eye Junction", "mark": "Forehead slopes gently into the culmen with a subtle concave dip; crown is smoothly rounded; dark eye is clearly separated from black bill skin by white feathering."}, {"tract": "Neck Carriage & Voice", "mark": "Neck held straight upright or with a gentle basal C-curve kink; voice is a musical high-pitched barking bugle ('kwoo-kwoo' or 'who-who')."}], "rule_out": "Snow-white body + small yellow loral spot + rounded crown with forehead dip + eye distinct from bill = Adult Tundra Swan.", "rarity": "common", "length_cm": 132.0, "bill_mm": 95.0, "size_display": "132 cm (52.0\")", "bill_display": "95 mm"}, {"id": "mute_swan_adult", "rank": 2, "name": "Mute Swan (Adult)", "sci": "Cygnus olor", "prob": "55%", "group": "introduced", "traits": ["introduced", "orange_bill_black_knob", "black_basal_knob", "s_curve_neck_downward_bill", "all_white_body", "black_legs"], "plate": "assets/swan_plates/mute_swan_adult_plate.jpg", "plate_caption": "Diagnostic plate: Pure white body with bushed/arched secondary feathers, vivid reddish-orange bill with large black fleshy basal knob, black triangular lores, elegant S-curve neck with bill angled downward", "photo": "assets/swans/mute_swan_adult_1.jpg", "photo_caption": "Bay resident view: Graceful S-curve neck with downward-pointing reddish-orange bill, prominent black knob, arched wings", "crux_photo": "assets/swans/mute_swan_adult_2.jpg", "crux_caption": "Head closeup: Massive black fleshy knob at base of culmen, bright reddish-orange bill, triangular black loral patch", "diagnostics": [{"tract": "Bill Color & Knob (The Crux)", "mark": "Vivid reddish-orange bill with a prominent black fleshy basal knob (tubercle) and black cutting edges and nail."}, {"tract": "Neck Posture & Carriage", "mark": "Carries neck in a graceful, exaggerated S-curve with the head and bill tilted downward toward the water."}, {"tract": "Aggressive Posturing & Voice", "mark": "Frequently arches secondary flight feathers upward ('bushel-basket' display); largely silent except for explosive hissing and snorting."}], "rule_out": "Reddish-orange bill + prominent black basal knob + graceful S-curve neck with downward bill = Adult Mute Swan.", "rarity": "common", "length_cm": 150.0, "bill_mm": 88.0, "size_display": "150 cm (59.0\")", "bill_display": "88 mm"}, {"id": "tundra_swan_juvenile", "rank": 3, "name": "Tundra Swan (Juvenile / 1st Winter)", "sci": "Cygnus columbianus columbianus", "prob": "45%", "group": "native", "traits": ["native", "pink_and_dark_bill", "concave_dip_rounded_crown", "mottled_gray_brown", "straight_or_c_curve"], "plate": "assets/swan_plates/tundra_swan_juvenile_plate.jpg", "plate_caption": "Diagnostic plate: Mottled dingy brownish-gray plumage on head, neck, and upperparts; dull pinkish bill with contrasting black tip and black base/lores; rounded crown profile", "photo": "assets/swans/tundra_swan_juvenile_1.jpg", "photo_caption": "Winter marsh profile: Mottled grayish-buff plumage, pink bill with dark tip, accompanying adult Tundra flock", "crux_photo": "assets/swans/tundra_swan_juvenile_2.jpg", "crux_caption": "Bill closeup: Pinkish-flesh saddle across center of bill, bordered by black at tip and base; rounded crown", "diagnostics": [{"tract": "Bill Coloration", "mark": "Dull pinkish-flesh central saddle on bill, sharply framed by black at the bill tip and black across the lores and base."}, {"tract": "Plumage Tone", "mark": "Mottled brownish-gray to pale silvery-buff overall, with lighter chin and throat (paler than sooty juvenile Trumpeter)."}, {"tract": "Head Contour", "mark": "Rounded crown and forehead dip identical to adult Tundra Swan; noticeably smaller and shorter-necked than juvenile Trumpeter."}], "rule_out": "Mottled brownish-gray swan + pink bill with black tip and base + rounded crown = Juvenile Tundra Swan.", "rarity": "common", "length_cm": 125.0, "bill_mm": 90.0, "size_display": "125 cm (49.0\")", "bill_display": "90 mm"}, {"id": "mute_swan_juvenile", "rank": 4, "name": "Mute Swan (Juvenile / 1st Year)", "sci": "Cygnus olor", "prob": "35%", "group": "introduced", "traits": ["introduced", "pink_and_dark_bill", "s_curve_neck_downward_bill", "mottled_gray_brown"], "plate": "assets/swan_plates/mute_swan_juvenile_plate.jpg", "plate_caption": "Diagnostic plate: Dingy grayish-brown plumage, dull flesh-gray or pinkish-gray bill lacking basal knob, feathered indentation at bill base, downward-pointing bill on S-curve neck", "photo": "assets/swans/mute_swan_juvenile_1.jpg", "photo_caption": "Subadult view: Uniformly dingy brownish-gray body, dull flesh bill without knob, S-curve neck held downward", "crux_photo": "assets/swans/mute_swan_juvenile_2.jpg", "crux_caption": "Bill & lores: Dull pinkish-gray bill lacking knob; rounded forehead feather indentation projecting onto culmen", "diagnostics": [{"tract": "Bill Shape & Color", "mark": "Dull grayish-pink or flesh bill with black tip and edges, lacking any basal knob (knob develops late in first year)."}, {"tract": "Feather Margin at Bill Base", "mark": "Feather line at base of upper mandible forms a rounded forward-pointing indentation onto the culmen."}, {"tract": "Silhouette & Posture", "mark": "Maintains the classic Mute Swan S-curved neck and downward bill tilt even in immature plumage."}], "rule_out": "Dingy grayish-brown swan + dull pink-gray bill without knob + S-curve neck held downward = Juvenile Mute Swan.", "rarity": "common", "length_cm": 140.0, "bill_mm": 84.0, "size_display": "140 cm (55.0\")", "bill_display": "84 mm"}, {"id": "trumpeter_swan_adult", "rank": 5, "name": "Trumpeter Swan (Adult)", "sci": "Cygnus buccinator", "prob": "12%", "group": "native", "traits": ["native", "all_black_wedge_bill", "straight_wedge_profile", "eye_engulfed_in_black", "salmon_lipstick_line", "vertical_neck_column", "all_white_body", "black_legs"], "plate": "assets/swan_plates/trumpeter_swan_adult_plate.jpg", "plate_caption": "Diagnostic plate: Massive snow-white body, huge all-black wedge bill forming unbroken straight diagonal line with flat forehead, solid black lores engulfing eye, salmon lipstick line on tomia, straight vertical neck", "photo": "assets/swans/trumpeter_swan_adult_1.jpg", "photo_caption": "Winter migrant profile: North America's heaviest native bird; massive straight wedge bill, solid black lores engulfing eye", "crux_photo": "assets/swans/trumpeter_swan_adult_2.jpg", "crux_caption": "Bill & eye crux: Straight culmen seamlessly merging into flat forehead; eye completely engulfed in black; salmon lipstick streak", "diagnostics": [{"tract": "Bill Profile & Culmen (The Crux)", "mark": "Massive, entirely black wedge-shaped bill; culmen forms an unbroken, perfectly straight line continuous with the flat forehead."}, {"tract": "Eye & Lores Junction", "mark": "Loral skin is broad, solid jet-black, and completely engulfs the dark eye with no visible demarcation or yellow spot."}, {"tract": "Salmon 'Lipstick' Line", "mark": "Bright salmon-pink or reddish fleshy line runs along the cutting edge (tomia) of the upper bill, visible at close range."}, {"tract": "Neck Carriage & Voice", "mark": "Carries neck in a massive, straight vertical pillar; vocalization is a deep, resonant brassy french horn bugle ('oh-OH')."}], "rule_out": "Massive size + straight unbroken wedge bill & forehead + eye engulfed in black lores + salmon lipstick line = Adult Trumpeter Swan.", "rarity": "uncommon", "length_cm": 158.0, "bill_mm": 115.0, "size_display": "158 cm (62.0\")", "bill_display": "115 mm"}, {"id": "tundra_swan_black_lores", "rank": 6, "name": "Tundra Swan (Adult - Black-Lored Morph)", "sci": "Cygnus columbianus columbianus", "prob": "10%", "group": "native", "traits": ["native", "all_black_wedge_bill", "concave_dip_rounded_crown", "eye_separated_from_bill", "straight_or_c_curve", "all_white_body", "black_legs"], "plate": "assets/swan_plates/tundra_swan_black_lores_plate.jpg", "plate_caption": "Diagnostic plate: Identification pitfall: All-black bill with NO yellow spot (~10-15% of Tundras). Separated from Trumpeter by rounded crown, concave forehead dip, distinct eye boundary, and smaller size", "photo": "assets/swans/tundra_swan_black_lores_1.jpg", "photo_caption": "Identification trap: Adult Tundra Swan lacking yellow on lores; note rounded crown contour and forehead dip", "crux_photo": "assets/swans/tundra_swan_black_lores_2.jpg", "crux_caption": "Head closeup: Solid black bill without yellow, but forehead curves downward creating a notch; eye distinctly set off", "diagnostics": [{"tract": "The Identification Trap", "mark": "Approximately 10-15% of North American Tundra Swans have completely black lores with NO yellow spot, leading to frequent false Trumpeter reports."}, {"tract": "Separating Mark: Forehead & Head Contour", "mark": "Head is smoothly rounded; forehead dips in a gentle concave curve at the base of the bill (Trumpeter is a flat straight wedge)."}, {"tract": "Separating Mark: Eye Boundary", "mark": "Dark eye is visibly set off from the black bill skin by a small pinch/notch of white feathering (Trumpeter eye is swallowed by black)."}], "rule_out": "All-black bill without yellow + rounded crown with forehead dip + distinct eye boundary = Black-Lored Adult Tundra Swan.", "rarity": "uncommon", "length_cm": 132.0, "bill_mm": 95.0, "size_display": "132 cm (52.0\")", "bill_display": "95 mm"}, {"id": "trumpeter_swan_juvenile", "rank": 7, "name": "Trumpeter Swan (Juvenile / 1st Winter)", "sci": "Cygnus buccinator", "prob": "6%", "group": "native", "traits": ["native", "pink_and_dark_bill", "straight_wedge_profile", "eye_engulfed_in_black", "vertical_neck_column", "mottled_gray_brown"], "plate": "assets/swan_plates/trumpeter_swan_juvenile_plate.jpg", "plate_caption": "Diagnostic plate: Dark sooty brownish-gray plumage (darker than juvenile Tundra), massive straight wedge-shaped bill profile, pinkish saddle in center of culmen with black base/tip, eye engulfed in dark lores", "photo": "assets/swans/trumpeter_swan_juvenile_1.jpg", "photo_caption": "Immature winter profile: Dark sooty body, massive straight wedge bill profile, straight vertical neck", "crux_photo": "assets/swans/trumpeter_swan_juvenile_2.jpg", "crux_caption": "Head & bill detail: Flat continuous slope from forehead to tip; pinkish central bill saddle with black base", "diagnostics": [{"tract": "Plumage Shade (Sooty Gray)", "mark": "Uniformly darker and more sooty brownish-gray across body and neck than juvenile Tundra Swan, especially on head."}, {"tract": "Bill Profile & Color", "mark": "Retains the adult's massive, straight wedge profile; center of bill has a pale pinkish-flesh saddle with solid black base and tip."}, {"tract": "Loral Feathering & Eye", "mark": "Dark lores swallow the eye without separation; massive straight vertical neck column."}], "rule_out": "Dark sooty gray plumage + massive straight wedge bill & flat forehead + eye engulfed by lores = Juvenile Trumpeter Swan.", "rarity": "rare", "length_cm": 145.0, "bill_mm": 110.0, "size_display": "145 cm (57.0\")", "bill_display": "110 mm"}, {"id": "trumpeter_swan_yellow_fleck", "rank": 8, "name": "Trumpeter Swan (Adult - Yellow-Flecked Variant)", "sci": "Cygnus buccinator", "prob": "1.5%", "group": "native", "traits": ["native", "black_bill_yellow_spot", "straight_wedge_profile", "eye_engulfed_in_black", "salmon_lipstick_line", "vertical_neck_column", "all_white_body", "black_legs"], "plate": "assets/swan_plates/trumpeter_swan_yellow_fleck_plate.jpg", "plate_caption": "Diagnostic plate: Identification pitfall: ~1-2% of Trumpeter Swans display a small yellowish fleck on lores. Diagnosed by massive straight wedge bill, flat forehead slope, salmon lipstick line, and huge size", "photo": "assets/swans/trumpeter_swan_yellow_fleck_1.jpg", "photo_caption": "Identification trap: Trumpeter with aberrant yellow loral fleck; straight wedge culmen confirms Trumpeter", "crux_photo": "assets/swans/trumpeter_swan_yellow_fleck_2.jpg", "crux_caption": "Bill & forehead profile: Flat unbroken wedge slope and salmon lipstick line override the misleading yellow fleck", "diagnostics": [{"tract": "The Aberrant Pitfall", "mark": "A small fraction (~1-2%) of adult Trumpeter Swans display a tiny yellowish or orange fleck on the lores, causing erroneous Tundra Swan reports."}, {"tract": "Diagnostic Trumpeter Overrides", "mark": "Culmen remains completely straight and flat with the forehead (no dip); salmon lipstick line is prominent; head is elongated and wedge-shaped."}, {"tract": "Size & Proportions", "mark": "Massive bird with heavy vertical neck column and bill measuring >110 mm (vs ~95 mm in Tundra Swan)."}], "rule_out": "Yellow loral fleck BUT massive straight wedge bill + flat forehead slope + salmon lipstick line = Yellow-Flecked Trumpeter Swan.", "rarity": "rare", "length_cm": 158.0, "bill_mm": 115.0, "size_display": "158 cm (62.0\")", "bill_display": "115 mm"}, {"id": "whooper_swan", "rank": 9, "name": "Whooper Swan (Adult - Eurasian Vagrant)", "sci": "Cygnus cygnus", "prob": "0.8%", "group": "vagrant", "traits": ["vagrant", "yellow_wedge_past_nostril", "straight_wedge_profile", "vertical_neck_column", "all_white_body", "black_legs"], "plate": "assets/swan_plates/whooper_swan_plate.jpg", "plate_caption": "Diagnostic plate: Large pure white swan, striking bright yellow wedge covering more than half the bill and extending past the nostril in an acute point, black bill tip and culmen ridge, straight erect neck", "photo": "assets/swans/whooper_swan_1.jpg", "photo_caption": "Review vagrant view: Large wedge of bright yellow covering base of bill past nostril; straight neck carriage", "crux_photo": "assets/swans/whooper_swan_2.jpg", "crux_caption": "Bill crux: Brilliant yellow wedge extends past the nostril into a sharp pointed tip; black anterior culmen and tip", "diagnostics": [{"tract": "Bill Pattern (The Crux)", "mark": "Extensive bright lemon-yellow wedge covers more than 50% of the upper mandible, extending forward past the nostril in an acute point."}, {"tract": "Bill Tip & Ridge", "mark": "Anterior portion of the bill, nail, and cutting edges are solid black, creating sharp diagonal yellow-black contrast."}, {"tract": "Head & Neck Posture", "mark": "Angular, wedge-shaped head with a straight culmen; neck held in an upright, erect posture like a Trumpeter Swan."}], "rule_out": "Snow-white swan + yellow wedge on bill extending PAST the nostril in a sharp point = Adult Whooper Swan.", "rarity": "rare", "length_cm": 152.0, "bill_mm": 105.0, "size_display": "152 cm (60.0\")", "bill_display": "105 mm"}, {"id": "bewicks_swan", "rank": 10, "name": "Bewick's Swan (Adult - Eurasian Subspecies)", "sci": "Cygnus columbianus bewickii", "prob": "0.5%", "group": "vagrant", "traits": ["vagrant", "yellow_patch_behind_nostril", "concave_dip_rounded_crown", "straight_or_c_curve", "all_white_body", "black_legs"], "plate": "assets/swan_plates/bewicks_swan_plate.jpg", "plate_caption": "Diagnostic plate: Eurasian subspecies of Tundra Swan: Bright yellow patch on base of bill is rounded or blunt and terminates behind the nostril (<40% of bill), rounded head crown, upright neck", "photo": "assets/swans/bewicks_swan_1.jpg", "photo_caption": "Rare vagrant profile: Rounded yellow patch on bill base terminating behind nostril; compact Tundra proportions", "crux_photo": "assets/swans/bewicks_swan_2.jpg", "crux_caption": "Bill comparison: Yellow patch stops bluntly behind nostril (never reaching or passing nostril like Whooper Swan)", "diagnostics": [{"tract": "Bill Pattern vs. Whooper (The Crux)", "mark": "Bright yellow patch is restricted to the base of the bill, terminating bluntly behind the nostril (covering less than 40% of the bill)."}, {"tract": "Bill Pattern vs. Whistling Swan", "mark": "Shows vastly more yellow than North American Tundra Swan (which only has a tiny teardrop spot), but less than Whooper."}, {"tract": "Size & Head Contour", "mark": "Exact same size and rounded crown contour as North American Tundra Swan (Whistling Swan); smaller than Whooper."}], "rule_out": "Tundra Swan size/shape + blunt yellow patch on bill terminating BEHIND nostril = Adult Bewick's Swan.", "rarity": "rare", "length_cm": 127.0, "bill_mm": 90.0, "size_display": "127 cm (50.0\")", "bill_display": "90 mm"}, {"id": "black_swan", "rank": 11, "name": "Black Swan (Adult - Feral / Exotic)", "sci": "Cygnus atratus", "prob": "2%", "group": "introduced", "traits": ["introduced", "red_bill_white_band", "solid_black_body", "s_curve_neck_downward_bill"], "plate": "assets/swan_plates/black_swan_plate.jpg", "plate_caption": "Diagnostic plate: Solid soot-black body plumage with curly ruffled mantle feathers, bright crimson-red bill with narrow white subterminal band and pale tip, glowing ruby-red eye, long slender curved neck", "photo": "assets/swans/black_swan_1.jpg", "photo_caption": "Urban pond escapee view: Striking all-black plumage, vivid red bill with white tip band, curly wing feathers", "crux_photo": "assets/swans/black_swan_2.jpg", "crux_caption": "Bill & eye detail: Bright crimson-red bill with white subterminal band across tip; glowing ruby-red eye", "diagnostics": [{"tract": "Body Plumage", "mark": "Solid sooty charcoal-black body plumage with curly, ruffled scapulars; shows brilliant snow-white primary and secondary flight feathers in flight."}, {"tract": "Bill & Eye (The Crux)", "mark": "Vivid crimson-red bill with a crisp white subterminal band across the tip and pale nail; eye is bright glowing ruby-red."}, {"tract": "Neck & Provenance", "mark": "Exceptionally long and slender neck; native to Australia but widespread in waterfowl collections and feral park escapees."}], "rule_out": "Solid soot-black body + crimson-red bill with white band + ruby-red eye = Black Swan.", "rarity": "rare", "length_cm": 130.0, "bill_mm": 72.0, "size_display": "130 cm (51.0\")", "bill_display": "72 mm"}, {"id": "mute_swan_polish", "rank": 12, "name": "Mute Swan ('Polish Swan' White Morph Juvenile)", "sci": "Cygnus olor immutabilis", "prob": "1.0%", "group": "introduced", "traits": ["introduced", "pink_and_dark_bill", "s_curve_neck_downward_bill", "all_white_body"], "plate": "assets/swan_plates/mute_swan_polish_plate.jpg", "plate_caption": "Diagnostic plate: Leucistic morph occurring in ~20% of Mute Swan broods: Hatches pure white; all-white juvenile plumage, pale pinkish feet and dull pinkish-flesh bill lacking basal knob, S-curve neck", "photo": "assets/swans/mute_swan_polish_1.jpg", "photo_caption": "White juvenile trap: Pure white juvenile mute swan, dull flesh-pink bill without knob, pinkish-gray feet", "crux_photo": "assets/swans/mute_swan_polish_2.jpg", "crux_caption": "Bill & leg detail: Pale flesh bill without knob; pale pinkish-gray legs and feet (wild native swans have black legs)", "diagnostics": [{"tract": "The 'White Juvenile' Trap", "mark": "Genetic leucistic morph ('immutabilis') that hatches with pure white down and fledges into clean snow-white plumage without a gray phase."}, {"tract": "Bill Separation from Adult", "mark": "Bill is dull pinkish-flesh or grayish-pink and completely lacks the adult's black basal knob."}, {"tract": "Leg Color Separation from Native Swans", "mark": "Legs and webbed feet are pale grayish-pink or flesh (adult and juvenile Tundra/Trumpeter swans have solid black legs)."}], "rule_out": "All-white plumage + dull pink bill lacking knob + pale pinkish legs + S-curve neck = Polish Morph Juvenile Mute Swan.", "rarity": "rare", "length_cm": 140.0, "bill_mm": 84.0, "size_display": "140 cm (55.0\")", "bill_display": "84 mm"}, {"id": "snow_goose", "rank": 13, "name": "Snow Goose (White Morph Adult - Lookalike Trap)", "sci": "Anser caerulescens", "prob": "40%", "group": "lookalike", "traits": ["lookalike", "pink_bill_grinning_patch", "black_wingtips", "short_thick_neck", "all_white_body"], "plate": "assets/swan_plates/snow_goose_plate.jpg", "plate_caption": "Diagnostic plate: Lookalike trap: Often associates with Tundra Swan flocks. Dramatically smaller (half swan size), short thick neck, stout pink bill with black grinning patch, black primary wingtips folded over white tail", "photo": "assets/swans/snow_goose_1.jpg", "photo_caption": "Comparison view: Compact white goose, stout pink bill with black grinning patch, jet-black wingtips visible at rest", "crux_photo": "assets/swans/snow_goose_2.jpg", "crux_caption": "Head & bill detail: Stout pink bill with heavy black grinning patch along tomia; dark eye and pink legs", "diagnostics": [{"tract": "Size Contrast vs. Swans", "mark": "Much smaller and lighter than any swan (~70 cm vs >130 cm; half the length and one-third the weight of a Tundra Swan)."}, {"tract": "Black Wingtips (The Crux)", "mark": "Conspicuous jet-black primary flight feathers visible folded over the tail at rest and forming striking black wingtips in flight (swans have ALL white wings)."}, {"tract": "Bill & Grinning Patch", "mark": "Stout, high-based pink bill with a prominent black 'grinning patch' (smile patch) along the cutting edge of the mandibles."}], "rule_out": "Small white waterfowl + black wingtips + stout pink bill with black grinning patch = Adult Snow Goose.", "rarity": "common", "length_cm": 71.0, "bill_mm": 58.0, "size_display": "71 cm (28.0\")", "bill_display": "58 mm"}, {"id": "domestic_white_goose", "rank": 14, "name": "Domestic White Goose (Greylag Derivative - Trap)", "sci": "Anser anser f. domesticus", "prob": "30%", "group": "lookalike", "traits": ["lookalike", "heavy_orange_bill", "short_thick_neck", "all_white_body"], "plate": "assets/swan_plates/domestic_white_goose_plate.jpg", "plate_caption": "Diagnostic plate: Common beginner confusion: Chunky rear-heavy body, thick bulky neck, stout bright orange bill without knob or grinning patch, bright orange legs and feet, pure white plumage", "photo": "assets/swans/domestic_white_goose_1.jpg", "photo_caption": "Park pond view: Chunky barnyard build, short thick neck, bright orange bill and feet, heavy abdominal paunch", "crux_photo": "assets/swans/domestic_white_goose_2.jpg", "crux_caption": "Head closeup: Thick stout bright orange bill without any basal knob or black patch; bright orange eye-ring", "diagnostics": [{"tract": "Build & Paunch", "mark": "Chunky, heavy, rear-heavy barnyard body with prominent abdominal fat paunch (keel lobes) floating high in the water."}, {"tract": "Bill & Leg Color", "mark": "Stout, thick, entirely bright orange bill lacking any black knob or grinning patch; bright orange legs and feet."}, {"tract": "Neck & Voice", "mark": "Short, thick upright neck (much shorter than any swan); loud, harsh barnyard gaggle and honking."}], "rule_out": "Chunky barnyard build + thick orange bill without knob + orange legs + short neck = Domestic White Goose.", "rarity": "common", "length_cm": 80.0, "bill_mm": 65.0, "size_display": "80 cm (31.5\")", "bill_display": "65 mm"}];
+
+    let activeGroup = 'all';
+    let activeRarity = 'all';
+    let activeTraits = new Set();
+    let currentViewMode = 'both';
+    let currentSort = 'freq-desc';
+
+    function setSort(mode) {
+      currentSort = mode;
+      renderFeed();
+    }
+    const dismissedCards = new Set();
+    const photoModes = {}; // cardId -> 'primary' | 'crux'
+
+    // Mutually exclusive trait pairings
+    const traitExclusions = {
+      'black_bill_yellow_spot': ['all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'all_black_wedge_bill': ['black_bill_yellow_spot', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'orange_bill_black_knob': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'pink_and_dark_bill': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'yellow_wedge_past_nostril': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'yellow_patch_behind_nostril': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'red_bill_white_band': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'pink_bill_grinning_patch', 'heavy_orange_bill'],
+      'pink_bill_grinning_patch': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'heavy_orange_bill'],
+      'heavy_orange_bill': ['black_bill_yellow_spot', 'all_black_wedge_bill', 'orange_bill_black_knob', 'pink_and_dark_bill', 'yellow_wedge_past_nostril', 'yellow_patch_behind_nostril', 'red_bill_white_band', 'pink_bill_grinning_patch'],
+
+      'straight_wedge_profile': ['concave_dip_rounded_crown', 's_curve_neck_downward_bill'],
+      'concave_dip_rounded_crown': ['straight_wedge_profile', 's_curve_neck_downward_bill'],
+      's_curve_neck_downward_bill': ['straight_wedge_profile', 'vertical_neck_column'],
+
+      'eye_engulfed_in_black': ['eye_separated_from_bill'],
+      'eye_separated_from_bill': ['eye_engulfed_in_black'],
+
+      'all_white_body': ['mottled_gray_brown', 'solid_black_body'],
+      'mottled_gray_brown': ['all_white_body', 'solid_black_body'],
+      'solid_black_body': ['all_white_body', 'mottled_gray_brown']
+    };
+
+    function dismissSpecies(id) {
+      dismissedCards.add(id);
+      renderFeed();
+    }
+
+    function unhideAll() {
+      dismissedCards.clear();
+      renderFeed();
+    }
+
+    function toggleGroup(group) {
+      activeGroup = group;
+      renderFeed();
+    }
+
+    function toggleRarity(rarity) {
+      activeRarity = rarity;
+      renderFeed();
+    }
+
+    function toggleTrait(trait) {
+      if (activeTraits.has(trait)) {
+        activeTraits.delete(trait);
+      } else {
+        if (traitExclusions[trait]) {
+          traitExclusions[trait].forEach(t => activeTraits.delete(t));
+        }
+        activeTraits.add(trait);
+      }
+      renderFeed();
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      ['both', 'plates', 'photos'].forEach(m => {
+        const b = document.getElementById(`vm-${m}`);
+        if (b) b.className = "view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white";
+      });
+      const active = document.getElementById(`vm-${mode}`);
+      if (active) active.className = "view-btn px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 text-white";
+      renderFeed();
+    }
+
+    function toggleCardPhoto(speciesId, mode) {
+      photoModes[speciesId] = mode;
+      renderFeed();
+    }
+
+    function renderFeed() {
+      const container = document.getElementById('swanFeed');
+      if (!container) return;
+      container.innerHTML = '';
+
+      updateFilterButtons();
+
+      const filtered = swans.filter(s => {
+        if (dismissedCards.has(s.id)) return false;
+        if (activeGroup !== 'all' && s.group !== activeGroup) return false;
+        if (activeRarity !== 'all' && s.rarity !== activeRarity) return false;
+        for (const trait of activeTraits) {
+          if (!s.traits.includes(trait)) return false;
+        }
+        return true;
+      });
+
+      filtered.sort((a, b) => {
+        const probA = parseFloat(String(a.prob).replace(/[^0-9.]/g, '')) || 0;
+        const probB = parseFloat(String(b.prob).replace(/[^0-9.]/g, '')) || 0;
+        switch (currentSort) {
+          case 'freq-desc':
+            return probB - probA || a.rank - b.rank;
+          case 'freq-asc':
+            return probA - probB || b.rank - a.rank;
+          case 'size-asc':
+            return (a.length_cm - b.length_cm) || (a.bill_mm - b.bill_mm) || a.name.localeCompare(b.name);
+          case 'size-desc':
+            return (b.length_cm - a.length_cm) || (b.bill_mm - a.bill_mm) || a.name.localeCompare(b.name);
+          case 'bill-asc':
+            return (a.bill_mm - b.bill_mm) || (a.length_cm - b.length_cm) || a.name.localeCompare(b.name);
+          case 'bill-desc':
+            return (b.bill_mm - a.bill_mm) || (b.length_cm - a.length_cm) || a.name.localeCompare(b.name);
+          case 'name-asc':
+            return a.name.localeCompare(b.name);
+          default:
+            return a.rank - b.rank;
+        }
+      });
+
+      let matches = filtered.length;
+
+      filtered.forEach(s => {
+        // Determine current photo for this card (primary vs crux)
+        const currentPhotoMode = photoModes[s.id] || 'primary';
+        const activePhotoUrl = currentPhotoMode === 'crux' ? s.crux_photo : s.photo;
+        const activePhotoCaption = currentPhotoMode === 'crux' ? s.crux_caption : s.photo_caption;
+
+        const card = document.createElement('div');
+        card.id = `sp-${s.id}`;
+        card.className = "bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 sm:p-4 shadow-lg transition-all duration-200";
+
+        // Frequency & Rarity Badge
+        let frequencyBadge = '';
+        let rarityCallout = '';
+        if (s.rarity === 'rare') {
+          frequencyBadge = `<span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 tracking-wide uppercase">&#9733; eBird Rare</span>`;
+          rarityCallout = `
+            <div class="mt-2.5 p-2 rounded-lg bg-amber-950/30 border border-amber-500/30 flex items-start gap-2 text-xs text-amber-200/90">
+              <span class="text-amber-400 font-bold shrink-0">&#9888; Rare / Review Visitor:</span>
+              <span>Requires field notes, photos, and formal documentation for local eBird review. Scrutinize forehead-to-bill slope, loral skin boundary, yellow pattern on bill, and vocalizations.</span>
+            </div>
+          `;
+        } else if (s.rarity === 'uncommon') {
+          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-800/80">${s.prob} Seasonal</span>`;
+        } else {
+          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-sky-300 border border-slate-700">${s.prob} Frequency</span>`;
+        }
+
+        // Guild Tag formatting
+        const groupLabels = {
+          'native': 'Native Swan',
+          'introduced': 'Introduced / Exotic',
+          'vagrant': 'Rare Vagrant',
+          'lookalike': 'Lookalike Trap'
+        };
+        const groupLabel = groupLabels[s.group] || s.group;
+
+        // Diagnostics list HTML
+        let diagHtml = '';
+        s.diagnostics.forEach(d => {
+          diagHtml += `
+            <div class="flex items-baseline gap-1.5 text-xs text-slate-300">
+              <span class="font-bold text-sky-400 shrink-0">${d.tract}:</span>
+              <span class="leading-relaxed">${d.mark}</span>
+            </div>
+          `;
+        });
+
+        const photoToggleHtml = `
+          <div class="flex items-center gap-1 mt-1.5 justify-end">
+            <button onclick="toggleCardPhoto('${s.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
+            <button onclick="toggleCardPhoto('${s.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          </div>
+        `;
+
+        // Visual layout based on currentViewMode
+        let visualsHtml = '';
+        if (currentViewMode === 'both') {
+          visualsHtml = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${s.plate}" alt="${s.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${s.plate_caption}</p>
+              </div>
+
+              <!-- Visual 2: Field Photograph (with Toggle) -->
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+                </div>
+                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
+                  <img src="${activePhotoUrl}" alt="${s.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
+                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
+                  ${photoToggleHtml}
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (currentViewMode === 'plates') {
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
+                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+              </div>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${s.plate}" alt="${s.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${s.plate_caption}</p>
+            </div>
+          `;
+        } else if (currentViewMode === 'photos') {
+          visualsHtml = `
+            <div class="mt-3">
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
+                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
+                ${photoToggleHtml}
+              </div>
+              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
+                <img src="${activePhotoUrl}" alt="${s.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5 flex-wrap">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-black text-slate-400 tabular-nums">#${s.rank}</span>
+                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${s.name}</h2>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+              </div>
+              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${s.sci}</p>
+            </div>
+            
+            <div class="flex items-center gap-1.5 flex-wrap">
+              ${frequencyBadge}
+              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${s.size_display}</span>
+              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${s.bill_display} beak</span>
+              <button onclick="dismissSpecies('${s.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${s.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Rarity Callout for Review Species -->
+          ${rarityCallout}
+
+          <!-- Visual Plates & Photos -->
+          ${visualsHtml}
+
+          <!-- Diagnostic Feather Tract Checklist -->
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
+            ${diagHtml}
+          </div>
+
+          <!-- Single-line Elimination Rule -->
+          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
+            <strong class="text-amber-300 font-bold">Rule:</strong> ${s.rule_out}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Update counter & unhide button
+      const counter = document.getElementById('matchCounter');
+      const unhideBtn = document.getElementById('unhideBtn');
+      const unhideCount = document.getElementById('unhideCount');
+      if (counter) {
+        if (dismissedCards.size > 0) {
+          counter.textContent = `${matches} of ${swans.length} shown (${dismissedCards.size} hidden)`;
+          if (unhideBtn) {
+            unhideBtn.classList.remove('hidden');
+            if (unhideCount) unhideCount.textContent = dismissedCards.size;
+          }
+        } else {
+          counter.textContent = `${matches} of ${swans.length} variants shown`;
+          if (unhideBtn) unhideBtn.classList.add('hidden');
+        }
+      }
+    }
+
+    function updateFilterButtons() {
+      // Group buttons
+      const groupIds = ['all', 'native', 'introduced', 'vagrant', 'lookalike'];
+      groupIds.forEach(g => {
+        const btn = document.getElementById(`f-group-${g}`);
+        if (!btn) return;
+        if (activeGroup === g) {
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+        } else {
+          btn.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
+        }
+      });
+
+      // Rarity buttons
+      const rAll = document.getElementById('f-rarity-all');
+      const rCommon = document.getElementById('f-rarity-common');
+      const rUncommon = document.getElementById('f-rarity-uncommon');
+      const rRare = document.getElementById('f-rarity-rare');
+
+      [rAll, rCommon, rUncommon].forEach(b => {
+        if (b) b.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
+      });
+      if (rRare) rRare.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help";
+
+      if (activeRarity === 'all') {
+        if (rAll) rAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition";
+      } else if (activeRarity === 'common') {
+        if (rCommon) rCommon.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+      } else if (activeRarity === 'uncommon') {
+        if (rUncommon) rUncommon.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+      } else if (activeRarity === 'rare') {
+        if (rRare) rRare.className = "filter-chip px-2.5 py-1 rounded text-xs font-black bg-amber-500 text-slate-950 border border-amber-400 shrink-0 transition shadow-sm ring-1 ring-amber-400/60";
+      }
+
+      // Trait buttons
+      const traitLabels = {
+        'black_bill_yellow_spot': 'Yellow Loral Spot',
+        'all_black_wedge_bill': 'All-Black Wedge Bill',
+        'orange_bill_black_knob': 'Orange Bill + Knob',
+        'pink_and_dark_bill': 'Pink & Dark Bill',
+        'yellow_wedge_past_nostril': 'Yellow Past Nostril',
+        'yellow_patch_behind_nostril': 'Yellow Behind Nostril',
+        'red_bill_white_band': 'Red Bill + White Band',
+        'pink_bill_grinning_patch': 'Pink + Grinning Patch',
+        'heavy_orange_bill': 'Heavy Orange Bill',
+        'straight_wedge_profile': 'Straight Wedge Slope',
+        'concave_dip_rounded_crown': 'Forehead Dip / Round Crown',
+        'eye_engulfed_in_black': 'Eye In Black Lores',
+        'eye_separated_from_bill': 'Eye Distinct from Bill',
+        'salmon_lipstick_line': 'Salmon Lipstick Line',
+        'black_basal_knob': 'Black Basal Knob',
+        's_curve_neck_downward_bill': 'S-Curve Neck + Downward Bill',
+        'vertical_neck_column': 'Vertical Neck Column',
+        'straight_or_c_curve': 'Straight / C-Curve Neck',
+        'black_wingtips': 'Black Wingtips',
+        'mottled_gray_brown': 'Mottled Gray-Brown',
+        'solid_black_body': 'Solid Black Body'
+      };
+
+      Object.keys(traitLabels).forEach(t => {
+        const btn = document.getElementById(`f-${t}`);
+        if (!btn) return;
+        const base = traitLabels[t];
+        if (activeTraits.has(t)) {
+          btn.innerHTML = `&#10003; ${base}`;
+          btn.className = "filter-chip px-2 py-0.5 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
+        } else {
+          btn.textContent = base;
+          btn.className = "filter-chip px-2 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help";
+        }
+      });
+    }
+
+    // Service Worker for offline PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js?v=15').then(reg => {
+          reg.update();
+        }).catch(() => {});
+      });
+    }
+
+    // Initial render
+    renderFeed();
+  </script>
+</body>
+</html>

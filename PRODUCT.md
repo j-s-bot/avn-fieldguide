@@ -16,7 +16,7 @@ AvnLookalike provides instant, visual-first species elimination and side-by-side
 
 ## Positioning
 
-Unlike general field guides that treat every species as an isolated encyclopedia entry, AvnLookalike is an active *eliminator*: species are organized across 6 targeted taxonomic lookalike complexes, dynamically rank-ordered by regional eBird checklist frequency, filtered across mutually exclusive anatomical facets (bill shape, plumage marks, leg color, feeding behavior), and dismissed in-memory as candidates are ruled out.
+Unlike general field guides that treat every species as an isolated encyclopedia entry, AvnLookalike is an active *eliminator*: species are organized across 7 targeted taxonomic lookalike complexes, dynamically rank-ordered by regional eBird checklist frequency, filtered across mutually exclusive anatomical facets (bill shape, plumage marks, leg color, feeding behavior), and dismissed in-memory as candidates are ruled out.
 
 ## Operating Context
 
@@ -39,13 +39,14 @@ Mobile phone screens in bright sunlight or low-glare twilight, often in remote f
 
 ## Evidence on Hand
 
-- Standardized field-guide watercolor plates and uncropped field photos across 6 specialized guides (110 total species and plumage variants):
+- Standardized field-guide watercolor plates and uncropped field photos across 7 specialized guides (124 total species and plumage variants):
   - Sparrows (`index.html`): 11 species.
   - Ducks & Waterfowl (`ducks.html`): 29 species and plumage morphs.
   - Gulls & Laridae (`gulls.html`): 19 species and age cycles.
   - Shorebirds & Plovers (`shorebirds.html`): 21 species and seasonal plumages.
   - Terns & Skimmers (`terns.html`): 16 species and age/seasonal plumages.
   - Grebes & Loons (`grebes.html`): 14 species and seasonal plumages.
+  - Swans & Lookalikes (`swans.html`): 14 species, morphs, and lookalike traps.
   - Curated crux field marks, high-resolution field verification photos, and field comparison assets.
 - Regional eBird checklist frequency data for Mid-Atlantic / Central Maryland.
 

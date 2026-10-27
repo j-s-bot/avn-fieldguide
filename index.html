@@ -852,24 +852,30 @@
 
     function updateUrlParams() {
       if (!window.history || !window.history.replaceState) return;
-      const url = new URL(window.location.href);
+      try {
+        const url = new URL(window.location.href);
 
-      if (currentSort && currentSort !== 'freq-desc') {
-        url.searchParams.set('sort', currentSort);
-      } else {
-        url.searchParams.delete('sort');
+        if (currentSort && currentSort !== 'freq-desc') {
+          url.searchParams.set('sort', currentSort);
+        } else {
+          url.searchParams.delete('sort');
+        }
+
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          url.searchParams.set('species', Array.from(urlSpeciesFilter).join(','));
+        } else {
+          url.searchParams.delete('species');
+          url.searchParams.delete('filter');
+          url.searchParams.delete('include');
+          url.searchParams.delete('checklist');
+        }
+
+        const cleanSearch = url.search ? url.search.replace(/%2C/g, ',') : '';
+        const targetUrl = url.pathname + cleanSearch + (url.hash || '');
+        window.history.replaceState({}, '', targetUrl);
+      } catch (e) {
+        console.warn('URL sync notice:', e);
       }
-
-      if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
-        url.searchParams.set('species', Array.from(urlSpeciesFilter).join(','));
-      } else {
-        url.searchParams.delete('species');
-        url.searchParams.delete('filter');
-        url.searchParams.delete('include');
-        url.searchParams.delete('checklist');
-      }
-
-      window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
     }
 
     function setSort(val) {

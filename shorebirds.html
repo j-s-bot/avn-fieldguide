@@ -1206,47 +1206,60 @@
 
     function updateUrlParams() {
       if (!window.history || !window.history.replaceState) return;
-      const url = new URL(window.location.href);
+      try {
+        const url = new URL(window.location.href);
 
-      // Keep or update sort parameter
-      if (currentSort && currentSort !== 'freq-desc') {
-        url.searchParams.set('sort', currentSort);
-      } else {
-        url.searchParams.delete('sort');
-      }
-
-      // Keep or delete species filter
-      if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
-        let paramName = 'species';
-        for (const p of ['species', 'filter', 'include', 'checklist']) {
-          if (url.searchParams.has(p)) { paramName = p; break; }
+        // Keep or update sort parameter
+        if (currentSort && currentSort !== 'freq-desc') {
+          url.searchParams.set('sort', currentSort);
+        } else {
+          url.searchParams.delete('sort');
         }
-        url.searchParams.set(paramName, Array.from(urlSpeciesFilter).map(id => {
-          const s = shorebirds.find(sb => sb.id === id);
-          return (s && s.ebird_code) ? s.ebird_code : id;
-        }).join(','));
-      } else {
-        url.searchParams.delete('species');
-        url.searchParams.delete('filter');
-        url.searchParams.delete('include');
-        url.searchParams.delete('checklist');
-      }
 
-      window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+        // Keep or delete species filter
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          let paramName = 'species';
+          for (const p of ['species', 'filter', 'include', 'checklist']) {
+            if (url.searchParams.has(p)) { paramName = p; break; }
+          }
+          url.searchParams.set(paramName, Array.from(urlSpeciesFilter).map(id => {
+            const s = shorebirds.find(sb => sb.id === id);
+            return (s && s.ebird_code) ? s.ebird_code : id;
+          }).join(','));
+        } else {
+          url.searchParams.delete('species');
+          url.searchParams.delete('filter');
+          url.searchParams.delete('include');
+          url.searchParams.delete('checklist');
+        }
+
+        // Keep comma sub-delimiters clean in the query string and preserve hash
+        const cleanSearch = url.search ? url.search.replace(/%2C/g, ',') : '';
+        const targetUrl = url.pathname + cleanSearch + (url.hash || '');
+        window.history.replaceState({}, '', targetUrl);
+      } catch (e) {
+        // Suppress SecurityError on local file:// execution or restrictive sandboxes
+        console.warn('URL sync notice:', e);
+      }
     }
 
     function copyCurrentShareLink() {
       updateUrlParams();
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = document.getElementById('copyShareBtn');
-        if (btn) {
-          const original = btn.innerHTML;
-          btn.innerHTML = '<span>✓ Copied!</span>';
-          setTimeout(() => { btn.innerHTML = original; }, 2000);
-        }
-      }).catch(() => {
-        alert('Share URL: ' + window.location.href);
-      });
+      const cleanUrl = window.location.href.replace(/%2C/g, ',');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanUrl).then(() => {
+          const btn = document.getElementById('copyShareBtn');
+          if (btn) {
+            const original = btn.innerHTML;
+            btn.innerHTML = '<span>✓ Copied!</span>';
+            setTimeout(() => { btn.innerHTML = original; }, 2000);
+          }
+        }).catch(() => {
+          prompt('Share URL:', cleanUrl);
+        });
+      } else {
+        prompt('Share URL:', cleanUrl);
+      }
     }
 
     function clearUrlFilter() {

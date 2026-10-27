@@ -38,8 +38,8 @@
 <body class="min-h-screen pb-32">
 
   <!-- 1. TOP SYSTEM & GUIDE NAVIGATION (Slim 44px) -->
-  <header class="sticky top-0 z-40 bg-[#060913]/95 backdrop-blur-md border-b border-slate-800/80 px-3 sm:px-6 py-2">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+  <header class="sticky top-0 z-40 bg-[#060913]/95 backdrop-blur-md border-b border-slate-800/80 px-2.5 sm:px-6 py-1.5 sm:py-2">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-1.5 sm:gap-3">
       
       <!-- Brand & Guide Complex Selector -->
       <div class="flex items-center gap-3 min-w-0">
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Quick Actions / View Controls -->
-      <div class="flex items-center gap-2 shrink-0 flex-wrap">
+      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar max-w-full py-0.5">
         
         <!-- Asset Mode Selector: Both / Plates / Photos -->
         <div class="inline-flex rounded-lg bg-slate-900/90 border border-slate-800 p-0.5 text-xs">
@@ -81,15 +81,31 @@
           <span id="hotkeyLabel">Both (P)</span>
         </button>
 
-        <!-- Density View Mode Toggle -->
-        <div class="inline-flex rounded-lg bg-slate-900/90 border border-slate-800 p-0.5 text-xs">
-          <button id="viewGridBtn" onclick="setLayoutView('matrix')" class="px-2 py-1 rounded-md font-semibold text-white bg-slate-800 shadow-sm transition flex items-center gap-1" title="Field Matrix: Compact scannable cards">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-            <span class="hidden sm:inline">Matrix</span>
+        <!-- Density View Mode Toggle: 1/row, 2/row, 3/row -->
+        <div class="inline-flex rounded-lg bg-slate-900/90 border border-slate-800 p-0.5 text-xs" role="group" aria-label="Layout column density">
+          <button id="gridCol1Btn" onclick="setGridDensity(1)" class="px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1.5" title="1 per row: Large expanded specimen view with big photos and diagnostic anatomy">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="2" y="2" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="4.5" y="4.5" width="7" height="7" rx="1"/>
+            </svg>
+            <span class="text-[11px] font-semibold hidden xl:inline">1/row</span>
           </button>
-          <button id="viewDetailBtn" onclick="setLayoutView('detail')" class="px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1" title="Detail Cards: Full-width specimen breakdown">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            <span class="hidden sm:inline">Detail</span>
+          <button id="gridCol2Btn" onclick="setGridDensity(2)" class="px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1.5" title="2 per row: Balanced dual-column comparison view with generous image frames">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="1.5" y="2" width="13" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="3.5" y="4.5" width="4" height="7" rx="0.75"/>
+              <rect x="8.5" y="4.5" width="4" height="7" rx="0.75"/>
+            </svg>
+            <span class="text-[11px] font-semibold hidden xl:inline">2/row</span>
+          </button>
+          <button id="gridCol3Btn" onclick="setGridDensity(3)" class="px-2 py-1 rounded-md font-semibold text-white bg-slate-800 shadow-sm transition flex items-center gap-1.5" title="3 per row: Compact identification matrix overview">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="1" y="2" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="2.5" y="4.5" width="2.8" height="7" rx="0.5"/>
+              <rect x="6.6" y="4.5" width="2.8" height="7" rx="0.5"/>
+              <rect x="10.7" y="4.5" width="2.8" height="7" rx="0.5"/>
+            </svg>
+            <span class="text-[11px] font-semibold hidden xl:inline">3/row</span>
           </button>
         </div>
 
@@ -293,7 +309,7 @@
   </main>
 
   <!-- 5. PINNED HEAD-TO-HEAD 'VS' COMPARISON TRAY -->
-  <aside id="compareTray" class="fixed bottom-0 inset-x-0 z-50 bg-slate-950/95 backdrop-blur-xl border-t border-sky-500/50 p-3 sm:px-6 shadow-2xl transition-transform translate-y-full">
+  <aside id="compareTray" class="fixed bottom-0 inset-x-0 z-50 bg-slate-950/95 backdrop-blur-xl border-t border-sky-500/50 p-2.5 sm:px-6 shadow-2xl transition-transform translate-y-full max-w-full overflow-hidden">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <div class="flex items-center gap-3">
@@ -305,7 +321,7 @@
             <span>Side-by-Side Comparison</span>
             <span id="compareCountBadge" class="bg-sky-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
           </div>
-          <div id="compareNamesPreview" class="text-[11px] text-slate-400 truncate max-w-sm sm:max-w-md">
+          <div id="compareNamesPreview" class="text-[11px] text-slate-400 truncate max-w-[150px] sm:max-w-md">
             Select 2 or 3 sparrows to compare crux field marks
           </div>
         </div>
@@ -325,23 +341,69 @@
   </aside>
 
   <!-- 6. HEAD-TO-HEAD COMPARISON MODAL OVERLAY -->
-  <div id="compareModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-3 sm:p-6 overflow-y-auto">
-    <div class="max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
+  <div id="compareModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-2 sm:p-5 overflow-y-auto" onclick="handleCompareBackdropClick(event)">
+    <div class="max-w-6xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-6 shadow-2xl space-y-4">
       
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
-          <h2 class="text-base sm:text-lg font-black text-white">Head-to-Head Crux Comparison</h2>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 gap-3 flex-wrap">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-white">Head-to-Head Crux Comparison</h2>
+            <div id="compareModalSubtitle" class="text-xs text-slate-400">Aligned diagnostic field marks and decisive separating rule-outs</div>
+          </div>
         </div>
-        <button onclick="closeComparisonModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
+
+        <div class="flex items-center gap-2">
+          <!-- Modal Asset Mode Selector -->
+          <div class="inline-flex rounded-lg bg-slate-950 border border-slate-800 p-0.5 text-xs">
+            <button id="modalAssetBothBtn" onclick="setModalAssetMode('both')" class="px-2.5 py-1 rounded font-semibold text-white bg-slate-800 transition">⚡ Both</button>
+            <button id="modalAssetPlatesBtn" onclick="setModalAssetMode('plates')" class="px-2.5 py-1 rounded font-medium text-slate-400 hover:text-white transition">🎨 Plates</button>
+            <button id="modalAssetPhotosBtn" onclick="setModalAssetMode('photos')" class="px-2.5 py-1 rounded font-medium text-slate-400 hover:text-white transition">📷 Photos</button>
+          </div>
+
+          <button onclick="closeComparisonModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="Close Comparison (Esc)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
       </div>
 
-      <div id="compareModalContent" class="overflow-x-auto">
+      <div id="compareModalContent" class="space-y-6">
         <!-- Rendered dynamically -->
       </div>
 
+    </div>
+  </div>
+
+  <!-- 7. FULLSCREEN IMAGE LIGHTBOX MODAL -->
+  <div id="imageLightboxModal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-5" onclick="handleLightboxBackdropClick(event)">
+    <!-- Lightbox Header -->
+    <div class="flex items-center justify-between gap-3 max-w-6xl w-full mx-auto pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="lightboxTitle" class="text-base sm:text-lg font-black text-white tracking-tight truncate">Species Name</h3>
+            <span id="lightboxBadge" class="text-[10px] font-mono-num font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">FIELD PLATE</span>
+          </div>
+          <p id="lightboxSubtitle" class="text-xs italic font-serif text-slate-400 truncate">Scientific Name</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-[11px] text-slate-500 hidden sm:inline">Press <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono text-[10px]">Esc</kbd> or click outside to close</span>
+        <button id="closeLightboxBtn" onclick="closeLightbox()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="Close Lightbox (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox Main Stage Image -->
+    <div class="flex-1 flex items-center justify-center p-2 sm:p-4 min-h-0 overflow-hidden">
+      <img id="lightboxImg" src="" alt="Specimen Enlargement" class="max-h-[75vh] max-w-[94vw] sm:max-w-[85vw] object-contain rounded-xl shadow-2xl border border-slate-800 select-none transition-all">
+    </div>
+
+    <!-- Lightbox Footer / Diagnostic Notes -->
+    <div class="max-w-4xl w-full mx-auto pt-3 border-t border-slate-800/80 text-center">
+      <p id="lightboxCaption" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Diagnostic field mark description</p>
     </div>
   </div>
 
@@ -351,12 +413,128 @@
     let currentBreastFork = 'all'; // 'all' | 'streaked' | 'unstreaked'
     let activeTraits = new Set();
     let currentSort = 'freq-desc';
-    let currentLayoutView = 'matrix'; // 'matrix' (compact) | 'detail' (full)
+    let currentGridCols = parseInt(localStorage.getItem('avn_sparrow_grid_cols') || '3', 10);
+    if (![1, 2, 3].includes(currentGridCols)) currentGridCols = 3;
     let currentAssetMode = 'both'; // 'both' | 'plates' | 'photos'
+    let modalAssetMode = 'both'; // 'both' | 'plates' | 'photos'
     let cardAssetOverrides = {}; // id -> 'both' | 'plates' | 'photos'
     let photoIndices = {};
     let dismissedIds = new Set();
     let comparedIds = new Set();
+
+    // Comprehensive standardized trait matrix for aligned head-to-head comparison
+    const sparrowTraitsLookup = {
+      song_sparrow: {
+        bill_desc: "12.5 mm • Medium conical gray-brown bill with dark culmen",
+        breast_desc: "Coarse heavy brown streaks converging into large central stickpin spot",
+        crown_desc: "Brown crown split by narrow gray median line; broad gray supercilium",
+        eye_desc: "Dark eyeline behind eye; NO yellow lores; faint broken eyering",
+        leg_desc: "Pinkish to pale flesh-tan legs",
+        wings_desc: "Brown wings without wingbars; warm rufous-edged primaries",
+        tail_desc: "Long, rounded tail pumped continuously downward in flight; plain wings",
+        habitat_desc: "Brushy field edges, marshes, hedgerows, suburban shrubbery"
+      },
+      white_throated_sparrow: {
+        bill_desc: "11.5 mm • Dark gray-black conical bill",
+        breast_desc: "Plain pearl-gray breast contrasting with crisp square snow-white throat bib",
+        crown_desc: "Bold black & white stripes (white-striped) or tan & brown (tan-striped)",
+        eye_desc: "Bright lemon-yellow supraloral spot directly in front of and above eye",
+        leg_desc: "Pinkish to pale flesh legs",
+        wings_desc: "Two distinct narrow white wingbars; patterned rufous-brown back",
+        tail_desc: "Long, slightly notched tail without white outer feathers",
+        habitat_desc: "Boreal forest understory, thickets, leaf litter, winter brush piles"
+      },
+      swamp_sparrow: {
+        bill_desc: "11.0 mm • Dark horn conical bill with pale yellowish base",
+        breast_desc: "Clean slate-gray breast and neck without streaks; clean whitish throat",
+        crown_desc: "Solid bright rufous cap with clean contrasting slate-gray collar and nape",
+        eye_desc: "Dark eyeline behind eye; NO yellow; plain gray face and cheeks",
+        leg_desc: "Long pinkish to reddish-brown legs and large feet for marsh skulking",
+        wings_desc: "Solid unbarred rich rufous wings (no white wingbars!); rufous shoulder",
+        tail_desc: "Rounded tail; unstreaked rufous rump",
+        habitat_desc: "Damp freshwater marshes, cattails, sedges, soggy wetland borders"
+      },
+      chipping_sparrow: {
+        bill_desc: "9.5 mm • Small bill; black in breeding, pinkish-tan in winter/immature",
+        breast_desc: "Completely unstreaked plain frosty grayish-white underparts",
+        crown_desc: "Solid bright rufous cap (breeding) or streaked brown-rufous (fall/winter)",
+        eye_desc: "Sharp black eyeline running through eye all the way from bill to nape",
+        leg_desc: "Pale pinkish-tan legs",
+        wings_desc: "Two thin white wingbars; brown streaked mantle",
+        tail_desc: "Very slender, petite body with long distinctly notched tail",
+        habitat_desc: "Open conifer woodlands, parklands, manicured lawns, suburban trees"
+      },
+      field_sparrow: {
+        bill_desc: "9.5 mm • Diagnostic bright candy-pink conical bill (both mandibles)",
+        breast_desc: "Completely unstreaked, warm buffy wash across breast and flanks",
+        crown_desc: "Warm rufous cap and plain unstreaked face without dark eyelines",
+        eye_desc: "Prominent complete bold white eye-ring giving wide-eyed innocent stare",
+        leg_desc: "Pale pinkish to flesh legs",
+        wings_desc: "Two narrow white wingbars; warm rufous mantle",
+        tail_desc: "Relatively long notched tail; slim petite build",
+        habitat_desc: "Overgrown old fields, brushy pastures, dry upland grassy slopes"
+      },
+      savannah_sparrow: {
+        bill_desc: "10.5 mm • Slender horn/pinkish-tan bill",
+        breast_desc: "Crisp, neat narrow dark brown streaks on white ground (no central stickpin)",
+        crown_desc: "Narrow whitish median crown stripe dividing dark streaked cap",
+        eye_desc: "Diagnostic lemon-yellow supraloral spot in front of and above eye",
+        leg_desc: "Pale pinkish legs",
+        wings_desc: "Two thin pale wingbars; neat crisp streaking across back",
+        tail_desc: "Short, distinctly notched tail; compact body; short flight profile",
+        habitat_desc: "Open grassy fields, coastal dunes, meadows, agricultural plains"
+      },
+      white_crowned_sparrow: {
+        bill_desc: "11.5 mm • Stout conical pinkish to dull-orange bill",
+        breast_desc: "Completely plain, smooth, unstreaked pearl-gray breast and neck",
+        crown_desc: "High-contrast black & white crown (adult) or cinnamon-brown & tan (immature)",
+        eye_desc: "Black or brown eyeline; NO yellow; clean plain pearl-gray face",
+        leg_desc: "Dull pink to orange-flesh legs",
+        wings_desc: "Two crisp white wingbars; bold streaked back",
+        tail_desc: "Long square/notched tail; large upright posture",
+        habitat_desc: "Scrubby fields, forest edges, brush piles, roadside hedgerows"
+      },
+      lincolns_sparrow: {
+        bill_desc: "10.5 mm • Slender, sharp grayish-horn conical bill",
+        breast_desc: "Warm creamy buff chest apron with razor-thin dark pencil-point streaks",
+        crown_desc: "Fine gray median crown stripe; neat buffy mustache and gray supercilium",
+        eye_desc: "Narrow whitish eye-ring; neat buffy moustachial stripe; gray lores",
+        leg_desc: "Pale pinkish-tan legs",
+        wings_desc: "Warm olive-brown wings without bold wingbars",
+        tail_desc: "Short rounded tail; clean white belly contrasting with buff chest apron",
+        habitat_desc: "Dense wet willows, sphagnum bogs, skulking riparian thickets"
+      },
+      fox_sparrow: {
+        bill_desc: "13.5 mm • Heavy bill with dark upper mandible and bright yellow lower mandible",
+        breast_desc: "Dense triangular rust-red arrowhead chevron spots on whitish ground",
+        crown_desc: "Gray and brilliant foxy-rust streaked crown, nape, and back",
+        eye_desc: "Gray face with reddish-brown ear patch and faint pale eye-ring; no yellow",
+        leg_desc: "Noticeably stout, heavy pinkish-flesh legs and large feet for leaf-scratching",
+        wings_desc: "Brilliant foxy-rust wings with two faint thin white wingbars",
+        tail_desc: "Huge Towhee-sized bulky body (18 cm); brilliant foxy-red wings and long tail",
+        habitat_desc: "Dense forest brush, dense riparian tangles, woodland leaf litter"
+      },
+      vesper_sparrow: {
+        bill_desc: "11.5 mm • Pale pinkish-horn conical bill with darker culmen",
+        breast_desc: "Crisp brown streaks on whitish ground extending down flanks",
+        crown_desc: "Streaked brown crown with distinct chestnut/rufous shoulder patch",
+        eye_desc: "Bold, complete white eye-ring with dusky ear patch bordered in white",
+        leg_desc: "Pale flesh-colored legs",
+        wings_desc: "Distinct chestnut/rufous lesser coverts (shoulder patch) at bend of wing",
+        tail_desc: "Diagnostic flashing clean white outer tail feathers seen in flight",
+        habitat_desc: "Dry open grasslands, prairie pastures, dirt road borders, gravel fields"
+      },
+      house_sparrow_female: {
+        bill_desc: "12.5 mm • Heavy, stubby, thick conical finch-like yellowish-horn bill",
+        breast_desc: "Completely plain, unstreaked dingy grayish-buff underparts",
+        crown_desc: "Plain grayish-brown crown without stripes or rufous color",
+        eye_desc: "Broad pale creamy-buff eyebrow stripe trailing behind eye; no eye-ring",
+        leg_desc: "Pale brownish-pink legs",
+        wings_desc: "Single broad buffy wingbar; unstreaked dingy brown mantle",
+        tail_desc: "Medium notched tail; unstreaked dingy back; communal posture",
+        habitat_desc: "Human settlements, farms, city buildings, parking lots, urban feeders"
+      }
+    };
 
     // Hotkey listener: P to toggle asset flip mode, Esc to close modals
     window.addEventListener('keydown', (e) => {
@@ -365,17 +543,98 @@
         e.preventDefault();
         toggleAssetHotKey();
       } else if (e.key === 'Escape') {
-        closeComparisonModal();
+        const lightbox = document.getElementById('imageLightboxModal');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+          return;
+        }
+        const compareModal = document.getElementById('compareModal');
+        if (compareModal && !compareModal.classList.contains('hidden')) {
+          closeComparisonModal();
+          return;
+        }
         const drawer = document.getElementById('anatomyDrawer');
-        if (!drawer.classList.contains('hidden')) drawer.classList.add('hidden');
+        if (drawer && !drawer.classList.contains('hidden')) drawer.classList.add('hidden');
       }
     });
 
+    // Lightbox modal functions
+    function openLightbox(src, title, sci, badge, caption) {
+      if (!src) return;
+      const modal = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const titleEl = document.getElementById('lightboxTitle');
+      const subtitleEl = document.getElementById('lightboxSubtitle');
+      const badgeEl = document.getElementById('lightboxBadge');
+      const captionEl = document.getElementById('lightboxCaption');
+
+      img.src = src;
+      titleEl.textContent = title || 'Specimen View';
+      subtitleEl.textContent = sci || '';
+      badgeEl.textContent = badge || 'IMAGE';
+      captionEl.textContent = caption || '';
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightboxModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('lightboxImg').src = '';
+    }
+
+    function handleLightboxBackdropClick(event) {
+      if (event.target.id === 'imageLightboxModal' || event.target.closest('#closeLightboxBtn')) {
+        closeLightbox();
+      }
+    }
+
+    function handleCompareBackdropClick(event) {
+      if (event.target.id === 'compareModal') {
+        closeComparisonModal();
+      }
+    }
+
+    function setGridDensity(cols) {
+      currentGridCols = cols;
+      localStorage.setItem('avn_sparrow_grid_cols', cols);
+      updateGridButtons();
+      renderFeed();
+    }
+
+    function updateGridButtons() {
+      [1, 2, 3].forEach(c => {
+        const btn = document.getElementById(`gridCol${c}Btn`);
+        if (!btn) return;
+        if (c === currentGridCols) {
+          btn.className = 'px-2 py-1 rounded-md font-semibold text-white bg-slate-800 shadow-sm transition flex items-center gap-1.5';
+        } else {
+          btn.className = 'px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1.5';
+        }
+      });
+    }
+
     function setAssetMode(mode) {
       currentAssetMode = mode;
-      cardAssetOverrides = {};
       updateAssetModeUI();
       renderFeed();
+    }
+
+    function setModalAssetMode(mode) {
+      modalAssetMode = mode;
+      ['both', 'plates', 'photos'].forEach(m => {
+        const btn = document.getElementById(`modalAsset${m.charAt(0).toUpperCase() + m.slice(1)}Btn`);
+        if (!btn) return;
+        if (m === modalAssetMode) {
+          btn.className = 'px-2.5 py-1 rounded font-semibold text-white bg-slate-800 transition';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded font-medium text-slate-400 hover:text-white transition';
+        }
+      });
+      openComparisonModal();
     }
 
     function toggleAssetHotKey() {
@@ -414,46 +673,69 @@
     // Vertical Height Comparison Frame of Reference (Ground Plane Standing Chart)
     // -------------------------------------------------------------------------
     function renderSizeGauge(length_cm, size_display) {
-      const baseline = 15.0; // Song Sparrow baseline (15.0 cm)
-      const baseHeightPx = 28; // pixel height of baseline sparrow
-      const birdHeightPx = Math.round((length_cm / baseline) * baseHeightPx);
-      
-      const isSmaller = length_cm < baseline;
-      const isLarger = length_cm > baseline;
-      const isBaseline = length_cm === baseline;
+      const baseline = 15.0; // Song Sparrow baseline
+      const delta = length_cm - baseline;
+      const isSmaller = delta < -0.2;
+      const isLarger = delta > 0.2;
+      const isBaseline = !isSmaller && !isLarger;
 
-      const birdFill = isBaseline ? '#38bdf8' : (isSmaller ? '#fbbf24' : '#34d399');
+      // Coordinate parameters (Frame 76px wide, 44px high)
+      const groundY = 38;
+      const baseScaleY = 24; // 15cm baseline height in pixels
+      const baseTopY = groundY - baseScaleY; // 14
+      const birdScaleY = Math.max(14, Math.min(33, Math.round((length_cm / baseline) * baseScaleY)));
+      const birdTopY = groundY - birdScaleY;
+
+      const birdColor = isBaseline ? '#38bdf8' : (isSmaller ? '#fbbf24' : '#34d399');
+      const deltaSign = delta > 0 ? `+${delta.toFixed(1)}` : `${delta.toFixed(1)}`;
+      const pctDelta = Math.round((delta / baseline) * 100);
+      const pctSign = pctDelta > 0 ? `+${pctDelta}` : `${pctDelta}`;
+
+      let deltaBadge = '';
+      if (isBaseline) {
+        deltaBadge = `<span class="inline-flex items-center gap-1 text-[9px] font-mono-num font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/60 leading-none">● Song Baseline (0cm)</span>`;
+      } else if (isSmaller) {
+        deltaBadge = `<span class="inline-flex items-center gap-0.5 text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-800/60 leading-none">▼ ${deltaSign} cm (${pctSign}%)</span>`;
+      } else {
+        deltaBadge = `<span class="inline-flex items-center gap-0.5 text-[9px] font-mono-num font-bold text-emerald-300 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/60 leading-none">▲ ${deltaSign} cm (${pctSign}%)</span>`;
+      }
 
       return `
-        <div class="flex items-center gap-2.5 py-0.5" title="Vertical Height Frame of Reference: Target bird standing next to 15 cm Song Sparrow baseline">
-          <!-- Shared Ground Baseline Chart -->
-          <div class="relative w-14 h-9 flex items-end justify-between border-b border-slate-700/80 pb-0.5 shrink-0">
-            <!-- 15cm Baseline Sparrow (Ghost Outline) -->
-            <div class="flex flex-col items-center justify-end h-full">
-              <svg width="15" height="${baseHeightPx}" viewBox="0 0 20 28" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2 2" class="opacity-60">
-                <path d="M 6,28 L 8,24 C 6,20 4,14 6,10 C 7,7 9,5 12,4 C 14,3 17,4 18,6 L 20,7 L 17,9 C 16,13 15,18 13,24 L 14,28 Z" fill="#334155" fill-opacity="0.2" />
-              </svg>
-              <span class="text-[7px] font-mono-num text-slate-500 mt-0.5 leading-none">15cm</span>
-            </div>
+        <div class="flex items-center gap-2 py-0.5 select-none" title="Standing Height Scale: Target sparrow (${length_cm} cm) on shared ground plane next to 15.0 cm Song Sparrow baseline">
+          <!-- Ground plane visual comparison chart -->
+          <div class="relative w-[76px] h-[44px] bg-slate-950/80 rounded-lg border border-slate-800/90 p-1 shrink-0 overflow-hidden">
+            <svg viewBox="0 0 76 44" class="w-full h-full overflow-visible">
+              <!-- Horizontal 15cm Mean Ceiling Reference Line (Dashed) -->
+              <line x1="2" y1="${baseTopY}" x2="74" y2="${baseTopY}" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+              <text x="3" y="${baseTopY - 2}" fill="#94a3b8" font-size="6.5" font-family="monospace" font-weight="bold">15cm mean</text>
 
-            <!-- Vertical Separator Guideline -->
-            <div class="h-6 w-[1px] bg-slate-800/80 self-center"></div>
+              <!-- Solid Shared Ground Line -->
+              <line x1="2" y1="${groundY}" x2="74" y2="${groundY}" stroke="#475569" stroke-width="1.5"/>
 
-            <!-- Target Sparrow (Solid Proportional Height) -->
-            <div class="flex flex-col items-center justify-end h-full">
-              <svg width="15" height="${birdHeightPx}" viewBox="0 0 20 28" preserveAspectRatio="none" class="transition-transform">
-                <path d="M 6,28 L 8,24 C 6,20 4,14 6,10 C 7,7 9,5 12,4 C 14,3 17,4 18,6 L 20,7 L 17,9 C 16,13 15,18 13,24 L 14,28 Z" fill="${birdFill}" />
-              </svg>
-              <span class="text-[7px] font-mono-num font-bold text-white mt-0.5 leading-none">${Math.round(length_cm)}cm</span>
-            </div>
+              <!-- 15cm Baseline Sparrow Silhouette (Ghost Outline) -->
+              <g transform="translate(14, ${groundY}) scale(0.7, -${baseScaleY / 28})">
+                <path d="M 0,0 L 2,4 C 0,8 -2,14 0,18 C 1,21 3,23 6,24 C 8,25 11,24 12,22 L 14,21 L 11,19 C 10,15 9,10 7,4 L 8,0 Z" fill="#334155" fill-opacity="0.4" stroke="#64748b" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+              </g>
+
+              <!-- Center Guideline Separator -->
+              <line x1="38" y1="12" x2="38" y2="${groundY}" stroke="#334155" stroke-width="0.8" opacity="0.6"/>
+
+              <!-- Target Bird Silhouette (Solid High-Contrast Proportional Height) -->
+              <g transform="translate(48, ${groundY}) scale(0.7, -${birdScaleY / 28})">
+                <path d="M 0,0 L 2,4 C 0,8 -2,14 0,18 C 1,21 3,23 6,24 C 8,25 11,24 12,22 L 14,21 L 11,19 C 10,15 9,10 7,4 L 8,0 Z" fill="${birdColor}"/>
+              </g>
+              <text x="56" y="${birdTopY - 2}" fill="${birdColor}" font-size="7" font-family="monospace" font-weight="extrabold">${Math.round(length_cm)}cm</text>
+            </svg>
           </div>
 
-          <!-- Descriptive Height & Frame of Reference -->
-          <div class="flex flex-col justify-center">
-            <span class="text-[11px] font-mono-num font-extrabold text-slate-100 tracking-tight">${size_display}</span>
-            <span class="text-[9px] font-medium leading-tight ${isBaseline ? 'text-sky-400 font-bold' : (isSmaller ? 'text-amber-300' : 'text-emerald-300')}">
-              ${isBaseline ? 'Baseline Height' : (isSmaller ? `${Math.round((length_cm / baseline) * 100)}% of Mean` : `${Math.round((length_cm / baseline) * 100)}% of Mean`)}
-            </span>
+          <!-- Descriptive Metric & Prominent Delta Pill -->
+          <div class="flex flex-col justify-center min-w-0">
+            <div class="flex items-baseline gap-1">
+              <span class="text-xs font-mono-num font-black text-white tracking-tight leading-tight">${size_display}</span>
+            </div>
+            <div class="mt-0.5">
+              ${deltaBadge}
+            </div>
           </div>
         </div>
       `;
@@ -515,22 +797,6 @@
       drawer.classList.toggle('hidden');
     }
 
-    function setLayoutView(mode) {
-      currentLayoutView = mode;
-      const matrixBtn = document.getElementById('viewGridBtn');
-      const detailBtn = document.getElementById('viewDetailBtn');
-
-      if (mode === 'matrix') {
-        matrixBtn.className = 'px-2 py-1 rounded-md font-semibold text-white bg-slate-800 shadow-sm transition flex items-center gap-1';
-        detailBtn.className = 'px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1';
-      } else {
-        detailBtn.className = 'px-2 py-1 rounded-md font-semibold text-white bg-slate-800 shadow-sm transition flex items-center gap-1';
-        matrixBtn.className = 'px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition flex items-center gap-1';
-      }
-
-      renderFeed();
-    }
-
     function setSort(val) {
       currentSort = val;
       renderFeed();
@@ -586,55 +852,129 @@
       }
     }
 
+    // -------------------------------------------------------------------------
+    // Comprehensive Head-to-Head Compare Modal with Aligned Feature Matrix
+    // -------------------------------------------------------------------------
     function openComparisonModal() {
       if (comparedIds.size < 2) return;
       const modal = document.getElementById('compareModal');
       const content = document.getElementById('compareModalContent');
+      const subtitle = document.getElementById('compareModalSubtitle');
       const selected = sparrows.filter(s => comparedIds.has(s.id));
 
-      let cols = selected.length === 2 ? 'grid-cols-2' : 'grid-cols-3';
+      if (subtitle) {
+        subtitle.textContent = selected.map(s => s.name).join(' vs. ') + ` (${selected.length} Species Selected)`;
+      }
 
-      let html = `
-        <div class="grid ${cols} gap-4 items-start">
+      const cols = selected.length === 2 ? 'grid-cols-2' : 'grid-cols-3';
+      const colWidthClass = selected.length === 2 ? 'w-1/2' : 'w-1/3';
+
+      // Evaluate dynamic differences between selected species for highlighting
+      const hasBreastDiff = selected.some(s => s.breast === 'streaked') && selected.some(s => s.breast === 'unstreaked');
+      const hasYellowDiff = selected.some(s => s.yellow) && selected.some(s => !s.yellow);
+      const hasEyeringDiff = selected.some(s => s.eyering) && selected.some(s => !s.eyering);
+      const hasPinkBillDiff = selected.some(s => s.pink_bill) && selected.some(s => !s.pink_bill);
+      const hasRufousCrownDiff = selected.some(s => s.rufous_crown) && selected.some(s => !s.rufous_crown);
+      
+      const minLength = Math.min(...selected.map(s => s.length_cm));
+      const maxLength = Math.max(...selected.map(s => s.length_cm));
+      const hasSizeDiff = (maxLength - minLength) >= 1.5;
+
+      const minBill = Math.min(...selected.map(s => s.bill_mm));
+      const maxBill = Math.max(...selected.map(s => s.bill_mm));
+      const hasBillDiff = (maxBill - minBill) >= 1.5 || hasPinkBillDiff;
+
+      // 1. Visual Showcase Cards (Expansive, High-Resolution Images with Lightbox triggers)
+      let visualCardsHtml = `
+        <div class="grid ${cols} gap-4 items-stretch">
           ${selected.map(s => {
+            const traits = sparrowTraitsLookup[s.id] || {};
             const plateSrc = (typeof plates !== 'undefined' && plates[s.plate_key]) ? plates[s.plate_key] : '';
-            const photoKey = s.photo_variants[0]?.key;
-            const photoSrc = (typeof photos !== 'undefined' && photos[photoKey]) ? photos[photoKey] : '';
-            return `
-              <div class="bg-slate-950 rounded-xl border border-slate-800 p-3 space-y-3">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <div>
-                    <h3 class="font-extrabold text-sm text-white">${s.name}</h3>
-                    <div class="text-[10px] italic text-slate-400">${s.sci}</div>
-                  </div>
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">
-                    ${s.prob}
-                  </span>
-                </div>
+            const currentPhoto = s.photo_variants[photoIndices[s.id] || 0] || s.photo_variants[0];
+            const photoSrc = (typeof photos !== 'undefined' && photos[currentPhoto.key]) ? photos[currentPhoto.key] : '';
 
-                <div class="space-y-2">
-                  <div class="bg-slate-900 rounded-lg p-1.5 flex items-center justify-center min-h-[140px] border border-slate-800/80">
-                    <img src="${plateSrc}" alt="${s.name}" class="max-h-32 object-contain">
-                  </div>
-                  <div class="bg-slate-900 rounded-lg p-1.5 flex items-center justify-center min-h-[140px] border border-slate-800/80">
-                    <img src="${photoSrc}" alt="${s.name}" class="max-h-32 object-contain">
-                  </div>
-                </div>
-
-                ${renderSizeGauge(s.length_cm, s.size_display)}
-
-                <div class="p-2.5 rounded-lg bg-amber-950/30 border border-amber-800/40 text-xs">
-                  <div class="text-amber-300 font-bold mb-1">Crux Rule:</div>
-                  <p class="text-amber-200/90 text-[11px] leading-relaxed">${s.rule_out}</p>
-                </div>
-
-                <div class="space-y-1.5 text-xs">
-                  ${s.diagnostics.map(d => `
-                    <div class="p-1.5 rounded bg-slate-900 border border-slate-800/60">
-                      <span class="font-bold text-sky-400 uppercase text-[10px] block">${d.tract}</span>
-                      <span class="text-slate-200 text-[11px]">${d.mark}</span>
-                    </div>
+            let morphTabs = '';
+            if (s.photo_variants.length > 1) {
+              morphTabs = `
+                <div class="flex items-center gap-1 mt-1 overflow-x-auto no-scrollbar">
+                  <span class="text-[9px] font-bold text-slate-500 uppercase mr-0.5">Morph:</span>
+                  ${s.photo_variants.map((v, i) => `
+                    <button onclick="switchPhoto('${s.id}', ${i}); openComparisonModal();" 
+                            class="px-2 py-0.5 rounded text-[10px] font-medium border transition ${i === (photoIndices[s.id] || 0) ? 'bg-sky-600 text-white border-sky-400 font-bold' : 'bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800'}">
+                      ${v.label}
+                    </button>
                   `).join('')}
+                </div>
+              `;
+            }
+
+            return `
+              <div class="bg-slate-950 rounded-xl border border-slate-800 p-3 flex flex-col justify-between space-y-3 shadow-lg">
+                <div>
+                  <div class="flex items-start justify-between border-b border-slate-800/80 pb-2 gap-2">
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-mono-num font-bold text-slate-500">#${s.rank}</span>
+                        <h3 class="font-extrabold text-sm sm:text-base text-white truncate">${s.name}</h3>
+                      </div>
+                      <div class="text-[11px] italic font-serif text-slate-400 truncate">${s.sci}</div>
+                    </div>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800 shrink-0">
+                      ${s.prob}
+                    </span>
+                  </div>
+
+                  <!-- Dynamic Visual Stage based on modalAssetMode -->
+                  <div class="mt-2.5">
+                    ${(() => {
+                      if (modalAssetMode === 'both') {
+                        return `
+                          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="relative bg-slate-900 rounded-lg p-2 flex flex-col items-center justify-center min-h-[180px] sm:min-h-[210px] border border-slate-800/80 group cursor-zoom-in"
+                                 onclick="openLightbox('${plateSrc}', '${s.name}', '${s.sci}', 'FIELD PLATE', 'Sibley Standard Lateral Profile')"
+                                 title="Click to view full-screen plate">
+                              <img src="${plateSrc}" alt="${s.name} Plate" class="max-h-44 sm:max-h-48 object-contain transition group-hover:scale-105 duration-200">
+                              <span class="absolute top-1.5 left-1.5 text-[8px] font-mono-num font-bold text-sky-300 bg-sky-950/90 border border-sky-800/60 px-1 rounded">PLATE</span>
+                              <span class="absolute bottom-1.5 right-1.5 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow">🔍 Zoom</span>
+                            </div>
+                            <div class="relative bg-slate-900 rounded-lg p-2 flex flex-col items-center justify-center min-h-[180px] sm:min-h-[210px] border border-slate-800/80 group cursor-zoom-in"
+                                 onclick="openLightbox('${photoSrc}', '${s.name}', '${s.sci}', 'FIELD PHOTO (${currentPhoto.label})', '${currentPhoto.caption}')"
+                                 title="Click to view full-screen photo">
+                              <img src="${photoSrc}" alt="${s.name} Photo" class="max-h-44 sm:max-h-48 object-contain transition group-hover:scale-105 duration-200">
+                              <span class="absolute top-1.5 left-1.5 text-[8px] font-mono-num font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-800/60 px-1 rounded">PHOTO</span>
+                              <span class="absolute bottom-1.5 right-1.5 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow">🔍 Zoom</span>
+                            </div>
+                          </div>
+                        `;
+                      } else if (modalAssetMode === 'plates') {
+                        return `
+                          <div class="relative bg-slate-900 rounded-xl p-3 flex flex-col items-center justify-center min-h-[220px] sm:min-h-[260px] border border-slate-800/80 group cursor-zoom-in"
+                               onclick="openLightbox('${plateSrc}', '${s.name}', '${s.sci}', 'FIELD PLATE', 'Sibley Standard Lateral Profile')"
+                               title="Click to view full-screen plate">
+                            <img src="${plateSrc}" alt="${s.name} Plate" class="max-h-56 sm:max-h-60 object-contain transition group-hover:scale-105 duration-200">
+                            <span class="absolute top-2 left-2 text-[9px] font-mono-num font-bold text-sky-300 bg-sky-950/90 border border-sky-800/60 px-1.5 py-0.5 rounded">FIELD PLATE</span>
+                            <span class="absolute bottom-2 right-2 text-[10px] font-mono-num font-bold text-white bg-black/80 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow">🔍 Click to Expand</span>
+                          </div>
+                        `;
+                      } else {
+                        return `
+                          <div class="relative bg-slate-900 rounded-xl p-3 flex flex-col items-center justify-center min-h-[220px] sm:min-h-[260px] border border-slate-800/80 group cursor-zoom-in"
+                               onclick="openLightbox('${photoSrc}', '${s.name}', '${s.sci}', 'FIELD PHOTO (${currentPhoto.label})', '${currentPhoto.caption}')"
+                               title="Click to view full-screen photo">
+                            <img src="${photoSrc}" alt="${s.name} Photo" class="max-h-56 sm:max-h-60 object-contain transition group-hover:scale-105 duration-200">
+                            <span class="absolute top-2 left-2 text-[9px] font-mono-num font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-800/60 px-1.5 py-0.5 rounded">FIELD PHOTO</span>
+                            <span class="absolute bottom-2 right-2 text-[10px] font-mono-num font-bold text-white bg-black/80 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow">🔍 Click to Expand</span>
+                          </div>
+                        `;
+                      }
+                    })()}
+                    ${morphTabs}
+                  </div>
+                </div>
+
+                <!-- Bottom Standing Height Frame -->
+                <div class="pt-2 border-t border-slate-800/80">
+                  ${renderSizeGauge(s.length_cm, s.size_display)}
                 </div>
               </div>
             `;
@@ -642,12 +982,225 @@
         </div>
       `;
 
-      content.innerHTML = html;
+      // 2. Aligned Feature Matrix Table (Comparing All Key Separators)
+      let tableHtml = `
+        <div class="rounded-xl border border-slate-800 bg-slate-950/90 overflow-hidden shadow-xl">
+          <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Aligned Diagnostic Trait Matrix</h4>
+            </div>
+            <span class="text-[11px] text-amber-300/90 font-medium">⚡ Highlighted rows mark decisive separating field marks</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-800 bg-slate-900/40 text-[11px] text-slate-400 font-bold uppercase tracking-wider">
+                  <th class="p-3 w-36 sm:w-44 shrink-0 bg-slate-900/80 sticky left-0 z-10 border-r border-slate-800">Field Mark</th>
+                  ${selected.map(s => `
+                    <th class="p-3 ${colWidthClass} text-white font-extrabold">
+                      <div class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                        <span class="text-xs sm:text-sm">${s.name}</span>
+                      </div>
+                    </th>
+                  `).join('')}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60">
+                
+                <!-- ROW: Standing Height & Body Length -->
+                <tr class="${hasSizeDiff ? 'bg-sky-950/30 font-medium' : 'hover:bg-slate-900/30'} transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1">
+                      <span>Body Size</span>
+                      ${hasSizeDiff ? '<span class="text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1 py-0.2 rounded border border-amber-800/60">⚡ DELTA</span>' : ''}
+                    </div>
+                  </td>
+                  ${selected.map(s => `
+                    <td class="p-3 align-top">
+                      <div class="flex flex-col gap-1">
+                        <span class="text-xs font-mono-num font-black text-white">${s.size_display}</span>
+                        <span class="text-[11px] text-slate-400">
+                          ${s.length_cm === 15.0 ? 'Baseline Song Sparrow Mean' : (s.length_cm < 15.0 ? `${(15.0 - s.length_cm).toFixed(1)} cm smaller than Song` : `${(s.length_cm - 15.0).toFixed(1)} cm larger than Song`)}
+                        </span>
+                      </div>
+                    </td>
+                  `).join('')}
+                </tr>
+
+                <!-- ROW: Bill / Beak Length, Shape & Color -->
+                <tr class="${hasBillDiff ? 'bg-sky-950/30 font-medium' : 'hover:bg-slate-900/30'} transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1">
+                      <span>Bill & Beak</span>
+                      ${hasBillDiff ? '<span class="text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1 py-0.2 rounded border border-amber-800/60">⚡ CLINCHER</span>' : ''}
+                    </div>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-1.5">
+                            <span class="font-mono-num font-bold text-sky-400">${s.bill_display}</span>
+                            ${s.pink_bill ? '<span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-950 text-rose-300 border border-rose-800">PINK BILL</span>' : ''}
+                          </div>
+                          <p class="text-slate-300 text-[11px] leading-relaxed">${traits.bill_desc || s.diagnostics.find(d => d.tract === 'Bill')?.mark || 'Conical bill'}</p>
+                        </div>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Breast & Underparts Pattern -->
+                <tr class="${hasBreastDiff ? 'bg-sky-950/30 font-medium' : 'hover:bg-slate-900/30'} transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1">
+                      <span>Breast / Belly</span>
+                      ${hasBreastDiff ? '<span class="text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1 py-0.2 rounded border border-amber-800/60">⚡ FORK</span>' : ''}
+                    </div>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <div class="space-y-1">
+                          <span class="inline-block text-[10px] font-bold px-1.5 py-0.5 rounded ${s.breast === 'streaked' ? 'bg-amber-950/80 text-amber-300 border border-amber-800/60' : 'bg-slate-800 text-slate-300 border border-slate-700'}">
+                            ${s.breast === 'streaked' ? '🪶 Streaked Breast' : '⚪ Unstreaked Breast'}
+                          </span>
+                          <p class="text-slate-300 text-[11px] leading-relaxed">${traits.breast_desc || s.diagnostics.find(d => d.tract === 'Breast' || d.tract === 'Chest')?.mark || ''}</p>
+                        </div>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Eye & Lores -->
+                <tr class="${(hasYellowDiff || hasEyeringDiff) ? 'bg-sky-950/30 font-medium' : 'hover:bg-slate-900/30'} transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1">
+                      <span>Eye & Lores</span>
+                      ${(hasYellowDiff || hasEyeringDiff) ? '<span class="text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1 py-0.2 rounded border border-amber-800/60">⚡ KEY</span>' : ''}
+                    </div>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <div class="space-y-1">
+                          <div class="flex flex-wrap gap-1">
+                            ${s.yellow ? '<span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-950 text-amber-300 border border-amber-800">YELLOW LORES</span>' : ''}
+                            ${s.eyering ? '<span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-sky-950 text-sky-300 border border-sky-800">EYE-RING</span>' : ''}
+                          </div>
+                          <p class="text-slate-300 text-[11px] leading-relaxed">${traits.eye_desc || s.diagnostics.find(d => d.tract === 'Lores' || d.tract === 'Eye-Ring' || d.tract === 'Face')?.mark || ''}</p>
+                        </div>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Crown & Forehead -->
+                <tr class="${hasRufousCrownDiff ? 'bg-sky-950/30 font-medium' : 'hover:bg-slate-900/30'} transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1">
+                      <span>Crown & Cap</span>
+                      ${hasRufousCrownDiff ? '<span class="text-[9px] font-mono-num font-bold text-amber-300 bg-amber-950/80 px-1 py-0.2 rounded border border-amber-800/60">⚡ CAP</span>' : ''}
+                    </div>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <div class="space-y-1">
+                          ${s.rufous_crown ? '<span class="inline-block text-[9px] font-bold px-1.5 py-0.2 rounded bg-orange-950 text-orange-300 border border-orange-800">RUFOUS CAP</span>' : ''}
+                          <p class="text-slate-300 text-[11px] leading-relaxed">${traits.crown_desc || s.diagnostics.find(d => d.tract === 'Crown' || d.tract === 'Head')?.mark || ''}</p>
+                        </div>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Wings & Shoulders -->
+                <tr class="hover:bg-slate-900/30 transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <span>Wings & Shoulders</span>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <p class="text-slate-300 text-[11px] leading-relaxed">${traits.wings_desc || s.diagnostics.find(d => d.tract === 'Wings' || d.tract === 'Shoulder')?.mark || 'Typical brown sparrow wings'}</p>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Tail Structure & Flight Action -->
+                <tr class="hover:bg-slate-900/30 transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <span>Tail & Flight</span>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <p class="text-slate-300 text-[11px] leading-relaxed">${traits.tail_desc || s.diagnostics.find(d => d.tract === 'Tail')?.mark || 'Tail without distinct flight marks'}</p>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Legs & Feet Color -->
+                <tr class="hover:bg-slate-900/30 transition">
+                  <td class="p-3 font-bold text-slate-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <span>Legs & Feet</span>
+                  </td>
+                  ${selected.map(s => {
+                    const traits = sparrowTraitsLookup[s.id] || {};
+                    return `
+                      <td class="p-3 align-top">
+                        <p class="text-slate-300 text-[11px] leading-relaxed">${traits.leg_desc || 'Pinkish-flesh legs'}</p>
+                      </td>
+                    `;
+                  }).join('')}
+                </tr>
+
+                <!-- ROW: Decisive Knockout Crux Rule -->
+                <tr class="bg-amber-950/30 border-t-2 border-amber-500/40">
+                  <td class="p-3 font-extrabold text-amber-300 bg-slate-950/95 sticky left-0 z-10 border-r border-slate-800">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                      <span>Decisive Crux</span>
+                    </div>
+                  </td>
+                  ${selected.map(s => `
+                    <td class="p-3 align-top">
+                      <div class="p-2.5 rounded-lg bg-amber-950/40 border border-amber-800/50">
+                        <span class="text-amber-400 font-extrabold text-[10px] uppercase block mb-1">Knockout Rule:</span>
+                        <p class="text-amber-200 text-[11px] leading-relaxed font-medium">${s.rule_out}</p>
+                      </div>
+                    </td>
+                  `).join('')}
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      content.innerHTML = visualCardsHtml + tableHtml;
       modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
     }
 
     function closeComparisonModal() {
-      document.getElementById('compareModal').classList.add('hidden');
+      const modal = document.getElementById('compareModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
 
     function switchPhoto(speciesId, index) {
@@ -656,7 +1209,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Main Feed Renderer
+    // Main Comparative Feed Renderer
     // -------------------------------------------------------------------------
     function renderFeed() {
       const container = document.getElementById('sparrowFeed');
@@ -695,10 +1248,13 @@
         unhideBtn.classList.add('hidden');
       }
 
-      if (currentLayoutView === 'matrix') {
-        container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5';
+      // Configure layout grid classes based on currentGridCols
+      if (currentGridCols === 1) {
+        container.className = 'grid grid-cols-1 gap-5 max-w-4xl mx-auto';
+      } else if (currentGridCols === 2) {
+        container.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto';
       } else {
-        container.className = 'flex flex-col space-y-4 max-w-4xl mx-auto';
+        container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 max-w-7xl mx-auto';
       }
 
       container.innerHTML = '';
@@ -725,170 +1281,146 @@
 
         const card = document.createElement('article');
         card.id = `sp-${s.id}`;
+        card.className = `bg-[#0c1222] border ${isCompared ? 'border-sky-500 ring-1 ring-sky-500' : 'border-slate-800/90'} rounded-2xl p-3.5 sm:p-4 shadow-md hover:border-slate-700 transition flex flex-col justify-between`;
 
-        if (currentLayoutView === 'matrix') {
-          card.className = `bg-[#0c1222] border ${isCompared ? 'border-sky-500 ring-1 ring-sky-500' : 'border-slate-800/90'} rounded-2xl p-3 shadow-md hover:border-slate-700 transition flex flex-col justify-between`;
+        const effMode = cardAssetOverrides[s.id] || currentAssetMode;
 
-          card.innerHTML = `
-            <div>
-              <div class="flex items-start justify-between gap-1.5 pb-2 border-b border-slate-800/80">
-                <div class="min-w-0">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-mono-num font-bold text-slate-500">#${s.rank}</span>
-                    <h3 class="font-extrabold text-sm sm:text-base text-white tracking-tight truncate">${s.name}</h3>
-                  </div>
-                  <div class="text-[10px] italic font-serif text-slate-400 truncate">${s.sci}</div>
-                </div>
+        // Image height adjustments based on current column density:
+        // 1-col: large stage (h-60 sm:h-72); 2-col: medium (h-44 sm:h-52); 3-col: compact (h-36 sm:h-40)
+        let visualStageHtml = '';
 
-                <div class="flex items-center gap-1 shrink-0">
-                  <span class="text-[10px] font-bold tabular-nums px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-300 border border-sky-800/60" title="eBird Frequency">
-                    ${s.prob}
-                  </span>
-                  <button onclick="dismissSpecies('${s.id}')" title="Dismiss" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  </button>
-                </div>
+        if (effMode === 'both') {
+          const bothImgHeight = currentGridCols === 1 ? 'h-56 sm:h-72' : (currentGridCols === 2 ? 'h-44 sm:h-52' : 'h-36 sm:h-40');
+          const maxImgHeight = currentGridCols === 1 ? 'max-h-52 sm:max-h-64' : (currentGridCols === 2 ? 'max-h-40 sm:max-h-48' : 'max-h-32');
+
+          visualStageHtml = `
+            <div class="mt-2.5 grid grid-cols-2 gap-2 bg-slate-950/90 rounded-xl p-1.5">
+              <div class="relative flex items-center justify-center ${bothImgHeight} bg-slate-900/50 rounded-lg overflow-hidden group cursor-zoom-in"
+                   onclick="openLightbox('${plateSrc}', '${s.name}', '${s.sci}', 'FIELD PLATE', 'Sibley Standard Lateral Profile')"
+                   title="Click to zoom plate">
+                <img src="${plateSrc}" alt="${s.name} Plate" class="${maxImgHeight} w-auto object-contain transition group-hover:scale-105 duration-200">
+                <span class="absolute bottom-1 left-1 text-[8px] font-mono-num font-bold text-sky-300 bg-sky-950/80 border border-sky-800/60 px-1 rounded">PLATE</span>
+                <span class="absolute bottom-1 right-1 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow pointer-events-none">🔍 Expand</span>
               </div>
-
-              <!-- Dynamic Visual Canvas -->
-              ${(() => {
-                const effMode = cardAssetOverrides[s.id] || currentAssetMode;
-                if (effMode === 'both') {
-                  return `
-                    <div class="mt-2 grid grid-cols-2 gap-1.5 bg-slate-950/90 rounded-xl p-1.5">
-                      <div class="relative flex items-center justify-center h-36 bg-slate-900/40 rounded-lg overflow-hidden group">
-                        <img src="${plateSrc}" alt="${s.name} Plate" class="max-h-32 w-auto object-contain transition group-hover:scale-105 duration-200">
-                        <span class="absolute bottom-1 left-1 text-[8px] font-mono-num font-bold text-sky-300 bg-sky-950/80 border border-sky-800/60 px-1 rounded">PLATE</span>
-                      </div>
-                      <div class="relative flex items-center justify-center h-36 bg-slate-900/40 rounded-lg overflow-hidden group">
-                        <img src="${photoSrc}" alt="${s.name} Photo" class="max-h-32 w-auto object-contain transition group-hover:scale-105 duration-200">
-                        <span class="absolute bottom-1 left-1 text-[8px] font-mono-num font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-800/60 px-1 rounded">PHOTO</span>
-                      </div>
-                    </div>
-                  `;
-                } else if (effMode === 'plates') {
-                  return `
-                    <div onclick="flipCardAsset('${s.id}')" class="mt-2 relative bg-slate-950/90 rounded-xl p-2 flex items-center justify-center h-44 overflow-hidden group cursor-pointer" title="Click or press 'P' to flip to field photo">
-                      <img src="${plateSrc}" alt="${s.name} Plate" class="max-h-40 w-auto object-contain transition group-hover:scale-105 duration-200">
-                      <span class="absolute top-1.5 right-1.5 text-[9px] font-mono-num font-semibold text-slate-400 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 px-1.5 py-0.5 rounded opacity-90 group-hover:opacity-100 transition flex items-center gap-1 shadow-sm">
-                        <span>🎨 Plate</span>
-                        <span class="text-sky-400 font-bold">&rarr; 📷</span>
-                      </span>
-                      <span class="absolute bottom-1.5 right-1.5 text-[9px] text-slate-500 bg-black/60 px-1 rounded opacity-0 group-hover:opacity-100 transition">Click / P to flip</span>
-                    </div>
-                  `;
-                } else {
-                  return `
-                    <div onclick="flipCardAsset('${s.id}')" class="mt-2 relative bg-slate-950/90 rounded-xl p-2 flex items-center justify-center h-44 overflow-hidden group cursor-pointer" title="Click or press 'P' to flip to field plate">
-                      <img src="${photoSrc}" alt="${s.name} Photo" class="max-h-40 w-auto object-contain transition group-hover:scale-105 duration-200">
-                      <span class="absolute top-1.5 right-1.5 text-[9px] font-mono-num font-semibold text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800/80 px-1.5 py-0.5 rounded opacity-90 group-hover:opacity-100 transition flex items-center gap-1 shadow-sm">
-                        <span>📷 Photo</span>
-                        <span class="text-sky-400 font-bold">&rarr; 🎨</span>
-                      </span>
-                      <span class="absolute bottom-1.5 right-1.5 text-[9px] text-slate-500 bg-black/60 px-1 rounded opacity-0 group-hover:opacity-100 transition">Click / P to flip</span>
-                    </div>
-                  `;
-                }
-              })()}
-
-              <div class="mt-2 flex flex-wrap gap-1">
-                <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded ${s.breast === 'streaked' ? 'bg-amber-950/70 text-amber-300 border border-amber-800/60' : 'bg-slate-800/80 text-slate-300 border border-slate-700/60'}">
-                  ${s.breast === 'streaked' ? 'Streaked' : 'Unstreaked'}
-                </span>
-                ${s.yellow ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-950/70 text-amber-300 border border-amber-800/60">Yellow Lores</span>' : ''}
-                ${s.eyering ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-950/70 text-sky-300 border border-sky-800/60">Eye-Ring</span>' : ''}
-                ${s.rufous_crown ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-orange-950/70 text-orange-300 border border-orange-800/60">Rufous Cap</span>' : ''}
-                ${s.pink_bill ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-rose-950/70 text-rose-300 border border-rose-800/60">Pink Bill</span>' : ''}
-              </div>
-
-              <div class="mt-2.5 pl-2.5 py-0.5 border-l-2 border-amber-400 text-[11px] text-amber-200/90 leading-snug">
-                <strong class="text-amber-300 font-bold">Crux:</strong> ${s.rule_out}
+              <div class="relative flex items-center justify-center ${bothImgHeight} bg-slate-900/50 rounded-lg overflow-hidden group cursor-zoom-in"
+                   onclick="openLightbox('${photoSrc}', '${s.name}', '${s.sci}', 'FIELD PHOTO (${currentPhoto.label})', '${currentPhoto.caption}')"
+                   title="Click to zoom photo">
+                <img src="${photoSrc}" alt="${s.name} Photo" class="${maxImgHeight} w-auto object-contain transition group-hover:scale-105 duration-200">
+                <span class="absolute bottom-1 left-1 text-[8px] font-mono-num font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-800/60 px-1 rounded">PHOTO</span>
+                <span class="absolute bottom-1 right-1 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow pointer-events-none">🔍 Expand</span>
               </div>
             </div>
+          `;
+        } else if (effMode === 'plates') {
+          const plateHeight = currentGridCols === 1 ? 'h-64 sm:h-80' : (currentGridCols === 2 ? 'h-52 sm:h-64' : 'h-44 sm:h-48');
+          const maxImgHeight = currentGridCols === 1 ? 'max-h-60 sm:max-h-72' : (currentGridCols === 2 ? 'max-h-48 sm:max-h-56' : 'max-h-40');
 
-            <!-- Card Bottom Bar: Vertical Height Standing Scale & Compare Toggle -->
-            <div class="mt-3 pt-2.5 border-t border-slate-800/60 flex items-center justify-between gap-2 text-xs">
-              ${renderSizeGauge(s.length_cm, s.size_display)}
-              <button onclick="toggleCompare('${s.id}')" class="px-2.5 py-1 rounded-md text-[11px] font-semibold transition flex items-center gap-1 shrink-0 ${isCompared ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300 hover:text-white'}">
-                <span>${isCompared ? '✓ Compared' : '+ Compare'}</span>
+          visualStageHtml = `
+            <div class="mt-2.5 relative bg-slate-950/90 rounded-xl p-2.5 flex items-center justify-center ${plateHeight} overflow-hidden group cursor-zoom-in"
+                 onclick="openLightbox('${plateSrc}', '${s.name}', '${s.sci}', 'FIELD PLATE', 'Sibley Standard Lateral Profile')"
+                 title="Click to view full-screen plate">
+              <img src="${plateSrc}" alt="${s.name} Plate" class="${maxImgHeight} w-auto object-contain transition group-hover:scale-105 duration-200">
+              <span class="absolute top-2 left-2 text-[9px] font-mono-num font-bold text-sky-300 bg-sky-950/90 border border-sky-800/70 px-1.5 py-0.5 rounded">🎨 PLATE</span>
+              <button onclick="event.stopPropagation(); flipCardAsset('${s.id}')" class="absolute top-2 right-2 text-[9px] font-mono-num font-semibold text-slate-300 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 px-2 py-0.5 rounded opacity-90 group-hover:opacity-100 transition flex items-center gap-1 shadow-sm">
+                <span>Flip to 📷 Photo</span>
               </button>
+              <span class="absolute bottom-2 right-2 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow pointer-events-none">🔍 Click to Expand</span>
             </div>
           `;
         } else {
-          card.className = `bg-[#0c1222] border ${isCompared ? 'border-sky-500 ring-1 ring-sky-500' : 'border-slate-800/90'} rounded-2xl p-4 sm:p-5 shadow-lg space-y-3`;
+          const photoHeight = currentGridCols === 1 ? 'h-64 sm:h-80' : (currentGridCols === 2 ? 'h-52 sm:h-64' : 'h-44 sm:h-48');
+          const maxImgHeight = currentGridCols === 1 ? 'max-h-60 sm:max-h-72' : (currentGridCols === 2 ? 'max-h-48 sm:max-h-56' : 'max-h-40');
 
-          let morphButtons = '';
-          if (s.photo_variants.length > 1) {
-            morphButtons = `
-              <div class="flex items-center gap-1 mt-1.5 overflow-x-auto no-scrollbar">
-                <span class="text-[10px] font-bold uppercase text-slate-400 mr-0.5">Morph:</span>
-                ${s.photo_variants.map((v, i) => `
-                  <button onclick="switchPhoto('${s.id}', ${i})" class="px-2 py-0.5 rounded text-[10px] font-medium border transition ${i === (photoIndices[s.id] || 0) ? 'bg-sky-600 text-white border-sky-500 font-bold' : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'}">
-                    ${v.label}
-                  </button>
-                `).join('')}
-              </div>
-            `;
-          }
-
-          card.innerHTML = `
-            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 flex-wrap gap-2">
-              <div class="flex items-baseline gap-2">
-                <span class="text-xs font-mono-num font-bold text-slate-500">#${s.rank}</span>
-                <h3 class="text-lg sm:text-xl font-black text-white tracking-tight">${s.name}</h3>
-                <span class="text-xs italic font-serif text-slate-400 hidden sm:inline">${s.sci}</span>
-              </div>
-              <div class="flex items-center gap-3">
-                ${renderSizeGauge(s.length_cm, s.size_display)}
-                <span class="text-xs font-bold tabular-nums px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800 shrink-0">
-                  ${s.prob} Likelihood
-                </span>
-                <button onclick="toggleCompare('${s.id}')" class="px-2 py-0.5 rounded text-xs font-semibold shrink-0 ${isCompared ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300 hover:text-white'}">
-                  ${isCompared ? '✓ Added' : '+ Compare'}
-                </button>
-                <button onclick="dismissSpecies('${s.id}')" title="Dismiss" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 shrink-0">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div class="space-y-1">
-                <div class="flex items-center justify-between text-[11px] font-bold text-sky-400 uppercase tracking-wider">
-                  <span>Field Plate (Right Lateral)</span>
-                  <span class="text-slate-500 text-[10px] font-normal">Sibley Standard</span>
-                </div>
-                <div class="bg-slate-950/80 rounded-xl p-2 flex items-center justify-center min-h-[220px]">
-                  <img src="${plateSrc}" alt="${s.name}" class="max-h-52 w-auto object-contain">
-                </div>
-              </div>
-
-              <div class="space-y-1">
-                <div class="flex items-center justify-between text-[11px] font-bold text-emerald-400 uppercase tracking-wider">
-                  <span>Field Photo</span>
-                  <span class="text-slate-400 text-[10px] font-normal">${currentPhoto.label}</span>
-                </div>
-                <div class="bg-slate-950/80 rounded-xl p-2 flex items-center justify-center min-h-[220px]">
-                  <img src="${photoSrc}" alt="${s.name}" class="max-h-52 w-auto object-contain">
-                </div>
-                ${morphButtons}
-              </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-              ${s.diagnostics.map(d => `
-                <div class="p-2 rounded-lg bg-slate-950/40 border-l border-sky-500/50">
-                  <span class="font-bold text-sky-400 uppercase text-[10px] block">${d.tract}</span>
-                  <span class="text-slate-200 text-[11px] leading-snug">${d.mark}</span>
-                </div>
-              `).join('')}
-            </div>
-
-            <div class="mt-2 pl-3 py-1 border-l-2 border-amber-400 text-xs text-amber-200/90">
-              <strong class="text-amber-300 font-bold">Rule:</strong> ${s.rule_out}
+          visualStageHtml = `
+            <div class="mt-2.5 relative bg-slate-950/90 rounded-xl p-2.5 flex items-center justify-center ${photoHeight} overflow-hidden group cursor-zoom-in"
+                 onclick="openLightbox('${photoSrc}', '${s.name}', '${s.sci}', 'FIELD PHOTO (${currentPhoto.label})', '${currentPhoto.caption}')"
+                 title="Click to view full-screen photo">
+              <img src="${photoSrc}" alt="${s.name} Photo" class="${maxImgHeight} w-auto object-contain transition group-hover:scale-105 duration-200">
+              <span class="absolute top-2 left-2 text-[9px] font-mono-num font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-800/70 px-1.5 py-0.5 rounded">📷 PHOTO</span>
+              <button onclick="event.stopPropagation(); flipCardAsset('${s.id}')" class="absolute top-2 right-2 text-[9px] font-mono-num font-semibold text-slate-300 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 px-2 py-0.5 rounded opacity-90 group-hover:opacity-100 transition flex items-center gap-1 shadow-sm">
+                <span>Flip to 🎨 Plate</span>
+              </button>
+              <span class="absolute bottom-2 right-2 text-[9px] font-mono-num font-bold text-white bg-black/80 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition shadow pointer-events-none">🔍 Click to Expand</span>
             </div>
           `;
         }
+
+        let morphButtons = '';
+        if (s.photo_variants.length > 1) {
+          morphButtons = `
+            <div class="flex items-center gap-1 mt-1.5 overflow-x-auto no-scrollbar">
+              <span class="text-[9px] font-bold uppercase text-slate-500 mr-0.5">Morph:</span>
+              ${s.photo_variants.map((v, i) => `
+                <button onclick="switchPhoto('${s.id}', ${i})" class="px-2 py-0.5 rounded text-[10px] font-medium border transition ${i === (photoIndices[s.id] || 0) ? 'bg-sky-600 text-white border-sky-500 font-bold' : 'bg-slate-900 text-slate-400 border-slate-800 hover:bg-slate-800'}">
+                  ${v.label}
+                </button>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-1.5 pb-2 border-b border-slate-800/80">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] font-mono-num font-bold text-slate-500">#${s.rank}</span>
+                  <h3 class="font-extrabold text-sm sm:text-base text-white tracking-tight truncate">${s.name}</h3>
+                </div>
+                <div class="text-[11px] italic font-serif text-slate-400 truncate">${s.sci}</div>
+              </div>
+
+              <div class="flex items-center gap-1 shrink-0">
+                <span class="text-[10px] font-bold tabular-nums px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-300 border border-sky-800/60" title="eBird Frequency in Region">
+                  ${s.prob}
+                </span>
+                <button onclick="dismissSpecies('${s.id}')" title="Dismiss species from feed" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 transition">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Visual Stage -->
+            ${visualStageHtml}
+            ${morphButtons}
+
+            <!-- Trait Pills -->
+            <div class="mt-2.5 flex flex-wrap gap-1">
+              <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded ${s.breast === 'streaked' ? 'bg-amber-950/70 text-amber-300 border border-amber-800/60' : 'bg-slate-800/80 text-slate-300 border border-slate-700/60'}">
+                ${s.breast === 'streaked' ? 'Streaked' : 'Unstreaked'}
+              </span>
+              ${s.yellow ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-950/70 text-amber-300 border border-amber-800/60">Yellow Lores</span>' : ''}
+              ${s.eyering ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-950/70 text-sky-300 border border-sky-800/60">Eye-Ring</span>' : ''}
+              ${s.rufous_crown ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-orange-950/70 text-orange-300 border border-orange-800/60">Rufous Cap</span>' : ''}
+              ${s.pink_bill ? '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-rose-950/70 text-rose-300 border border-rose-800/60">Pink Bill</span>' : ''}
+            </div>
+
+            <!-- Knockout Crux Callout -->
+            <div class="mt-2.5 pl-2.5 py-0.5 border-l-2 border-amber-400 text-[11px] text-amber-200/90 leading-snug">
+              <strong class="text-amber-300 font-bold">Crux:</strong> ${s.rule_out}
+            </div>
+
+            ${currentGridCols === 1 ? `
+              <!-- Expanded Diagnostics in 1-column mode -->
+              <div class="mt-3 pt-2.5 border-t border-slate-800/70 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                ${s.diagnostics.map(d => `
+                  <div class="p-2 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                    <span class="font-bold text-sky-400 uppercase text-[10px] block">${d.tract}</span>
+                    <span class="text-slate-300 text-[11px] leading-snug">${d.mark}</span>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Card Bottom Bar: Vertical Height Standing Scale & Compare Toggle -->
+          <div class="mt-3 pt-2.5 border-t border-slate-800/60 flex items-center justify-between gap-2 text-xs">
+            ${renderSizeGauge(s.length_cm, s.size_display)}
+            <button onclick="toggleCompare('${s.id}')" class="px-2.5 py-1 rounded-md text-[11px] font-semibold transition flex items-center gap-1 shrink-0 ${isCompared ? 'bg-sky-600 text-white shadow-sm ring-1 ring-sky-400' : 'bg-slate-800 text-slate-300 hover:text-white'}">
+              <span>${isCompared ? '✓ Compared' : '+ Compare'}</span>
+            </button>
+          </div>
+        `;
 
         container.appendChild(card);
       });
@@ -896,12 +1428,13 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=15').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=20').then(reg => {
           reg.update();
         }).catch(() => {});
       });
     }
 
+    updateGridButtons();
     renderFeed();
   </script>
 </body>

@@ -1,12 +1,12 @@
-# AvnLookalike 🦅
+# AVN Fieldguide 🦅
 
 > Visual avian identification, species-pair disambiguation, and field eliminator.
 
-Live Web Application: **[https://j-s-bot.github.io/avn-lookalike/](https://j-s-bot.github.io/avn-lookalike/)**
+Live Web Application: **[https://j-s-bot.github.io/avn-fieldguide/](https://j-s-bot.github.io/avn-fieldguide/)**
 
 ---
 
-## 🎯 What is AvnLookalike?
+## 🎯 What is AVN Fieldguide?
 
 Bird identification apps often present generic catalog listings or AI classifiers without explaining *why* one candidate was picked over another. When observing ambiguous species complexes (such as sparrows, fall warblers, or empidonax flycatchers), birders need:
 
@@ -46,4 +46,4 @@ Current live module covers the 11 confusing Little Brown Jobs (LBJs) in Baltimor
 
 ## 📱 Offline PWA Support
 
-AvnLookalike is a zero-dependency, self-contained Progressive Web App (PWA). All image assets are encoded directly in the client bundle. Open the site on mobile and tap **"Add to Home Screen"** to use it offline in the field with zero cellular service.
+AVN Fieldguide is a zero-dependency, self-contained Progressive Web App (PWA). All image assets are encoded directly in the client bundle. Open the site on mobile and tap **"Add to Home Screen"** to use it offline in the field with zero cellular service.

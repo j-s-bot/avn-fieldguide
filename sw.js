@@ -1,4 +1,4 @@
-const CACHE_NAME = 'avn-lookalike-v18';
+const CACHE_NAME = 'avn-fieldguide-v19';
 const ASSETS = [
   './',
   './index.html',

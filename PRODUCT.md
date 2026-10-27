@@ -12,11 +12,11 @@ Field birders, wildlife photographers, and ornithologists needing rapid, decisiv
 
 ## Product Purpose
 
-AvnLookalike provides instant, visual-first species elimination and side-by-side comparative analysis. Instead of generic catalog text or black-box machine learning guesses, it presents species in standardized, identical lateral profile coordinates (Sibley/Peterson field plates) alongside verified uncropped field photographs, highlighting only the decisive separating tracts (crux marks) to settle field IDs in seconds.
+AVN Fieldguide provides instant, visual-first species elimination and side-by-side comparative analysis. Instead of generic catalog text or black-box machine learning guesses, it presents species in standardized, identical lateral profile coordinates (Sibley/Peterson field plates) alongside verified uncropped field photographs, highlighting only the decisive separating tracts (crux marks) to settle field IDs in seconds.
 
 ## Positioning
 
-Unlike general field guides that treat every species as an isolated encyclopedia entry, AvnLookalike is an active *eliminator*: species are organized across 7 targeted taxonomic lookalike complexes, dynamically rank-ordered by regional eBird checklist frequency, filtered across mutually exclusive anatomical facets (bill shape, plumage marks, leg color, feeding behavior), and dismissed in-memory as candidates are ruled out.
+Unlike general field guides that treat every species as an isolated encyclopedia entry, AVN Fieldguide is an active *eliminator*: species are organized across 7 targeted taxonomic lookalike complexes, dynamically rank-ordered by regional eBird checklist frequency, filtered across mutually exclusive anatomical facets (bill shape, plumage marks, leg color, feeding behavior), and dismissed in-memory as candidates are ruled out.
 
 ## Operating Context
 
@@ -34,7 +34,7 @@ Mobile phone screens in bright sunlight or low-glare twilight, often in remote f
 
 ## Brand Commitments
 
-- **Namespace**: `avn-*` family (`avn-codex`, `avn-studio`, `avn-birdbox`, `avn-lookalike`).
+- **Namespace**: `avn-*` family (`avn-codex`, `avn-studio`, `avn-birdbox`, `avn-fieldguide`).
 - **Tone**: Precision, instrument-grade, restrained scientific authority. No AI marketing gimmicks, no emojis, no bloated SaaS cards.
 
 ## Evidence on Hand

@@ -1,6 +1,6 @@
 {
-  "name": "AvnLookalike",
-  "short_name": "AvnLookalike",
+  "name": "AVN Fieldguide",
+  "short_name": "AVN Fieldguide",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#020617",

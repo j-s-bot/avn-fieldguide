@@ -36,7 +36,8 @@
     "length_cm": 26.0,
     "bill_mm": 20.0,
     "size_display": "26 cm (10.5\")",
-    "bill_display": "20 mm"
+    "bill_display": "20 mm",
+    "ebird_code": "kildee"
   },
   {
     "id": "semipalmated_plover",
@@ -76,7 +77,8 @@
     "length_cm": 18.0,
     "bill_mm": 13.0,
     "size_display": "18 cm (7.0\")",
-    "bill_display": "13 mm"
+    "bill_display": "13 mm",
+    "ebird_code": "semplo"
   },
   {
     "id": "piping_plover",
@@ -116,7 +118,8 @@
     "length_cm": 18.0,
     "bill_mm": 12.0,
     "size_display": "18 cm (7.0\")",
-    "bill_display": "12 mm"
+    "bill_display": "12 mm",
+    "ebird_code": "pipplo"
   },
   {
     "id": "black_bellied_plover",
@@ -157,7 +160,8 @@
     "length_cm": 29.0,
     "bill_mm": 29.0,
     "size_display": "29 cm (11.5\")",
-    "bill_display": "29 mm"
+    "bill_display": "29 mm",
+    "ebird_code": "bkbplo"
   },
   {
     "id": "american_golden_plover",
@@ -196,7 +200,8 @@
     "length_cm": 26.0,
     "bill_mm": 22.0,
     "size_display": "26 cm (10.5\")",
-    "bill_display": "22 mm"
+    "bill_display": "22 mm",
+    "ebird_code": "amgplo"
   },
   {
     "id": "greater_yellowlegs",
@@ -235,7 +240,8 @@
     "length_cm": 36.0,
     "bill_mm": 56.0,
     "size_display": "36 cm (14.0\")",
-    "bill_display": "56 mm"
+    "bill_display": "56 mm",
+    "ebird_code": "greyel"
   },
   {
     "id": "lesser_yellowlegs",
@@ -274,7 +280,8 @@
     "length_cm": 26.0,
     "bill_mm": 37.0,
     "size_display": "26 cm (10.5\")",
-    "bill_display": "37 mm"
+    "bill_display": "37 mm",
+    "ebird_code": "lesyel"
   },
   {
     "id": "solitary_sandpiper",
@@ -314,7 +321,8 @@
     "length_cm": 21.0,
     "bill_mm": 30.0,
     "size_display": "21 cm (8.5\")",
-    "bill_display": "30 mm"
+    "bill_display": "30 mm",
+    "ebird_code": "solsan"
   },
   {
     "id": "spotted_sandpiper_breeding",
@@ -353,7 +361,8 @@
     "length_cm": 19.0,
     "bill_mm": 24.0,
     "size_display": "19 cm (7.5\")",
-    "bill_display": "24 mm"
+    "bill_display": "24 mm",
+    "ebird_code": "sposan"
   },
   {
     "id": "spotted_sandpiper_nonbreeding",
@@ -392,7 +401,8 @@
     "length_cm": 19.0,
     "bill_mm": 24.0,
     "size_display": "19 cm (7.5\")",
-    "bill_display": "24 mm"
+    "bill_display": "24 mm",
+    "ebird_code": "sposan"
   },
   {
     "id": "least_sandpiper",
@@ -431,7 +441,8 @@
     "length_cm": 14.0,
     "bill_mm": 18.0,
     "size_display": "14 cm (5.5\")",
-    "bill_display": "18 mm"
+    "bill_display": "18 mm",
+    "ebird_code": "leasan"
   },
   {
     "id": "semipalmated_sandpiper",
@@ -470,7 +481,8 @@
     "length_cm": 15.0,
     "bill_mm": 19.0,
     "size_display": "15 cm (6.0\")",
-    "bill_display": "19 mm"
+    "bill_display": "19 mm",
+    "ebird_code": "semsan"
   },
   {
     "id": "western_sandpiper",
@@ -509,7 +521,8 @@
     "length_cm": 16.0,
     "bill_mm": 25.0,
     "size_display": "16 cm (6.3\")",
-    "bill_display": "25 mm"
+    "bill_display": "25 mm",
+    "ebird_code": "wessan"
   },
   {
     "id": "white_rumped_sandpiper",
@@ -549,7 +562,8 @@
     "length_cm": 19.0,
     "bill_mm": 23.0,
     "size_display": "19 cm (7.5\")",
-    "bill_display": "23 mm"
+    "bill_display": "23 mm",
+    "ebird_code": "whrsan"
   },
   {
     "id": "sanderling",
@@ -589,7 +603,49 @@
     "length_cm": 20.0,
     "bill_mm": 25.0,
     "size_display": "20 cm (8.0\")",
-    "bill_display": "25 mm"
+    "bill_display": "25 mm",
+    "ebird_code": "sander"
+  },
+  {
+    "id": "pectoral_sandpiper",
+    "rank": 15,
+    "name": "Pectoral Sandpiper",
+    "sci": "Calidris melanotos",
+    "prob": "22%",
+    "ebird_code": "pecsan",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "yellow_legs",
+      "droop_bill",
+      "streaked_breast"
+    ],
+    "plate": "assets/shorebird_plates/pectoral_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Medium-sized peep with razor-sharp breast bib cutoff, bright yellowish legs, slightly decurved bill with yellowish base, pale buff mantle 'V's",
+    "photo": "assets/shorebirds/pectoral_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Diagnostic dense brown breast streaks ending abruptly at pure white belly, dull yellowish legs, slightly decurved bill with yellowish base",
+    "crux_photo": "assets/shorebirds/pectoral_sandpiper_2.jpg",
+    "crux_caption": "Bib crux: Distinct horizontal razor-sharp boundary line separating dark streaked chest from clean white underparts; scaly back with pale stripes",
+    "diagnostics": [
+      {
+        "tract": "Breast Cutoff (Bib)",
+        "mark": "100% DIAGNOSTIC CRUX: Dense, heavy brownish streaking on breast cuts off abruptly in a sharp horizontal line against clean, stark white belly ('razor-sharp bib')."
+      },
+      {
+        "tract": "Bill & Legs",
+        "mark": "Medium, slightly decurved bill with diagnostic dull yellowish or greenish-horn base and dark tip; medium-length dull yellow to greenish-yellow legs."
+      },
+      {
+        "tract": "Back & Posture",
+        "mark": "Dark scaly upperparts with prominent pale buff/whitish mantle 'V' stripes; alert upright neck-stretching posture when alarmed ('telescoping neck')."
+      }
+    ],
+    "rule_out": "Razor-sharp breast bib cutoff at pure white belly + yellowish legs + slightly decurved bill with yellow base = Pectoral Sandpiper.",
+    "rarity": "uncommon",
+    "length_cm": 21.0,
+    "bill_mm": 28.5,
+    "size_display": "21 cm (8.3\")",
+    "bill_display": "28.5 mm"
   },
   {
     "id": "dunlin",
@@ -628,7 +684,8 @@
     "length_cm": 21.0,
     "bill_mm": 38.0,
     "size_display": "21 cm (8.5\")",
-    "bill_display": "38 mm"
+    "bill_display": "38 mm",
+    "ebird_code": "dunlin"
   },
   {
     "id": "short_billed_dowitcher",
@@ -668,7 +725,8 @@
     "length_cm": 28.0,
     "bill_mm": 60.0,
     "size_display": "28 cm (11.0\")",
-    "bill_display": "60 mm"
+    "bill_display": "60 mm",
+    "ebird_code": "sbldow"
   },
   {
     "id": "long_billed_dowitcher",
@@ -708,7 +766,8 @@
     "length_cm": 29.0,
     "bill_mm": 70.0,
     "size_display": "29 cm (11.5\")",
-    "bill_display": "70 mm"
+    "bill_display": "70 mm",
+    "ebird_code": "lobdow"
   },
   {
     "id": "stilt_sandpiper",
@@ -748,7 +807,8 @@
     "length_cm": 22.0,
     "bill_mm": 39.0,
     "size_display": "22 cm (8.7\")",
-    "bill_display": "39 mm"
+    "bill_display": "39 mm",
+    "ebird_code": "stisan"
   },
   {
     "id": "willet",
@@ -788,7 +848,8 @@
     "length_cm": 38.0,
     "bill_mm": 57.0,
     "size_display": "38 cm (15.0\")",
-    "bill_display": "57 mm"
+    "bill_display": "57 mm",
+    "ebird_code": "willet"
   },
   {
     "id": "hudsonian_godwit",
@@ -829,6 +890,7 @@
     "length_cm": 39.0,
     "bill_mm": 80.0,
     "size_display": "39 cm (15.5\")",
-    "bill_display": "80 mm"
+    "bill_display": "80 mm",
+    "ebird_code": "hudgod"
   }
 ]

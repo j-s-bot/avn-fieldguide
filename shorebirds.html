@@ -23,8 +23,8 @@
 <body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white pb-12 overflow-x-hidden">
 
   <!-- Instrument Header -->
-  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5">
-    <div class="max-w-6xl mx-auto w-full max-w-full flex items-center justify-between gap-3 overflow-x-auto no-scrollbar">
+  <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-3 sm:px-4 py-2 max-w-full overflow-hidden">
+    <div class="max-w-6xl mx-auto w-full max-w-full flex flex-col md:flex-row md:items-center justify-between gap-2 overflow-x-hidden">
       
       <!-- Brand & Navigation Switcher -->
       <div class="flex items-center gap-2.5 min-w-0 flex-1">
@@ -88,7 +88,7 @@
       <button onclick="toggleRarity('uncommon')" id="f-rarity-uncommon" title="eBird Uncommon: Regular seasonal migrants or localized arrivals (1% - 15% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Uncommon</button>
       <button onclick="toggleRarity('rare')" id="f-rarity-rare" title="eBird Rare / Review Species: Rare review vagrants requiring documentation (Hudsonian Godwit)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help">&#9733; Rares Only</button>
 
-      <div class="ml-auto pl-2 flex items-center gap-2 border-l border-slate-800 shrink-0">
+      <div class="flex items-center gap-2 max-w-full overflow-x-auto no-scrollbar py-0.5">
         <!-- Sort Selector -->
         <div class="flex items-center gap-1.5">
           <label for="sortSelect" class="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0">Sort:</label>
@@ -143,19 +143,965 @@
   </header>
 
   <!-- Immediate Shorebird Feed (1 card per row, matching ducks.html & gulls.html) -->
+  <div id="urlFilterBannerContainer" class="max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden">
+    <!-- Rendered dynamically -->
+  </div>
+
   <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="shorebirdFeed">
     <!-- Rendered via JS -->
   </main>
 
   <!-- Client-Side State & Multi-Select Engine -->
   <script>
-    const shorebirds = [{"id": "killdeer", "rank": 1, "name": "Killdeer", "sci": "Charadrius vociferus", "prob": "65%", "group": "plover", "traits": ["plover", "breast_bands", "short_stout_bill"], "plate": "assets/shorebird_plates/killdeer_plate.jpg", "plate_caption": "Diagnostic plate: Large dark eye with orange-red orbital ring, two complete bold black breast bands, tawny-brown upperparts, bright orange rump in flight", "photo": "assets/shorebirds/killdeer_1.jpg", "photo_caption": "Field profile: Double black neck/breast bands, slender alert build, white forehead and supercilium, flesh-pink legs", "crux_photo": "assets/shorebirds/killdeer_2.jpg", "crux_caption": "Chest closeup: Upper and lower black bands completely separated by white band; bright red-orange orbital eye-ring", "diagnostics": [{"tract": "Breast Bands", "mark": "Two bold, complete black bands across pure white chest (only North American plover with two breast bands)."}, {"tract": "Rump & Tail", "mark": "In flight, flashes a brilliant fiery orange-rufous rump and uppertail contrasting with dark brown back."}, {"tract": "Eye & Call", "mark": "Large dark eye surrounded by a distinct bright orange-red orbital ring; loud, piercing 'kill-deer!' vocalization."}], "rule_out": "Two complete black breast bands + bright orange-rufous rump + red eye-ring = Killdeer.", "rarity": "common", "length_cm": 26.0, "bill_mm": 20.0, "size_display": "26 cm (10.5\")", "bill_display": "20 mm"}, {"id": "semipalmated_plover", "rank": 2, "name": "Semipalmated Plover", "sci": "Charadrius semipalmatus", "prob": "42%", "group": "plover", "traits": ["plover", "breast_bands", "short_stout_bill", "orange_legs"], "plate": "assets/shorebird_plates/semipalmated_plover_plate.jpg", "plate_caption": "Diagnostic plate: Single complete bold black breast band, dark mud-brown upperparts, stubby orange bill with black tip, bright orange legs", "photo": "assets/shorebirds/semipalmated_plover_1.jpg", "photo_caption": "Field profile: Compact build, single dark breast band, bright orange legs, short stubby two-toned bill", "crux_photo": "assets/shorebirds/semipalmated_plover_2.jpg", "crux_caption": "Mudflat view: Dark brownish mantle matching tidal mud; bold black forehead bar and white supercilium", "diagnostics": [{"tract": "Breast Band", "mark": "Single complete bold dark breast band encircling the neck (brownish in non-breeding, jet-black in breeding)."}, {"tract": "Bill & Legs", "mark": "Short, stubby bill with bright orange base and black tip (all-dark in winter); bright orange to yellow-orange legs."}, {"tract": "Mantle Tone", "mark": "Dark earthy grayish-brown upperparts (conspicuously darker than the pale bleached sand of Piping Plover)."}], "rule_out": "Single complete dark breast band + dark brown upperparts + bright orange legs + stubby bill = Semipalmated Plover.", "rarity": "common", "length_cm": 18.0, "bill_mm": 13.0, "size_display": "18 cm (7.0\")", "bill_display": "13 mm"}, {"id": "piping_plover", "rank": 3, "name": "Piping Plover", "sci": "Charadrius melodus", "prob": "4%", "group": "plover", "traits": ["plover", "breast_bands", "short_stout_bill", "orange_legs"], "plate": "assets/shorebird_plates/piping_plover_plate.jpg", "plate_caption": "Diagnostic plate: Extremely pale sandy mantle matching dry beach sand, single narrow black breast band (often broken), stubby orange bill, orange legs", "photo": "assets/shorebirds/piping_plover_1.jpg", "photo_caption": "Field profile: Pale bleached sand-colored back, narrow dark neck band, stubby orange-and-black bill, orange legs", "crux_photo": "assets/shorebirds/piping_plover_2.jpg", "crux_caption": "Beach habitat: Exceptional camouflage on dry ocean sand; pale rump and white underparts", "diagnostics": [{"tract": "Mantle Color", "mark": "Extremely pale, bleached sandy-gray upperparts perfectly matching dry coastal beach sand (ghostly pale compared to Semipalmated)."}, {"tract": "Neck Band", "mark": "Narrow black to dusky neck band across upper chest, frequently broken or incomplete at center of breast."}, {"tract": "Bill & Legs", "mark": "Short stubby orange bill with black tip; bright orange legs; threatened coastal beach specialist."}], "rule_out": "Ghostly pale sandy-white mantle + narrow/broken breast band + orange legs = Piping Plover.", "rarity": "uncommon", "length_cm": 18.0, "bill_mm": 12.0, "size_display": "18 cm (7.0\")", "bill_display": "12 mm"}, {"id": "black_bellied_plover", "rank": 4, "name": "Black-bellied Plover (Fall / Winter)", "sci": "Pluvialis squatarola", "prob": "38%", "group": "plover", "traits": ["plover", "short_stout_bill", "dark_legs", "black_axillaries", "white_rump"], "plate": "assets/shorebird_plates/black_bellied_plover_plate.jpg", "plate_caption": "Diagnostic plate: Large stout plover, heavy black bill, cold silver-gray spangled upperparts, white underparts, slate-gray legs. Black axillaries in flight", "photo": "assets/shorebirds/black_bellied_plover_1.jpg", "photo_caption": "Field profile: Bulky heavy-chested posture, cold silver-gray spangling, stout dark bill, dark gray legs", "crux_photo": "assets/shorebirds/black_bellied_plover_2.jpg", "crux_caption": "Flight crux: Diagnostic jet-black axillaries ('black armpits') beneath wings and stark white rump in flight", "diagnostics": [{"tract": "Flight Crux", "mark": "100% DIAGNOSTIC IN FLIGHT: Jet-black axillaries ('black armpits') on the underwing linings and crisp white rump."}, {"tract": "Structure & Bill", "mark": "Largest North American plover; heavy barrel-chested build; stout, thick black bill."}, {"tract": "Plumage Tone", "mark": "Cold, pale silver-gray spangling on mantle (completely lacks warm golden tones of American Golden-Plover)."}], "rule_out": "Large stout plover + cold silver-gray spangling + heavy black bill + jet-black underwing 'armpits' = Black-bellied Plover.", "rarity": "common", "length_cm": 29.0, "bill_mm": 29.0, "size_display": "29 cm (11.5\")", "bill_display": "29 mm"}, {"id": "american_golden_plover", "rank": 5, "name": "American Golden-Plover (Fall)", "sci": "Pluvialis dominica", "prob": "6%", "group": "plover", "traits": ["plover", "short_stout_bill", "dark_legs"], "plate": "assets/shorebird_plates/american_golden_plover_plate.jpg", "plate_caption": "Diagnostic plate: Slender attenuated build, long primary projection past tail, warm golden-buff spangling, bold whitish supercilium, dusky underwings", "photo": "assets/shorebirds/american_golden_plover_1.jpg", "photo_caption": "Field profile: Slender graceful structure, warm yellowish-gold spangled mantle, bold pale eyebrow, long wings extending well past tail", "crux_photo": "assets/shorebirds/american_golden_plover_2.jpg", "crux_caption": "Comparison view: Direct side-by-side comparison with Black-bellied Plover (left); Golden-Plover (right) is slimmer with warm golden spangling, smaller bill, and wings extending far past tail tip", "diagnostics": [{"tract": "Flight Underwing", "mark": "Uniform dusky-gray underwing linings and axillaries in flight (completely lacks the jet-black armpits of Black-bellied Plover)."}, {"tract": "Plumage Tone", "mark": "Warm golden-yellow and buff spangles covering dark brown upperparts; prominent pale whitish-buff supercilium."}, {"tract": "Structure", "mark": "Slender, attenuated body with long wings; primary tips project significantly (1-2 cm) beyond the tail tip."}], "rule_out": "Slender plover + warm golden spangles + long primary projection + dusky underwings (no black armpits) = American Golden-Plover.", "rarity": "uncommon", "length_cm": 26.0, "bill_mm": 22.0, "size_display": "26 cm (10.5\")", "bill_display": "22 mm"}, {"id": "greater_yellowlegs", "rank": 6, "name": "Greater Yellowlegs", "sci": "Tringa melanoleuca", "prob": "50%", "group": "yellowlegs", "traits": ["yellowlegs", "upturned_bill", "yellow_legs"], "plate": "assets/shorebird_plates/greater_yellowlegs_plate.jpg", "plate_caption": "Diagnostic plate: Long heavy bill (1.5x head length, distinctly upturned/recurved), long bright yellow legs, checkered grayish-brown mantle", "photo": "assets/shorebirds/greater_yellowlegs_1.jpg", "photo_caption": "Field profile: Long heavy bill with visible slight upward curve, heavy chest checkering, long bright yellow legs", "crux_photo": "assets/shorebirds/greater_yellowlegs_2.jpg", "crux_caption": "Bill closeup: Bill is clearly 1.5x longer than the distance from bill base to nape, with a pale gray base and upturned tip", "diagnostics": [{"tract": "Bill Length & Shape", "mark": "Long, stout bill that is 1.5x the length of the head, with a distinct slight upward curve (recurved) toward the tip."}, {"tract": "Legs & Size", "mark": "Very long, bright butter-yellow legs; robust, heavy-chested body (roughly 25-30% larger than Lesser Yellowlegs)."}, {"tract": "Voice", "mark": "Raucous, piercing 3 to 4 note descending whistle: 'tew-tew-tew' (Lesser usually gives 1 or 2 softer notes)."}], "rule_out": "Heavy upturned bill 1.5x head length + bright yellow legs + 3-4 note call = Greater Yellowlegs.", "rarity": "common", "length_cm": 36.0, "bill_mm": 56.0, "size_display": "36 cm (14.0\")", "bill_display": "56 mm"}, {"id": "lesser_yellowlegs", "rank": 7, "name": "Lesser Yellowlegs", "sci": "Tringa flavipes", "prob": "45%", "group": "yellowlegs", "traits": ["yellowlegs", "long_straight_bill", "yellow_legs"], "plate": "assets/shorebird_plates/lesser_yellowlegs_plate.jpg", "plate_caption": "Diagnostic plate: Dainty slender build, straight needle-like black bill (1.0x head length, never upturned), bright yellow legs, fine neck streaking", "photo": "assets/shorebirds/lesser_yellowlegs_1.jpg", "photo_caption": "Field profile: Dainty petite build, perfectly straight slender all-black bill, long bright yellow legs", "crux_photo": "assets/shorebirds/lesser_yellowlegs_2.jpg", "crux_caption": "Head closeup: Bill is slender, straight, and strictly equal to the head length (1.0x head length, never curved)", "diagnostics": [{"tract": "Bill Length & Shape", "mark": "Slender, straight, needle-fine all-black bill that is roughly equal to head length (1.0x head length, never upturned)."}, {"tract": "Structure & Legs", "mark": "Delicate, slender, dove-proportioned body with long bright yellow legs; much lighter and more buoyant than Greater."}, {"tract": "Voice", "mark": "Soft, mellow 1 or 2 note flight call: 'tyew' or 'tyew-tyew' (never loud piercing triple whistles)."}], "rule_out": "Straight needle-like bill equal to head length + dainty build + bright yellow legs = Lesser Yellowlegs.", "rarity": "common", "length_cm": 26.0, "bill_mm": 37.0, "size_display": "26 cm (10.5\")", "bill_display": "37 mm"}, {"id": "solitary_sandpiper", "rank": 8, "name": "Solitary Sandpiper", "sci": "Tringa solitaria", "prob": "25%", "group": "yellowlegs", "traits": ["yellowlegs", "eye_ring", "long_straight_bill", "yellow_legs"], "plate": "assets/shorebird_plates/solitary_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: Bold white eye-ring, dark unstriped olive-brown upperparts finely speckled with white, dull greenish-olive legs, barred outer tail", "photo": "assets/shorebirds/solitary_sandpiper_1.jpg", "photo_caption": "Field profile: Prominent white eye-ring on dark face, fine white speckling across dark back, dull olive legs, woodland pool habitat", "crux_photo": "assets/shorebirds/solitary_sandpiper_2.jpg", "crux_caption": "Eye-ring & back detail: Bold white eye-ring contrasting with dark face, fine neat white speckling across slate-brown mantle, dull greenish legs", "diagnostics": [{"tract": "Eye & Face", "mark": "Stark, bold, complete white eye-ring contrasting against dark dusky face."}, {"tract": "Mantle & Wings", "mark": "Very dark olive-brown upperparts finely sprinkled with neat white spots; in flight wings are completely dark with NO wingstripe."}, {"tract": "Legs & Tail", "mark": "Dull olive-green legs (not bright yellow!); outer tail feathers boldly barred with black and white; favors quiet freshwater puddles."}], "rule_out": "Bold white eye-ring + dark white-speckled back + unstriped dark wings + olive legs = Solitary Sandpiper.", "rarity": "common", "length_cm": 21.0, "bill_mm": 30.0, "size_display": "21 cm (8.5\")", "bill_display": "30 mm"}, {"id": "spotted_sandpiper_breeding", "rank": 9, "name": "Spotted Sandpiper (Breeding)", "sci": "Actitis macularius", "prob": "35%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "spotted_breast", "short_stout_bill"], "plate": "assets/shorebird_plates/spotted_sandpiper_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Dense bold dark spots covering pure white breast and belly, greenish-bronze back, pinkish-orange bill, horizontal teetering posture", "photo": "assets/shorebirds/spotted_sandpiper_breeding_1.jpg", "photo_caption": "Field profile: Bold black leopard spots covering white breast and belly, orange bill with dark tip, constant bobbing tail", "crux_photo": "assets/shorebirds/spotted_sandpiper_breeding_2.jpg", "crux_caption": "Teetering stance: Horizontal body carriage with perpetual rear-end teetering; greenish-bronze mantle", "diagnostics": [{"tract": "Underparts", "mark": "Pure white breast and belly densely covered in bold, distinct, dark round spots (unique among North American shorebirds)."}, {"tract": "Posture & Flight", "mark": "Perpetual nervous teetering/bobbing of the tail and rear body; stiff, trembling, cupped-wing fluttering flight over water."}, {"tract": "Bill & Upperparts", "mark": "Pinkish-orange bill with dark tip; unpatterned warm greenish-bronze upperparts."}], "rule_out": "Dense bold round belly spots + perpetual teetering + orange bill = Breeding Spotted Sandpiper.", "rarity": "common", "length_cm": 19.0, "bill_mm": 24.0, "size_display": "19 cm (7.5\")", "bill_display": "24 mm"}, {"id": "spotted_sandpiper_nonbreeding", "rank": 10, "name": "Spotted Sandpiper (Fall / Winter)", "sci": "Actitis macularius", "prob": "28%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "shoulder_spur", "short_stout_bill"], "plate": "assets/shorebird_plates/spotted_sandpiper_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Immaculate unspotted white underparts, diagnostic clean white vertical shoulder spur in front of wing, plain brownish-gray back", "photo": "assets/shorebirds/spotted_sandpiper_nonbreeding_1.jpg", "photo_caption": "Field profile: Clean white underparts, distinct white spur rising vertically in front of wing, pale yellowish legs, teetering gait", "crux_photo": "assets/shorebirds/spotted_sandpiper_nonbreeding_2.jpg", "crux_caption": "Shoulder closeup: Crisp white vertical wedge cutting up into brown breast side in front of the wing bend", "diagnostics": [{"tract": "Shoulder Spur", "mark": "100% DIAGNOSTIC CRUX: A crisp, bright white vertical finger/spur extending upward in front of the wing onto the side of the breast."}, {"tract": "Underparts & Posture", "mark": "Spots completely absent; immaculate white underparts with dusky brownish wash at sides of neck; compulsive tail bobbing."}, {"tract": "Flight", "mark": "Distinctive stiff-winged, trembling fluttering flight on arched downward wings, showing a bold white wingstripe."}], "rule_out": "Plain white underparts + crisp white shoulder spur in front of wing + compulsive tail teetering = Non-Breeding Spotted Sandpiper.", "rarity": "common", "length_cm": 19.0, "bill_mm": 24.0, "size_display": "19 cm (7.5\")", "bill_display": "24 mm"}, {"id": "least_sandpiper", "rank": 11, "name": "Least Sandpiper", "sci": "Calidris minutilla", "prob": "55%", "group": "peep", "traits": ["peep", "yellow_legs", "droop_bill"], "plate": "assets/shorebird_plates/least_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: World's smallest peep, diagnostic yellowish-green legs (only common peep with pale legs!), fine decurved bill, warm brown tones", "photo": "assets/shorebirds/least_sandpiper_1.jpg", "photo_caption": "Field profile: Diminutive tiny size, bright yellowish-green legs, fine droop-tipped bill, warm brownish mantle", "crux_photo": "assets/shorebirds/least_sandpiper_2.jpg", "crux_caption": "Legs closeup: Yellowish-green legs clearly visible on mud (all other common peeps have black legs!); hunched posture", "diagnostics": [{"tract": "Leg Color", "mark": "100% DIAGNOSTIC CRUX: Bright greenish-yellow to pale olive legs (all other common North American peeps have solid black legs!)."}, {"tract": "Size & Posture", "mark": "World's smallest shorebird (sparrow-sized); typically feeds in a hunched, crouched, creeping posture along high muddy edges."}, {"tract": "Bill & Plumage", "mark": "Fine, slender, decurved black bill with a drooping tip; warm rufous-brown tones across mantle and streaked breast."}], "rule_out": "Tiny peep + pale yellowish-green legs + fine drooping bill + warm brown tones = Least Sandpiper.", "rarity": "common", "length_cm": 14.0, "bill_mm": 18.0, "size_display": "14 cm (5.5\")", "bill_display": "18 mm"}, {"id": "semipalmated_sandpiper", "rank": 12, "name": "Semipalmated Sandpiper", "sci": "Calidris pusilla", "prob": "48%", "group": "peep", "traits": ["peep", "dark_legs", "short_stout_bill"], "plate": "assets/shorebird_plates/semipalmated_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: Small peep, solid black legs, short straight tubular blunt-tipped black bill, cold grayish-brown upperparts, white underparts", "photo": "assets/shorebirds/semipalmated_sandpiper_1.jpg", "photo_caption": "Field profile: Solid black legs, short straight blunt bill, cold grayish scalloped mantle, white belly", "crux_photo": "assets/shorebirds/semipalmated_sandpiper_2.jpg", "crux_caption": "Bill closeup: Bill is short, straight, and tubular with a blunt rounded tip (not fine or drooping)", "diagnostics": [{"tract": "Bill Shape", "mark": "Short, straight, stout, tubular black bill with a blunt rounded tip (never droop-tipped like Western or Least)."}, {"tract": "Leg Color", "mark": "Solid jet-black legs (partially webbed toes, hence 'semipalmated')."}, {"tract": "Plumage Tone", "mark": "Cold, neutral grayish-brown upperparts with pale feather fringes; neat light breast streaking."}], "rule_out": "Small peep + solid black legs + short straight blunt-tipped bill + cold gray mantle = Semipalmated Sandpiper.", "rarity": "common", "length_cm": 15.0, "bill_mm": 19.0, "size_display": "15 cm (6.0\")", "bill_display": "19 mm"}, {"id": "western_sandpiper", "rank": 13, "name": "Western Sandpiper", "sci": "Calidris mauri", "prob": "12%", "group": "peep", "traits": ["peep", "dark_legs", "droop_bill"], "plate": "assets/shorebird_plates/western_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: Peep with longer droop-tipped black bill with thick base, solid black legs, rufous-edged upper scapulars, flank chevrons", "photo": "assets/shorebirds/western_sandpiper_1.jpg", "photo_caption": "Field profile: Noticeably long bill with distinctly drooping tip and thickened base, black legs, rufous scapular patch", "crux_photo": "assets/shorebirds/western_sandpiper_2.jpg", "crux_caption": "Bill & breast: Thick bill base tapering to a fine downcurved tip; arrow-shaped chevron streaks on breast and flanks", "diagnostics": [{"tract": "Bill Structure", "mark": "Noticeably longer bill with a noticeably thickened, stout base that tapers to a fine, distinctly drooping/downcurved tip."}, {"tract": "Scapulars & Plumage", "mark": "Upper scapulars show bright rufous-chestnut feather edges contrasting with grayer lower back; arrow-shaped chevrons on flank."}, {"tract": "Legs & Foraging", "mark": "Solid black legs; probes in deeper water than Semipalmated Sandpiper with rhythmic head-stitching."}], "rule_out": "Peep with black legs + longer droop-tipped bill with thick base + rufous upper scapulars = Western Sandpiper.", "rarity": "uncommon", "length_cm": 16.0, "bill_mm": 25.0, "size_display": "16 cm (6.3\")", "bill_display": "25 mm"}, {"id": "white_rumped_sandpiper", "rank": 14, "name": "White-rumped Sandpiper", "sci": "Calidris fuscicollis", "prob": "8%", "group": "peep", "traits": ["peep", "dark_legs", "droop_bill", "white_rump"], "plate": "assets/shorebird_plates/white_rumped_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: Elongate attenuated profile, primaries projecting far beyond tail, decurved bill with pale lower base, pure white horseshoe rump", "photo": "assets/shorebirds/white_rumped_sandpiper_1.jpg", "photo_caption": "Field profile: Long elegant wings extending well beyond tail tip, pale base to lower mandible, neat flank streaks", "crux_photo": "assets/shorebirds/white_rumped_sandpiper_2.jpg", "crux_caption": "Breeding plumage profile: Rich rufous-edged upper scapulars, fine dark chevron streaks along flanks, and long wingtips projecting past tail", "diagnostics": [{"tract": "Flight Crux", "mark": "100% DIAGNOSTIC IN FLIGHT: Solid, pure snow-white horseshoe band completely across the rump and uppertail coverts."}, {"tract": "Wing Projection", "mark": "Very long, crossed primary tips projecting far beyond the tail tip, giving an elongate, horizontal profile."}, {"tract": "Bill & Flanks", "mark": "Slightly decurved dark bill with a distinctive pale flesh-orange spot at the base of the lower mandible; fine chevron streaks along flanks."}], "rule_out": "Pure white horseshoe rump in flight + long primary projection past tail + pale base to lower mandible = White-rumped Sandpiper.", "rarity": "uncommon", "length_cm": 19.0, "bill_mm": 23.0, "size_display": "19 cm (7.5\")", "bill_display": "23 mm"}, {"id": "sanderling", "rank": 15, "name": "Sanderling (Fall / Winter)", "sci": "Calidris alba", "prob": "50%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "short_stout_bill", "dark_legs", "bold_wing_stripe"], "plate": "assets/shorebird_plates/sanderling_plate.jpg", "plate_caption": "Diagnostic plate: Gleaming pure white underparts and face, pale pearl-gray back, prominent black carpal shoulder patch, black bill and legs", "photo": "assets/shorebirds/sanderling_1.jpg", "photo_caption": "Field profile: Dazzling pale white plumage, dark shoulder patch, stout black bill, black legs, sprinting along ocean surf", "crux_photo": "assets/shorebirds/sanderling_2.jpg", "crux_caption": "Flight wingstripe: Broad, gleaming white wingstripe contrasting against black flight feathers; only 3 toes (no hind toe)", "diagnostics": [{"tract": "Plumage Tone", "mark": "Whitest shorebird on the beach: dazzling snowy-white face, breast, and underparts with pale pearl-gray mantle."}, {"tract": "Shoulder Patch", "mark": "Prominent, contrasting blackish carpal patch on folded wing bend; broad brilliant white wingstripe in flight."}, {"tract": "Behavior & Feet", "mark": "Chases incoming and receding waves along ocean surf like a wind-up toy; feet lack a hind toe (hallux) entirely (3 toes)."}], "rule_out": "Dazzling white beach runner + black shoulder patch + stout black bill + wave-chasing behavior = Sanderling.", "rarity": "common", "length_cm": 20.0, "bill_mm": 25.0, "size_display": "20 cm (8.0\")", "bill_display": "25 mm"}, {"id": "dunlin", "rank": 16, "name": "Dunlin (Fall / Winter)", "sci": "Calidris alpina", "prob": "46%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "droop_bill", "dark_legs"], "plate": "assets/shorebird_plates/dunlin_plate.jpg", "plate_caption": "Diagnostic plate: Distinctive long heavy black bill that distinctly curves and droops downward at the tip, hunched posture, uniform drab gray mantle", "photo": "assets/shorebirds/dunlin_1.jpg", "photo_caption": "Field profile: Hunched droop-nosed silhouette, long downcurved bill, uniform brownish-gray basic plumage, black legs", "crux_photo": "assets/shorebirds/dunlin_2.jpg", "crux_caption": "Feeding view: Probing deep in tidal mud with distinctly decurved bill; immaculate white belly (black patch in breeding)", "diagnostics": [{"tract": "Bill Shape", "mark": "Long, heavy, distinctly downcurved black bill with a noticeable droop at the tip ('droop-nosed' look)."}, {"tract": "Posture & Body", "mark": "Characteristic hunched, pot-bellied, neckless carriage while probing deep in mudflats."}, {"tract": "Plumage Tone", "mark": "Uniformly drab brownish-gray mantle and breast wash in fall/winter; unspotted white belly (famous black belly patch in spring)."}], "rule_out": "Hunched posture + long heavy bill with drooping tip + uniform drab gray plumage = Dunlin.", "rarity": "common", "length_cm": 21.0, "bill_mm": 38.0, "size_display": "21 cm (8.5\")", "bill_display": "38 mm"}, {"id": "short_billed_dowitcher", "rank": 17, "name": "Short-billed Dowitcher", "sci": "Limnodromus griseus", "prob": "32%", "group": "dowitcher", "traits": ["dowitcher", "long_straight_bill", "yellow_legs", "white_rump"], "plate": "assets/shorebird_plates/short_billed_dowitcher_plate.jpg", "plate_caption": "Diagnostic plate: Long straight snipe-like bill, flat forehead profile with gentle loral angle, uniform gray-brown upperparts, yellowish-green legs", "photo": "assets/shorebirds/short_billed_dowitcher_1.jpg", "photo_caption": "Field profile: Straight heavy bill, sewing-machine vertical probing motion in tidal mud, yellowish-olive legs", "crux_photo": "assets/shorebirds/short_billed_dowitcher_2.jpg", "crux_caption": "Flight crux: Long white oval/cigar wedge extending from rump up the center of the lower back; rapid 3-note 'tut-tut-tut' call", "diagnostics": [{"tract": "Head & Loral Profile", "mark": "Flatter, more gently sloping forehead profile; pale supercilium runs straight back; bill is slightly shorter (roughly 2x head length)."}, {"tract": "Feeding & Habitat", "mark": "Rapid vertical up-and-down 'sewing machine' probing motion; primarily found on coastal tidal mudflats and saltmarshes."}, {"tract": "Voice & Tail", "mark": "Diagnostic rapid, mellow 3-note flight call: 'tut-tut-tut'; tail bars have white bars wider than dark bars."}], "rule_out": "Sewing-machine probing + white back wedge in flight + flat forehead + coastal saltmarsh + 3-note 'tut-tut-tut' = Short-billed Dowitcher.", "rarity": "common", "length_cm": 28.0, "bill_mm": 60.0, "size_display": "28 cm (11.0\")", "bill_display": "60 mm"}, {"id": "long_billed_dowitcher", "rank": 18, "name": "Long-billed Dowitcher", "sci": "Limnodromus scolopaceus", "prob": "10%", "group": "dowitcher", "traits": ["dowitcher", "long_straight_bill", "yellow_legs", "white_rump"], "plate": "assets/shorebird_plates/long_billed_dowitcher_plate.jpg", "plate_caption": "Diagnostic plate: Extremely long straight snipe bill, steep high-crowned forehead with abrupt drop to bill, dark breast wash, yellowish-olive legs", "photo": "assets/shorebirds/long_billed_dowitcher_1.jpg", "photo_caption": "Field profile: Exceptionally long bill, steep arched forehead, humpbacked posture, darker breast wash, freshwater preference", "crux_photo": "assets/shorebirds/long_billed_dowitcher_2.jpg", "crux_caption": "Voice crux: Diagnostic sharp, high-pitched single metallic 'keek!' call; tail has dark bars wider than pale bars", "diagnostics": [{"tract": "Head & Forehead Profile", "mark": "Steep, high-crowned forehead with a distinct, abrupt right-angle drop to the bill base; extremely long bill (often >2.5x head length)."}, {"tract": "Voice", "mark": "100% DIAGNOSTIC CRUX: A sharp, thin, high-pitched, metallic single note: 'keek!' or 'keek-keek!' (never mellow 3-note 'tut-tut-tut')."}, {"tract": "Habitat & Tail", "mark": "Strongly prefers freshwater marshes and managed impoundments over tidal flats; tail has black bars wider than pale bars."}], "rule_out": "Sewing-machine probing + steep forehead + very long bill + sharp single 'keek!' call + freshwater = Long-billed Dowitcher.", "rarity": "uncommon", "length_cm": 29.0, "bill_mm": 70.0, "size_display": "29 cm (11.5\")", "bill_display": "70 mm"}, {"id": "stilt_sandpiper", "rank": 19, "name": "Stilt Sandpiper", "sci": "Calidris himantopus", "prob": "9%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "droop_bill", "yellow_legs", "white_rump"], "plate": "assets/shorebird_plates/stilt_sandpiper_plate.jpg", "plate_caption": "Diagnostic plate: Slender medium sandpiper, diagnostic long greenish-yellow stilt legs, slender black bill with distinct gentle droop at tip, bold white supercilium, whitish underparts with fine streaking, white rump", "photo": "assets/shorebirds/stilt_sandpiper_1.jpg", "photo_caption": "Field profile: Long greenish-yellow legs, slender bill drooping slightly at tip, bold white eyebrow, deep wading posture", "crux_photo": "assets/shorebirds/stilt_sandpiper_2.jpg", "crux_caption": "Feeding crux: Decurved bill tip and long legs; often wades belly-deep with rapid vertical sewing-machine probing motion", "diagnostics": [{"tract": "Bill & Feeding Action", "mark": "Long, slender, dark bill that gently decurved/droops towards the tip; probes with a rapid vertical 'sewing-machine' motion while wading belly-deep in water."}, {"tract": "Legs & Stance", "mark": "Diagnostic long, spindly, greenish-yellow to dull olive legs ('stilt legs'); frequently wades in deeper water than peeps or yellowlegs."}, {"tract": "Head Pattern & Rump", "mark": "Prominent bold white supercilium (eyebrow) extending far behind the dark eye; flashes a solid white rump patch in flight (lacks dowitcher's white back wedge)."}], "rule_out": "Long greenish-yellow legs + decurved/droop-tipped bill + bold white supercilium + sewing-machine probing in deep water = Stilt Sandpiper.", "rarity": "uncommon", "length_cm": 22.0, "bill_mm": 39.0, "size_display": "22 cm (8.7\")", "bill_display": "39 mm"}, {"id": "willet", "rank": 20, "name": "Willet", "sci": "Tringa semipalmata", "prob": "36%", "group": "yellowlegs", "traits": ["yellowlegs", "long_straight_bill", "dark_legs", "bold_wing_stripe"], "plate": "assets/shorebird_plates/willet_plate.jpg", "plate_caption": "Diagnostic plate: Heavy stocky build, stout straight grayish-black bill, uniform plain gray plumage, long bluish-gray legs. Bold black-and-white wings", "photo": "assets/shorebirds/willet_1.jpg", "photo_caption": "Field profile: Unassuming stocky plain gray shorebird, thick straight bill, bluish-gray legs, coastal saltmarsh habitat", "crux_photo": "assets/shorebirds/willet_2.jpg", "crux_caption": "Flight explosion: Shocking brilliant black-and-white wing pattern ('piano keys') revealed the instant it takes flight", "diagnostics": [{"tract": "Flight Pattern", "mark": "100% DIAGNOSTIC EXPLOSION: When taking flight, plain gray bird erupts with a shocking, brilliant black-and-white 'piano key' wing stripe."}, {"tract": "Structure & Bill", "mark": "Large, stocky, heavily built shorebird; thick, straight, heavy grayish-black chisel bill."}, {"tract": "Legs & Plumage", "mark": "Long bluish-gray legs (never yellow!); completely plain, unpatterned battleship-gray plumage."}], "rule_out": "Plain battleship-gray body + heavy straight bill + shocking black-and-white 'piano key' wings in flight = Willet.", "rarity": "common", "length_cm": 38.0, "bill_mm": 57.0, "size_display": "38 cm (15.0\")", "bill_display": "57 mm"}, {"id": "hudsonian_godwit", "rank": 21, "name": "Hudsonian Godwit", "sci": "Limosa haemastica", "prob": "0.3%", "group": "medium_sandpiper", "traits": ["medium_sandpiper", "upturned_bill", "dark_legs", "black_axillaries", "white_rump"], "plate": "assets/shorebird_plates/hudsonian_godwit_plate.jpg", "plate_caption": "Diagnostic plate: Large graceful shorebird, long upturned two-toned bill (pink base, black tip), clean white supercilium, black underwings and white rump", "photo": "assets/shorebirds/hudsonian_godwit_1.jpg", "photo_caption": "Field profile: Elegant posture, long two-toned upturned bill, grayish-brown mantle, dark slate legs", "crux_photo": "assets/shorebirds/hudsonian_godwit_2.jpg", "crux_caption": "Flight crux: Diagnostic solid jet-black underwing linings, crisp white rump band, and solid black tail", "diagnostics": [{"tract": "Bill Structure", "mark": "Exceptionally long, slender bill that curves distinctly upward (recurved), with a bright flesh-pink basal half and jet-black tip."}, {"tract": "Flight Pattern Crux", "mark": "100% DIAGNOSTIC REVIEW CRUX: Solid jet-black underwing coverts/axillaries, crisp white rump band, and solid black tail."}, {"tract": "Size & Rarity", "mark": "Large, elegant godwit; rare fall migrant through coastal impoundments and mudflats requiring detailed documentation."}], "rule_out": "Long upturned two-toned pink/black bill + jet-black underwings + white rump & black tail = Hudsonian Godwit.", "rarity": "rare", "length_cm": 39.0, "bill_mm": 80.0, "size_display": "39 cm (15.5\")", "bill_display": "80 mm"}];
+    const shorebirds = [
+  {
+    "id": "killdeer",
+    "rank": 1,
+    "name": "Killdeer",
+    "sci": "Charadrius vociferus",
+    "prob": "65%",
+    "group": "plover",
+    "traits": [
+      "plover",
+      "breast_bands",
+      "short_stout_bill"
+    ],
+    "plate": "assets/shorebird_plates/killdeer_plate.jpg",
+    "plate_caption": "Diagnostic plate: Large dark eye with orange-red orbital ring, two complete bold black breast bands, tawny-brown upperparts, bright orange rump in flight",
+    "photo": "assets/shorebirds/killdeer_1.jpg",
+    "photo_caption": "Field profile: Double black neck/breast bands, slender alert build, white forehead and supercilium, flesh-pink legs",
+    "crux_photo": "assets/shorebirds/killdeer_2.jpg",
+    "crux_caption": "Chest closeup: Upper and lower black bands completely separated by white band; bright red-orange orbital eye-ring",
+    "diagnostics": [
+      {
+        "tract": "Breast Bands",
+        "mark": "Two bold, complete black bands across pure white chest (only North American plover with two breast bands)."
+      },
+      {
+        "tract": "Rump & Tail",
+        "mark": "In flight, flashes a brilliant fiery orange-rufous rump and uppertail contrasting with dark brown back."
+      },
+      {
+        "tract": "Eye & Call",
+        "mark": "Large dark eye surrounded by a distinct bright orange-red orbital ring; loud, piercing 'kill-deer!' vocalization."
+      }
+    ],
+    "rule_out": "Two complete black breast bands + bright orange-rufous rump + red eye-ring = Killdeer.",
+    "rarity": "common",
+    "length_cm": 26.0,
+    "bill_mm": 20.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "20 mm",
+    "ebird_code": "kildee"
+  },
+  {
+    "id": "semipalmated_plover",
+    "rank": 2,
+    "name": "Semipalmated Plover",
+    "sci": "Charadrius semipalmatus",
+    "prob": "42%",
+    "group": "plover",
+    "traits": [
+      "plover",
+      "breast_bands",
+      "short_stout_bill",
+      "orange_legs"
+    ],
+    "plate": "assets/shorebird_plates/semipalmated_plover_plate.jpg",
+    "plate_caption": "Diagnostic plate: Single complete bold black breast band, dark mud-brown upperparts, stubby orange bill with black tip, bright orange legs",
+    "photo": "assets/shorebirds/semipalmated_plover_1.jpg",
+    "photo_caption": "Field profile: Compact build, single dark breast band, bright orange legs, short stubby two-toned bill",
+    "crux_photo": "assets/shorebirds/semipalmated_plover_2.jpg",
+    "crux_caption": "Mudflat view: Dark brownish mantle matching tidal mud; bold black forehead bar and white supercilium",
+    "diagnostics": [
+      {
+        "tract": "Breast Band",
+        "mark": "Single complete bold dark breast band encircling the neck (brownish in non-breeding, jet-black in breeding)."
+      },
+      {
+        "tract": "Bill & Legs",
+        "mark": "Short, stubby bill with bright orange base and black tip (all-dark in winter); bright orange to yellow-orange legs."
+      },
+      {
+        "tract": "Mantle Tone",
+        "mark": "Dark earthy grayish-brown upperparts (conspicuously darker than the pale bleached sand of Piping Plover)."
+      }
+    ],
+    "rule_out": "Single complete dark breast band + dark brown upperparts + bright orange legs + stubby bill = Semipalmated Plover.",
+    "rarity": "common",
+    "length_cm": 18.0,
+    "bill_mm": 13.0,
+    "size_display": "18 cm (7.0\")",
+    "bill_display": "13 mm",
+    "ebird_code": "semplo"
+  },
+  {
+    "id": "piping_plover",
+    "rank": 3,
+    "name": "Piping Plover",
+    "sci": "Charadrius melodus",
+    "prob": "4%",
+    "group": "plover",
+    "traits": [
+      "plover",
+      "breast_bands",
+      "short_stout_bill",
+      "orange_legs"
+    ],
+    "plate": "assets/shorebird_plates/piping_plover_plate.jpg",
+    "plate_caption": "Diagnostic plate: Extremely pale sandy mantle matching dry beach sand, single narrow black breast band (often broken), stubby orange bill, orange legs",
+    "photo": "assets/shorebirds/piping_plover_1.jpg",
+    "photo_caption": "Field profile: Pale bleached sand-colored back, narrow dark neck band, stubby orange-and-black bill, orange legs",
+    "crux_photo": "assets/shorebirds/piping_plover_2.jpg",
+    "crux_caption": "Beach habitat: Exceptional camouflage on dry ocean sand; pale rump and white underparts",
+    "diagnostics": [
+      {
+        "tract": "Mantle Color",
+        "mark": "Extremely pale, bleached sandy-gray upperparts perfectly matching dry coastal beach sand (ghostly pale compared to Semipalmated)."
+      },
+      {
+        "tract": "Neck Band",
+        "mark": "Narrow black to dusky neck band across upper chest, frequently broken or incomplete at center of breast."
+      },
+      {
+        "tract": "Bill & Legs",
+        "mark": "Short stubby orange bill with black tip; bright orange legs; threatened coastal beach specialist."
+      }
+    ],
+    "rule_out": "Ghostly pale sandy-white mantle + narrow/broken breast band + orange legs = Piping Plover.",
+    "rarity": "uncommon",
+    "length_cm": 18.0,
+    "bill_mm": 12.0,
+    "size_display": "18 cm (7.0\")",
+    "bill_display": "12 mm",
+    "ebird_code": "pipplo"
+  },
+  {
+    "id": "black_bellied_plover",
+    "rank": 4,
+    "name": "Black-bellied Plover (Fall / Winter)",
+    "sci": "Pluvialis squatarola",
+    "prob": "38%",
+    "group": "plover",
+    "traits": [
+      "plover",
+      "short_stout_bill",
+      "dark_legs",
+      "black_axillaries",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/black_bellied_plover_plate.jpg",
+    "plate_caption": "Diagnostic plate: Large stout plover, heavy black bill, cold silver-gray spangled upperparts, white underparts, slate-gray legs. Black axillaries in flight",
+    "photo": "assets/shorebirds/black_bellied_plover_1.jpg",
+    "photo_caption": "Field profile: Bulky heavy-chested posture, cold silver-gray spangling, stout dark bill, dark gray legs",
+    "crux_photo": "assets/shorebirds/black_bellied_plover_2.jpg",
+    "crux_caption": "Flight crux: Diagnostic jet-black axillaries ('black armpits') beneath wings and stark white rump in flight",
+    "diagnostics": [
+      {
+        "tract": "Flight Crux",
+        "mark": "100% DIAGNOSTIC IN FLIGHT: Jet-black axillaries ('black armpits') on the underwing linings and crisp white rump."
+      },
+      {
+        "tract": "Structure & Bill",
+        "mark": "Largest North American plover; heavy barrel-chested build; stout, thick black bill."
+      },
+      {
+        "tract": "Plumage Tone",
+        "mark": "Cold, pale silver-gray spangling on mantle (completely lacks warm golden tones of American Golden-Plover)."
+      }
+    ],
+    "rule_out": "Large stout plover + cold silver-gray spangling + heavy black bill + jet-black underwing 'armpits' = Black-bellied Plover.",
+    "rarity": "common",
+    "length_cm": 29.0,
+    "bill_mm": 29.0,
+    "size_display": "29 cm (11.5\")",
+    "bill_display": "29 mm",
+    "ebird_code": "bkbplo"
+  },
+  {
+    "id": "american_golden_plover",
+    "rank": 5,
+    "name": "American Golden-Plover (Fall)",
+    "sci": "Pluvialis dominica",
+    "prob": "6%",
+    "group": "plover",
+    "traits": [
+      "plover",
+      "short_stout_bill",
+      "dark_legs"
+    ],
+    "plate": "assets/shorebird_plates/american_golden_plover_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender attenuated build, long primary projection past tail, warm golden-buff spangling, bold whitish supercilium, dusky underwings",
+    "photo": "assets/shorebirds/american_golden_plover_1.jpg",
+    "photo_caption": "Field profile: Slender graceful structure, warm yellowish-gold spangled mantle, bold pale eyebrow, long wings extending well past tail",
+    "crux_photo": "assets/shorebirds/american_golden_plover_2.jpg",
+    "crux_caption": "Comparison view: Direct side-by-side comparison with Black-bellied Plover (left); Golden-Plover (right) is slimmer with warm golden spangling, smaller bill, and wings extending far past tail tip",
+    "diagnostics": [
+      {
+        "tract": "Flight Underwing",
+        "mark": "Uniform dusky-gray underwing linings and axillaries in flight (completely lacks the jet-black armpits of Black-bellied Plover)."
+      },
+      {
+        "tract": "Plumage Tone",
+        "mark": "Warm golden-yellow and buff spangles covering dark brown upperparts; prominent pale whitish-buff supercilium."
+      },
+      {
+        "tract": "Structure",
+        "mark": "Slender, attenuated body with long wings; primary tips project significantly (1-2 cm) beyond the tail tip."
+      }
+    ],
+    "rule_out": "Slender plover + warm golden spangles + long primary projection + dusky underwings (no black armpits) = American Golden-Plover.",
+    "rarity": "uncommon",
+    "length_cm": 26.0,
+    "bill_mm": 22.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "22 mm",
+    "ebird_code": "amgplo"
+  },
+  {
+    "id": "greater_yellowlegs",
+    "rank": 6,
+    "name": "Greater Yellowlegs",
+    "sci": "Tringa melanoleuca",
+    "prob": "50%",
+    "group": "yellowlegs",
+    "traits": [
+      "yellowlegs",
+      "upturned_bill",
+      "yellow_legs"
+    ],
+    "plate": "assets/shorebird_plates/greater_yellowlegs_plate.jpg",
+    "plate_caption": "Diagnostic plate: Long heavy bill (1.5x head length, distinctly upturned/recurved), long bright yellow legs, checkered grayish-brown mantle",
+    "photo": "assets/shorebirds/greater_yellowlegs_1.jpg",
+    "photo_caption": "Field profile: Long heavy bill with visible slight upward curve, heavy chest checkering, long bright yellow legs",
+    "crux_photo": "assets/shorebirds/greater_yellowlegs_2.jpg",
+    "crux_caption": "Bill closeup: Bill is clearly 1.5x longer than the distance from bill base to nape, with a pale gray base and upturned tip",
+    "diagnostics": [
+      {
+        "tract": "Bill Length & Shape",
+        "mark": "Long, stout bill that is 1.5x the length of the head, with a distinct slight upward curve (recurved) toward the tip."
+      },
+      {
+        "tract": "Legs & Size",
+        "mark": "Very long, bright butter-yellow legs; robust, heavy-chested body (roughly 25-30% larger than Lesser Yellowlegs)."
+      },
+      {
+        "tract": "Voice",
+        "mark": "Raucous, piercing 3 to 4 note descending whistle: 'tew-tew-tew' (Lesser usually gives 1 or 2 softer notes)."
+      }
+    ],
+    "rule_out": "Heavy upturned bill 1.5x head length + bright yellow legs + 3-4 note call = Greater Yellowlegs.",
+    "rarity": "common",
+    "length_cm": 36.0,
+    "bill_mm": 56.0,
+    "size_display": "36 cm (14.0\")",
+    "bill_display": "56 mm",
+    "ebird_code": "greyel"
+  },
+  {
+    "id": "lesser_yellowlegs",
+    "rank": 7,
+    "name": "Lesser Yellowlegs",
+    "sci": "Tringa flavipes",
+    "prob": "45%",
+    "group": "yellowlegs",
+    "traits": [
+      "yellowlegs",
+      "long_straight_bill",
+      "yellow_legs"
+    ],
+    "plate": "assets/shorebird_plates/lesser_yellowlegs_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dainty slender build, straight needle-like black bill (1.0x head length, never upturned), bright yellow legs, fine neck streaking",
+    "photo": "assets/shorebirds/lesser_yellowlegs_1.jpg",
+    "photo_caption": "Field profile: Dainty petite build, perfectly straight slender all-black bill, long bright yellow legs",
+    "crux_photo": "assets/shorebirds/lesser_yellowlegs_2.jpg",
+    "crux_caption": "Head closeup: Bill is slender, straight, and strictly equal to the head length (1.0x head length, never curved)",
+    "diagnostics": [
+      {
+        "tract": "Bill Length & Shape",
+        "mark": "Slender, straight, needle-fine all-black bill that is roughly equal to head length (1.0x head length, never upturned)."
+      },
+      {
+        "tract": "Structure & Legs",
+        "mark": "Delicate, slender, dove-proportioned body with long bright yellow legs; much lighter and more buoyant than Greater."
+      },
+      {
+        "tract": "Voice",
+        "mark": "Soft, mellow 1 or 2 note flight call: 'tyew' or 'tyew-tyew' (never loud piercing triple whistles)."
+      }
+    ],
+    "rule_out": "Straight needle-like bill equal to head length + dainty build + bright yellow legs = Lesser Yellowlegs.",
+    "rarity": "common",
+    "length_cm": 26.0,
+    "bill_mm": 37.0,
+    "size_display": "26 cm (10.5\")",
+    "bill_display": "37 mm",
+    "ebird_code": "lesyel"
+  },
+  {
+    "id": "solitary_sandpiper",
+    "rank": 8,
+    "name": "Solitary Sandpiper",
+    "sci": "Tringa solitaria",
+    "prob": "25%",
+    "group": "yellowlegs",
+    "traits": [
+      "yellowlegs",
+      "eye_ring",
+      "long_straight_bill",
+      "yellow_legs"
+    ],
+    "plate": "assets/shorebird_plates/solitary_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Bold white eye-ring, dark unstriped olive-brown upperparts finely speckled with white, dull greenish-olive legs, barred outer tail",
+    "photo": "assets/shorebirds/solitary_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Prominent white eye-ring on dark face, fine white speckling across dark back, dull olive legs, woodland pool habitat",
+    "crux_photo": "assets/shorebirds/solitary_sandpiper_2.jpg",
+    "crux_caption": "Eye-ring & back detail: Bold white eye-ring contrasting with dark face, fine neat white speckling across slate-brown mantle, dull greenish legs",
+    "diagnostics": [
+      {
+        "tract": "Eye & Face",
+        "mark": "Stark, bold, complete white eye-ring contrasting against dark dusky face."
+      },
+      {
+        "tract": "Mantle & Wings",
+        "mark": "Very dark olive-brown upperparts finely sprinkled with neat white spots; in flight wings are completely dark with NO wingstripe."
+      },
+      {
+        "tract": "Legs & Tail",
+        "mark": "Dull olive-green legs (not bright yellow!); outer tail feathers boldly barred with black and white; favors quiet freshwater puddles."
+      }
+    ],
+    "rule_out": "Bold white eye-ring + dark white-speckled back + unstriped dark wings + olive legs = Solitary Sandpiper.",
+    "rarity": "common",
+    "length_cm": 21.0,
+    "bill_mm": 30.0,
+    "size_display": "21 cm (8.5\")",
+    "bill_display": "30 mm",
+    "ebird_code": "solsan"
+  },
+  {
+    "id": "spotted_sandpiper_breeding",
+    "rank": 9,
+    "name": "Spotted Sandpiper (Breeding)",
+    "sci": "Actitis macularius",
+    "prob": "35%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "spotted_breast",
+      "short_stout_bill"
+    ],
+    "plate": "assets/shorebird_plates/spotted_sandpiper_breeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Dense bold dark spots covering pure white breast and belly, greenish-bronze back, pinkish-orange bill, horizontal teetering posture",
+    "photo": "assets/shorebirds/spotted_sandpiper_breeding_1.jpg",
+    "photo_caption": "Field profile: Bold black leopard spots covering white breast and belly, orange bill with dark tip, constant bobbing tail",
+    "crux_photo": "assets/shorebirds/spotted_sandpiper_breeding_2.jpg",
+    "crux_caption": "Teetering stance: Horizontal body carriage with perpetual rear-end teetering; greenish-bronze mantle",
+    "diagnostics": [
+      {
+        "tract": "Underparts",
+        "mark": "Pure white breast and belly densely covered in bold, distinct, dark round spots (unique among North American shorebirds)."
+      },
+      {
+        "tract": "Posture & Flight",
+        "mark": "Perpetual nervous teetering/bobbing of the tail and rear body; stiff, trembling, cupped-wing fluttering flight over water."
+      },
+      {
+        "tract": "Bill & Upperparts",
+        "mark": "Pinkish-orange bill with dark tip; unpatterned warm greenish-bronze upperparts."
+      }
+    ],
+    "rule_out": "Dense bold round belly spots + perpetual teetering + orange bill = Breeding Spotted Sandpiper.",
+    "rarity": "common",
+    "length_cm": 19.0,
+    "bill_mm": 24.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "24 mm",
+    "ebird_code": "sposan"
+  },
+  {
+    "id": "spotted_sandpiper_nonbreeding",
+    "rank": 10,
+    "name": "Spotted Sandpiper (Fall / Winter)",
+    "sci": "Actitis macularius",
+    "prob": "28%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "shoulder_spur",
+      "short_stout_bill"
+    ],
+    "plate": "assets/shorebird_plates/spotted_sandpiper_nonbreeding_plate.jpg",
+    "plate_caption": "Diagnostic plate: Immaculate unspotted white underparts, diagnostic clean white vertical shoulder spur in front of wing, plain brownish-gray back",
+    "photo": "assets/shorebirds/spotted_sandpiper_nonbreeding_1.jpg",
+    "photo_caption": "Field profile: Clean white underparts, distinct white spur rising vertically in front of wing, pale yellowish legs, teetering gait",
+    "crux_photo": "assets/shorebirds/spotted_sandpiper_nonbreeding_2.jpg",
+    "crux_caption": "Shoulder closeup: Crisp white vertical wedge cutting up into brown breast side in front of the wing bend",
+    "diagnostics": [
+      {
+        "tract": "Shoulder Spur",
+        "mark": "100% DIAGNOSTIC CRUX: A crisp, bright white vertical finger/spur extending upward in front of the wing onto the side of the breast."
+      },
+      {
+        "tract": "Underparts & Posture",
+        "mark": "Spots completely absent; immaculate white underparts with dusky brownish wash at sides of neck; compulsive tail bobbing."
+      },
+      {
+        "tract": "Flight",
+        "mark": "Distinctive stiff-winged, trembling fluttering flight on arched downward wings, showing a bold white wingstripe."
+      }
+    ],
+    "rule_out": "Plain white underparts + crisp white shoulder spur in front of wing + compulsive tail teetering = Non-Breeding Spotted Sandpiper.",
+    "rarity": "common",
+    "length_cm": 19.0,
+    "bill_mm": 24.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "24 mm",
+    "ebird_code": "sposan"
+  },
+  {
+    "id": "least_sandpiper",
+    "rank": 11,
+    "name": "Least Sandpiper",
+    "sci": "Calidris minutilla",
+    "prob": "55%",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "yellow_legs",
+      "droop_bill"
+    ],
+    "plate": "assets/shorebird_plates/least_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: World's smallest peep, diagnostic yellowish-green legs (only common peep with pale legs!), fine decurved bill, warm brown tones",
+    "photo": "assets/shorebirds/least_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Diminutive tiny size, bright yellowish-green legs, fine droop-tipped bill, warm brownish mantle",
+    "crux_photo": "assets/shorebirds/least_sandpiper_2.jpg",
+    "crux_caption": "Legs closeup: Yellowish-green legs clearly visible on mud (all other common peeps have black legs!); hunched posture",
+    "diagnostics": [
+      {
+        "tract": "Leg Color",
+        "mark": "100% DIAGNOSTIC CRUX: Bright greenish-yellow to pale olive legs (all other common North American peeps have solid black legs!)."
+      },
+      {
+        "tract": "Size & Posture",
+        "mark": "World's smallest shorebird (sparrow-sized); typically feeds in a hunched, crouched, creeping posture along high muddy edges."
+      },
+      {
+        "tract": "Bill & Plumage",
+        "mark": "Fine, slender, decurved black bill with a drooping tip; warm rufous-brown tones across mantle and streaked breast."
+      }
+    ],
+    "rule_out": "Tiny peep + pale yellowish-green legs + fine drooping bill + warm brown tones = Least Sandpiper.",
+    "rarity": "common",
+    "length_cm": 14.0,
+    "bill_mm": 18.0,
+    "size_display": "14 cm (5.5\")",
+    "bill_display": "18 mm",
+    "ebird_code": "leasan"
+  },
+  {
+    "id": "semipalmated_sandpiper",
+    "rank": 12,
+    "name": "Semipalmated Sandpiper",
+    "sci": "Calidris pusilla",
+    "prob": "48%",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "dark_legs",
+      "short_stout_bill"
+    ],
+    "plate": "assets/shorebird_plates/semipalmated_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Small peep, solid black legs, short straight tubular blunt-tipped black bill, cold grayish-brown upperparts, white underparts",
+    "photo": "assets/shorebirds/semipalmated_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Solid black legs, short straight blunt bill, cold grayish scalloped mantle, white belly",
+    "crux_photo": "assets/shorebirds/semipalmated_sandpiper_2.jpg",
+    "crux_caption": "Bill closeup: Bill is short, straight, and tubular with a blunt rounded tip (not fine or drooping)",
+    "diagnostics": [
+      {
+        "tract": "Bill Shape",
+        "mark": "Short, straight, stout, tubular black bill with a blunt rounded tip (never droop-tipped like Western or Least)."
+      },
+      {
+        "tract": "Leg Color",
+        "mark": "Solid jet-black legs (partially webbed toes, hence 'semipalmated')."
+      },
+      {
+        "tract": "Plumage Tone",
+        "mark": "Cold, neutral grayish-brown upperparts with pale feather fringes; neat light breast streaking."
+      }
+    ],
+    "rule_out": "Small peep + solid black legs + short straight blunt-tipped bill + cold gray mantle = Semipalmated Sandpiper.",
+    "rarity": "common",
+    "length_cm": 15.0,
+    "bill_mm": 19.0,
+    "size_display": "15 cm (6.0\")",
+    "bill_display": "19 mm",
+    "ebird_code": "semsan"
+  },
+  {
+    "id": "western_sandpiper",
+    "rank": 13,
+    "name": "Western Sandpiper",
+    "sci": "Calidris mauri",
+    "prob": "12%",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "dark_legs",
+      "droop_bill"
+    ],
+    "plate": "assets/shorebird_plates/western_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Peep with longer droop-tipped black bill with thick base, solid black legs, rufous-edged upper scapulars, flank chevrons",
+    "photo": "assets/shorebirds/western_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Noticeably long bill with distinctly drooping tip and thickened base, black legs, rufous scapular patch",
+    "crux_photo": "assets/shorebirds/western_sandpiper_2.jpg",
+    "crux_caption": "Bill & breast: Thick bill base tapering to a fine downcurved tip; arrow-shaped chevron streaks on breast and flanks",
+    "diagnostics": [
+      {
+        "tract": "Bill Structure",
+        "mark": "Noticeably longer bill with a noticeably thickened, stout base that tapers to a fine, distinctly drooping/downcurved tip."
+      },
+      {
+        "tract": "Scapulars & Plumage",
+        "mark": "Upper scapulars show bright rufous-chestnut feather edges contrasting with grayer lower back; arrow-shaped chevrons on flank."
+      },
+      {
+        "tract": "Legs & Foraging",
+        "mark": "Solid black legs; probes in deeper water than Semipalmated Sandpiper with rhythmic head-stitching."
+      }
+    ],
+    "rule_out": "Peep with black legs + longer droop-tipped bill with thick base + rufous upper scapulars = Western Sandpiper.",
+    "rarity": "uncommon",
+    "length_cm": 16.0,
+    "bill_mm": 25.0,
+    "size_display": "16 cm (6.3\")",
+    "bill_display": "25 mm",
+    "ebird_code": "wessan"
+  },
+  {
+    "id": "white_rumped_sandpiper",
+    "rank": 14,
+    "name": "White-rumped Sandpiper",
+    "sci": "Calidris fuscicollis",
+    "prob": "8%",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "dark_legs",
+      "droop_bill",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/white_rumped_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Elongate attenuated profile, primaries projecting far beyond tail, decurved bill with pale lower base, pure white horseshoe rump",
+    "photo": "assets/shorebirds/white_rumped_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Long elegant wings extending well beyond tail tip, pale base to lower mandible, neat flank streaks",
+    "crux_photo": "assets/shorebirds/white_rumped_sandpiper_2.jpg",
+    "crux_caption": "Breeding plumage profile: Rich rufous-edged upper scapulars, fine dark chevron streaks along flanks, and long wingtips projecting past tail",
+    "diagnostics": [
+      {
+        "tract": "Flight Crux",
+        "mark": "100% DIAGNOSTIC IN FLIGHT: Solid, pure snow-white horseshoe band completely across the rump and uppertail coverts."
+      },
+      {
+        "tract": "Wing Projection",
+        "mark": "Very long, crossed primary tips projecting far beyond the tail tip, giving an elongate, horizontal profile."
+      },
+      {
+        "tract": "Bill & Flanks",
+        "mark": "Slightly decurved dark bill with a distinctive pale flesh-orange spot at the base of the lower mandible; fine chevron streaks along flanks."
+      }
+    ],
+    "rule_out": "Pure white horseshoe rump in flight + long primary projection past tail + pale base to lower mandible = White-rumped Sandpiper.",
+    "rarity": "uncommon",
+    "length_cm": 19.0,
+    "bill_mm": 23.0,
+    "size_display": "19 cm (7.5\")",
+    "bill_display": "23 mm",
+    "ebird_code": "whrsan"
+  },
+  {
+    "id": "sanderling",
+    "rank": 15,
+    "name": "Sanderling (Fall / Winter)",
+    "sci": "Calidris alba",
+    "prob": "50%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "short_stout_bill",
+      "dark_legs",
+      "bold_wing_stripe"
+    ],
+    "plate": "assets/shorebird_plates/sanderling_plate.jpg",
+    "plate_caption": "Diagnostic plate: Gleaming pure white underparts and face, pale pearl-gray back, prominent black carpal shoulder patch, black bill and legs",
+    "photo": "assets/shorebirds/sanderling_1.jpg",
+    "photo_caption": "Field profile: Dazzling pale white plumage, dark shoulder patch, stout black bill, black legs, sprinting along ocean surf",
+    "crux_photo": "assets/shorebirds/sanderling_2.jpg",
+    "crux_caption": "Flight wingstripe: Broad, gleaming white wingstripe contrasting against black flight feathers; only 3 toes (no hind toe)",
+    "diagnostics": [
+      {
+        "tract": "Plumage Tone",
+        "mark": "Whitest shorebird on the beach: dazzling snowy-white face, breast, and underparts with pale pearl-gray mantle."
+      },
+      {
+        "tract": "Shoulder Patch",
+        "mark": "Prominent, contrasting blackish carpal patch on folded wing bend; broad brilliant white wingstripe in flight."
+      },
+      {
+        "tract": "Behavior & Feet",
+        "mark": "Chases incoming and receding waves along ocean surf like a wind-up toy; feet lack a hind toe (hallux) entirely (3 toes)."
+      }
+    ],
+    "rule_out": "Dazzling white beach runner + black shoulder patch + stout black bill + wave-chasing behavior = Sanderling.",
+    "rarity": "common",
+    "length_cm": 20.0,
+    "bill_mm": 25.0,
+    "size_display": "20 cm (8.0\")",
+    "bill_display": "25 mm",
+    "ebird_code": "sander"
+  },
+  {
+    "id": "pectoral_sandpiper",
+    "rank": 15,
+    "name": "Pectoral Sandpiper",
+    "sci": "Calidris melanotos",
+    "prob": "22%",
+    "ebird_code": "pecsan",
+    "group": "peep",
+    "traits": [
+      "peep",
+      "yellow_legs",
+      "droop_bill",
+      "streaked_breast"
+    ],
+    "plate": "assets/shorebird_plates/pectoral_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Medium-sized peep with razor-sharp breast bib cutoff, bright yellowish legs, slightly decurved bill with yellowish base, pale buff mantle 'V's",
+    "photo": "assets/shorebirds/pectoral_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Diagnostic dense brown breast streaks ending abruptly at pure white belly, dull yellowish legs, slightly decurved bill with yellowish base",
+    "crux_photo": "assets/shorebirds/pectoral_sandpiper_2.jpg",
+    "crux_caption": "Bib crux: Distinct horizontal razor-sharp boundary line separating dark streaked chest from clean white underparts; scaly back with pale stripes",
+    "diagnostics": [
+      {
+        "tract": "Breast Cutoff (Bib)",
+        "mark": "100% DIAGNOSTIC CRUX: Dense, heavy brownish streaking on breast cuts off abruptly in a sharp horizontal line against clean, stark white belly ('razor-sharp bib')."
+      },
+      {
+        "tract": "Bill & Legs",
+        "mark": "Medium, slightly decurved bill with diagnostic dull yellowish or greenish-horn base and dark tip; medium-length dull yellow to greenish-yellow legs."
+      },
+      {
+        "tract": "Back & Posture",
+        "mark": "Dark scaly upperparts with prominent pale buff/whitish mantle 'V' stripes; alert upright neck-stretching posture when alarmed ('telescoping neck')."
+      }
+    ],
+    "rule_out": "Razor-sharp breast bib cutoff at pure white belly + yellowish legs + slightly decurved bill with yellow base = Pectoral Sandpiper.",
+    "rarity": "uncommon",
+    "length_cm": 21.0,
+    "bill_mm": 28.5,
+    "size_display": "21 cm (8.3\")",
+    "bill_display": "28.5 mm"
+  },
+  {
+    "id": "dunlin",
+    "rank": 16,
+    "name": "Dunlin (Fall / Winter)",
+    "sci": "Calidris alpina",
+    "prob": "46%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "droop_bill",
+      "dark_legs"
+    ],
+    "plate": "assets/shorebird_plates/dunlin_plate.jpg",
+    "plate_caption": "Diagnostic plate: Distinctive long heavy black bill that distinctly curves and droops downward at the tip, hunched posture, uniform drab gray mantle",
+    "photo": "assets/shorebirds/dunlin_1.jpg",
+    "photo_caption": "Field profile: Hunched droop-nosed silhouette, long downcurved bill, uniform brownish-gray basic plumage, black legs",
+    "crux_photo": "assets/shorebirds/dunlin_2.jpg",
+    "crux_caption": "Feeding view: Probing deep in tidal mud with distinctly decurved bill; immaculate white belly (black patch in breeding)",
+    "diagnostics": [
+      {
+        "tract": "Bill Shape",
+        "mark": "Long, heavy, distinctly downcurved black bill with a noticeable droop at the tip ('droop-nosed' look)."
+      },
+      {
+        "tract": "Posture & Body",
+        "mark": "Characteristic hunched, pot-bellied, neckless carriage while probing deep in mudflats."
+      },
+      {
+        "tract": "Plumage Tone",
+        "mark": "Uniformly drab brownish-gray mantle and breast wash in fall/winter; unspotted white belly (famous black belly patch in spring)."
+      }
+    ],
+    "rule_out": "Hunched posture + long heavy bill with drooping tip + uniform drab gray plumage = Dunlin.",
+    "rarity": "common",
+    "length_cm": 21.0,
+    "bill_mm": 38.0,
+    "size_display": "21 cm (8.5\")",
+    "bill_display": "38 mm",
+    "ebird_code": "dunlin"
+  },
+  {
+    "id": "short_billed_dowitcher",
+    "rank": 17,
+    "name": "Short-billed Dowitcher",
+    "sci": "Limnodromus griseus",
+    "prob": "32%",
+    "group": "dowitcher",
+    "traits": [
+      "dowitcher",
+      "long_straight_bill",
+      "yellow_legs",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/short_billed_dowitcher_plate.jpg",
+    "plate_caption": "Diagnostic plate: Long straight snipe-like bill, flat forehead profile with gentle loral angle, uniform gray-brown upperparts, yellowish-green legs",
+    "photo": "assets/shorebirds/short_billed_dowitcher_1.jpg",
+    "photo_caption": "Field profile: Straight heavy bill, sewing-machine vertical probing motion in tidal mud, yellowish-olive legs",
+    "crux_photo": "assets/shorebirds/short_billed_dowitcher_2.jpg",
+    "crux_caption": "Flight crux: Long white oval/cigar wedge extending from rump up the center of the lower back; rapid 3-note 'tut-tut-tut' call",
+    "diagnostics": [
+      {
+        "tract": "Head & Loral Profile",
+        "mark": "Flatter, more gently sloping forehead profile; pale supercilium runs straight back; bill is slightly shorter (roughly 2x head length)."
+      },
+      {
+        "tract": "Feeding & Habitat",
+        "mark": "Rapid vertical up-and-down 'sewing machine' probing motion; primarily found on coastal tidal mudflats and saltmarshes."
+      },
+      {
+        "tract": "Voice & Tail",
+        "mark": "Diagnostic rapid, mellow 3-note flight call: 'tut-tut-tut'; tail bars have white bars wider than dark bars."
+      }
+    ],
+    "rule_out": "Sewing-machine probing + white back wedge in flight + flat forehead + coastal saltmarsh + 3-note 'tut-tut-tut' = Short-billed Dowitcher.",
+    "rarity": "common",
+    "length_cm": 28.0,
+    "bill_mm": 60.0,
+    "size_display": "28 cm (11.0\")",
+    "bill_display": "60 mm",
+    "ebird_code": "sbldow"
+  },
+  {
+    "id": "long_billed_dowitcher",
+    "rank": 18,
+    "name": "Long-billed Dowitcher",
+    "sci": "Limnodromus scolopaceus",
+    "prob": "10%",
+    "group": "dowitcher",
+    "traits": [
+      "dowitcher",
+      "long_straight_bill",
+      "yellow_legs",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/long_billed_dowitcher_plate.jpg",
+    "plate_caption": "Diagnostic plate: Extremely long straight snipe bill, steep high-crowned forehead with abrupt drop to bill, dark breast wash, yellowish-olive legs",
+    "photo": "assets/shorebirds/long_billed_dowitcher_1.jpg",
+    "photo_caption": "Field profile: Exceptionally long bill, steep arched forehead, humpbacked posture, darker breast wash, freshwater preference",
+    "crux_photo": "assets/shorebirds/long_billed_dowitcher_2.jpg",
+    "crux_caption": "Voice crux: Diagnostic sharp, high-pitched single metallic 'keek!' call; tail has dark bars wider than pale bars",
+    "diagnostics": [
+      {
+        "tract": "Head & Forehead Profile",
+        "mark": "Steep, high-crowned forehead with a distinct, abrupt right-angle drop to the bill base; extremely long bill (often >2.5x head length)."
+      },
+      {
+        "tract": "Voice",
+        "mark": "100% DIAGNOSTIC CRUX: A sharp, thin, high-pitched, metallic single note: 'keek!' or 'keek-keek!' (never mellow 3-note 'tut-tut-tut')."
+      },
+      {
+        "tract": "Habitat & Tail",
+        "mark": "Strongly prefers freshwater marshes and managed impoundments over tidal flats; tail has black bars wider than pale bars."
+      }
+    ],
+    "rule_out": "Sewing-machine probing + steep forehead + very long bill + sharp single 'keek!' call + freshwater = Long-billed Dowitcher.",
+    "rarity": "uncommon",
+    "length_cm": 29.0,
+    "bill_mm": 70.0,
+    "size_display": "29 cm (11.5\")",
+    "bill_display": "70 mm",
+    "ebird_code": "lobdow"
+  },
+  {
+    "id": "stilt_sandpiper",
+    "rank": 19,
+    "name": "Stilt Sandpiper",
+    "sci": "Calidris himantopus",
+    "prob": "9%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "droop_bill",
+      "yellow_legs",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/stilt_sandpiper_plate.jpg",
+    "plate_caption": "Diagnostic plate: Slender medium sandpiper, diagnostic long greenish-yellow stilt legs, slender black bill with distinct gentle droop at tip, bold white supercilium, whitish underparts with fine streaking, white rump",
+    "photo": "assets/shorebirds/stilt_sandpiper_1.jpg",
+    "photo_caption": "Field profile: Long greenish-yellow legs, slender bill drooping slightly at tip, bold white eyebrow, deep wading posture",
+    "crux_photo": "assets/shorebirds/stilt_sandpiper_2.jpg",
+    "crux_caption": "Feeding crux: Decurved bill tip and long legs; often wades belly-deep with rapid vertical sewing-machine probing motion",
+    "diagnostics": [
+      {
+        "tract": "Bill & Feeding Action",
+        "mark": "Long, slender, dark bill that gently decurved/droops towards the tip; probes with a rapid vertical 'sewing-machine' motion while wading belly-deep in water."
+      },
+      {
+        "tract": "Legs & Stance",
+        "mark": "Diagnostic long, spindly, greenish-yellow to dull olive legs ('stilt legs'); frequently wades in deeper water than peeps or yellowlegs."
+      },
+      {
+        "tract": "Head Pattern & Rump",
+        "mark": "Prominent bold white supercilium (eyebrow) extending far behind the dark eye; flashes a solid white rump patch in flight (lacks dowitcher's white back wedge)."
+      }
+    ],
+    "rule_out": "Long greenish-yellow legs + decurved/droop-tipped bill + bold white supercilium + sewing-machine probing in deep water = Stilt Sandpiper.",
+    "rarity": "uncommon",
+    "length_cm": 22.0,
+    "bill_mm": 39.0,
+    "size_display": "22 cm (8.7\")",
+    "bill_display": "39 mm",
+    "ebird_code": "stisan"
+  },
+  {
+    "id": "willet",
+    "rank": 20,
+    "name": "Willet",
+    "sci": "Tringa semipalmata",
+    "prob": "36%",
+    "group": "yellowlegs",
+    "traits": [
+      "yellowlegs",
+      "long_straight_bill",
+      "dark_legs",
+      "bold_wing_stripe"
+    ],
+    "plate": "assets/shorebird_plates/willet_plate.jpg",
+    "plate_caption": "Diagnostic plate: Heavy stocky build, stout straight grayish-black bill, uniform plain gray plumage, long bluish-gray legs. Bold black-and-white wings",
+    "photo": "assets/shorebirds/willet_1.jpg",
+    "photo_caption": "Field profile: Unassuming stocky plain gray shorebird, thick straight bill, bluish-gray legs, coastal saltmarsh habitat",
+    "crux_photo": "assets/shorebirds/willet_2.jpg",
+    "crux_caption": "Flight explosion: Shocking brilliant black-and-white wing pattern ('piano keys') revealed the instant it takes flight",
+    "diagnostics": [
+      {
+        "tract": "Flight Pattern",
+        "mark": "100% DIAGNOSTIC EXPLOSION: When taking flight, plain gray bird erupts with a shocking, brilliant black-and-white 'piano key' wing stripe."
+      },
+      {
+        "tract": "Structure & Bill",
+        "mark": "Large, stocky, heavily built shorebird; thick, straight, heavy grayish-black chisel bill."
+      },
+      {
+        "tract": "Legs & Plumage",
+        "mark": "Long bluish-gray legs (never yellow!); completely plain, unpatterned battleship-gray plumage."
+      }
+    ],
+    "rule_out": "Plain battleship-gray body + heavy straight bill + shocking black-and-white 'piano key' wings in flight = Willet.",
+    "rarity": "common",
+    "length_cm": 38.0,
+    "bill_mm": 57.0,
+    "size_display": "38 cm (15.0\")",
+    "bill_display": "57 mm",
+    "ebird_code": "willet"
+  },
+  {
+    "id": "hudsonian_godwit",
+    "rank": 21,
+    "name": "Hudsonian Godwit",
+    "sci": "Limosa haemastica",
+    "prob": "0.3%",
+    "group": "medium_sandpiper",
+    "traits": [
+      "medium_sandpiper",
+      "upturned_bill",
+      "dark_legs",
+      "black_axillaries",
+      "white_rump"
+    ],
+    "plate": "assets/shorebird_plates/hudsonian_godwit_plate.jpg",
+    "plate_caption": "Diagnostic plate: Large graceful shorebird, long upturned two-toned bill (pink base, black tip), clean white supercilium, black underwings and white rump",
+    "photo": "assets/shorebirds/hudsonian_godwit_1.jpg",
+    "photo_caption": "Field profile: Elegant posture, long two-toned upturned bill, grayish-brown mantle, dark slate legs",
+    "crux_photo": "assets/shorebirds/hudsonian_godwit_2.jpg",
+    "crux_caption": "Flight crux: Diagnostic solid jet-black underwing linings, crisp white rump band, and solid black tail",
+    "diagnostics": [
+      {
+        "tract": "Bill Structure",
+        "mark": "Exceptionally long, slender bill that curves distinctly upward (recurved), with a bright flesh-pink basal half and jet-black tip."
+      },
+      {
+        "tract": "Flight Pattern Crux",
+        "mark": "100% DIAGNOSTIC REVIEW CRUX: Solid jet-black underwing coverts/axillaries, crisp white rump band, and solid black tail."
+      },
+      {
+        "tract": "Size & Rarity",
+        "mark": "Large, elegant godwit; rare fall migrant through coastal impoundments and mudflats requiring detailed documentation."
+      }
+    ],
+    "rule_out": "Long upturned two-toned pink/black bill + jet-black underwings + white rump & black tail = Hudsonian Godwit.",
+    "rarity": "rare",
+    "length_cm": 39.0,
+    "bill_mm": 80.0,
+    "size_display": "39 cm (15.5\")",
+    "bill_display": "80 mm",
+    "ebird_code": "hudgod"
+  }
+];
 
     let activeGroup = 'all'; // 'all', 'plover', 'peep', 'yellowlegs', 'dowitcher', 'medium_sandpiper'
     let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     let activeTraits = new Set();
     let currentViewMode = 'both';
     let currentSort = 'freq-desc';
+    let urlSpeciesFilter = null; // Set of allowed species IDs/codes
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+        tokens.forEach(tok => {
+          const found = shorebirds.find(s => 
+            s.id.toLowerCase() === tok ||
+            (s.ebird_code && s.ebird_code.toLowerCase() === tok) ||
+            s.id.toLowerCase().replace(/_/g, '') === tok.replace(/_/g, '') ||
+            s.id.toLowerCase().replace(/_/g, '-') === tok ||
+            s.name.toLowerCase().includes(tok)
+          );
+          if (found) {
+            matched.add(found.id);
+          }
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function copyCurrentShareLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('copyShareBtn');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<span>✓ Copied!</span>';
+          setTimeout(() => { btn.innerHTML = original; }, 2000);
+        }
+      }).catch(() => {
+        alert('Share URL: ' + window.location.href);
+      });
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      if (window.history && window.history.pushState) {
+        window.history.pushState({}, '', window.location.pathname);
+      }
+      renderFeed();
+    }
 
     function setSort(mode) {
       currentSort = mode;
@@ -234,7 +1180,51 @@
       const container = document.getElementById('shorebirdFeed');
       container.innerHTML = '';
 
+      // Render URL filter banner if active
+      const banner = document.getElementById('urlFilterBannerContainer');
+      if (banner) {
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          const allowedList = shorebirds.filter(s => urlSpeciesFilter.has(s.id));
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden";
+          banner.innerHTML = `
+            <div class="bg-gradient-to-r from-sky-950/90 via-slate-900 to-sky-950/80 border border-sky-500/50 rounded-2xl p-3 sm:p-4 shadow-xl">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <span class="w-3 h-3 rounded-full bg-sky-400 shrink-0 animate-pulse"></span>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="text-xs font-black uppercase tracking-wider text-white">Targeted Checklist Active</span>
+                      <span class="text-[10px] font-mono-num font-bold px-2 py-0.5 rounded bg-sky-900/80 text-sky-200 border border-sky-600/70">
+                        ${allowedList.length} of ${shorebirds.length} Species
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 truncate max-w-xl mt-0.5">
+                      ${allowedList.map(s => s.name).join(', ')}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <button onclick="copyCurrentShareLink()" id="copyShareBtn" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-sm">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Copy Link</span>
+                  </button>
+                  <button onclick="clearUrlFilter()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 transition shadow-sm flex items-center gap-1">
+                    <span>Show All (${shorebirds.length})</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden";
+          banner.innerHTML = '';
+        }
+      }
+
       const filtered = shorebirds.filter(s => {
+        if (urlSpeciesFilter && !urlSpeciesFilter.has(s.id)) return false;
         if (dismissedCards.has(s.id)) return false;
         if (activeGroup !== 'all' && s.group !== activeGroup) return false;
         if (activeRarity !== 'all' && s.rarity !== activeRarity) return false;
@@ -452,13 +1442,13 @@
       const unhideCount = document.getElementById('unhideCount');
       if (counter) {
         if (dismissedCards.size > 0) {
-          counter.textContent = `${matches} of 21 shown (${dismissedCards.size} hidden)`;
+          counter.textContent = `${matches} of ${shorebirds.length} shown (${dismissedCards.size} hidden)`;
           if (unhideBtn) {
             unhideBtn.classList.remove('hidden');
             if (unhideCount) unhideCount.textContent = dismissedCards.size;
           }
         } else {
-          counter.textContent = `${matches} of 21 variants shown`;
+          counter.textContent = `${matches} of ${shorebirds.length} shown`;
           if (unhideBtn) unhideBtn.classList.add('hidden');
         }
       }
@@ -539,7 +1529,8 @@
       });
     }
 
-    // Initial render
+    // Initial render with URL filter check
+    initUrlFilter();
     renderFeed();
   </script>
 </body>

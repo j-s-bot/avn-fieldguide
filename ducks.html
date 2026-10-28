@@ -70,71 +70,39 @@
     </div>
 
     <!-- Horizontal Multi-Select Trait, Rarity & Sex Filter Bar -->
+    <!-- Row 1: Primary Triage (Sex, Status, Guild, Beak Color Palette, Sort & View) -->
     <div class="max-w-6xl mx-auto w-full max-w-full mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
       <!-- Sex filters -->
-      <button onclick="toggleSex('all')" id="f-sex-all" title="Show all 29 drake and hen cards" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 29</button>
-      <button onclick="toggleSex('drake')" id="f-sex-drake" title="Filter to male / drake variants only" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Drake (Male)</button>
+      <button onclick="toggleSex('all')" id="f-sex-all" title="Show all 29 drake and hen cards" class="filter-chip px-2 py-1 rounded text-xs font-semibold bg-sky-600 text-white shrink-0 transition">All 29</button>
+      <button onclick="toggleSex('drake')" id="f-sex-drake" title="Filter to male / drake variants only" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Drake</button>
       <button onclick="toggleSex('hen')" id="f-sex-hen" title="Filter to female / hen variants only (isolates confusing brown hens)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition">Hen (Female)</button>
 
       <span class="text-slate-700">|</span>
 
       <!-- eBird Rarity Tiers -->
-      <button onclick="toggleRarity('all')" id="f-rarity-all" title="Show all eBird status levels (Common, Uncommon, and Rare)" class="filter-chip px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition">All Status</button>
-      <button onclick="toggleRarity('common')" id="f-rarity-common" title="eBird Common: Expected, high-frequency species (>15% checklists) in Central MD late fall" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Common</button>
-      <button onclick="toggleRarity('uncommon')" id="f-rarity-uncommon" title="eBird Uncommon: Regular seasonal migrants or localized winter arrivals (1% - 15% checklists)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Uncommon</button>
-      <button onclick="toggleRarity('rare')" id="f-rarity-rare" title="eBird Rare / Review Species: Eurasian vagrants requiring documentation (Tufted Duck & Eurasian Wigeon)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help">&#9733; Rares Only</button>
+      <button onclick="toggleRarity('all')" id="f-rarity-all" title="Show all eBird status levels (Common, Uncommon, and Rare)" class="filter-chip px-2 py-1 rounded text-xs font-semibold bg-slate-800 text-white border border-slate-700 shrink-0 transition">All Status</button>
+      <button onclick="toggleRarity('common')" id="f-rarity-common" title="eBird Common: Expected, high-frequency species (>15% checklists) in Central MD late fall" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Common</button>
+      <button onclick="toggleRarity('uncommon')" id="f-rarity-uncommon" title="eBird Uncommon: Regular seasonal migrants or localized winter arrivals (1% - 15% checklists)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Uncommon</button>
+      <button onclick="toggleRarity('rare')" id="f-rarity-rare" title="eBird Rare / Review Species: Eurasian vagrants requiring documentation (Tufted Duck & Eurasian Wigeon)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400 shrink-0 transition cursor-help">&#9733; Rare</button>
 
       <span class="text-slate-700">|</span>
 
       <!-- Guild filters -->
-      <button onclick="toggleTrait('dabbler')" id="f-dabbler" title="Dabbler: Puddle ducks that feed on the surface or tip tail-up in shallow water (Mallard, Gadwall, Shoveler, Pintail, Teal, Wigeon, Wood Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Dabbler</button>
-      <button onclick="toggleTrait('diver')" id="f-diver" title="Diver: Diving ducks that completely submerge to feed in deeper water (Ring-necked, Scaup, Bufflehead, Merganser, Ruddy, Tufted Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Diver</button>
+      <button onclick="toggleTrait('dabbler')" id="f-dabbler" title="Dabbler: Puddle ducks that feed on the surface or tip tail-up in shallow water" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Dabbler</button>
+      <button onclick="toggleTrait('diver')" id="f-diver" title="Diver: Diving ducks that completely submerge to feed in deeper water" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Diver</button>
 
       <span class="text-slate-700">|</span>
 
-      <!-- Beak / Bill Color Wheel Palette Filters -->
-      <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 shrink-0 flex items-center gap-1 pl-0.5" title="Filter by bill / beak color">
-        <svg class="w-3.5 h-3.5 text-slate-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-dasharray="14 3 14 3" opacity="0.4" />
-          <path d="M12 3a9 9 0 0 1 9 9" stroke="#38bdf8" stroke-width="2.5" />
-          <path d="M21 12a9 9 0 0 1-6.36 8.6" stroke="#fb923c" stroke-width="2.5" />
-          <path d="M14.64 20.6A9 9 0 0 1 3 12" stroke="#facc15" stroke-width="2.5" />
-          <path d="M3 12A9 9 0 0 1 12 3" stroke="#f43f5e" stroke-width="2.5" />
-          <circle cx="12" cy="12" r="2.5" fill="#94a3b8" />
-        </svg>
-        Beak:
-      </span>
-      <button onclick="toggleBillColor('blue')" id="f-bill-blue" title="Blue / Lead-blue Beaks (Scaup, Wigeon, Ring-necked, Pintail Drake, Bufflehead Drake)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer">
-        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shrink-0"></span>
-        <span>Blue</span>
-      </button>
-      <button onclick="toggleBillColor('orange')" id="f-bill-orange" title="Orange / Two-tone Orange Beaks (Mallard Hen, Gadwall Hen, Shoveler Hen, Merganser Hen)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer">
-        <span class="w-2.5 h-2.5 rounded-full bg-orange-400 shadow-sm shrink-0"></span>
-        <span>Orange</span>
-      </button>
-      <button onclick="toggleBillColor('yellow')" id="f-bill-yellow" title="Yellow / Olive Beaks (Mallard Drake, American Black Duck)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer">
-        <span class="w-2.5 h-2.5 rounded-full bg-yellow-400 shadow-sm shrink-0"></span>
-        <span>Yellow</span>
-      </button>
-      <button onclick="toggleBillColor('black')" id="f-bill-black" title="Dark / Black / Slate Beaks (Gadwall Drake, Pintail Hen, Shoveler Drake, Teal, etc.)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer">
-        <span class="w-2.5 h-2.5 rounded-full bg-slate-400 border border-slate-600 shadow-sm shrink-0"></span>
-        <span>Dark/Slate</span>
-      </button>
-      <button onclick="toggleBillColor('red')" id="f-bill-red" title="Red / Tri-color Patterned Beaks (Wood Duck Drake)" class="filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer">
-        <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shrink-0">
-        </span><span>Red</span>
-      </button>
+      <!-- Beak Color Swatches (Pure Color Dots with Mouseover Labels) -->
+      <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 rounded-full px-2 py-1 shrink-0" title="Filter by Beak Color (hover for species details)">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none mr-0.5">Beak:</span>
+        <button onclick="toggleBillColor('blue')" id="f-bill-blue" title="Blue / Lead-blue Beak (12 species: Scaup, Wigeon, Ring-necked, Pintail Drake, Bufflehead Drake)" class="w-4 h-4 rounded-full bg-sky-400 hover:scale-125 transition-all shadow cursor-pointer border border-sky-300/40 shrink-0" aria-label="Blue beak"></button>
+        <button onclick="toggleBillColor('orange')" id="f-bill-orange" title="Orange / Two-tone Beak (4 species: Mallard Hen, Gadwall Hen, Shoveler Hen, Merganser Hen)" class="w-4 h-4 rounded-full bg-orange-400 hover:scale-125 transition-all shadow cursor-pointer border border-orange-300/40 shrink-0" aria-label="Orange beak"></button>
+        <button onclick="toggleBillColor('yellow')" id="f-bill-yellow" title="Yellow / Olive Beak (2 species: Mallard Drake, Black Duck)" class="w-4 h-4 rounded-full bg-yellow-400 hover:scale-125 transition-all shadow cursor-pointer border border-yellow-300/40 shrink-0" aria-label="Yellow beak"></button>
+        <button onclick="toggleBillColor('black')" id="f-bill-black" title="Dark / Slate Beak (16 species: Gadwall Drake, Teal, Shoveler Drake, Pintail Hen, etc.)" class="w-4 h-4 rounded-full bg-slate-400 hover:scale-125 transition-all shadow cursor-pointer border border-slate-300/50 shrink-0" aria-label="Dark/Slate beak"></button>
+        <button onclick="toggleBillColor('red')" id="f-bill-red" title="Red / Tri-color Beak (1 species: Wood Duck Drake)" class="w-4 h-4 rounded-full bg-rose-500 hover:scale-125 transition-all shadow cursor-pointer border border-rose-400/40 shrink-0" aria-label="Red beak"></button>
+      </div>
 
-      <!-- Diagnostic Crux Trait Filters with Tooltips -->
-      <button onclick="toggleTrait('spatulate_bill')" id="f-spatulate_bill" title="Spatulate Bill: Broad, flattened spoon-shaped bill with fine straining lamellae (Northern Shoveler)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Spatulate Bill</button>
-      <button onclick="toggleTrait('white_bill_ring')" id="f-white_bill_ring" title="White Bill Ring: Distinct white band encircling the bill near the black tip (Ring-necked Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Bill Ring</button>
-      <button onclick="toggleTrait('crested_head')" id="f-crested_head" title="Crested Head / Tuft: Elongated crown feathers forming a fan, drooping crest, or tuft (Wood Duck, Hooded Merganser, Tufted Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Crested / Tufted</button>
-      <button onclick="toggleTrait('green_head')" id="f-green_head" title="Green Head / Patch: Iridescent bottle-green or emerald crown, facial patch, or speculum" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Green Head/Patch</button>
-      <button onclick="toggleTrait('white_cheek_patch')" id="f-white_cheek_patch" title="White Cheek Patch: Distinct stark white patch on cheek or behind eye (Bufflehead, Ruddy Duck, Hooded Merganser)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Cheek Patch</button>
-      <button onclick="toggleTrait('white_speculum')" id="f-white_speculum" title="White Speculum: Brilliant white secondary wing patch (100% diagnostic crux for Gadwall)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Speculum</button>
-      <button onclick="toggleTrait('stiff_tail')" id="f-stiff_tail" title="Stiff Upright Tail: Pointed spiky tail feathers held cocked vertically upright above water (Ruddy Duck)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Stiff Tail</button>
-      <button onclick="toggleTrait('white_bill_base')" id="f-white_bill_base" title="White at Bill Base: Crisp white facial mask or ring encircling base of bill (Lesser Scaup Hen, Ring-necked Hen, Tufted Hen)" class="filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White at Bill Base</button>
-      
       <div class="ml-auto pl-2 flex items-center gap-2 border-l border-slate-800 shrink-0">
         <!-- Sort Selector -->
         <div class="flex items-center gap-1.5">
@@ -156,6 +124,19 @@
           <button onclick="setViewMode('photos')" id="vm-photos" class="view-btn px-2 py-0.5 rounded text-[11px] font-medium text-slate-400 hover:text-white">Photos</button>
         </div>
       </div>
+    </div>
+
+    <!-- Row 2: Crux Anatomical Plumage Traits -->
+    <div class="max-w-6xl mx-auto w-full max-w-full mt-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 shrink-0 select-none pl-0.5">Crux Traits:</span>
+      <button onclick="toggleTrait('spatulate_bill')" id="f-spatulate_bill" title="Spatulate Bill: Broad, flattened spoon-shaped bill with fine straining lamellae (Northern Shoveler)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Spatulate Bill</button>
+      <button onclick="toggleTrait('white_bill_ring')" id="f-white_bill_ring" title="White Bill Ring: Distinct white band encircling the bill near the black tip (Ring-necked Duck)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Bill Ring</button>
+      <button onclick="toggleTrait('crested_head')" id="f-crested_head" title="Crested Head / Tuft: Elongated crown feathers forming a fan, drooping crest, or tuft (Wood Duck, Hooded Merganser, Tufted Duck)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Crested / Tufted</button>
+      <button onclick="toggleTrait('green_head')" id="f-green_head" title="Green Head / Patch: Iridescent bottle-green or emerald crown, facial patch, or speculum" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Green Head/Patch</button>
+      <button onclick="toggleTrait('white_cheek_patch')" id="f-white_cheek_patch" title="White Cheek Patch: Distinct stark white patch on cheek or behind eye (Bufflehead, Ruddy Duck, Hooded Merganser)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Cheek Patch</button>
+      <button onclick="toggleTrait('white_speculum')" id="f-white_speculum" title="White Speculum: Brilliant white secondary wing patch (100% diagnostic crux for Gadwall)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White Speculum</button>
+      <button onclick="toggleTrait('stiff_tail')" id="f-stiff_tail" title="Stiff Upright Tail: Pointed spiky tail feathers held cocked vertically upright above water (Ruddy Duck)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">Stiff Tail</button>
+      <button onclick="toggleTrait('white_bill_base')" id="f-white_bill_base" title="White at Bill Base: Crisp white facial mask or ring encircling base of bill (Lesser Scaup Hen, Ring-necked Hen, Tufted Hen)" class="filter-chip px-2.5 py-0.5 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition cursor-help">White at Bill Base</button>
     </div>
   </header>
 
@@ -914,22 +895,22 @@
         sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexAll.textContent = "All 29";
-        sexDrake.textContent = "Drake (Male)";
-        sexHen.textContent = "Hen (Female)";
+        sexDrake.textContent = "Drake";
+        sexHen.textContent = "Hen";
       } else if (activeSex === 'drake') {
         sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-sky-600 text-white border border-sky-400 shrink-0 transition shadow-sm ring-1 ring-sky-400/50";
         sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexAll.textContent = "Reset Sex";
-        sexDrake.innerHTML = "&#10003; Drake (Male)";
-        sexHen.textContent = "Hen (Female)";
+        sexDrake.innerHTML = "&#10003; Drake";
+        sexHen.textContent = "Hen";
       } else if (activeSex === 'hen') {
         sexAll.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexDrake.className = "filter-chip px-2.5 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition";
         sexHen.className = "filter-chip px-2.5 py-1 rounded text-xs font-bold bg-amber-600 text-white border border-amber-400 shrink-0 transition shadow-sm ring-1 ring-amber-400/50";
         sexAll.textContent = "Reset Sex";
-        sexDrake.textContent = "Drake (Male)";
-        sexHen.innerHTML = "&#10003; Hen (Female)";
+        sexDrake.textContent = "Drake";
+        sexHen.innerHTML = "&#10003; Hen";
       }
 
       // Rarity buttons
@@ -953,24 +934,27 @@
         rRare.className = "filter-chip px-2.5 py-1 rounded text-xs font-black bg-amber-500 text-slate-950 border border-amber-400 shrink-0 transition shadow-sm ring-1 ring-amber-400/60";
       }
 
-      // Beak Color buttons
+      // Beak Color buttons (pure color dots with mouseover label)
       const billColorsMeta = [
-        { id: 'blue', name: 'Blue', dot: 'bg-sky-400', activeBg: 'bg-sky-950/90 text-sky-200 border-sky-400 ring-1 ring-sky-400/60 font-bold' },
-        { id: 'orange', name: 'Orange', dot: 'bg-orange-400', activeBg: 'bg-orange-950/90 text-orange-200 border-orange-400 ring-1 ring-orange-400/60 font-bold' },
-        { id: 'yellow', name: 'Yellow', dot: 'bg-yellow-400', activeBg: 'bg-yellow-950/90 text-yellow-200 border-yellow-400 ring-1 ring-yellow-400/60 font-bold' },
-        { id: 'black', name: 'Dark/Slate', dot: 'bg-slate-400', activeBg: 'bg-slate-800 text-slate-100 border-slate-400 ring-1 ring-slate-400/60 font-bold' },
-        { id: 'red', name: 'Red', dot: 'bg-rose-500', activeBg: 'bg-rose-950/90 text-rose-200 border-rose-400 ring-1 ring-rose-400/60 font-bold' }
+        { id: 'blue', name: 'Blue Beak', count: 12, dotBg: 'bg-sky-400', border: 'border-sky-300/50', activeStyle: 'ring-2 ring-white scale-125 shadow-[0_0_8px_rgba(56,189,248,0.9)]' },
+        { id: 'orange', name: 'Orange Beak', count: 4, dotBg: 'bg-orange-400', border: 'border-orange-300/50', activeStyle: 'ring-2 ring-white scale-125 shadow-[0_0_8px_rgba(251,146,60,0.9)]' },
+        { id: 'yellow', name: 'Yellow Beak', count: 2, dotBg: 'bg-yellow-400', border: 'border-yellow-300/50', activeStyle: 'ring-2 ring-white scale-125 shadow-[0_0_8px_rgba(250,204,21,0.9)]' },
+        { id: 'black', name: 'Dark/Slate Beak', count: 16, dotBg: 'bg-slate-400', border: 'border-slate-300/60', activeStyle: 'ring-2 ring-white scale-125 shadow-[0_0_8px_rgba(148,163,184,0.9)]' },
+        { id: 'red', name: 'Red Beak', count: 1, dotBg: 'bg-rose-500', border: 'border-rose-400/50', activeStyle: 'ring-2 ring-white scale-125 shadow-[0_0_8px_rgba(244,63,94,0.9)]' }
       ];
 
+      const anyActive = activeBillColors.size > 0;
       billColorsMeta.forEach(bc => {
         const btn = document.getElementById(`f-bill-${bc.id}`);
         if (!btn) return;
-        if (activeBillColors.has(bc.id)) {
-          btn.innerHTML = `<span class="w-2.5 h-2.5 rounded-full ${bc.dot} shadow-sm shrink-0 ring-1 ring-white"></span><span>&#10003; ${bc.name}</span>`;
-          btn.className = `filter-chip px-2 py-1 rounded text-xs border shrink-0 transition shadow-sm flex items-center gap-1.5 cursor-pointer ${bc.activeBg}`;
+        const isActive = activeBillColors.has(bc.id);
+        if (isActive) {
+          btn.className = `w-4 h-4 rounded-full ${bc.dotBg} ${bc.activeStyle} transition-all duration-150 cursor-pointer border ${bc.border} shrink-0 opacity-100`;
+          btn.title = `✓ ${bc.name} (${bc.count} species) - ACTIVE (click to disable)`;
         } else {
-          btn.innerHTML = `<span class="w-2.5 h-2.5 rounded-full ${bc.dot} shadow-sm shrink-0 opacity-70"></span><span>${bc.name}</span>`;
-          btn.className = "filter-chip px-2 py-1 rounded text-xs font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 shrink-0 transition flex items-center gap-1.5 cursor-pointer";
+          const dimClass = anyActive ? 'opacity-35 hover:opacity-90' : 'opacity-80 hover:opacity-100 hover:scale-125';
+          btn.className = `w-4 h-4 rounded-full ${bc.dotBg} ${dimClass} transition-all duration-150 cursor-pointer border ${bc.border} shrink-0`;
+          btn.title = `${bc.name} (${bc.count} species) - click to filter`;
         }
       });
 

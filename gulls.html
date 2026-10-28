@@ -154,33 +154,229 @@
   </header>
 
   <!-- Immediate Gull Feed (1 card per row, identical to ducks.html) -->
+    <!-- Immediate Gull Feed -->
+  <div id="urlFilterBannerContainer" class="max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden">
+    <!-- Rendered dynamically -->
+  </div>
+
   <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="gullFeed">
     <!-- Rendered via JS -->
   </main>
+
+  <!-- FULLSCREEN IMAGE LIGHTBOX MODAL -->
+  <div id="imageLightboxModal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-5" onclick="handleLightboxBackdropClick(event)">
+    <!-- Lightbox Header -->
+    <div class="flex items-center justify-between gap-3 max-w-6xl w-full mx-auto pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="lightboxTitle" class="text-lg sm:text-xl font-black text-white tracking-tight truncate">Species Name</h3>
+            <span id="lightboxBadge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">DIAGNOSTIC PLATE</span>
+          </div>
+          <p id="lightboxSubtitle" class="text-xs italic font-serif text-slate-400 truncate">Scientific Name</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-[11px] text-slate-500 hidden sm:inline">Press <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono text-[10px]">Esc</kbd> or click outside to close</span>
+        <button id="closeLightboxBtn" onclick="closeLightbox()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer" title="Close Lightbox (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox Main Stage Image -->
+    <div class="flex-1 flex items-center justify-center p-2 sm:p-4 min-h-0 overflow-hidden">
+      <img id="lightboxImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Specimen Enlargement" class="max-h-[78vh] max-w-[95vw] sm:max-w-[88vw] object-contain rounded-xl shadow-2xl border border-slate-800 select-none transition-all cursor-zoom-out" onclick="closeLightbox()">
+    </div>
+
+    <!-- Lightbox Footer / Diagnostic Notes -->
+    <div class="max-w-4xl w-full mx-auto pt-3 border-t border-slate-800/80 text-center">
+      <p id="lightboxCaption" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Diagnostic field mark description</p>
+    </div>
+  </div>
 
   <!-- Client-Side State & Multi-Select Engine -->
   <script>
     const gulls = [{"id": "ring_billed_gull_adult", "rank": 1, "name": "Ring-billed Gull (Adult)", "sci": "Larus delawarensis", "prob": "72%", "age": "adult", "mantle": "pale_mantle", "legs": "yellow_legs", "traits": ["pale_mantle", "yellow_legs", "bill_ring", "streaked_head", "white_mirrors"], "plate": "assets/gull_plates/ring_billed_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Medium build, pale pearl-gray mantle, bright yellow legs, complete solid black bill ring, pale yellow eye", "photo": "assets/gulls/ring_billed_gull_adult_1.jpg", "photo_caption": "Field profile: Crisp black band completely encircling slender yellow bill, bright yellow legs, pale gray mantle", "crux_photo": "assets/gulls/ring_billed_gull_adult_2.jpg", "crux_caption": "Head closeup: Piercing pale yellow iris, complete black subterminal ring, neat head streaking in winter", "diagnostics": [{"tract": "Bill Pattern", "mark": "Slender yellow bill encircled by a sharp, complete solid black ring near the tip (never has a red spot)."}, {"tract": "Legs & Eye", "mark": "Bright yellow to greenish-yellow legs; pale lemon-yellow iris with a subtle red orbital ring."}, {"tract": "Mantle & Size", "mark": "Pale pearl-gray mantle (slightly paler than Herring Gull); medium build, noticeably smaller and gentler than Herring Gull."}], "rule_out": "Slender yellow bill with complete black ring + bright yellow legs + pale gray mantle = Adult Ring-billed Gull.", "rarity": "common", "length_cm": 45.0, "bill_mm": 40.0, "size_display": "45 cm (17.5\")", "bill_display": "40 mm"}, {"id": "ring_billed_gull_immature", "rank": 2, "name": "Ring-billed Gull (1st Winter)", "sci": "Larus delawarensis", "prob": "60%", "age": "immature", "mantle": "pale_mantle", "legs": "pink_legs", "traits": ["pale_mantle", "pink_legs", "two_toned_bill"], "plate": "assets/gull_plates/ring_billed_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Mottled brown-gray saddle, flesh-pink legs, pink bill with sharply demarcated solid black distal third, narrow black tail band", "photo": "assets/gulls/ring_billed_gull_immature_1.jpg", "photo_caption": "Field profile: Pink base with sharp black tip on bill, neat brown wing covert mottling, pink legs", "crux_photo": "assets/gulls/ring_billed_gull_immature_2.jpg", "crux_caption": "Tail & wings: Crisp narrow black tail band contrasting with white rump; neat pale gray saddle", "diagnostics": [{"tract": "Bill Pattern", "mark": "Distinctive two-toned bill: bright flesh-pink basal two-thirds with a sharply demarcated, solid black tip."}, {"tract": "Legs & Tail", "mark": "Flesh-pink legs (turn yellowish in 2nd year); narrow, clean black subterminal tail band contrasting with white rump."}, {"tract": "Mantle & Build", "mark": "Pale gray saddle feathers starting to molt in, surrounded by neatly patterned brown wing coverts."}], "rule_out": "Pink bill with crisp black tip + narrow clean black tail band + pink legs = 1st-Winter Ring-billed Gull.", "rarity": "common", "length_cm": 45.0, "bill_mm": 40.0, "size_display": "45 cm (17.5\")", "bill_display": "40 mm"}, {"id": "herring_gull_adult", "rank": 3, "name": "Herring Gull (Adult Winter)", "sci": "Larus argentatus", "prob": "55%", "age": "adult", "mantle": "pale_mantle", "legs": "pink_legs", "traits": ["pale_mantle", "pink_legs", "red_spot", "streaked_head", "white_mirrors"], "plate": "assets/gull_plates/herring_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Heavy bulky build, pale pearl-gray mantle, pale pink flesh legs, heavy yellow bill with red gonydeal spot, streaked winter head", "photo": "assets/gulls/herring_gull_adult_1.jpg", "photo_caption": "Field profile: Bulky chest, heavy yellow bill with red gonydeal spot, bubblegum-pink legs, brown-streaked winter nape", "crux_photo": "assets/gulls/herring_gull_adult_2.jpg", "crux_caption": "Bill & eye: Pale clear yellow eye with fierce brow angle; bold red spot on lower mandible angle", "diagnostics": [{"tract": "Bill Pattern", "mark": "Heavy, stout yellow bill with an angular gonys marked by a prominent bright red spot on the lower mandible."}, {"tract": "Leg Color", "mark": "Flesh-pink to bubblegum-pink legs at all seasons (diagnostic versus yellow-legged adult Ring-billed and Lesser Black-backed)."}, {"tract": "Head & Mantle", "mark": "Pale pearl-gray mantle; head and hindneck heavily smudged/streaked with dusky brown in winter plumage."}], "rule_out": "Heavy build + pale gray mantle + bubblegum-pink legs + red spot on heavy yellow bill = Adult Herring Gull.", "rarity": "common", "length_cm": 61.0, "bill_mm": 56.0, "size_display": "61 cm (24.0\")", "bill_display": "56 mm"}, {"id": "herring_gull_immature", "rank": 4, "name": "Herring Gull (1st Winter)", "sci": "Larus argentatus", "prob": "45%", "age": "immature", "mantle": "pale_mantle", "legs": "pink_legs", "traits": ["pink_legs", "black_bill"], "plate": "assets/gull_plates/herring_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Coarse checkered grayish-brown plumage, heavy dark bill, pink legs, uniform dark brown tail and primaries", "photo": "assets/gulls/herring_gull_immature_1.jpg", "photo_caption": "Field profile: Large bulky shape, uniform checkered brown plumage, dark smudgy bill, pink legs", "crux_photo": "assets/gulls/herring_gull_immature_2.jpg", "crux_caption": "Flight/covert pattern: Solid dark brown tail with pale vermiculated uppertail coverts; pale window on inner primaries", "diagnostics": [{"tract": "Plumage Tone", "mark": "Uniformly mottled, checkered grayish-brown all over body, head, and folded wings with no crisp white head contrast."}, {"tract": "Bill & Legs", "mark": "Heavy all-dark or dusky blackish bill (develops pale pinkish base later in 1st winter); sturdy pink legs."}, {"tract": "Tail & Wings", "mark": "Broad solid dark brown tail band; in flight shows a distinctive paler translucent window on inner primary feathers."}], "rule_out": "Bulky brown gull + heavy dark bill + solid dark brown tail + pale inner primary window = 1st-Winter Herring Gull.", "rarity": "common", "length_cm": 61.0, "bill_mm": 56.0, "size_display": "61 cm (24.0\")", "bill_display": "56 mm"}, {"id": "great_black_backed_gull_adult", "rank": 5, "name": "Great Black-backed Gull (Adult)", "sci": "Larus marinus", "prob": "35%", "age": "adult", "mantle": "black_mantle", "legs": "pink_legs", "traits": ["black_mantle", "pink_legs", "red_spot", "white_mirrors"], "plate": "assets/gull_plates/great_black_backed_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Massive apex predator build, stark jet-black mantle, pale pink legs, massive dagger-like yellow bill with blood-red spot", "photo": "assets/gulls/great_black_backed_gull_adult_1.jpg", "photo_caption": "Field profile: Enormous size, pitch-black mantle contrasting with snow-white underparts, heavy flesh-pink legs", "crux_photo": "assets/gulls/great_black_backed_gull_adult_2.jpg", "crux_caption": "Bill closeup: Massive brutal yellow bill with bulbous gonys and deep red spot; pale stern cold eye", "diagnostics": [{"tract": "Mantle & Size", "mark": "World's largest gull; stark slaty-black to jet-black mantle and wings contrasting sharply with snow-white underparts."}, {"tract": "Bill Structure", "mark": "Massive, dagger-like yellow bill with a prominent bulbous gonys and blood-red spot; fearsome aggressive expression."}, {"tract": "Leg Color", "mark": "Pale flesh-pink to whitish-pink legs (never bright yellow, instantly separating it from Lesser Black-backed Gull)."}], "rule_out": "Giant size + jet-black mantle + pale pink legs + massive brutal bill = Adult Great Black-backed Gull.", "rarity": "common", "length_cm": 75.0, "bill_mm": 65.0, "size_display": "75 cm (30.0\")", "bill_display": "65 mm"}, {"id": "great_black_backed_gull_immature", "rank": 6, "name": "Great Black-backed Gull (1st Winter)", "sci": "Larus marinus", "prob": "25%", "age": "immature", "mantle": "dark_mantle", "legs": "pink_legs", "traits": ["pink_legs", "two_toned_bill"], "plate": "assets/gull_plates/great_black_backed_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Massive barrel-chested build, stark white head and chest contrasting with sharply checkered dark mantle, massive black bill", "photo": "assets/gulls/great_black_backed_gull_immature_1.jpg", "photo_caption": "Field profile: Huge heavy structure, clean whitish face and chest, crisp dark checkered scapulars, pale pink legs", "crux_photo": "assets/gulls/great_black_backed_gull_immature_2.jpg", "crux_caption": "Covert pattern: High-contrast checkered blackish-brown and white feathers; massive heavy black bill", "diagnostics": [{"tract": "Structure & Size", "mark": "Massive, barrel-chested profile with thick bull-neck, dwarfing nearby Herring and Ring-billed Gulls."}, {"tract": "Head & Underparts", "mark": "Strikingly white head, throat, and underparts contrasting sharply with dark checkered mantle (much whiter-headed than 1st-winter Herring)."}, {"tract": "Bill & Rump", "mark": "Huge heavy all-black bill (sometimes with slight pale flesh base); finely checkered/barred tail coverts with distinct tail band."}], "rule_out": "Massive bull-necked size + strikingly white head/underparts + crisp checkered black-brown mantle = 1st-Winter Great Black-backed Gull.", "rarity": "common", "length_cm": 75.0, "bill_mm": 65.0, "size_display": "75 cm (30.0\")", "bill_display": "65 mm"}, {"id": "laughing_gull_breeding", "rank": 7, "name": "Laughing Gull (Adult Breeding)", "sci": "Leucophaeus atricilla", "prob": "48%", "age": "adult", "mantle": "dark_mantle", "legs": "red_legs", "traits": ["dark_mantle", "red_legs", "black_hood", "black_bill"], "plate": "assets/gull_plates/laughing_gull_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Full velvety black hood, bold white crescent eye-arcs, deep slate-gray mantle, drooping dark red bill, solid black wingtips", "photo": "assets/gulls/laughing_gull_breeding_1.jpg", "photo_caption": "Field profile: Velvety jet-black hood extending down nape, crisp white eye-crescents, dark slate-gray back", "crux_photo": "assets/gulls/laughing_gull_breeding_2.jpg", "crux_caption": "Head closeup: Bold separated white eye-arcs above and below dark eye; long drooping dark red bill", "diagnostics": [{"tract": "Head Pattern", "mark": "Full velvety jet-black hood extending completely over crown, cheeks, and upper nape in spring/summer."}, {"tract": "Eye & Bill", "mark": "Prominent, thick white crescent eye-arcs above and below dark eye; long, noticeably drooping dark reddish-black bill."}, {"tract": "Mantle & Wings", "mark": "Deep, dark slate-gray mantle (much darker than Herring/Ring-billed); solid black wingtips without white mirrors."}], "rule_out": "Full black hood + bold white eye-arcs + deep slate-gray mantle + drooping reddish bill = Breeding Adult Laughing Gull.", "rarity": "common", "length_cm": 41.0, "bill_mm": 41.0, "size_display": "41 cm (16.0\")", "bill_display": "41 mm"}, {"id": "laughing_gull_winter", "rank": 8, "name": "Laughing Gull (Adult Winter)", "sci": "Leucophaeus atricilla", "prob": "30%", "age": "adult", "mantle": "dark_mantle", "legs": "red_legs", "traits": ["dark_mantle", "red_legs", "ear_spot", "black_bill"], "plate": "assets/gull_plates/laughing_gull_winter_plate.jpg", "plate_caption": "Diagnostic plate: White head with dusky brownish-gray smudge across hindneck and ear coverts, deep slate-gray mantle, drooping blackish bill", "photo": "assets/gulls/laughing_gull_winter_1.jpg", "photo_caption": "Field profile: White face with dusky smudge on rear crown and nape, deep slate mantle, long drooping dark bill", "crux_photo": "assets/gulls/laughing_gull_winter_2.jpg", "crux_caption": "Resting view: Dark slate-gray back, solid black primary tips lacking white spots, dusky collar", "diagnostics": [{"tract": "Head Pattern", "mark": "Hood lost; white head with a characteristic dusky, mottled brownish-gray smudge forming a partial collar around rear crown/nape."}, {"tract": "Mantle & Wings", "mark": "Deep charcoal/slate-gray mantle retained year-round; solid black outer primaries without white apical mirror spots."}, {"tract": "Bill & Leg Color", "mark": "Long, slender, distinctly decurved (drooping) blackish bill; dark reddish-black legs."}], "rule_out": "Deep slate-gray mantle + dusky nape smudge + long drooping dark bill + solid black wingtips = Winter Adult Laughing Gull.", "rarity": "common", "length_cm": 41.0, "bill_mm": 41.0, "size_display": "41 cm (16.0\")", "bill_display": "41 mm"}, {"id": "bonapartes_gull_adult", "rank": 9, "name": "Bonaparte's Gull (Adult Winter)", "sci": "Chroicocephalus philadelphia", "prob": "22%", "age": "adult", "mantle": "pale_mantle", "legs": "red_legs", "traits": ["pale_mantle", "red_legs", "ear_spot", "black_bill", "white_wedge"], "plate": "assets/gull_plates/bonapartes_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Petite tern-like build, pale silvery-gray mantle, stark round black ear spot on white head, needle-thin black bill, pink-orange legs", "photo": "assets/gulls/bonapartes_gull_adult_1.jpg", "photo_caption": "Field profile: Dainty petite profile, round black spot behind eye, needle-fine black bill, bright pinkish-orange legs", "crux_photo": "assets/gulls/bonapartes_gull_adult_2.jpg", "crux_caption": "Flight profile: Dazzling long white triangle/wedge on leading edge of outer wing, black trailing edge", "diagnostics": [{"tract": "Size & Build", "mark": "Petite, dainty, tern-like structure; snappy, buoyant, flickering wingbeats in flight (smallest common gull in MD)."}, {"tract": "Head & Bill", "mark": "Clean white head with a prominent, stark round blackish ear spot behind eye; needle-thin, sharp all-black bill."}, {"tract": "Wing Pattern", "mark": "In flight, shows a brilliant, broad silvery-white triangular wedge across outer primaries with a neat black trailing edge."}], "rule_out": "Petite tern-like build + needle-thin black bill + stark black ear spot + bright pink-orange legs = Winter Adult Bonaparte's Gull.", "rarity": "common", "length_cm": 33.0, "bill_mm": 24.0, "size_display": "33 cm (13.0\")", "bill_display": "24 mm"}, {"id": "bonapartes_gull_immature", "rank": 10, "name": "Bonaparte's Gull (1st Winter)", "sci": "Chroicocephalus philadelphia", "prob": "18%", "age": "immature", "mantle": "pale_mantle", "legs": "red_legs", "traits": ["pale_mantle", "red_legs", "ear_spot", "black_bill"], "plate": "assets/gull_plates/bonapartes_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Petite dainty size, black ear spot, needle-thin black bill, bold brown carpal bar forming diagonal wing zigzag, black tail band", "photo": "assets/gulls/bonapartes_gull_immature_1.jpg", "photo_caption": "Field profile: Small dainty build, dark ear spot, brown carpal bar across wing coverts, pinkish-orange legs", "crux_photo": "assets/gulls/bonapartes_gull_immature_2.jpg", "crux_caption": "Flight view: Brown diagonal 'M' pattern across upperwings, clean black subterminal tail band", "diagnostics": [{"tract": "Head & Bill", "mark": "Distinct dark blackish ear spot on white head; dainty, slender needle-like black bill."}, {"tract": "Wing Coverts", "mark": "Bold brown carpal bar running diagonally across upperwing coverts, creating a striking zigzag 'M' pattern in flight."}, {"tract": "Tail & Legs", "mark": "Narrow, crisp black subterminal band across pure white tail; dull flesh-pink to pale orange legs."}], "rule_out": "Petite dainty size + slender black bill + black ear spot + brown diagonal wing bar + black tail band = 1st-Winter Bonaparte's Gull.", "rarity": "common", "length_cm": 33.0, "bill_mm": 24.0, "size_display": "33 cm (13.0\")", "bill_display": "24 mm"}, {"id": "lesser_black_backed_gull_adult", "rank": 11, "name": "Lesser Black-backed Gull (Adult Winter)", "sci": "Larus fuscus", "prob": "12%", "age": "adult", "mantle": "dark_mantle", "legs": "yellow_legs", "traits": ["dark_mantle", "yellow_legs", "red_spot", "streaked_head", "white_mirrors"], "plate": "assets/gull_plates/lesser_black_backed_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Slender attenuated build, dark slate-gray mantle (intermediate between Herring and GBBG), bright yellow legs, long wings", "photo": "assets/gulls/lesser_black_backed_gull_adult_1.jpg", "photo_caption": "Field profile: Dark slate mantle, bright butter-yellow legs, long slender wings projecting far past tail, yellow bill with red spot", "crux_photo": "assets/gulls/lesser_black_backed_gull_adult_2.jpg", "crux_caption": "Comparison profile: Charcoal-gray mantle clearly darker than Herring Gull but paler than jet-black Great Black-backed; bright yellow legs", "diagnostics": [{"tract": "Leg Color", "mark": "Bright butter-yellow legs in adult (100% diagnostic crux separating it from pink-legged Herring and Great Black-backed Gulls)."}, {"tract": "Mantle Shade", "mark": "Deep slate/charcoal gray mantle (graellsii subspecies) \u2014 conspicuously darker than Herring Gull, yet noticeably paler than jet-black Great Black-backed."}, {"tract": "Wing Projection", "mark": "Very long, slender, attenuated wings extending far beyond tail tip when standing, imparting an elegant, tapered rear profile."}], "rule_out": "Dark slate mantle + bright yellow legs + long primary projection + red spot on yellow bill = Adult Lesser Black-backed Gull.", "rarity": "uncommon", "length_cm": 53.0, "bill_mm": 52.0, "size_display": "53 cm (21.0\")", "bill_display": "52 mm"}, {"id": "lesser_black_backed_gull_immature", "rank": 12, "name": "Lesser Black-backed Gull (1st Winter)", "sci": "Larus fuscus", "prob": "8%", "age": "immature", "mantle": "dark_mantle", "legs": "pink_legs", "traits": ["dark_mantle", "pink_legs", "black_bill"], "plate": "assets/gull_plates/lesser_black_backed_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Elongate attenuated structure, very dark uniform blackish-brown wing coverts, solid black slender bill, dark eye mask", "photo": "assets/gulls/lesser_black_backed_gull_immature_1.jpg", "photo_caption": "Field profile: Very dark sooty-brown wing coverts, slender all-black bill, dark eye smudge, elongate silhouette", "crux_photo": "assets/gulls/lesser_black_backed_gull_immature_2.jpg", "crux_caption": "Flight profile: Distinct pale translucent window on inner primaries; broad dark brown-black tail band", "diagnostics": [{"tract": "Plumage Tone", "mark": "Conspicuously dark, sooty blackish-brown wing coverts and tertials (overall darker and more uniform than 1st-winter Herring Gull)."}, {"tract": "Bill & Face", "mark": "Slender, all-black bill without pale base; dark smudgy 'raccoon' mask concentrated around and behind eye."}, {"tract": "Structure", "mark": "Slender, elongate structure with long primary projection extending far past the tail."}], "rule_out": "Very dark sooty-brown coverts + slender all-black bill + long primary projection + dark eye mask = 1st-Winter Lesser Black-backed Gull.", "rarity": "uncommon", "length_cm": 53.0, "bill_mm": 52.0, "size_display": "53 cm (21.0\")", "bill_display": "52 mm"}, {"id": "iceland_gull_adult", "rank": 13, "name": "Iceland Gull (Kumlien's Adult)", "sci": "Larus glaucoides kumlieni", "prob": "4%", "age": "adult", "mantle": "pale_mantle", "legs": "pink_legs", "traits": ["pale_mantle", "pink_legs", "red_spot", "streaked_head", "white_wingtips"], "plate": "assets/gull_plates/iceland_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Gentle rounded dove-like head, small dainty greenish-yellow bill with faint red spot, pink legs, frosted pale gray wingtips with NO solid black", "photo": "assets/gulls/iceland_gull_adult_1.jpg", "photo_caption": "Field profile: Gentle rounded crown, small petite bill, pale pearl-gray mantle, pale frosted/translucent wingtips", "crux_photo": "assets/gulls/iceland_gull_adult_2.jpg", "crux_caption": "Wingtip closeup: Wingtips lack solid black (pale gray markings or white mirrors on frosted gray primaries), small bill", "diagnostics": [{"tract": "Wingtip Pattern", "mark": "Wingtips completely lack solid jet-black pigment! Show pale gray to frosted translucent primary tips with variable pale gray markings (Kumlien's)."}, {"tract": "Head & Bill", "mark": "Distinctive gentle, rounded, dove-like head profile with steep forehead; small, delicate greenish-yellow bill with faint red spot."}, {"tract": "Size & Legs", "mark": "Medium build (Herring Gull size or slightly smaller, but much more delicate); bright flesh-pink legs."}], "rule_out": "Gentle rounded dove-like head + small delicate bill + pale gray/frosted wingtips with NO solid black = Adult Iceland Gull (Kumlien's).", "rarity": "uncommon", "length_cm": 55.0, "bill_mm": 42.0, "size_display": "55 cm (21.5\")", "bill_display": "42 mm"}, {"id": "iceland_gull_immature", "rank": 14, "name": "Iceland Gull (1st Winter)", "sci": "Larus glaucoides", "prob": "3%", "age": "immature", "mantle": "white_mantle", "legs": "pink_legs", "traits": ["white_mantle", "pink_legs", "white_wingtips"], "plate": "assets/gull_plates/iceland_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Gentle dove-like rounded head, delicate slender dark bill, pink legs, uniform pale creamy-biscuit plumage, pure frosted wingtips", "photo": "assets/gulls/iceland_gull_immature_1.jpg", "photo_caption": "Field profile: Uniform frosted caf\u00e9-au-lait wash, gentle rounded head, delicate slender black-tipped bill, pale wingtips", "crux_photo": "assets/gulls/iceland_gull_immature_2.jpg", "crux_caption": "Standing profile: Wingtips as pale as or paler than the body, completely lacking dark brown or black pigment", "diagnostics": [{"tract": "Plumage Color", "mark": "Uniformly pale creamy-buff, biscuit, or caf\u00e9-au-lait vermiculated plumage all over body and folded wings."}, {"tract": "Wingtip Color", "mark": "Wingtips are entirely pale and frosted (pure white to creamy-buff), matching or paler than the mantle (never dark brown like Herring Gull!)."}, {"tract": "Head & Bill", "mark": "Dove-like rounded head with steep forehead; slender, delicate dark bill with pale flesh base; pink legs."}], "rule_out": "Frosted creamy-biscuit body + pale wingtips lacking dark pigment + gentle rounded head + petite slender bill = 1st-Winter Iceland Gull.", "rarity": "uncommon", "length_cm": 55.0, "bill_mm": 42.0, "size_display": "55 cm (21.5\")", "bill_display": "42 mm"}, {"id": "glaucous_gull_adult", "rank": 15, "name": "Glaucous Gull (Adult Winter)", "sci": "Larus hyperboreus", "prob": "2%", "age": "adult", "mantle": "white_mantle", "legs": "pink_legs", "traits": ["white_mantle", "pink_legs", "red_spot", "white_wingtips"], "plate": "assets/gull_plates/glaucous_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Massive heavy apex size, very pale chalky-gray mantle, heavy stout yellow bill with red gonydeal spot, pink legs, pure white wingtips", "photo": "assets/gulls/glaucous_gull_adult_1.jpg", "photo_caption": "Field profile: Huge bulky body (rivals Great Black-backed), very pale chalky-gray back, pure chalk-white wingtips with zero black", "crux_photo": "assets/gulls/glaucous_gull_adult_2.jpg", "crux_caption": "Head closeup: Heavy stout yellow bill with bright red gonydeal spot, pale yellow eye, fierce flat crown", "diagnostics": [{"tract": "Wingtip Pattern", "mark": "Pure chalk-white wingtips with zero black, gray, or dark pigment anywhere (completely unmarked white primary tips)."}, {"tract": "Size & Build", "mark": "Massive, powerful, heavy-chested high-Arctic gull (often exceeds Herring Gull in size, rivaling Great Black-backed Gull)."}, {"tract": "Bill & Mantle", "mark": "Heavy, stout yellow bill with a prominent red gonydeal spot; extremely pale, washed-out chalky-gray mantle; pink legs."}], "rule_out": "Massive apex size + extremely pale mantle + pure chalk-white wingtips with zero black + heavy yellow bill = Adult Glaucous Gull.", "rarity": "uncommon", "length_cm": 68.0, "bill_mm": 60.0, "size_display": "68 cm (27.0\")", "bill_display": "60 mm"}, {"id": "glaucous_gull_immature", "rank": 16, "name": "Glaucous Gull (1st Winter)", "sci": "Larus hyperboreus", "prob": "2%", "age": "immature", "mantle": "white_mantle", "legs": "pink_legs", "traits": ["white_mantle", "pink_legs", "two_toned_bill", "white_wingtips"], "plate": "assets/gull_plates/glaucous_gull_immature_plate.jpg", "plate_caption": "Diagnostic plate: Massive heavy structure, pale creamy-white to buff wash, pure white wingtips, heavy pink bill with sharply demarcated black tip", "photo": "assets/gulls/glaucous_gull_immature_1.jpg", "photo_caption": "Field profile: Huge size, pale creamy-buff plumage, pure white wingtips, distinctive heavy two-toned pink-and-black bill", "crux_photo": "assets/gulls/glaucous_gull_immature_2.jpg", "crux_caption": "Bill closeup: Bright bubblegum-pink basal two-thirds with a razor-sharp, ink-black tip; sturdy pink legs", "diagnostics": [{"tract": "Bill Pattern", "mark": "Diagnostic two-toned bill: bright flesh-pink basal two-thirds with a razor-sharp, completely demarcated jet-black distal tip."}, {"tract": "Wingtip & Body", "mark": "Pure snow-white to pale creamy-buff wingtips (zero dark brown or black pigment); uniform pale marzipan-buff body plumage."}, {"tract": "Size & Structure", "mark": "Massive heavy-chested apex structure with a flat, fierce crown and thick bull-neck; pale flesh-pink legs."}], "rule_out": "Massive size + pure white wingtips + heavy two-toned pink-and-black bill = 1st-Winter Glaucous Gull.", "rarity": "uncommon", "length_cm": 68.0, "bill_mm": 60.0, "size_display": "68 cm (27.0\")", "bill_display": "60 mm"}, {"id": "black_headed_gull_adult", "rank": 17, "name": "Black-headed Gull (Adult Winter)", "sci": "Chroicocephalus ridibundus", "prob": "0.3%", "age": "adult", "mantle": "pale_mantle", "legs": "red_legs", "traits": ["pale_mantle", "red_legs", "ear_spot", "white_wedge"], "plate": "assets/gull_plates/black_headed_gull_adult_plate.jpg", "plate_caption": "Diagnostic plate: Medium-small size (larger than Bonaparte's), pale gray mantle, dark ear spot, dull dark red bill and legs, dark underwing primaries", "photo": "assets/gulls/black_headed_gull_adult_1.jpg", "photo_caption": "Field profile: White head with dark smudged ear spot, dull dark reddish bill with dusky tip, dull red legs", "crux_photo": "assets/gulls/black_headed_gull_adult_2.jpg", "crux_caption": "Crux flight view: Diagnostic dark charcoal/blackish underside of primaries (Bonaparte's has snow-white underwings!)", "diagnostics": [{"tract": "Underwing Crux", "mark": "100% DIAGNOSTIC CRUX: In flight, underside of primary flight feathers is solid smoky charcoal-gray to black (Bonaparte's has pure white underwing!)."}, {"tract": "Bill & Leg Color", "mark": "Dull dark reddish to blood-red bill with a dusky/blackish tip; dull dark red legs (Bonaparte's has needle-thin black bill and bright pinkish-orange legs)."}, {"tract": "Size & Head", "mark": "Noticeably larger, longer-winged, and heavier-billed than Bonaparte's Gull; white head with dark dusky ear spot."}], "rule_out": "Bonaparte's lookalike with dark smoky-black underwing + dull reddish bill + dull red legs = Adult Black-headed Gull.", "rarity": "rare", "length_cm": 37.0, "bill_mm": 34.0, "size_display": "37 cm (14.5\")", "bill_display": "34 mm"}, {"id": "black_legged_kittiwake_adult", "rank": 18, "name": "Black-legged Kittiwake (Adult Winter)", "sci": "Rissa tridactyla", "prob": "0.2%", "age": "adult", "mantle": "dark_mantle", "legs": "black_legs", "traits": ["dark_mantle", "black_legs", "unmarked_bill", "ink_wingtips"], "plate": "assets/gull_plates/black_legged_kittiwake_adult_plate.jpg", "plate_caption": "Diagnostic plate: Compact oceanic pelagic gull, medium-gray mantle, plain unmarked greenish-yellow bill, very short jet-black legs, solid ink-dipped wingtips", "photo": "assets/gulls/black_legged_kittiwake_adult_1.jpg", "photo_caption": "Field profile: Plain unmarked pale greenish-yellow bill, very short jet-black legs, solid triangular black wingtips without white spots", "crux_photo": "assets/gulls/black_legged_kittiwake_adult_2.jpg", "crux_caption": "Flight wingtips: Wingtips look cleanly dipped into black ink, cut off straight across with NO white mirrors or spots", "diagnostics": [{"tract": "Wingtip Pattern", "mark": "Solid triangular jet-black wingtips that look neatly dipped into black ink, severed straight across with ZERO white mirror spots."}, {"tract": "Legs & Bill", "mark": "Very short, jet-black legs (tridactyla lacks hind toe); plain, unmarked pale greenish-yellow bill (no red spot, no black ring)."}, {"tract": "Head & Habitat", "mark": "Dusky slate-gray smudge across hindneck/nape; pelagic oceanic cliff gull seen offshore or driven to coast during major nor'easters."}], "rule_out": "Plain greenish-yellow bill + short jet-black legs + ink-dipped wingtips with no white mirrors = Adult Black-legged Kittiwake.", "rarity": "rare", "length_cm": 41.0, "bill_mm": 36.0, "size_display": "41 cm (16.0\")", "bill_display": "36 mm"}, {"id": "black_legged_kittiwake_immature", "rank": 19, "name": "Black-legged Kittiwake (1st Winter)", "sci": "Rissa tridactyla", "prob": "0.2%", "age": "immature", "mantle": "dark_mantle", "legs": "black_legs", "traits": ["dark_mantle", "black_legs", "black_bill", "tar_collar", "ear_spot"], "plate": "assets/gull_plates/black_legged_kittiwake_immature_plate.jpg", "plate_caption": "Diagnostic plate: Compact pelagic gull, all-black bill, short black legs, bold black 'tar collar' nape bar, carpal wing zigzag, black tail band", "photo": "assets/gulls/black_legged_kittiwake_immature_1.jpg", "photo_caption": "Field profile: Bold black collar across back of neck ('tar collar'), black ear spot, all-black bill, short black legs", "crux_photo": "assets/gulls/black_legged_kittiwake_immature_2.jpg", "crux_caption": "Flight pattern: Striking bold black 'M' zigzag across upperwings, clean black subterminal tail band, solid black outer primaries", "diagnostics": [{"tract": "Nape & Neck", "mark": "Diagnostic stark black bar or half-collar across the hindneck ('tar collar'), accompanied by a crisp black ear spot."}, {"tract": "Wing Pattern", "mark": "Bold, dramatic black diagonal 'M' or zigzag band across upperwing coverts contrasting with pure white trailing secondary triangle."}, {"tract": "Bill & Legs", "mark": "Stout, all-black bill; short jet-black legs; neat black terminal band on notched white tail."}], "rule_out": "Black 'tar collar' on nape + bold black 'M' zigzag on upperwing + solid black bill + short black legs = 1st-Winter Black-legged Kittiwake.", "rarity": "rare", "length_cm": 41.0, "bill_mm": 36.0, "size_display": "41 cm (16.0\")", "bill_display": "36 mm"}];
 
-    let activeAge = 'all'; // 'all', 'adult', 'immature'
+        let activeAge = 'all'; // 'all', 'adult', 'immature'
     let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     let activeTraits = new Set();
     let currentViewMode = 'both';
     let currentSort = 'freq-desc';
+    let urlSpeciesFilter = null;
+    const dismissedCards = new Set();
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      const sortParam = params.get('sort') || params.get('order');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'size-asc': 'size-asc',
+          'size-desc': 'size-desc',
+          'size': 'size-asc',
+          'bill-asc': 'bill-asc',
+          'bill-desc': 'bill-desc',
+          'bill': 'bill-asc',
+          'name-asc': 'name-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+
+        tokens.forEach(tok => {
+          gulls.forEach(g => {
+            const idNorm = g.id.toLowerCase();
+            const nameNorm = g.name.toLowerCase();
+            const sciNorm = g.sci.toLowerCase();
+            if (
+              idNorm === tok ||
+              idNorm.replace(/_/g, '') === tok.replace(/_/g, '') ||
+              idNorm.replace(/_/g, '-') === tok ||
+              idNorm.startsWith(tok + '_') ||
+              idNorm.endsWith('_' + tok) ||
+              nameNorm.includes(tok) ||
+              sciNorm.includes(tok)
+            ) {
+              matched.add(g.id);
+            }
+          });
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function updateUrlParams() {
+      if (!window.history || !window.history.replaceState) return;
+      try {
+        const url = new URL(window.location.href);
+
+        if (currentSort && currentSort !== 'freq-desc') {
+          url.searchParams.set('sort', currentSort);
+        } else {
+          url.searchParams.delete('sort');
+        }
+
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          let paramName = 'species';
+          for (const p of ['species', 'filter', 'include', 'checklist']) {
+            if (url.searchParams.has(p)) { paramName = p; break; }
+          }
+          url.searchParams.set(paramName, Array.from(urlSpeciesFilter).join(','));
+        } else {
+          url.searchParams.delete('species');
+          url.searchParams.delete('filter');
+          url.searchParams.delete('include');
+          url.searchParams.delete('checklist');
+        }
+
+        const cleanSearch = url.search ? url.search.replace(/%2C/g, ',') : '';
+        const targetUrl = url.pathname + cleanSearch + (url.hash || '');
+        window.history.replaceState({}, '', targetUrl);
+      } catch (e) {
+        console.warn('URL sync notice:', e);
+      }
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      updateUrlParams();
+      renderFeed();
+    }
+
+    function copyCurrentShareLink() {
+      updateUrlParams();
+      const cleanUrl = window.location.href.replace(/%2C/g, ',');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanUrl).then(() => {
+          const btn = document.getElementById('copyShareBtn');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = `<span>✓ Copied!</span>`;
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
+          }
+        }).catch(() => {
+          prompt('Share URL:', cleanUrl);
+        });
+      } else {
+        prompt('Share URL:', cleanUrl);
+      }
+    }
+
+    function openLightbox(src, title, sci, badge, caption) {
+      if (!src) return;
+      const modal = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const titleEl = document.getElementById('lightboxTitle');
+      const subtitleEl = document.getElementById('lightboxSubtitle');
+      const badgeEl = document.getElementById('lightboxBadge');
+      const captionEl = document.getElementById('lightboxCaption');
+
+      img.src = src;
+      titleEl.textContent = title || 'Specimen View';
+      subtitleEl.textContent = sci || '';
+      badgeEl.textContent = badge || 'IMAGE';
+      captionEl.textContent = caption || '';
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightboxModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('lightboxImg').src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
+    }
+
+    function handleLightboxBackdropClick(event) {
+      if (event.target.id === 'imageLightboxModal' || event.target.closest('#closeLightboxBtn')) {
+        closeLightbox();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lightbox = document.getElementById('imageLightboxModal');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+        }
+      }
+    });
 
     function setSort(mode) {
       currentSort = mode;
+      updateUrlParams();
       renderFeed();
     }
-    const dismissedCards = new Set();
 
     function dismissSpecies(id) {
       dismissedCards.add(id);
+      updateUrlParams();
       renderFeed();
     }
 
     function unhideAll() {
       dismissedCards.clear();
+      updateUrlParams();
       renderFeed();
     } // 'both', 'plates', 'photos'
     const photoModes = {}; // cardId -> 'primary' | 'crux'
@@ -212,18 +408,21 @@
       activeAge = (activeAge === age) ? 'all' : age;
       updateFilterButtons();
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleRarity(rarity) {
       activeRarity = (activeRarity === rarity) ? 'all' : rarity;
       updateFilterButtons();
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleTrait(trait) {
       if (activeTraits.has(trait)) {
         activeTraits.delete(trait);
-      } else {
+        updateUrlParams();
+    } else {
         // Remove mutually exclusive traits
         EXCLUSIVE_PAIRS.forEach(pair => {
           if (pair[0] === trait && activeTraits.has(pair[1])) activeTraits.delete(pair[1]);
@@ -254,7 +453,51 @@
       const container = document.getElementById('gullFeed');
       container.innerHTML = '';
 
+      // Render URL filter banner if active
+      const banner = document.getElementById('urlFilterBannerContainer');
+      if (banner) {
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          const allowedList = gulls.filter(g => urlSpeciesFilter.has(g.id));
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden";
+          banner.innerHTML = `
+            <div class="bg-gradient-to-r from-sky-950/90 via-slate-900 to-sky-950/80 border border-sky-500/50 rounded-2xl p-3 sm:p-4 shadow-xl">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0 ring-2 ring-sky-400/30"></span>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="text-xs font-black uppercase tracking-wider text-white">Targeted Checklist Active</span>
+                      <span class="text-[10px] font-mono-num font-bold px-2 py-0.5 rounded bg-sky-900/80 text-sky-200 border border-sky-600/70">
+                        ${allowedList.length} of ${gulls.length} Cards
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 truncate max-w-xl mt-0.5">
+                      ${Array.from(new Set(allowedList.map(g => g.name.replace(/\s*\([^)]*\)/, '')))).join(', ')}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <button onclick="copyCurrentShareLink()" id="copyShareBtn" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Copy Link</span>
+                  </button>
+                  <button onclick="clearUrlFilter()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 transition shadow-sm flex items-center gap-1 cursor-pointer">
+                    <span>Show All (${gulls.length})</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden";
+          banner.innerHTML = '';
+        }
+      }
+
       const filtered = gulls.filter(g => {
+        if (urlSpeciesFilter && !urlSpeciesFilter.has(g.id)) return false;
         if (dismissedCards.has(g.id)) return false;
         if (activeAge !== 'all' && g.age !== activeAge) return false;
         if (activeRarity !== 'all' && g.rarity !== activeRarity) return false;
@@ -288,25 +531,38 @@
       });
 
       let matches = filtered.length;
+      const maxCategoryLength = Math.max(...gulls.map(b => b.length_cm || 0), 80.0);
+      const maxCategoryBill = Math.max(...gulls.map(b => b.bill_mm || 0), 70.0);
+
       filtered.forEach(g => {
         const card = document.createElement('div');
+        card.id = `sp-${g.id}`;
         const isRare = g.rarity === 'rare';
         const isUncommon = g.rarity === 'uncommon';
+        const lenPct = Math.min(100, Math.round(((g.length_cm || 0) / maxCategoryLength) * 100));
 
-        // Distinctive container styling: highlighted border for Rares
+        // Distinctive container styling: highlighted border for Rares + Full-Card Caliper Flex Container
         if (isRare) {
-          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl p-3 sm:p-4 transition hover:border-amber-400 shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30";
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl overflow-hidden shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30 transition hover:border-amber-400 flex flex-col group";
         } else {
-          card.className = "bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 transition hover:border-slate-700/80 shadow-sm";
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
         }
 
-        // Diagnostics HTML
-        const diagHtml = g.diagnostics.map(diag => `
-          <div class="flex items-baseline gap-2 text-xs leading-relaxed">
-            <span class="font-bold text-[11px] uppercase tracking-wider text-sky-400 shrink-0 w-24 sm:w-28">${diag.tract}</span>
-            <span class="text-slate-200">${diag.mark}</span>
-          </div>
-        `).join('');
+        // Diagnostics HTML (Compact 3-column inline grid)
+        const diagHtml = g.diagnostics.map(diag => {
+          let label = diag.tract;
+          if (label.toLowerCase().includes('bill')) label = 'Bill';
+          else if (label.toLowerCase().includes('leg')) label = 'Legs';
+          else if (label.toLowerCase().includes('wing') || label.toLowerCase().includes('primary')) label = 'Wings/Primaries';
+          else if (label.toLowerCase().includes('mantle') || label.toLowerCase().includes('body')) label = 'Mantle';
+          else if (label.toLowerCase().includes('head') || label.toLowerCase().includes('eye')) label = 'Head/Eye';
+          return `
+            <div class="flex items-baseline gap-1.5 min-w-0">
+              <span class="text-[10px] font-black uppercase tracking-wider text-sky-400 bg-sky-950/60 px-1 py-0.5 rounded border border-sky-800/40 shrink-0">${label}</span>
+              <span class="text-slate-300 text-[11px] truncate" title="${diag.mark}">${diag.mark}</span>
+            </div>
+          `;
+        }).join('');
 
         // Age Badge color & label
         let ageBadgeClass = "bg-sky-950/80 text-sky-400 border-sky-800/60";
@@ -328,19 +584,19 @@
           `;
           rarityCallout = `
             <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
-              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare pelagic/Eurasian vagrant in Mid-Atlantic & MD. Detailed notes/photo required.</span>
-              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.5% eBird freq</span>
+              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare pelagic / coastal vagrant in Mid-Atlantic & Maryland. Detailed description/photo required.</span>
+              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.1% eBird freq</span>
             </div>
           `;
         } else if (isUncommon) {
           frequencyBadge = `
-            <span class="text-[11px] font-semibold tabular-nums text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD & East Coast">
+            <span class="text-[11px] font-semibold tabular-nums text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
               ${g.prob} freq (Uncommon)
             </span>
           `;
         } else {
           frequencyBadge = `
-            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency in Central MD & East Coast">
+            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
               ${g.prob} freq (Common)
             </span>
           `;
@@ -352,111 +608,164 @@
         const activePhotoCaption = currentPhotoMode === 'primary' ? g.photo_caption : g.crux_caption;
 
         const photoToggleHtml = `
-          <div class="flex items-center gap-1 mt-1.5 justify-end">
-            <button onclick="toggleCardPhoto('${g.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
-            <button onclick="toggleCardPhoto('${g.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          <div class="flex items-center gap-0.5 bg-slate-900/90 p-0.5 rounded border border-slate-700/80 shadow">
+            <button onclick="toggleCardPhoto('${g.id}', 'primary')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Profile</button>
+            <button onclick="toggleCardPhoto('${g.id}', 'crux')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Crux</button>
           </div>
         `;
+
+        // Safe string escapes for lightbox modal attributes
+        const safeName = g.name.replace(/'/g, "\\'");
+        const safeSci = g.sci.replace(/'/g, "\\'");
+        const safePlateCap = (g.plate_caption || '').replace(/'/g, "\\'");
+        const safePhotoCap = (activePhotoCaption || '').replace(/'/g, "\\'");
 
         // Visual layout based on currentViewMode (Both = Hand-drawn Plate on Left, Field Photo on Right)
         let visualsHtml = '';
         if (currentViewMode === 'both') {
           visualsHtml = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-2.5">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate with Inset Badges (Click to Enlarge) -->
+              <div onclick="openLightbox('${g.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${g.plate_caption}">
+                  ${g.plate_caption}
+                </div>
               </div>
 
-              <!-- Visual 2: Field Photograph (with Toggle) -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+              <!-- Visual 2: Field Photograph (with Inset Toggle Overlay & Click to Enlarge) -->
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
-                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
-                  ${photoToggleHtml}
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
                 </div>
               </div>
             </div>
           `;
         } else if (currentViewMode === 'plates') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${g.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${g.plate_caption}">
+                  ${g.plate_caption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
             </div>
           `;
         } else if (currentViewMode === 'photos') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                ${photoToggleHtml}
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
 
         card.innerHTML = `
-          <!-- Card Header -->
-          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5 flex-wrap">
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs font-black text-slate-400 tabular-nums">#${g.rank}</span>
-                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${g.name}</h2>
-                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border ${ageBadgeClass}">${ageLabel}</span>
+          <!-- Main Card Row (Left Height Rail + Content) -->
+          <div class="flex flex-1">
+            <!-- Left Vertical Height Rail (Fills based on standing height) -->
+            <div class="w-2.5 bg-slate-950 border-r border-slate-800 flex flex-col justify-end shrink-0 relative" title="Standing Stature: ${g.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}%)">
+              <div class="absolute inset-y-0 right-0 flex flex-col justify-between py-4 pointer-events-none opacity-30 z-10">
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
               </div>
-              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${g.sci}</p>
+              <div class="bg-gradient-to-t from-sky-500 via-sky-400 to-cyan-300 w-full rounded-t-sm shadow-[0_0_10px_rgba(56,189,248,0.4)]" style="height: ${lenPct}%;"></div>
             </div>
-            
-            <div class="flex items-center gap-1.5 flex-wrap">
-              ${frequencyBadge}
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${g.size_display}</span>
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${g.bill_display} beak</span>
-              <button onclick="dismissSpecies('${g.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${g.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
+
+            <!-- Card Content Body -->
+            <div class="p-3 sm:p-3.5 flex-1 min-w-0">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between gap-2 border-b border-slate-800/60 pb-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="text-xs font-black text-slate-400 font-mono-num">#${g.rank}</span>
+                  <h2 class="text-base sm:text-lg font-bold tracking-tight text-white truncate">${g.name}</h2>
+                  <span class="text-[11px] italic font-serif text-slate-400 hidden sm:inline">${g.sci}</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded border ${ageBadgeClass}">${ageLabel}</span>
+                </div>
+                
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${frequencyBadge}
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${g.size_display}</span>
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${g.bill_display} beak</span>
+                  <span class="text-[10px] font-mono-num font-bold text-sky-400/90 bg-sky-950/90 border border-sky-800/50 px-1.5 py-0.5 rounded-full hidden sm:inline" title="Proportion of Category Maximum Stature">${lenPct}% Max</span>
+                  <button onclick="dismissSpecies('${g.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${g.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-0.5 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rarity Callout for Review Species -->
+              ${rarityCallout}
+
+              <!-- Visual Plates & Photos -->
+              ${visualsHtml}
+
+              <!-- Compact Diagnostic Grid -->
+              <div class="mt-2.5 pt-2 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                ${diagHtml}
+              </div>
+
+              <!-- Single-line Elimination Rule -->
+              <div class="mt-2 text-xs text-amber-200/90 bg-amber-950/20 border-l-2 border-amber-500 rounded-r px-2.5 py-1 flex items-center justify-between">
+                <span><strong class="text-amber-300 font-bold">Rule:</strong> ${g.rule_out}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Rarity Callout for Review Species -->
-          ${rarityCallout}
-
-          <!-- Visual Plates & Photos -->
-          ${visualsHtml}
-
-          <!-- Diagnostic Feather Tract Checklist -->
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
-            ${diagHtml}
-          </div>
-
-          <!-- Single-line Elimination Rule -->
-          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
-            <strong class="text-amber-300 font-bold">Rule:</strong> ${g.rule_out}
+          <!-- Bottom Horizontal Length Rail (Spans the FULL Card Width!) -->
+          <div class="h-2.5 bg-slate-950 border-t border-slate-800 flex items-center relative w-full" title="Total Body Length: ${g.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}% full-width)">
+            <div class="absolute inset-x-0 top-0 flex justify-between px-6 pointer-events-none opacity-30 z-10">
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+            </div>
+            <div class="bg-gradient-to-r from-sky-500 via-sky-400 to-cyan-300 h-full rounded-r-sm shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-all" style="width: ${lenPct}%;"></div>
+            <span class="absolute right-2 text-[9px] font-mono-num font-bold text-slate-500 uppercase tracking-widest hidden sm:inline">${lenPct}% Category Scale</span>
           </div>
         `;
 
@@ -569,12 +878,13 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=9').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=28').then(reg => {
           reg.update();
         }).catch(() => {});
       });
     }
 
+    initUrlFilter();
     // Initial render
     renderFeed();
   </script>

@@ -160,74 +160,250 @@
   </header>
 
   <!-- Immediate Terns Feed (1 card per row, matching ducks.html, gulls.html, & shorebirds.html) -->
+    <!-- Immediate Tern Feed -->
+  <div id="urlFilterBannerContainer" class="max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden">
+    <!-- Rendered dynamically -->
+  </div>
+
   <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="ternFeed">
     <!-- Rendered via JS -->
   </main>
+
+  <!-- FULLSCREEN IMAGE LIGHTBOX MODAL -->
+  <div id="imageLightboxModal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-5" onclick="handleLightboxBackdropClick(event)">
+    <!-- Lightbox Header -->
+    <div class="flex items-center justify-between gap-3 max-w-6xl w-full mx-auto pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="lightboxTitle" class="text-lg sm:text-xl font-black text-white tracking-tight truncate">Species Name</h3>
+            <span id="lightboxBadge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">DIAGNOSTIC PLATE</span>
+          </div>
+          <p id="lightboxSubtitle" class="text-xs italic font-serif text-slate-400 truncate">Scientific Name</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-[11px] text-slate-500 hidden sm:inline">Press <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono text-[10px]">Esc</kbd> or click outside to close</span>
+        <button id="closeLightboxBtn" onclick="closeLightbox()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer" title="Close Lightbox (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox Main Stage Image -->
+    <div class="flex-1 flex items-center justify-center p-2 sm:p-4 min-h-0 overflow-hidden">
+      <img id="lightboxImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Specimen Enlargement" class="max-h-[78vh] max-w-[95vw] sm:max-w-[88vw] object-contain rounded-xl shadow-2xl border border-slate-800 select-none transition-all cursor-zoom-out" onclick="closeLightbox()">
+    </div>
+
+    <!-- Lightbox Footer / Diagnostic Notes -->
+    <div class="max-w-4xl w-full mx-auto pt-3 border-t border-slate-800/80 text-center">
+      <p id="lightboxCaption" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Diagnostic field mark description</p>
+    </div>
+  </div>
 
   <!-- Client-Side State & Multi-Select Engine -->
   <script>
     const terns = [{"id": "forsters_tern_breeding", "rank": 1, "name": "Forster's Tern (Breeding)", "sci": "Sterna forsteri", "prob": "58%", "group": "typical_sterna", "traits": ["typical_sterna", "orange_black_bill", "black_cap", "pale_primaries", "forked_tail", "orange_red_legs"], "plate": "assets/tern_plates/forsters_tern_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Stout orange bill with sharp black tip, solid black cap down to bill, frosty silvery-white outer primaries (paler than mantle), deeply forked tail with white outer webs, orange-red legs", "photo": "assets/terns/forsters_tern_breeding_1.jpg", "photo_caption": "Field profile: Orange bill with black tip, pristine white breast and belly, frosty silvery-white wingtips, long tail streamers", "crux_photo": "assets/terns/forsters_tern_breeding_2.jpg", "crux_caption": "Head closeup: Orange bill base contrasting with distinct black tip, solid velvet black cap down to lower eye level", "diagnostics": [{"tract": "Bill Color & Shape", "mark": "Bright orange bill with a distinct black tip; noticeably stouter and heavier-based than Common Tern."}, {"tract": "Primary Frosting", "mark": "Outer primary flight feathers are frosted silvery-white on the upper surface, appearing paler than the back (never a dark wedge)."}, {"tract": "Underparts & Tail", "mark": "Pure snow-white breast and belly; deeply forked tail where outer webs are white and inner webs are gray (reverse of Common Tern)."}], "rule_out": "Orange bill with black tip + frosted silvery outer primaries + pure white underparts = Breeding Forster's Tern.", "rarity": "common", "length_cm": 36.0, "bill_mm": 39.0, "size_display": "36 cm (14.0\")", "bill_display": "39 mm"}, {"id": "forsters_tern_nonbreeding", "rank": 2, "name": "Forster's Tern (Fall / Non-Breeding)", "sci": "Sterna forsteri", "prob": "55%", "group": "typical_sterna", "traits": ["typical_sterna", "all_black_bill", "isolated_eye_mask", "pale_primaries", "forked_tail", "orange_red_legs"], "plate": "assets/tern_plates/forsters_tern_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Distinctive black 'comma' or bandit eye-mask through eye, pure white nape and crown (no dark band across back of head), all-black bill, frosty silvery mantle and primaries", "photo": "assets/terns/forsters_tern_nonbreeding_1.jpg", "photo_caption": "Field profile: Isolated jet-black comma eye patch surrounded by stark white head and nape, dark bill, silvery-gray back", "crux_photo": "assets/terns/forsters_tern_nonbreeding_2.jpg", "crux_caption": "Head closeup: Diagnostic isolated black eye-mask ending sharply behind eye; nape and hindneck remain entirely pure white", "diagnostics": [{"tract": "Head Pattern (The Crux)", "mark": "Bold black comma-shaped mask through the eye that terminates behind ear coverts; nape and crown are entirely clean white."}, {"tract": "Bill", "mark": "All-black or black with faint dull reddish tinge at the extreme base during late fall/winter."}, {"tract": "Wing Pattern", "mark": "Frosty silvery-white outer primaries lacking a dark carpal bar along the leading wing edge."}], "rule_out": "Isolated black comma eye patch + completely white nape + frosty primaries = Non-Breeding Forster's Tern.", "rarity": "common", "length_cm": 36.0, "bill_mm": 39.0, "size_display": "36 cm (14.0\")", "bill_display": "39 mm"}, {"id": "royal_tern", "rank": 3, "name": "Royal Tern", "sci": "Thalasseus maximus", "prob": "48%", "group": "crested_tern", "traits": ["crested_tern", "carrot_orange_bill", "white_forehead", "shaggy_crest", "large_crested", "forked_tail", "black_legs"], "plate": "assets/tern_plates/royal_tern_plate.jpg", "plate_caption": "Diagnostic plate: Large crested tern, massive stout carrot-orange bill, shaggy rear black crest, bald white forehead extending far back onto crown, pale gray mantle, black legs", "photo": "assets/terns/royal_tern_1.jpg", "photo_caption": "Beach flock view: Huge carrot-orange bill, shaggy black crest, extensive white forehead, pure white underparts", "crux_photo": "assets/terns/royal_tern_2.jpg", "crux_caption": "Head closeup: Massive, slightly decurved carrot-orange bill and shaggy crest; forehead is cleanly white to mid-crown", "diagnostics": [{"tract": "Bill", "mark": "Massive, stout carrot-orange to yellowish-orange dagger bill, slightly decurved along culmen."}, {"tract": "Forehead & Crest", "mark": "In almost all plumages seen post-spring, forehead is stark white extending back to mid-crown, leaving a shaggy black rear crest."}, {"tract": "Underwing", "mark": "Underside of outer primaries is translucent whitish with only narrow dark tips (never solid blackish like Caspian)."}], "rule_out": "Massive carrot-orange bill + extensive white forehead + shaggy black rear crest + pale underwing = Royal Tern.", "rarity": "common", "length_cm": 50.0, "bill_mm": 63.0, "size_display": "50 cm (20.0\")", "bill_display": "63 mm"}, {"id": "common_tern_breeding", "rank": 4, "name": "Common Tern (Breeding)", "sci": "Sterna hirundo", "prob": "42%", "group": "typical_sterna", "traits": ["typical_sterna", "red_black_bill", "black_cap", "dark_primaries", "forked_tail", "orange_red_legs"], "plate": "assets/tern_plates/common_tern_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Slender blood-red to coral-red bill with black tip, solid black cap, dusky grayish wash across breast/belly contrasting with white cheeks, dark translucent wedge on outer primaries", "photo": "assets/terns/common_tern_breeding_1.jpg", "photo_caption": "Field profile: Coral-red bill with black tip, pale smoky-gray underparts, sharp black cap, deeply forked tail with dark outer streamers", "crux_photo": "assets/terns/common_tern_breeding_2.jpg", "crux_caption": "Head & bill: Coral-red bill with crisp black tip, slender tapered bill profile, duskier throat/breast than Forster's", "diagnostics": [{"tract": "Bill & Underparts", "mark": "Slender coral-red to blood-red bill with black tip; breast and belly have an unmistakable smoky-gray wash."}, {"tract": "Outer Primaries", "mark": "Upper outer primaries show a dark grayish wedge that becomes translucent when backlit in flight."}, {"tract": "Tail Webbing", "mark": "Outer webs of outermost tail streamers are dark grayish-black (contrasting with white inner webs)."}], "rule_out": "Coral-red bill with black tip + smoky gray breast + dark primary wedge + dark outer tail webs = Breeding Common Tern.", "rarity": "common", "length_cm": 35.0, "bill_mm": 36.0, "size_display": "35 cm (13.5\")", "bill_display": "36 mm"}, {"id": "common_tern_nonbreeding", "rank": 5, "name": "Common Tern (Fall / Non-Breeding)", "sci": "Sterna hirundo", "prob": "38%", "group": "typical_sterna", "traits": ["typical_sterna", "all_black_bill", "dark_nape_band", "carpal_bar", "dark_primaries", "forked_tail", "orange_red_legs"], "plate": "assets/tern_plates/common_tern_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Black bill, dark blackish-gray nape band connecting continuously across back of head from ear to ear, white forehead, prominent dark carpal bar on leading edge of inner wing", "photo": "assets/terns/common_tern_nonbreeding_1.jpg", "photo_caption": "Field view: Dark nape band wrapping behind head, white forehead, dark carpal shoulder bar, black bill", "crux_photo": "assets/terns/common_tern_nonbreeding_2.jpg", "crux_caption": "Head & nape: Dark eye mask extends continuously across the nape (forming a solid dark collar, unlike Forster's isolated comma)", "diagnostics": [{"tract": "Nape Band (The Crux)", "mark": "Dark eye mask connects continuously across the nape/hindneck, forming a complete dark horseshoe/band around back of head."}, {"tract": "Carpal Bar", "mark": "Prominent dark brownish-black bar along the leading edge (carpal joint) of the inner wing (never present on adult Forster's)."}, {"tract": "Outer Primaries", "mark": "Outer primaries are dusky gray to blackish (darker than inner wing, never frosty white)."}], "rule_out": "Continuous dark nape band connecting across hindneck + dark carpal bar on wing + dark primaries = Non-Breeding Common Tern.", "rarity": "common", "length_cm": 35.0, "bill_mm": 36.0, "size_display": "35 cm (13.5\")", "bill_display": "36 mm"}, {"id": "caspian_tern", "rank": 6, "name": "Caspian Tern", "sci": "Hydroprogne caspia", "prob": "35%", "group": "crested_tern", "traits": ["crested_tern", "blood_red_bill", "dark_underwing_wedge", "large_crested", "black_cap", "black_legs"], "plate": "assets/tern_plates/caspian_tern_plate.jpg", "plate_caption": "Diagnostic plate: World's largest tern (gull-sized), massive thick blood-red bill with dark dusky tip, full black cap (finely streaked white in fall), shallow notched tail, solid blackish underwing primary patch", "photo": "assets/terns/caspian_tern_1.jpg", "photo_caption": "Field view: Huge bulky gull-like structure, deep coral/blood-red bill with dark smudge, full black cap, shallow tail fork", "crux_photo": "assets/terns/caspian_tern_2.jpg", "crux_caption": "Head & bill: Massive heavy blood-red bill with dark subterminal smudge, black cap extending down to lower eye rim", "diagnostics": [{"tract": "Size & Bill", "mark": "Massive, gull-sized body; huge, thick blood-red to deep coral bill with a dark dusky smudge near tip."}, {"tract": "Underwing Primaries", "mark": "Underside of outer primaries shows an extensive, solid dusky-black wedge/patch (boldly contrasting in flight)."}, {"tract": "Cap & Tail", "mark": "Full black cap (streaked white on forehead in winter, but never bald white like Royal); shallowly notched tail."}], "rule_out": "Massive gull size + huge blood-red bill with dark tip + solid blackish underwing patch = Caspian Tern.", "rarity": "common", "length_cm": 53.0, "bill_mm": 68.0, "size_display": "53 cm (21.0\")", "bill_display": "68 mm"}, {"id": "least_tern", "rank": 7, "name": "Least Tern", "sci": "Sternula antillarum", "prob": "28%", "group": "small_tern", "traits": ["small_tern", "yellow_black_bill", "white_triangle", "tiny_size", "yellow_legs", "black_cap"], "plate": "assets/tern_plates/least_tern_plate.jpg", "plate_caption": "Diagnostic plate: Tiny petite structure (smallest NA tern), bright yellow bill with sharp black tip, stark white triangular forehead patch against black cap, bright yellow legs, buoyant fluttery flight", "photo": "assets/terns/least_tern_1.jpg", "photo_caption": "Beach nesting profile: Tiny size, yellow bill with black tip, white forehead chevron, yellow legs", "crux_photo": "assets/terns/least_tern_2.jpg", "crux_caption": "Head closeup: Crisp white forehead triangle contrasting with jet-black cap and black lores line, yellow bill", "diagnostics": [{"tract": "Size & Flight", "mark": "Smallest North American tern (only 8.5-9 inches); quick, buoyant, erratic swallow-like wingbeats."}, {"tract": "Bill & Forehead", "mark": "Bright yellow bill with a sharp black tip; prominent stark white triangular patch on forehead."}, {"tract": "Legs", "mark": "Short, bright yellow to orange-yellow legs (all other small/medium Sterna have reddish or black legs)."}], "rule_out": "Tiny size + yellow bill with black tip + white triangular forehead patch + yellow legs = Least Tern.", "rarity": "uncommon", "length_cm": 23.0, "bill_mm": 28.0, "size_display": "23 cm (9.0\")", "bill_display": "28 mm"}, {"id": "black_skimmer", "rank": 8, "name": "Black Skimmer", "sci": "Rynchops niger", "prob": "15%", "group": "skimmer", "traits": ["skimmer", "knife_bill", "red_black_bill", "black_body", "orange_red_legs", "black_cap"], "plate": "assets/tern_plates/black_skimmer_plate.jpg", "plate_caption": "Diagnostic plate: Bizarre knife-like laterally compressed red-and-black bill with lower mandible far longer than upper, jet-black upperparts, snow-white face and underparts, bright reddish-orange legs", "photo": "assets/terns/black_skimmer_1.jpg", "photo_caption": "Field profile: Unique knife bill, black cap and back, white underparts, long pointed black wings", "crux_photo": "assets/terns/black_skimmer_2.jpg", "crux_caption": "Bill closeup: Massive knife-thin red bill base with jet black tip; lower mandible extends significantly beyond upper mandible", "diagnostics": [{"tract": "Bill (Unique)", "mark": "Huge laterally compressed blade-like bill; lower mandible is up to an inch longer than upper mandible for water-skimming."}, {"tract": "Plumage", "mark": "Solid jet-black crown, nape, back, and wings; brilliant pure snow-white forehead, cheeks, and underparts."}, {"tract": "Foraging Action", "mark": "Flies low over calm water with lower mandible cutting the surface, snapping shut on contact with fish."}], "rule_out": "Blade-like red bill with elongated lower mandible + black back + white underparts = Black Skimmer.", "rarity": "uncommon", "length_cm": 46.0, "bill_mm": 75.0, "size_display": "46 cm (18.0\")", "bill_display": "75 mm"}, {"id": "black_tern_breeding", "rank": 9, "name": "Black Tern (Breeding)", "sci": "Chlidonias niger", "prob": "12%", "group": "marsh_tern", "traits": ["marsh_tern", "black_body", "all_black_bill", "tiny_size", "black_cap"], "plate": "assets/tern_plates/black_tern_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Small marsh tern, entirely jet-black head, neck, breast, and belly, contrasting slate-gray mantle and wings, crisp white undertail coverts, small black bill, dark legs", "photo": "assets/terns/black_tern_breeding_1.jpg", "photo_caption": "Perched marsh profile: Solid soot-black head and underparts, slate-gray wings, white vent, erratic flight", "crux_photo": "assets/terns/black_tern_breeding_2.jpg", "crux_caption": "Field view: Jet-black underparts contrasting sharply with pure white undertail coverts and silver-gray underwing lining", "diagnostics": [{"tract": "Underparts & Head", "mark": "Solid velvety soot-black head, neck, breast, and belly (completely unique among North American terns)."}, {"tract": "Wings & Tail", "mark": "Contrasting medium slate-gray mantle and wings; short, shallowly notched gray tail with crisp white undertail coverts."}, {"tract": "Structure & Habitat", "mark": "Small, delicate marsh tern with fluttery butterfly-like flight, dipping to pick insects from water and marshes."}], "rule_out": "Solid soot-black head and body + slate-gray wings + white undertail = Breeding Black Tern.", "rarity": "uncommon", "length_cm": 24.0, "bill_mm": 27.0, "size_display": "24 cm (9.5\")", "bill_display": "27 mm"}, {"id": "black_tern_nonbreeding", "rank": 10, "name": "Black Tern (Fall / Non-Breeding)", "sci": "Chlidonias niger", "prob": "10%", "group": "marsh_tern", "traits": ["marsh_tern", "all_black_bill", "breast_smudge", "tiny_size"], "plate": "assets/tern_plates/black_tern_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Small delicate build, white underparts and head, dark blackish-gray cap with dark ear spot, diagnostic dark smudge on side of white breast in front of wing bend, pale gray back", "photo": "assets/terns/black_tern_nonbreeding_1.jpg", "photo_caption": "Fall field view: White head and underparts, dark cap, diagnostic dark chest smudge at shoulder, fluttery flight", "crux_photo": "assets/terns/black_tern_nonbreeding_2.jpg", "crux_caption": "Chest closeup: Diagnostic downward dark gray spur/smudge on side of breast in front of folded wing bend", "diagnostics": [{"tract": "Breast Smudge (The Crux)", "mark": "Dark dusky gray vertical patch/smudge extending downward on the side of the white breast just in front of the wing bend."}, {"tract": "Head Pattern", "mark": "White face and throat with a dark grayish-black cap that connects to an ear spot behind the eye."}, {"tract": "Size & Build", "mark": "Tiny, delicate marsh tern structure with short shallowly notched tail and slender needle-sharp black bill."}], "rule_out": "Tiny marsh tern + white underparts with dark side-breast smudge + dark cap/ear spot = Non-Breeding Black Tern.", "rarity": "uncommon", "length_cm": 24.0, "bill_mm": 27.0, "size_display": "24 cm (9.5\")", "bill_display": "27 mm"}, {"id": "gull_billed_tern", "rank": 11, "name": "Gull-billed Tern", "sci": "Gelochelidon nilotica", "prob": "9%", "group": "marsh_tern", "traits": ["marsh_tern", "thick_black_bill", "all_black_bill", "black_cap", "black_legs"], "plate": "assets/tern_plates/gull_billed_tern_plate.jpg", "plate_caption": "Diagnostic plate: Stout gull-like structure, heavy thick stubby black bill (gull-like, blunt, not needle-sharp), full black cap, pale silver-gray mantle, pure white underparts, long black legs", "photo": "assets/terns/gull_billed_tern_1.jpg", "photo_caption": "Field profile: Unmistakable thick stubby black bill, sturdy body, broad rounded wings, long black legs", "crux_photo": "assets/terns/gull_billed_tern_2.jpg", "crux_caption": "Bill closeup: Heavy, thick, blunt black bill lacking needle-sharp tip; hunts insects and crabs over saltmarshes", "diagnostics": [{"tract": "Bill (The Crux)", "mark": "Exceptionally thick, heavy, stubby black bill; blunt and gull-like rather than long and needle-sharp."}, {"tract": "Wings & Tail", "mark": "Broader, more rounded wings and shorter, less deeply forked tail than typical Sterna terns."}, {"tract": "Feeding Behavior", "mark": "Hawks insects over marshes and plucks fiddler crabs from mudflats; rarely or never plunge-dives into open water."}], "rule_out": "Heavy, thick stubby black gull-like bill + pale plumage + insect-hawking marsh flight = Gull-billed Tern.", "rarity": "uncommon", "length_cm": 36.0, "bill_mm": 34.0, "size_display": "36 cm (14.0\")", "bill_display": "34 mm"}, {"id": "sandwich_tern", "rank": 12, "name": "Sandwich Tern", "sci": "Thalasseus sandvicensis", "prob": "8%", "group": "crested_tern", "traits": ["crested_tern", "yellow_tip_bill", "all_black_bill", "shaggy_crest", "large_crested", "forked_tail", "black_legs"], "plate": "assets/tern_plates/sandwich_tern_plate.jpg", "plate_caption": "Diagnostic plate: Slender crested tern, long slender black bill with a sharply defined lemon-yellow tip, shaggy black crest on back of crown, pale gray mantle, white underparts, black legs with yellow soles", "photo": "assets/terns/sandwich_tern_1.jpg", "photo_caption": "Field profile: Long black bill with brilliant yellow tip, shaggy rear crest, slender build, black legs", "crux_photo": "assets/terns/sandwich_tern_2.jpg", "crux_caption": "Bill closeup: Sharp, narrow pencil-like black bill tipped distinctly with pale lemon-yellow", "diagnostics": [{"tract": "Bill (The Crux)", "mark": "Long, slender black bill with a sharply demarcated pale yellow to ivory tip ('pencil dipped in yellow paint')."}, {"tract": "Crest & Build", "mark": "Slender, attenuated crested tern structure with a shaggy black crest projecting from the rear crown."}, {"tract": "Plumage & Legs", "mark": "Very pale, bleached silver-gray mantle and white underparts; black legs with distinctive yellowish soles."}], "rule_out": "Long slender black bill with crisp yellow tip + shaggy black crest = Sandwich Tern.", "rarity": "uncommon", "length_cm": 41.0, "bill_mm": 52.0, "size_display": "41 cm (16.0\")", "bill_display": "52 mm"}, {"id": "roseate_tern", "rank": 13, "name": "Roseate Tern", "sci": "Sterna dougallii", "prob": "2%", "group": "typical_sterna", "traits": ["typical_sterna", "all_black_bill", "long_streamers", "pale_primaries", "orange_red_legs", "black_cap"], "plate": "assets/tern_plates/roseate_tern_plate.jpg", "plate_caption": "Diagnostic plate: Very pale frosty silvery-white mantle, solid black cap, all-black slender bill, exceptionally long white tail streamers extending far beyond folded wingtips at rest, red legs", "photo": "assets/terns/roseate_tern_1.jpg", "photo_caption": "Field profile: Extremely long white tail streamers extending well past folded wings, all-black bill, pale ghostly plumage", "crux_photo": "assets/terns/roseate_tern_2.jpg", "crux_caption": "Tail & bill view: Slender black bill (red base only in late summer), streamers exceeding wingtips by 2-3 inches", "diagnostics": [{"tract": "Tail Streamers (The Crux)", "mark": "Extremely long, pure white outer tail streamers that project 2 to 3 inches beyond the folded wingtips at rest."}, {"tract": "Bill", "mark": "Slender, needle-sharp all-black bill in early summer (developing red at the extreme base only by late breeding season)."}, {"tract": "Mantle & Underparts", "mark": "Palest of all medium terns\u2014frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."}], "rule_out": "Tail streamers extending far beyond wingtips at rest + all-black slender bill + frosty pale mantle = Roseate Tern.", "rarity": "rare", "length_cm": 36.0, "bill_mm": 38.0, "size_display": "36 cm (14.0\")", "bill_display": "38 mm"}, {"id": "arctic_tern", "rank": 14, "name": "Arctic Tern", "sci": "Sterna paradisaea", "prob": "1%", "group": "typical_sterna", "traits": ["typical_sterna", "blood_red_bill", "short_legs", "long_streamers", "translucent_primaries", "orange_red_legs", "black_cap"], "plate": "assets/tern_plates/arctic_tern_plate.jpg", "plate_caption": "Diagnostic plate: Compact body sitting very low to ground on diagnostic exceptionally short coral-red legs, short blood-red bill (entirely red with no black tip), solid black cap, translucent primaries with thin black trailing edge", "photo": "assets/terns/arctic_tern_1.jpg", "photo_caption": "Field view: Extremely short legs (sits nearly flat on ground), short blood-red bill with no black, white cheek stripe", "crux_photo": "assets/terns/arctic_tern_2.jpg", "crux_caption": "Head & bill: Short, slender, all-red bill without black tip, crisp white cheek line separating black cap from gray throat", "diagnostics": [{"tract": "Leg Length (The Crux)", "mark": "Diagnostic exceptionally short legs (tarsus only 15-16 mm); bird stands very low and appears to sit on its belly."}, {"tract": "Bill", "mark": "Short, delicate, deep blood-red bill with NO black tip whatsoever (contrast with Common and Forster's)."}, {"tract": "Flight Feathers", "mark": "All primaries are uniform translucent white when backlit in flight, edged beneath with a narrow, crisp pencil-thin black line."}], "rule_out": "Exceptionally short legs + all-red short bill with no black tip + translucent flight feathers = Arctic Tern.", "rarity": "rare", "length_cm": 36.0, "bill_mm": 31.0, "size_display": "36 cm (14.0\")", "bill_display": "31 mm"}, {"id": "sooty_tern", "rank": 15, "name": "Sooty Tern", "sci": "Onychoprion fuscatus", "prob": "0.5%", "group": "pelagic_vagrant", "traits": ["pelagic_vagrant", "black_body", "white_triangle", "all_black_bill", "forked_tail", "black_legs"], "plate": "assets/tern_plates/sooty_tern_plate.jpg", "plate_caption": "Diagnostic plate: Stark jet-black upperparts (crown, nape, back, and wings), pure crisp snow-white underparts, white forehead patch ending strictly before the eye, deeply forked tail with white outer margins, black bill and legs", "photo": "assets/terns/sooty_tern_1.jpg", "photo_caption": "Pelagic view: Pitch-black upperparts contrasting with pure snow-white underparts, white forehead triangle, black bill", "crux_photo": "assets/terns/sooty_tern_2.jpg", "crux_caption": "Face pattern: White forehead patch ends sharply in front of eye (does NOT extend past eye into an eyebrow)", "diagnostics": [{"tract": "Upperparts", "mark": "Stark, pitch-black crown, nape, back, and wings sharply contrasting with pristine snow-white underparts."}, {"tract": "Forehead Patch", "mark": "White triangular forehead patch ends squarely BEFORE the eye; black lores line connects directly to dark eye."}, {"tract": "Tail", "mark": "Long, deeply forked tail with prominent white outer margins; oceanic pelagic wanderer brought by tropical storms."}], "rule_out": "Jet-black back + pure white underparts + white forehead ending before eye = Sooty Tern.", "rarity": "rare", "length_cm": 42.0, "bill_mm": 44.0, "size_display": "42 cm (16.5\")", "bill_display": "44 mm"}, {"id": "bridled_tern", "rank": 16, "name": "Bridled Tern", "sci": "Onychoprion anaethetus", "prob": "0.5%", "group": "pelagic_vagrant", "traits": ["pelagic_vagrant", "white_collar", "all_black_bill", "forked_tail", "black_legs"], "plate": "assets/tern_plates/bridled_tern_plate.jpg", "plate_caption": "Diagnostic plate: Dark smoky grayish-brown mantle and wings (not jet black), black cap separated from mantle by a distinct pale whitish collar across the hindneck, white forehead patch extending as a narrow white eyebrow past the eye, white underparts", "photo": "assets/terns/bridled_tern_1.jpg", "photo_caption": "Pelagic profile: Brownish-gray back, distinct white collar on hindneck, white eyebrow extending behind eye, black bill", "crux_photo": "assets/terns/bridled_tern_2.jpg", "crux_caption": "Head closeup: White forehead continues backward as a distinct narrow white supercilium trailing past the eye", "diagnostics": [{"tract": "Hindneck Collar (The Crux)", "mark": "Distinct pale whitish collar on the nape and hindneck cleanly separating the black cap from the dark mantle."}, {"tract": "Supercilium / Eyebrow", "mark": "White forehead continues as a narrow white stripe (eyebrow) extending backward beyond the eye (the 'bridle')."}, {"tract": "Mantle Tone", "mark": "Upperparts are dark smoky grayish-brown, visibly paler and browner than the solid jet-black of Sooty Tern."}], "rule_out": "Smoky brown back + white collar on hindneck + white eyebrow extending past eye = Bridled Tern.", "rarity": "rare", "length_cm": 37.0, "bill_mm": 40.0, "size_display": "37 cm (14.5\")", "bill_display": "40 mm"}];
 
-    let activeGroup = 'all';
-    let activeRarity = 'all';
+        let activeGroup = 'all'; // 'all', 'typical_sterna', 'marsh_tern', 'crested', 'large_caspian'
+    let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     let activeTraits = new Set();
     let currentViewMode = 'both';
     let currentSort = 'freq-desc';
+    let urlSpeciesFilter = null;
+    const photoModes = {};
+    const dismissedCards = new Set();
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      const sortParam = params.get('sort') || params.get('order');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'size-asc': 'size-asc',
+          'size-desc': 'size-desc',
+          'size': 'size-asc',
+          'bill-asc': 'bill-asc',
+          'bill-desc': 'bill-desc',
+          'bill': 'bill-asc',
+          'name-asc': 'name-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+
+        tokens.forEach(tok => {
+          terns.forEach(t => {
+            const idNorm = t.id.toLowerCase();
+            const nameNorm = t.name.toLowerCase();
+            const sciNorm = t.sci.toLowerCase();
+            if (
+              idNorm === tok ||
+              idNorm.replace(/_/g, '') === tok.replace(/_/g, '') ||
+              idNorm.replace(/_/g, '-') === tok ||
+              idNorm.startsWith(tok + '_') ||
+              idNorm.endsWith('_' + tok) ||
+              nameNorm.includes(tok) ||
+              sciNorm.includes(tok)
+            ) {
+              matched.add(t.id);
+            }
+          });
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function updateUrlParams() {
+      if (!window.history || !window.history.replaceState) return;
+      try {
+        const url = new URL(window.location.href);
+
+        if (currentSort && currentSort !== 'freq-desc') {
+          url.searchParams.set('sort', currentSort);
+        } else {
+          url.searchParams.delete('sort');
+        }
+
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          let paramName = 'species';
+          for (const p of ['species', 'filter', 'include', 'checklist']) {
+            if (url.searchParams.has(p)) { paramName = p; break; }
+          }
+          url.searchParams.set(paramName, Array.from(urlSpeciesFilter).join(','));
+        } else {
+          url.searchParams.delete('species');
+          url.searchParams.delete('filter');
+          url.searchParams.delete('include');
+          url.searchParams.delete('checklist');
+        }
+
+        const cleanSearch = url.search ? url.search.replace(/%2C/g, ',') : '';
+        const targetUrl = url.pathname + cleanSearch + (url.hash || '');
+        window.history.replaceState({}, '', targetUrl);
+      } catch (e) {
+        console.warn('URL sync notice:', e);
+      }
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      updateUrlParams();
+      renderFeed();
+    }
+
+    function copyCurrentShareLink() {
+      updateUrlParams();
+      const cleanUrl = window.location.href.replace(/%2C/g, ',');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanUrl).then(() => {
+          const btn = document.getElementById('copyShareBtn');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = `<span>✓ Copied!</span>`;
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
+          }
+        }).catch(() => {
+          prompt('Share URL:', cleanUrl);
+        });
+      } else {
+        prompt('Share URL:', cleanUrl);
+      }
+    }
+
+    function openLightbox(src, title, sci, badge, caption) {
+      if (!src) return;
+      const modal = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const titleEl = document.getElementById('lightboxTitle');
+      const subtitleEl = document.getElementById('lightboxSubtitle');
+      const badgeEl = document.getElementById('lightboxBadge');
+      const captionEl = document.getElementById('lightboxCaption');
+
+      img.src = src;
+      titleEl.textContent = title || 'Specimen View';
+      subtitleEl.textContent = sci || '';
+      badgeEl.textContent = badge || 'IMAGE';
+      captionEl.textContent = caption || '';
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightboxModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('lightboxImg').src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
+    }
+
+    function handleLightboxBackdropClick(event) {
+      if (event.target.id === 'imageLightboxModal' || event.target.closest('#closeLightboxBtn')) {
+        closeLightbox();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lightbox = document.getElementById('imageLightboxModal');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+        }
+      }
+    });
 
     function setSort(mode) {
       currentSort = mode;
+      updateUrlParams();
       renderFeed();
-    } // 'both', 'plates', 'photos'
-    const dismissedCards = new Set();
-    const photoModes = {}; // cardId -> 'primary' | 'crux'
-
-    // Mutually exclusive trait pairings
-    const traitExclusions = {
-      'orange_black_bill': ['all_black_bill', 'carrot_orange_bill', 'blood_red_bill', 'yellow_black_bill', 'yellow_tip_bill', 'knife_bill', 'thick_black_bill'],
-      'all_black_bill': ['orange_black_bill', 'carrot_orange_bill', 'blood_red_bill', 'yellow_black_bill', 'yellow_tip_bill', 'knife_bill'],
-      'carrot_orange_bill': ['orange_black_bill', 'all_black_bill', 'blood_red_bill', 'yellow_black_bill', 'yellow_tip_bill', 'knife_bill'],
-      'blood_red_bill': ['orange_black_bill', 'all_black_bill', 'carrot_orange_bill', 'yellow_black_bill', 'yellow_tip_bill', 'knife_bill'],
-      'yellow_black_bill': ['orange_black_bill', 'all_black_bill', 'carrot_orange_bill', 'blood_red_bill', 'yellow_tip_bill', 'knife_bill'],
-      'yellow_tip_bill': ['orange_black_bill', 'all_black_bill', 'carrot_orange_bill', 'blood_red_bill', 'yellow_black_bill', 'knife_bill'],
-      'knife_bill': ['orange_black_bill', 'all_black_bill', 'carrot_orange_bill', 'blood_red_bill', 'yellow_black_bill', 'yellow_tip_bill'],
-      'thick_black_bill': ['knife_bill', 'yellow_tip_bill', 'yellow_black_bill', 'carrot_orange_bill', 'orange_black_bill'],
-      
-      'isolated_eye_mask': ['dark_nape_band', 'black_cap'],
-      'dark_nape_band': ['isolated_eye_mask', 'black_cap'],
-      'black_cap': ['isolated_eye_mask', 'dark_nape_band'],
-
-      'pale_primaries': ['dark_primaries', 'dark_underwing_wedge'],
-      'dark_primaries': ['pale_primaries'],
-
-      'orange_red_legs': ['yellow_legs', 'black_legs'],
-      'yellow_legs': ['orange_red_legs', 'black_legs'],
-      'black_legs': ['orange_red_legs', 'yellow_legs']
-    };
+    }
 
     function dismissSpecies(id) {
       dismissedCards.add(id);
+      updateUrlParams();
       renderFeed();
     }
 
     function unhideAll() {
       dismissedCards.clear();
+      updateUrlParams();
       renderFeed();
     }
 
     function toggleGroup(group) {
       activeGroup = group;
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleRarity(rarity) {
       activeRarity = rarity;
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleTrait(trait) {
       if (activeTraits.has(trait)) {
         activeTraits.delete(trait);
-      } else {
+        updateUrlParams();
+    } else {
         if (traitExclusions[trait]) {
           traitExclusions[trait].forEach(t => activeTraits.delete(t));
         }
@@ -294,162 +470,242 @@
 
       let matches = filtered.length;
 
-      filtered.forEach(t => {
+      const maxCategoryLength = Math.max(...terns.map(b => b.length_cm || 0), 60.0);
+      const maxCategoryBill = Math.max(...terns.map(b => b.bill_mm || 0), 75.0);
 
-        // Determine current photo for this card (primary vs crux)
+      filtered.forEach(t => {
+        const card = document.createElement('div');
+        card.id = `sp-${t.id}`;
+        const isRare = t.rarity === 'rare';
+        const isUncommon = t.rarity === 'uncommon';
+        const lenPct = Math.min(100, Math.round(((t.length_cm || 0) / maxCategoryLength) * 100));
+
+        // Distinctive container styling: highlighted border for Rares + Full-Card Caliper Flex Container
+        if (isRare) {
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl overflow-hidden shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30 transition hover:border-amber-400 flex flex-col group";
+        } else {
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
+        }
+
+        // Diagnostics HTML (Compact 3-column inline grid)
+        const diagHtml = t.diagnostics.map(diag => {
+          let label = diag.tract;
+          if (label.toLowerCase().includes('bill')) label = 'Bill';
+          else if (label.toLowerCase().includes('tail') || label.toLowerCase().includes('streamer')) label = 'Tail';
+          else if (label.toLowerCase().includes('wing') || label.toLowerCase().includes('primary')) label = 'Wings/Primaries';
+          else if (label.toLowerCase().includes('cap') || label.toLowerCase().includes('head')) label = 'Cap/Crown';
+          else if (label.toLowerCase().includes('leg')) label = 'Legs';
+          return `
+            <div class="flex items-baseline gap-1.5 min-w-0">
+              <span class="text-[10px] font-black uppercase tracking-wider text-sky-400 bg-sky-950/60 px-1 py-0.5 rounded border border-sky-800/40 shrink-0">${label}</span>
+              <span class="text-slate-300 text-[11px] truncate" title="${diag.mark}">${diag.mark}</span>
+            </div>
+          `;
+        }).join('');
+
+        // Group Badge
+        const groupLabels = {
+          'typical_sterna': 'Typical Sterna',
+          'marsh_tern': 'Marsh Tern (Chlidonias)',
+          'crested': 'Crested Tern (Thalasseus)',
+          'large_caspian': 'Caspian Tern (Hydroprogne)'
+        };
+        const groupLabel = groupLabels[t.group] || 'Tern';
+
+        // Frequency / Rarity Badge
+        let frequencyBadge = '';
+        let rarityCallout = '';
+        if (isRare) {
+          frequencyBadge = `
+            <span class="text-[11px] font-black px-2 py-0.5 rounded border border-amber-500/80 bg-amber-500/20 text-amber-300 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <span class="bg-amber-400 text-slate-950 font-black px-1 rounded-[2px] text-[10px]">R</span>
+              Rare Vagrant
+            </span>
+          `;
+          rarityCallout = `
+            <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
+              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare pelagic / coastal vagrant in Mid-Atlantic & Maryland. Detailed description/photo required.</span>
+              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.1% eBird freq</span>
+            </div>
+          `;
+        } else if (isUncommon) {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
+              ${t.prob} freq (Uncommon)
+            </span>
+          `;
+        } else {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
+              ${t.prob} freq (Common)
+            </span>
+          `;
+        }
+
+        // Photo toggle state (primary vs crux)
         const currentPhotoMode = photoModes[t.id] || 'primary';
         const activePhotoUrl = currentPhotoMode === 'crux' ? t.crux_photo : t.photo;
         const activePhotoCaption = currentPhotoMode === 'crux' ? t.crux_caption : t.photo_caption;
 
-        const card = document.createElement('div');
-        card.id = `sp-${t.id}`;
-        card.className = "bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 sm:p-4 shadow-lg transition-all duration-200";
-
-        // Frequency & Rarity Badge
-        let frequencyBadge = '';
-        let rarityCallout = '';
-        if (t.rarity === 'rare') {
-          frequencyBadge = `<span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 tracking-wide uppercase">&#9733; eBird Rare</span>`;
-          rarityCallout = `
-            <div class="mt-2.5 p-2 rounded-lg bg-amber-950/30 border border-amber-500/30 flex items-start gap-2 text-xs text-amber-200/90">
-              <span class="text-amber-400 font-bold shrink-0">&#9888; Review / Pelagic Vagrant:</span>
-              <span>Requires field notes, photos, and formal documentation for local eBird review. Check underwing translucency, bill proportions, and tail streamers.</span>
-            </div>
-          `;
-        } else if (t.rarity === 'uncommon') {
-          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-800/80">${t.prob} Seasonal</span>`;
-        } else {
-          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-sky-300 border border-slate-700">${t.prob} Frequency</span>`;
-        }
-
-        // Guild Tag formatting
-        const groupLabels = {
-          'typical_sterna': 'Typical Sterna',
-          'crested_tern': 'Crested Tern',
-          'marsh_tern': 'Marsh Tern',
-          'small_tern': 'Small Tern',
-          'skimmer': 'Skimmer',
-          'pelagic_vagrant': 'Pelagic Vagrant'
-        };
-        const groupLabel = groupLabels[t.group] || t.group;
-
-        // Diagnostics list HTML
-        let diagHtml = '';
-        t.diagnostics.forEach(d => {
-          diagHtml += `
-            <div class="flex items-baseline gap-1.5 text-xs text-slate-300">
-              <span class="font-bold text-sky-400 shrink-0">${d.tract}:</span>
-              <span class="leading-relaxed">${d.mark}</span>
-            </div>
-          `;
-        });
-
         const photoToggleHtml = `
-          <div class="flex items-center gap-1 mt-1.5 justify-end">
-            <button onclick="toggleCardPhoto('${t.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
-            <button onclick="toggleCardPhoto('${t.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          <div class="flex items-center gap-0.5 bg-slate-900/90 p-0.5 rounded border border-slate-700/80 shadow">
+            <button onclick="toggleCardPhoto('${t.id}', 'primary')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Profile</button>
+            <button onclick="toggleCardPhoto('${t.id}', 'crux')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Crux</button>
           </div>
         `;
+
+        // Safe string escapes for lightbox modal attributes
+        const safeName = t.name.replace(/'/g, "\\'");
+        const safeSci = t.sci.replace(/'/g, "\\'");
+        const safePlateCap = (t.plate_caption || '').replace(/'/g, "\\'");
+        const safePhotoCap = (activePhotoCaption || '').replace(/'/g, "\\'");
 
         // Visual layout based on currentViewMode (Both = Hand-drawn Plate on Left, Field Photo on Right)
         let visualsHtml = '';
         if (currentViewMode === 'both') {
           visualsHtml = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-2.5">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate with Inset Badges (Click to Enlarge) -->
+              <div onclick="openLightbox('${t.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${t.plate}" alt="${t.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${t.plate}" alt="${t.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${t.plate_caption}</p>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${t.plate_caption}">
+                  ${t.plate_caption}
+                </div>
               </div>
 
-              <!-- Visual 2: Field Photograph (with Toggle) -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+              <!-- Visual 2: Field Photograph (with Inset Toggle Overlay & Click to Enlarge) -->
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${activePhotoUrl}" alt="${t.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${t.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
-                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
-                  ${photoToggleHtml}
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
                 </div>
               </div>
             </div>
           `;
         } else if (currentViewMode === 'plates') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${t.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${t.plate}" alt="${t.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${t.plate_caption}">
+                  ${t.plate_caption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${t.plate}" alt="${t.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${t.plate_caption}</p>
             </div>
           `;
         } else if (currentViewMode === 'photos') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                ${photoToggleHtml}
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${t.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${activePhotoUrl}" alt="${t.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
 
         card.innerHTML = `
-          <!-- Card Header -->
-          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5 flex-wrap">
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs font-black text-slate-400 tabular-nums">#${t.rank}</span>
-                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${t.name}</h2>
-                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+          <!-- Main Card Row (Left Height Rail + Content) -->
+          <div class="flex flex-1">
+            <!-- Left Vertical Height Rail (Fills based on standing height) -->
+            <div class="w-2.5 bg-slate-950 border-r border-slate-800 flex flex-col justify-end shrink-0 relative" title="Standing Stature: ${t.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}%)">
+              <div class="absolute inset-y-0 right-0 flex flex-col justify-between py-4 pointer-events-none opacity-30 z-10">
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
               </div>
-              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${t.sci}</p>
+              <div class="bg-gradient-to-t from-sky-500 via-sky-400 to-cyan-300 w-full rounded-t-sm shadow-[0_0_10px_rgba(56,189,248,0.4)]" style="height: ${lenPct}%;"></div>
             </div>
-            
-            <div class="flex items-center gap-1.5 flex-wrap">
-              ${frequencyBadge}
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${t.size_display}</span>
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${t.bill_display} beak</span>
-              <button onclick="dismissSpecies('${t.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${t.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
+
+            <!-- Card Content Body -->
+            <div class="p-3 sm:p-3.5 flex-1 min-w-0">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between gap-2 border-b border-slate-800/60 pb-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="text-xs font-black text-slate-400 font-mono-num">#${t.rank}</span>
+                  <h2 class="text-base sm:text-lg font-bold tracking-tight text-white truncate">${t.name}</h2>
+                  <span class="text-[11px] italic font-serif text-slate-400 hidden sm:inline">${t.sci}</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+                </div>
+                
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${frequencyBadge}
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${t.size_display}</span>
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${t.bill_display} beak</span>
+                  <span class="text-[10px] font-mono-num font-bold text-sky-400/90 bg-sky-950/90 border border-sky-800/50 px-1.5 py-0.5 rounded-full hidden sm:inline" title="Proportion of Category Maximum Stature">${lenPct}% Max</span>
+                  <button onclick="dismissSpecies('${t.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${t.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-0.5 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rarity Callout for Review Species -->
+              ${rarityCallout}
+
+              <!-- Visual Plates & Photos -->
+              ${visualsHtml}
+
+              <!-- Compact Diagnostic Grid -->
+              <div class="mt-2.5 pt-2 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                ${diagHtml}
+              </div>
+
+              <!-- Single-line Elimination Rule -->
+              <div class="mt-2 text-xs text-amber-200/90 bg-amber-950/20 border-l-2 border-amber-500 rounded-r px-2.5 py-1 flex items-center justify-between">
+                <span><strong class="text-amber-300 font-bold">Rule:</strong> ${t.rule_out}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Rarity Callout for Review Species -->
-          ${rarityCallout}
-
-          <!-- Visual Plates & Photos -->
-          ${visualsHtml}
-
-          <!-- Diagnostic Feather Tract Checklist -->
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
-            ${diagHtml}
-          </div>
-
-          <!-- Single-line Elimination Rule -->
-          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
-            <strong class="text-amber-300 font-bold">Rule:</strong> ${t.rule_out}
+          <!-- Bottom Horizontal Length Rail (Spans the FULL Card Width!) -->
+          <div class="h-2.5 bg-slate-950 border-t border-slate-800 flex items-center relative w-full" title="Total Body Length: ${t.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}% full-width)">
+            <div class="absolute inset-x-0 top-0 flex justify-between px-6 pointer-events-none opacity-30 z-10">
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+            </div>
+            <div class="bg-gradient-to-r from-sky-500 via-sky-400 to-cyan-300 h-full rounded-r-sm shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-all" style="width: ${lenPct}%;"></div>
+            <span class="absolute right-2 text-[9px] font-mono-num font-bold text-slate-500 uppercase tracking-widest hidden sm:inline">${lenPct}% Category Scale</span>
           </div>
         `;
 
@@ -554,12 +810,13 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=14').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=28').then(reg => {
           reg.update();
         }).catch(() => {});
       });
     }
 
+    initUrlFilter();
     // Initial render
     renderFeed();
   </script>

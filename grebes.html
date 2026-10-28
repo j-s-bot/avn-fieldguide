@@ -147,65 +147,250 @@
   </header>
 
   <!-- Immediate Grebes & Loons Feed (1 card per row, matching all other guides) -->
+    <!-- Immediate Grebe Feed -->
+  <div id="urlFilterBannerContainer" class="max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden">
+    <!-- Rendered dynamically -->
+  </div>
+
   <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="grebeFeed">
     <!-- Rendered via JS -->
   </main>
+
+  <!-- FULLSCREEN IMAGE LIGHTBOX MODAL -->
+  <div id="imageLightboxModal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-5" onclick="handleLightboxBackdropClick(event)">
+    <!-- Lightbox Header -->
+    <div class="flex items-center justify-between gap-3 max-w-6xl w-full mx-auto pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="lightboxTitle" class="text-lg sm:text-xl font-black text-white tracking-tight truncate">Species Name</h3>
+            <span id="lightboxBadge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">DIAGNOSTIC PLATE</span>
+          </div>
+          <p id="lightboxSubtitle" class="text-xs italic font-serif text-slate-400 truncate">Scientific Name</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-[11px] text-slate-500 hidden sm:inline">Press <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono text-[10px]">Esc</kbd> or click outside to close</span>
+        <button id="closeLightboxBtn" onclick="closeLightbox()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer" title="Close Lightbox (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox Main Stage Image -->
+    <div class="flex-1 flex items-center justify-center p-2 sm:p-4 min-h-0 overflow-hidden">
+      <img id="lightboxImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Specimen Enlargement" class="max-h-[78vh] max-w-[95vw] sm:max-w-[88vw] object-contain rounded-xl shadow-2xl border border-slate-800 select-none transition-all cursor-zoom-out" onclick="closeLightbox()">
+    </div>
+
+    <!-- Lightbox Footer / Diagnostic Notes -->
+    <div class="max-w-4xl w-full mx-auto pt-3 border-t border-slate-800/80 text-center">
+      <p id="lightboxCaption" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">Diagnostic field mark description</p>
+    </div>
+  </div>
 
   <!-- Client-Side State & Multi-Select Engine -->
   <script>
     const grebes = [{"id": "pied_billed_grebe_nonbreeding", "rank": 1, "name": "Pied-billed Grebe (Fall / Winter)", "sci": "Podilymbus podiceps", "prob": "65%", "group": "grebe", "traits": ["grebe", "chicken_bill", "brown_body", "dark_eye", "stocky_build"], "plate": "assets/grebe_plates/pied_billed_grebe_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Stocky rounded body, warm brownish-tan face and neck with faint dusky eyeline, stubby arched chicken-like bill in pale horn (no black band), dark eye, pale fluffy undertail", "photo": "assets/grebes/pied_billed_grebe_nonbreeding_1.jpg", "photo_caption": "Winter pond view: Stocky warm brown profile, pale horn-colored chicken bill, dark eye, solitary skulking diver", "crux_photo": "assets/grebes/pied_billed_grebe_nonbreeding_2.jpg", "crux_caption": "Head closeup: Stubby, strongly curved culmen; bill is plain pale horn with no dark vertical band in winter", "diagnostics": [{"tract": "Bill Shape (Chicken Bill)", "mark": "Short, stubby, laterally compressed arched bill resembling a domestic chicken; pale ivory-horn without black band in winter."}, {"tract": "Head & Eye", "mark": "Warm brownish-tan cheeks and throat with faint diffuse dusky eyeline; dark brownish-black eye (never ruby-red)."}, {"tract": "Habits & Habitat", "mark": "Freshwater marsh edges, vegetated farm ponds, and tidal ditches; sinks slowly straight down underwater like a submarine."}], "rule_out": "Stocky brown body + pale unbanded chicken bill + dark eye + solitary freshwater habit = Non-Breeding Pied-billed Grebe.", "rarity": "common", "length_cm": 34.0, "bill_mm": 23.0, "size_display": "34 cm (13.5\")", "bill_display": "23 mm"}, {"id": "horned_grebe_nonbreeding", "rank": 2, "name": "Horned Grebe (Non-Breeding / Winter)", "sci": "Podiceps auritus", "prob": "52%", "group": "grebe", "traits": ["grebe", "straight_chisel_bill", "white_cheek", "red_eye", "black_cap"], "plate": "assets/grebe_plates/horned_grebe_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Striking crisp black-and-white contrast: clean snow-white cheek extending squarely up to eye level, flat-topped black cap, straight dark chisel bill with pale ivory tip, ruby-red eye", "photo": "assets/grebes/horned_grebe_nonbreeding_1.jpg", "photo_caption": "Winter bay view: Crisp black-and-white head pattern, stark white cheek, brilliant ruby-red eye, straight chisel bill", "crux_photo": "assets/grebes/horned_grebe_nonbreeding_2.jpg", "crux_caption": "Head closeup: Sharp horizontal demarcation between flat black cap and pure white cheek; ruby eye and pale bill tip", "diagnostics": [{"tract": "Head Pattern (The Crux)", "mark": "Stark, crisp black-and-white contrast: pure snow-white cheeks cut cleanly in a straight horizontal line below the flat black cap."}, {"tract": "Eye & Bill", "mark": "Piercing brilliant ruby-red eye; straight, dark, needle-chisel bill with a distinct tiny pale ivory/yellow tip."}, {"tract": "Head Shape", "mark": "Crown is distinctly flat-topped with a blocky, angular nape (unlike the rounded head of Pied-billed or peaked crest of Eared)."}], "rule_out": "Stark snow-white cheek up to eye level + flat black cap + ruby-red eye + pale-tipped straight bill = Non-Breeding Horned Grebe.", "rarity": "common", "length_cm": 35.0, "bill_mm": 23.0, "size_display": "35 cm (14.0\")", "bill_display": "23 mm"}, {"id": "pied_billed_grebe_breeding", "rank": 3, "name": "Pied-billed Grebe (Breeding)", "sci": "Podilymbus podiceps", "prob": "48%", "group": "grebe", "traits": ["grebe", "chicken_bill", "bill_band", "black_throat_bib", "dark_eye"], "plate": "assets/grebe_plates/pied_billed_grebe_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Diagnostic ivory-white chicken-like bill with a bold vertical black band encircling the middle, jet-black throat bib, brownish-gray body, dark eye with thin whitish eye-ring", "photo": "assets/grebes/pied_billed_grebe_breeding_1.jpg", "photo_caption": "Breeding marsh view: Bold vertical black ring encircling the pale bill, jet-black throat bib, dark brownish body", "crux_photo": "assets/grebes/pied_billed_grebe_breeding_2.jpg", "crux_caption": "Bill & throat: Complete vertical black bar wrapped around arched ivory bill; contrasting velvety black throat patch", "diagnostics": [{"tract": "Bill Ring (The Crux)", "mark": "Diagnostic vertical black band encircling the middle of the stout, arched, ivory-white bill."}, {"tract": "Throat Bib", "mark": "Solid jet-black patch (bib) covering chin and upper throat, contrasting with grayish-brown head."}, {"tract": "Eye", "mark": "Dark brown eye encircled by a distinct, thin white eye-ring."}], "rule_out": "Stout arched whitish bill with vertical black ring + black throat bib = Breeding Pied-billed Grebe.", "rarity": "common", "length_cm": 34.0, "bill_mm": 23.0, "size_display": "34 cm (13.5\")", "bill_display": "23 mm"}, {"id": "common_loon_nonbreeding", "rank": 4, "name": "Common Loon (Non-Breeding / Winter)", "sci": "Gavia immer", "prob": "45%", "group": "loon", "traits": ["loon", "heavy_dagger_bill", "jagged_neck_notch", "dark_eye_surround", "large_size"], "plate": "assets/grebe_plates/common_loon_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Large bulky low-slung body, heavy straight dagger-like bill held horizontal, dark eye surround, diagnostic jagged white notch cutting into dark neck from behind, dark scalloped mantle", "photo": "assets/grebes/common_loon_nonbreeding_1.jpg", "photo_caption": "Winter coastal profile: Heavy straight bill held level, jagged white notch in rear neck, dark eye surround, bulky diver", "crux_photo": "assets/grebes/common_loon_nonbreeding_2.jpg", "crux_caption": "Neck & bill crux: Deep white cutout notch indenting the dark neck collar; massive stout straight dagger bill", "diagnostics": [{"tract": "Neck Notch (The Crux)", "mark": "Diagnostic jagged white indentation or 'notch' cutting deeply into the dark collar on the side/rear of the neck."}, {"tract": "Bill Structure & Angle", "mark": "Massive, heavy, straight dagger-like bill (grayish with pale tip), held strictly horizontal/level while swimming."}, {"tract": "Face & Eye", "mark": "Eye is surrounded by dark plumage; crown and forehead have a steep, blocky profile with a bump over the bill base."}], "rule_out": "Large bulky diver + heavy horizontal dagger bill + jagged white neck notch from behind = Non-Breeding Common Loon.", "rarity": "common", "length_cm": 81.0, "bill_mm": 82.0, "size_display": "81 cm (32.0\")", "bill_display": "82 mm"}, {"id": "red_throated_loon_nonbreeding", "rank": 5, "name": "Red-throated Loon (Non-Breeding / Winter)", "sci": "Gavia stellata", "prob": "32%", "group": "loon", "traits": ["loon", "uptilted_bill", "white_face", "white_speckled_back", "slender_build"], "plate": "assets/grebe_plates/red_throated_loon_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Slender delicate build, slender bill distinctly uptilted and held at an upward angle, extensive clean white face extending above eye and down throat, fine white speckling/dots across back", "photo": "assets/grebes/red_throated_loon_nonbreeding_1.jpg", "photo_caption": "Ocean surf view: Slender bill tilted upward, extensive clean white face and foreneck, slender neck, speckled gray back", "crux_photo": "assets/grebes/red_throated_loon_nonbreeding_2.jpg", "crux_caption": "Head & bill profile: Slender bill held at diagnostic upward 15-degree tilt; culmen straight with angled lower mandible gonys", "diagnostics": [{"tract": "Bill & Carriage (The Crux)", "mark": "Slender bill with an angled lower mandible, consistently held tilted upward at an elevated angle ('snobbish' posture)."}, {"tract": "Face & Neck", "mark": "Extensive clean white plumage covers the entire chin, throat, and face, extending well above and behind the eye."}, {"tract": "Mantle Pattern", "mark": "Upperparts are finely spangled with tiny crisp white dots/speckles (unlike the scalloped broad scales of Common Loon)."}], "rule_out": "Slender uptilted bill held at an angle + extensive white face above eye + speckled white back = Non-Breeding Red-throated Loon.", "rarity": "common", "length_cm": 63.0, "bill_mm": 52.0, "size_display": "63 cm (25.0\")", "bill_display": "52 mm"}, {"id": "common_loon_breeding", "rank": 6, "name": "Common Loon (Breeding)", "sci": "Gavia immer", "prob": "22%", "group": "loon", "traits": ["loon", "heavy_dagger_bill", "checkerboard_back", "striped_necklace", "ruby_eye", "large_size"], "plate": "assets/grebe_plates/common_loon_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Large muscular diver, iridescent black head/neck, bold striped white necklace and choker, brilliant black-and-white checkerboard mantle, heavy black dagger bill held level, ruby-red eye", "photo": "assets/grebes/common_loon_breeding_1.jpg", "photo_caption": "Breeding plumage: Brilliant checkerboard back, striped white necklace, heavy black dagger bill, ruby-red eye", "crux_photo": "assets/grebes/common_loon_breeding_2.jpg", "crux_caption": "Neck & throat detail: Crisp vertical black-and-white pinstripes on neck collar; heavy chisel black bill", "diagnostics": [{"tract": "Plumage Pattern", "mark": "Solid velvety black head/neck with green-purple sheen; striped white neck patches; spectacular black-and-white checkerboard back."}, {"tract": "Bill", "mark": "Massive, stout, entirely jet-black dagger bill held horizontal; powerful diving waterbird."}, {"tract": "Eye", "mark": "Deep glowing ruby-red eye contrasting with velvety black head."}], "rule_out": "Velvet black head + striped white necklace + checkerboard back + heavy black dagger bill = Breeding Common Loon.", "rarity": "uncommon", "length_cm": 81.0, "bill_mm": 82.0, "size_display": "81 cm (32.0\")", "bill_display": "82 mm"}, {"id": "horned_grebe_breeding", "rank": 7, "name": "Horned Grebe (Breeding)", "sci": "Podiceps auritus", "prob": "18%", "group": "grebe", "traits": ["grebe", "golden_horns", "rufous_neck", "red_eye", "straight_chisel_bill"], "plate": "assets/grebe_plates/horned_grebe_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Dramatic bright golden-buff ear tufts ('horns') projecting from above eye, puffy black crested head/chin, rich chestnut-rufous neck, chest, and flanks, ruby-red eye, straight dark bill with pale tip", "photo": "assets/grebes/horned_grebe_breeding_1.jpg", "photo_caption": "Spring plumage view: Brilliant golden horns, black puffy hood, rich cinnamon-rufous neck and flanks, ruby-red eye", "crux_photo": "assets/grebes/horned_grebe_breeding_2.jpg", "crux_caption": "Head closeup: Dense golden-yellow ear tufts originating over lores; black chin and crown; pale-tipped chisel bill", "diagnostics": [{"tract": "Golden Horns (The Crux)", "mark": "Broad, brilliant golden-yellow feather tufts ('horns') starting in front of the eye and sweeping back across the dark crown."}, {"tract": "Neck & Underparts", "mark": "Rich, intense chestnut-rufous foreneck, chest, and flanks (contrasting with black chin and white belly)."}, {"tract": "Bill & Eye", "mark": "Straight, slender black bill with pale ivory tip; blazing ruby-red eye."}], "rule_out": "Bright golden horns + black puffy hood + rich chestnut-rufous neck and flanks = Breeding Horned Grebe.", "rarity": "uncommon", "length_cm": 35.0, "bill_mm": 23.0, "size_display": "35 cm (14.0\")", "bill_display": "23 mm"}, {"id": "red_necked_grebe_nonbreeding", "rank": 8, "name": "Red-necked Grebe (Non-Breeding / Winter)", "sci": "Podiceps grisegena", "prob": "12%", "group": "grebe", "traits": ["grebe", "yellow_dagger_bill", "dusky_cheek", "large_size"], "plate": "assets/grebe_plates/red_necked_grebe_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Large heavy grebe (nearly twice Horned Grebe's bulk), long stout straight bill with bright yellow base and dark culmen/tip, dingy dusky-gray cheeks (never clean white), dark cap down to eye level", "photo": "assets/grebes/red_necked_grebe_nonbreeding_1.jpg", "photo_caption": "Winter coastal view: Large heavy build, long stout yellow-based dagger bill, dingy grayish cheek patch, dark cap", "crux_photo": "assets/grebes/red_necked_grebe_nonbreeding_2.jpg", "crux_caption": "Head & bill detail: Long heavy bill with extensive bright yellow base; diffuse dirty-gray cheek (lacks Horned's crisp white)", "diagnostics": [{"tract": "Bill Structure & Color (The Crux)", "mark": "Long, heavy, dagger-like bill with extensive bright yellow at base and lower mandible (conspicuously heavier than Horned)."}, {"tract": "Cheek Pattern", "mark": "Cheeks are dingy dusky-gray with diffuse borders, blending into a whitish crescent behind ear coverts (never crisp white)."}, {"tract": "Size & Silhouette", "mark": "Much larger, longer-necked, and heavier-bodied than Horned Grebe; approaches loon proportions on open water."}], "rule_out": "Large heavy grebe + stout yellow-based dagger bill + dingy dusky-gray cheek = Non-Breeding Red-necked Grebe.", "rarity": "uncommon", "length_cm": 48.0, "bill_mm": 52.0, "size_display": "48 cm (19.0\")", "bill_display": "52 mm"}, {"id": "red_throated_loon_breeding", "rank": 9, "name": "Red-throated Loon (Breeding)", "sci": "Gavia stellata", "prob": "4%", "group": "loon", "traits": ["loon", "uptilted_bill", "red_throat_patch", "striped_hindneck", "slender_build"], "plate": "assets/grebe_plates/red_throated_loon_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Slender uptilted bill held slightly elevated, smooth velvet slate-gray head and face, diagnostic rich triangular rufous-chestnut throat patch, fine black-and-white pinstripes down hindneck", "photo": "assets/grebes/red_throated_loon_breeding_1.jpg", "photo_caption": "Spring migrant view: Chestnut-red throat patch, velvety slate-gray head, pinstriped hindneck, slender uptilted bill", "crux_photo": "assets/grebes/red_throated_loon_breeding_2.jpg", "crux_caption": "Throat & neck: Rich rufous-red triangular patch on foreneck; neat vertical black-and-white pinstripes on nape", "diagnostics": [{"tract": "Throat Patch (The Crux)", "mark": "Stark triangular patch of rich, glossy chestnut-red on the center of the foreneck."}, {"tract": "Head & Hindneck", "mark": "Velvety smooth slate-gray head and face; hindneck features elegant vertical black-and-white pinstripes."}, {"tract": "Mantle & Bill", "mark": "Plain unspotted brownish-gray mantle; slender dark bill held tilted upward at an elevated angle."}], "rule_out": "Chestnut-red throat patch + velvet slate-gray head + pinstriped hindneck + uptilted bill = Breeding Red-throated Loon.", "rarity": "rare", "length_cm": 63.0, "bill_mm": 52.0, "size_display": "63 cm (25.0\")", "bill_display": "52 mm"}, {"id": "red_necked_grebe_breeding", "rank": 10, "name": "Red-necked Grebe (Breeding)", "sci": "Podiceps grisegena", "prob": "3%", "group": "grebe", "traits": ["grebe", "yellow_dagger_bill", "rufous_neck", "white_cheek", "large_size"], "plate": "assets/grebe_plates/red_necked_grebe_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Large crested grebe, rich warm chestnut-rufous neck and upper breast, contrasting stark silvery-white cheeks, flat black cap with slight rear crest, heavy yellow dagger bill with black culmen", "photo": "assets/grebes/red_necked_grebe_breeding_1.jpg", "photo_caption": "Spring profile: Rich chestnut neck, stark silvery-white cheeks, black cap, heavy yellow dagger bill", "crux_photo": "assets/grebes/red_necked_grebe_breeding_2.jpg", "crux_caption": "Head closeup: Crisp silvery-white cheek contrasting sharply with dark cap and fiery chestnut neck; heavy yellow bill", "diagnostics": [{"tract": "Neck & Cheeks (The Crux)", "mark": "Rich, fiery chestnut-rufous neck and upper breast contrasting sharply with bright, clean silvery-white cheeks."}, {"tract": "Bill", "mark": "Heavy, stout dagger-like bill, bright yellow with black culmen ridge and sharp tip."}, {"tract": "Cap & Crest", "mark": "Glossy black cap with short double rear crest, cleanly separated from white cheeks."}], "rule_out": "Rich chestnut neck + stark silvery-white cheeks + heavy yellow dagger bill = Breeding Red-necked Grebe.", "rarity": "rare", "length_cm": 48.0, "bill_mm": 52.0, "size_display": "48 cm (19.0\")", "bill_display": "52 mm"}, {"id": "eared_grebe_nonbreeding", "rank": 11, "name": "Eared Grebe (Non-Breeding / Winter)", "sci": "Podiceps nigricollis", "prob": "1.5%", "group": "grebe", "traits": ["grebe", "peaked_crest", "thin_upturned_bill", "dusky_ear_smudge", "red_eye"], "plate": "assets/grebe_plates/eared_grebe_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Distinctive peaked forehead silhouette (head highest directly above eye), slender thin slightly upturned black bill, dusky auricular smudge across ear coverts (diffuse dirty gray cheek, NOT crisp white), ruby-red eye", "photo": "assets/grebes/eared_grebe_nonbreeding_1.jpg", "photo_caption": "Review vagrant view: Peaked forehead crest over eye, thin upturned bill, dusky ear smudge across cheek, dark neck", "crux_photo": "assets/grebes/eared_grebe_nonbreeding_2.jpg", "crux_caption": "Head silhouette: Crown peaks sharply over eye; slender bill curves slightly upward; dirty dusky wash over ear coverts", "diagnostics": [{"tract": "Head Silhouette & Bill (The Crux)", "mark": "Forehead rises steeply with peak of head directly above the eye (triangular puffy crown); bill is thin and slightly upturned."}, {"tract": "Cheek Pattern", "mark": "Dusky-gray auricular smudge extends across the ear coverts; cheeks appear dirty and smudged (never clean white like Horned)."}, {"tract": "Neck", "mark": "Foreneck is dusky or mottled dark gray, lacking Horned Grebe's clean white throat and foreneck."}], "rule_out": "Peaked forehead crown + thin upturned bill + diffuse dusky cheek smudge = Non-Breeding Eared Grebe.", "rarity": "rare", "length_cm": 33.0, "bill_mm": 24.0, "size_display": "33 cm (13.0\")", "bill_display": "24 mm"}, {"id": "eared_grebe_breeding", "rank": 12, "name": "Eared Grebe (Breeding)", "sci": "Podiceps nigricollis", "prob": "0.5%", "group": "grebe", "traits": ["grebe", "peaked_crest", "golden_fan_plumes", "black_neck", "thin_upturned_bill", "red_eye"], "plate": "assets/grebe_plates/eared_grebe_breeding_plate.jpg", "plate_caption": "Diagnostic plate: Peaked crested forehead, solid jet-black head, neck, and breast, spectacular fan-like spray of golden-yellow plumes radiating across cheek/ear coverts from behind eye, chestnut flanks, thin upturned bill, ruby-red eye", "photo": "assets/grebes/eared_grebe_breeding_1.jpg", "photo_caption": "Breeding profile: Solid black head and neck, radiating fan of golden cheek plumes, rich chestnut flanks, peaked crest", "crux_photo": "assets/grebes/eared_grebe_breeding_2.jpg", "crux_caption": "Head closeup: Golden cheek plumes fan outward across ear coverts; black neck; thin upturned bill", "diagnostics": [{"tract": "Golden Ear Plumes (The Crux)", "mark": "Spectacular fan-like spray of fine golden-yellow plumes radiating outward across the entire cheek from behind eye."}, {"tract": "Head & Neck", "mark": "Solid jet-black head, chin, throat, and entire neck (unlike Horned Grebe's rufous neck)."}, {"tract": "Bill & Flanks", "mark": "Thin, upturned black needle bill; rich chestnut-rufous flanks and black back."}], "rule_out": "Solid black neck + radiating golden cheek plumes + peaked forehead + thin upturned bill = Breeding Eared Grebe.", "rarity": "rare", "length_cm": 33.0, "bill_mm": 24.0, "size_display": "33 cm (13.0\")", "bill_display": "24 mm"}, {"id": "western_grebe", "rank": 13, "name": "Western Grebe", "sci": "Aechmophorus occidentalis", "prob": "0.5%", "group": "grebe", "traits": ["grebe", "swan_neck", "yellow_needle_bill", "eye_in_black", "large_size", "red_eye"], "plate": "assets/grebe_plates/western_grebe_plate.jpg", "plate_caption": "Diagnostic plate: Large graceful swan-like structure with very long slender white neck, long sharp dagger-like greenish-yellow needle bill, solid black cap extending DOWN BELOW the bright red eye (eye in black), dark gray back", "photo": "assets/grebes/western_grebe_1.jpg", "photo_caption": "Pelagic review vagrant view: Extremely long swan-like neck, bright greenish-yellow needle bill, red eye completely surrounded by black", "crux_photo": "assets/grebes/western_grebe_2.jpg", "crux_caption": "Head & eye crux: Black cap extends squarely below the eye so the bright red eye is completely surrounded by black (Clark's has eye in white)", "diagnostics": [{"tract": "Eye Placement (The Crux)", "mark": "Black cap extends clearly below the eye; bright red eye is completely encircled by black plumage (unlike Clark's Grebe)."}, {"tract": "Neck & Size", "mark": "Huge grebe with an exceptionally long, slender, graceful swan-like neck (pure white in front, narrow black stripe behind)."}, {"tract": "Bill", "mark": "Long, straight, sharply pointed greenish-yellow to olive dagger bill."}], "rule_out": "Long swan-like neck + bright yellow needle bill + red eye completely enclosed in black cap = Western Grebe.", "rarity": "rare", "length_cm": 63.0, "bill_mm": 75.0, "size_display": "63 cm (25.0\")", "bill_display": "75 mm"}, {"id": "pacific_loon_nonbreeding", "rank": 14, "name": "Pacific Loon (Non-Breeding / Winter)", "sci": "Gavia pacifica", "prob": "0.5%", "group": "loon", "traits": ["loon", "slender_straight_bill", "velvety_gray_nape", "chinstrap", "clean_neck_demarcation"], "plate": "assets/grebe_plates/pacific_loon_nonbreeding_plate.jpg", "plate_caption": "Diagnostic plate: Medium-sized loon structure, slender straight dagger bill held horizontal, smooth velvety silvery-ash-gray nape, clean straight demarcation line down neck, diagnostic thin dark 'chinstrap' necklace across throat", "photo": "assets/grebes/pacific_loon_nonbreeding_1.jpg", "photo_caption": "Winter coastal vagrant: Smooth velvety pale gray nape, straight razor-sharp neck demarcation, dark chinstrap line", "crux_photo": "assets/grebes/pacific_loon_nonbreeding_2.jpg", "crux_caption": "Neck & throat detail: Diagnostic thin dark chinstrap bar across lower throat; smooth silvery nape (lacks Common Loon's neck notch)", "diagnostics": [{"tract": "Nape & Neck Line (The Crux)", "mark": "Nape and hindneck are smooth pale velvety silvery-gray; border between dark hindneck and white foreneck is a crisp straight line (no notch!)."}, {"tract": "Chinstrap", "mark": "Often displays a thin, neat dark brownish-gray 'chinstrap' or necklace running horizontally across the lower throat."}, {"tract": "Bill & Carriage", "mark": "Slender, straight, dagger-like bill held level/horizontal (smaller and more delicate than Common Loon; not uptilted like Red-throated)."}], "rule_out": "Slender straight bill held level + velvety silvery-gray nape + clean straight neck demarcation + dark chinstrap = Non-Breeding Pacific Loon.", "rarity": "rare", "length_cm": 66.0, "bill_mm": 54.0, "size_display": "66 cm (26.0\")", "bill_display": "54 mm"}];
 
-    let activeGroup = 'all';
-    let activeRarity = 'all';
+        let activeGroup = 'all'; // 'all', 'grebe', 'loon'
+    let activeRarity = 'all'; // 'all', 'common', 'uncommon', 'rare'
     let activeTraits = new Set();
     let currentViewMode = 'both';
     let currentSort = 'freq-desc';
+    let urlSpeciesFilter = null;
+    const photoModes = {};
+    const dismissedCards = new Set();
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      const sortParam = params.get('sort') || params.get('order');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'size-asc': 'size-asc',
+          'size-desc': 'size-desc',
+          'size': 'size-asc',
+          'bill-asc': 'bill-asc',
+          'bill-desc': 'bill-desc',
+          'bill': 'bill-asc',
+          'name-asc': 'name-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+
+        tokens.forEach(tok => {
+          grebes.forEach(g => {
+            const idNorm = g.id.toLowerCase();
+            const nameNorm = g.name.toLowerCase();
+            const sciNorm = g.sci.toLowerCase();
+            if (
+              idNorm === tok ||
+              idNorm.replace(/_/g, '') === tok.replace(/_/g, '') ||
+              idNorm.replace(/_/g, '-') === tok ||
+              idNorm.startsWith(tok + '_') ||
+              idNorm.endsWith('_' + tok) ||
+              nameNorm.includes(tok) ||
+              sciNorm.includes(tok)
+            ) {
+              matched.add(g.id);
+            }
+          });
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function updateUrlParams() {
+      if (!window.history || !window.history.replaceState) return;
+      try {
+        const url = new URL(window.location.href);
+
+        if (currentSort && currentSort !== 'freq-desc') {
+          url.searchParams.set('sort', currentSort);
+        } else {
+          url.searchParams.delete('sort');
+        }
+
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          let paramName = 'species';
+          for (const p of ['species', 'filter', 'include', 'checklist']) {
+            if (url.searchParams.has(p)) { paramName = p; break; }
+          }
+          url.searchParams.set(paramName, Array.from(urlSpeciesFilter).join(','));
+        } else {
+          url.searchParams.delete('species');
+          url.searchParams.delete('filter');
+          url.searchParams.delete('include');
+          url.searchParams.delete('checklist');
+        }
+
+        const cleanSearch = url.search ? url.search.replace(/%2C/g, ',') : '';
+        const targetUrl = url.pathname + cleanSearch + (url.hash || '');
+        window.history.replaceState({}, '', targetUrl);
+      } catch (e) {
+        console.warn('URL sync notice:', e);
+      }
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      updateUrlParams();
+      renderFeed();
+    }
+
+    function copyCurrentShareLink() {
+      updateUrlParams();
+      const cleanUrl = window.location.href.replace(/%2C/g, ',');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanUrl).then(() => {
+          const btn = document.getElementById('copyShareBtn');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = `<span>✓ Copied!</span>`;
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
+          }
+        }).catch(() => {
+          prompt('Share URL:', cleanUrl);
+        });
+      } else {
+        prompt('Share URL:', cleanUrl);
+      }
+    }
+
+    function openLightbox(src, title, sci, badge, caption) {
+      if (!src) return;
+      const modal = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const titleEl = document.getElementById('lightboxTitle');
+      const subtitleEl = document.getElementById('lightboxSubtitle');
+      const badgeEl = document.getElementById('lightboxBadge');
+      const captionEl = document.getElementById('lightboxCaption');
+
+      img.src = src;
+      titleEl.textContent = title || 'Specimen View';
+      subtitleEl.textContent = sci || '';
+      badgeEl.textContent = badge || 'IMAGE';
+      captionEl.textContent = caption || '';
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightboxModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('lightboxImg').src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
+    }
+
+    function handleLightboxBackdropClick(event) {
+      if (event.target.id === 'imageLightboxModal' || event.target.closest('#closeLightboxBtn')) {
+        closeLightbox();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lightbox = document.getElementById('imageLightboxModal');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+        }
+      }
+    });
 
     function setSort(mode) {
       currentSort = mode;
+      updateUrlParams();
       renderFeed();
-    } // 'both', 'plates', 'photos'
-    const dismissedCards = new Set();
-    const photoModes = {}; // cardId -> 'primary' | 'crux'
-
-    // Mutually exclusive trait pairings
-    const traitExclusions = {
-      'chicken_bill': ['straight_chisel_bill', 'heavy_dagger_bill', 'uptilted_bill', 'yellow_dagger_bill', 'thin_upturned_bill', 'yellow_needle_bill'],
-      'straight_chisel_bill': ['chicken_bill', 'heavy_dagger_bill', 'uptilted_bill', 'yellow_dagger_bill', 'thin_upturned_bill', 'yellow_needle_bill'],
-      'heavy_dagger_bill': ['chicken_bill', 'straight_chisel_bill', 'uptilted_bill', 'yellow_dagger_bill', 'thin_upturned_bill', 'yellow_needle_bill'],
-      'uptilted_bill': ['chicken_bill', 'straight_chisel_bill', 'heavy_dagger_bill', 'yellow_dagger_bill', 'thin_upturned_bill', 'yellow_needle_bill'],
-      'yellow_dagger_bill': ['chicken_bill', 'straight_chisel_bill', 'heavy_dagger_bill', 'uptilted_bill', 'thin_upturned_bill', 'yellow_needle_bill'],
-      'thin_upturned_bill': ['chicken_bill', 'straight_chisel_bill', 'heavy_dagger_bill', 'uptilted_bill', 'yellow_dagger_bill', 'yellow_needle_bill'],
-      'yellow_needle_bill': ['chicken_bill', 'straight_chisel_bill', 'heavy_dagger_bill', 'uptilted_bill', 'yellow_dagger_bill', 'thin_upturned_bill'],
-
-      'white_cheek': ['dusky_cheek', 'rufous_neck'],
-      'dusky_cheek': ['white_cheek']
-    };
+    }
 
     function dismissSpecies(id) {
       dismissedCards.add(id);
+      updateUrlParams();
       renderFeed();
     }
 
     function unhideAll() {
       dismissedCards.clear();
+      updateUrlParams();
       renderFeed();
     }
 
     function toggleGroup(group) {
       activeGroup = group;
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleRarity(rarity) {
       activeRarity = rarity;
       renderFeed();
+      updateUrlParams();
     }
 
     function toggleTrait(trait) {
       if (activeTraits.has(trait)) {
         activeTraits.delete(trait);
-      } else {
+        updateUrlParams();
+    } else {
         if (traitExclusions[trait]) {
           traitExclusions[trait].forEach(t => activeTraits.delete(t));
         }
@@ -272,158 +457,239 @@
 
       let matches = filtered.length;
 
-      filtered.forEach(g => {
+      const maxCategoryLength = Math.max(...grebes.map(b => b.length_cm || 0), 75.0);
+      const maxCategoryBill = Math.max(...grebes.map(b => b.bill_mm || 0), 85.0);
 
-        // Determine current photo for this card (primary vs crux)
+      filtered.forEach(g => {
+        const card = document.createElement('div');
+        card.id = `sp-${g.id}`;
+        const isRare = g.rarity === 'rare';
+        const isUncommon = g.rarity === 'uncommon';
+        const lenPct = Math.min(100, Math.round(((g.length_cm || 0) / maxCategoryLength) * 100));
+
+        // Distinctive container styling: highlighted border for Rares + Full-Card Caliper Flex Container
+        if (isRare) {
+          card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl overflow-hidden shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30 transition hover:border-amber-400 flex flex-col group";
+        } else {
+          card.className = "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
+        }
+
+        // Diagnostics HTML (Compact 3-column inline grid)
+        const diagHtml = g.diagnostics.map(diag => {
+          let label = diag.tract;
+          if (label.toLowerCase().includes('bill')) label = 'Bill';
+          else if (label.toLowerCase().includes('neck') || label.toLowerCase().includes('throat')) label = 'Neck/Throat';
+          else if (label.toLowerCase().includes('eye') || label.toLowerCase().includes('face') || label.toLowerCase().includes('cap')) label = 'Head/Eye';
+          else if (label.toLowerCase().includes('body') || label.toLowerCase().includes('flank')) label = 'Body/Flanks';
+          return `
+            <div class="flex items-baseline gap-1.5 min-w-0">
+              <span class="text-[10px] font-black uppercase tracking-wider text-sky-400 bg-sky-950/60 px-1 py-0.5 rounded border border-sky-800/40 shrink-0">${label}</span>
+              <span class="text-slate-300 text-[11px] truncate" title="${diag.mark}">${diag.mark}</span>
+            </div>
+          `;
+        }).join('');
+
+        // Group Badge
+        const groupLabels = {
+          'grebe': 'Grebe (Podicipedidae)',
+          'loon': 'Loon (Gaviidae)'
+        };
+        const groupLabel = groupLabels[g.group] || 'Grebe';
+
+        // Frequency / Rarity Badge
+        let frequencyBadge = '';
+        let rarityCallout = '';
+        if (isRare) {
+          frequencyBadge = `
+            <span class="text-[11px] font-black px-2 py-0.5 rounded border border-amber-500/80 bg-amber-500/20 text-amber-300 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <span class="bg-amber-400 text-slate-950 font-black px-1 rounded-[2px] text-[10px]">R</span>
+              Rare Vagrant
+            </span>
+          `;
+          rarityCallout = `
+            <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
+              <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare pelagic / inland water vagrant in Mid-Atlantic & Maryland. Detailed description/photo required.</span>
+              <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.1% eBird freq</span>
+            </div>
+          `;
+        } else if (isUncommon) {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-slate-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
+              ${g.prob} freq (Uncommon)
+            </span>
+          `;
+        } else {
+          frequencyBadge = `
+            <span class="text-[11px] font-semibold tabular-nums text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full" title="Relative seasonal frequency">
+              ${g.prob} freq (Common)
+            </span>
+          `;
+        }
+
+        // Photo toggle state (primary vs crux)
         const currentPhotoMode = photoModes[g.id] || 'primary';
         const activePhotoUrl = currentPhotoMode === 'crux' ? g.crux_photo : g.photo;
         const activePhotoCaption = currentPhotoMode === 'crux' ? g.crux_caption : g.photo_caption;
 
-        const card = document.createElement('div');
-        card.id = `sp-${g.id}`;
-        card.className = "bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 sm:p-4 shadow-lg transition-all duration-200";
-
-        // Frequency & Rarity Badge
-        let frequencyBadge = '';
-        let rarityCallout = '';
-        if (g.rarity === 'rare') {
-          frequencyBadge = `<span class="text-xs font-black px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 tracking-wide uppercase">&#9733; eBird Rare</span>`;
-          rarityCallout = `
-            <div class="mt-2.5 p-2 rounded-lg bg-amber-950/30 border border-amber-500/30 flex items-start gap-2 text-xs text-amber-200/90">
-              <span class="text-amber-400 font-bold shrink-0">&#9888; Rare / Review Visitor:</span>
-              <span>Requires field notes, photos, and formal documentation for local eBird review. Check bill curvature, head silhouette, cheek contrast, and eye color.</span>
-            </div>
-          `;
-        } else if (g.rarity === 'uncommon') {
-          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-800/80">${g.prob} Seasonal</span>`;
-        } else {
-          frequencyBadge = `<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-sky-300 border border-slate-700">${g.prob} Frequency</span>`;
-        }
-
-        // Guild Tag formatting
-        const groupLabels = {
-          'grebe': 'Grebe',
-          'loon': 'Loon'
-        };
-        const groupLabel = groupLabels[g.group] || g.group;
-
-        // Diagnostics list HTML
-        let diagHtml = '';
-        g.diagnostics.forEach(d => {
-          diagHtml += `
-            <div class="flex items-baseline gap-1.5 text-xs text-slate-300">
-              <span class="font-bold text-sky-400 shrink-0">${d.tract}:</span>
-              <span class="leading-relaxed">${d.mark}</span>
-            </div>
-          `;
-        });
-
         const photoToggleHtml = `
-          <div class="flex items-center gap-1 mt-1.5 justify-end">
-            <button onclick="toggleCardPhoto('${g.id}', 'primary')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Profile Photo</button>
-            <button onclick="toggleCardPhoto('${g.id}', 'crux')" class="px-2 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'}">Crux Detail</button>
+          <div class="flex items-center gap-0.5 bg-slate-900/90 p-0.5 rounded border border-slate-700/80 shadow">
+            <button onclick="toggleCardPhoto('${g.id}', 'primary')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'primary' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Profile</button>
+            <button onclick="toggleCardPhoto('${g.id}', 'crux')" class="px-1.5 py-0.5 rounded text-[10px] font-medium ${currentPhotoMode === 'crux' ? 'bg-slate-800 text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}">Crux</button>
           </div>
         `;
+
+        // Safe string escapes for lightbox modal attributes
+        const safeName = g.name.replace(/'/g, "\\'");
+        const safeSci = g.sci.replace(/'/g, "\\'");
+        const safePlateCap = (g.plate_caption || '').replace(/'/g, "\\'");
+        const safePhotoCap = (activePhotoCaption || '').replace(/'/g, "\\'");
 
         // Visual layout based on currentViewMode (Both = Hand-drawn Plate on Left, Field Photo on Right)
         let visualsHtml = '';
         if (currentViewMode === 'both') {
           visualsHtml = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <!-- Visual 1: Hand-Drawn Field Guide Plate -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                  <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-2.5">
+              <!-- Visual 1: Hand-Drawn Field Guide Plate with Inset Badges (Click to Enlarge) -->
+              <div onclick="openLightbox('${g.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${g.plate_caption}">
+                  ${g.plate_caption}
+                </div>
               </div>
 
-              <!-- Visual 2: Field Photograph (with Toggle) -->
-              <div class="flex flex-col">
-                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                  <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                  <span class="text-slate-500 text-[10px]">Natural Habitat</span>
+              <!-- Visual 2: Field Photograph (with Inset Toggle Overlay & Click to Enlarge) -->
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
                 </div>
-                <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-48 sm:h-56 md:h-64">
-                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
+                <div class="h-40 sm:h-44 md:h-48 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
                 </div>
-                <div class="flex items-start justify-between gap-1 px-1 mt-1.5">
-                  <p class="text-[11px] text-slate-400 leading-snug">${activePhotoCaption}</p>
-                  ${photoToggleHtml}
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
                 </div>
               </div>
             </div>
           `;
         } else if (currentViewMode === 'plates') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-sky-400 uppercase tracking-wide">Standardized Scientific Plate</span>
-                <span class="text-slate-500 text-[10px]">Sibley Style Watercolor</span>
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${g.plate}', '${safeName}', '${safeSci}', 'DIAGNOSTIC PLATE', '${safePlateCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-sky-500/50 hover:shadow-lg" title="Click to view fullscreen plate">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-sky-800/40">Diagnostic Plate</span>
+                  <span class="text-[10px] font-mono-num text-slate-400 bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 opacity-80 group-hover/img:opacity-100 group-hover/img:text-sky-300 transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                    Enlarge
+                  </span>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${g.plate_caption}">
+                  ${g.plate_caption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${g.plate}" alt="${g.name} Hand-Drawn Plate" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${g.plate_caption}</p>
             </div>
           `;
         } else if (currentViewMode === 'photos') {
           visualsHtml = `
-            <div class="mt-3">
-              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1 px-1">
-                <span class="text-emerald-400 uppercase tracking-wide">Field Photograph</span>
-                ${photoToggleHtml}
+            <div class="mt-2.5">
+              <div onclick="openLightbox('${activePhotoUrl}', '${safeName}', '${safeSci}', 'FIELD PHOTO (${currentPhotoMode.toUpperCase()})', '${safePhotoCap}')" class="relative bg-slate-950 rounded-lg border border-slate-800/90 overflow-hidden flex flex-col justify-between cursor-zoom-in group/img transition hover:border-emerald-500/50 hover:shadow-lg" title="Click to view fullscreen photo">
+                <div class="absolute top-1.5 left-2 right-2 flex items-center justify-between z-10">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-slate-950/80 backdrop-blur-sm px-1.5 py-0.5 rounded border border-emerald-800/40 pointer-events-none">Field Photograph</span>
+                  <div onclick="event.stopPropagation();" class="pointer-events-auto">
+                    ${photoToggleHtml}
+                  </div>
+                </div>
+                <div class="h-48 sm:h-56 md:h-64 flex items-center justify-center p-2 overflow-hidden">
+                  <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain transition duration-200 group-hover/img:scale-105">
+                </div>
+                <div class="bg-slate-950/90 border-t border-slate-800/60 px-2.5 py-1 text-[11px] text-slate-400 truncate" title="${activePhotoCaption}">
+                  ${activePhotoCaption}
+                </div>
               </div>
-              <div class="bg-slate-950/90 rounded-lg border border-slate-800/80 flex items-center justify-center p-1.5 h-52 sm:h-64 md:h-72">
-                <img src="${activePhotoUrl}" alt="${g.name} Field Photo" loading="lazy" class="max-h-full max-w-full object-contain">
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1.5 px-1 leading-snug">${activePhotoCaption}</p>
             </div>
           `;
         }
 
         card.innerHTML = `
-          <!-- Card Header -->
-          <div class="flex items-start justify-between gap-2 border-b border-slate-800/60 pb-2.5 flex-wrap">
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs font-black text-slate-400 tabular-nums">#${g.rank}</span>
-                <h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">${g.name}</h2>
-                <span class="text-[11px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+          <!-- Main Card Row (Left Height Rail + Content) -->
+          <div class="flex flex-1">
+            <!-- Left Vertical Height Rail (Fills based on standing height) -->
+            <div class="w-2.5 bg-slate-950 border-r border-slate-800 flex flex-col justify-end shrink-0 relative" title="Standing Stature: ${g.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}%)">
+              <div class="absolute inset-y-0 right-0 flex flex-col justify-between py-4 pointer-events-none opacity-30 z-10">
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
+                <div class="w-1 h-px bg-white"></div>
+                <div class="w-1.5 h-px bg-white"></div>
               </div>
-              <p class="text-xs italic font-serif text-slate-400 mt-0.5">${g.sci}</p>
+              <div class="bg-gradient-to-t from-sky-500 via-sky-400 to-cyan-300 w-full rounded-t-sm shadow-[0_0_10px_rgba(56,189,248,0.4)]" style="height: ${lenPct}%;"></div>
             </div>
-            
-            <div class="flex items-center gap-1.5 flex-wrap">
-              ${frequencyBadge}
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${g.size_display}</span>
-              <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${g.bill_display} beak</span>
-              <button onclick="dismissSpecies('${g.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${g.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-1 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
+
+            <!-- Card Content Body -->
+            <div class="p-3 sm:p-3.5 flex-1 min-w-0">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between gap-2 border-b border-slate-800/60 pb-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="text-xs font-black text-slate-400 font-mono-num">#${g.rank}</span>
+                  <h2 class="text-base sm:text-lg font-bold tracking-tight text-white truncate">${g.name}</h2>
+                  <span class="text-[11px] italic font-serif text-slate-400 hidden sm:inline">${g.sci}</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded border bg-sky-950/80 text-sky-400 border-sky-800/60">${groupLabel}</span>
+                </div>
+                
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${frequencyBadge}
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('size') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Typical Total Body Length">${g.size_display}</span>
+                  <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Culmen / Bill Length">${g.bill_display} beak</span>
+                  <span class="text-[10px] font-mono-num font-bold text-sky-400/90 bg-sky-950/90 border border-sky-800/50 px-1.5 py-0.5 rounded-full hidden sm:inline" title="Proportion of Category Maximum Stature">${lenPct}% Max</span>
+                  <button onclick="dismissSpecies('${g.id}')" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${g.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-0.5 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Rarity Callout for Review Species -->
+              ${rarityCallout}
+
+              <!-- Visual Plates & Photos -->
+              ${visualsHtml}
+
+              <!-- Compact Diagnostic Grid -->
+              <div class="mt-2.5 pt-2 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                ${diagHtml}
+              </div>
+
+              <!-- Single-line Elimination Rule -->
+              <div class="mt-2 text-xs text-amber-200/90 bg-amber-950/20 border-l-2 border-amber-500 rounded-r px-2.5 py-1 flex items-center justify-between">
+                <span><strong class="text-amber-300 font-bold">Rule:</strong> ${g.rule_out}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Rarity Callout for Review Species -->
-          ${rarityCallout}
-
-          <!-- Visual Plates & Photos -->
-          ${visualsHtml}
-
-          <!-- Diagnostic Feather Tract Checklist -->
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-1">
-            ${diagHtml}
-          </div>
-
-          <!-- Single-line Elimination Rule -->
-          <div class="mt-2.5 text-xs text-amber-200/90 bg-amber-950/20 border border-amber-800/30 rounded-md p-2">
-            <strong class="text-amber-300 font-bold">Rule:</strong> ${g.rule_out}
+          <!-- Bottom Horizontal Length Rail (Spans the FULL Card Width!) -->
+          <div class="h-2.5 bg-slate-950 border-t border-slate-800 flex items-center relative w-full" title="Total Body Length: ${g.length_cm} cm of ${maxCategoryLength} cm category max (${lenPct}% full-width)">
+            <div class="absolute inset-x-0 top-0 flex justify-between px-6 pointer-events-none opacity-30 z-10">
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+              <div class="h-1 w-px bg-white"></div>
+              <div class="h-1.5 w-px bg-white"></div>
+            </div>
+            <div class="bg-gradient-to-r from-sky-500 via-sky-400 to-cyan-300 h-full rounded-r-sm shadow-[0_0_10px_rgba(56,189,248,0.4)] transition-all" style="width: ${lenPct}%;"></div>
+            <span class="absolute right-2 text-[9px] font-mono-num font-bold text-slate-500 uppercase tracking-widest hidden sm:inline">${lenPct}% Category Scale</span>
           </div>
         `;
 
@@ -524,12 +790,13 @@
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=14').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=28').then(reg => {
           reg.update();
         }).catch(() => {});
       });
     }
 
+    initUrlFilter();
     // Initial render
     renderFeed();
   </script>

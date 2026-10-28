@@ -1754,7 +1754,7 @@ function renderFeed() {
     // Service Worker for offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=14').then(reg => {
+        navigator.serviceWorker.register('sw.js?v=28').then(reg => {
           reg.update();
         }).catch(() => {});
       });

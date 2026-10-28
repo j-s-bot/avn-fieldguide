@@ -127,6 +127,11 @@
   </header>
 
   <!-- Immediate Duck Feed (Starts immediately below header) -->
+    <!-- Targeted URL Checklist Banner Container -->
+  <div id="urlFilterBannerContainer" class="max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden">
+    <!-- Rendered dynamically -->
+  </div>
+
   <main class="max-w-6xl mx-auto px-3 sm:px-4 mt-4 space-y-5" id="duckFeed">
     <!-- Rendered via JS -->
   </main>
@@ -139,6 +144,129 @@
     const activeTraits = new Set();
     let currentViewMode = 'both';
     let currentSort = 'freq-desc';
+    let urlSpeciesFilter = null;
+
+    function initUrlFilter() {
+      const params = new URLSearchParams(window.location.search);
+
+      // 1. Sort parameter support
+      const sortParam = params.get('sort') || params.get('order') || params.get('orderby');
+      if (sortParam) {
+        const norm = sortParam.toLowerCase().trim();
+        const sortMap = {
+          'freq-desc': 'freq-desc',
+          'freq-asc': 'freq-asc',
+          'freq': 'freq-desc',
+          'size-asc': 'size-asc',
+          'size-desc': 'size-desc',
+          'size': 'size-asc',
+          'bill-asc': 'bill-asc',
+          'bill-desc': 'bill-desc',
+          'bill': 'bill-asc'
+        };
+        if (sortMap[norm]) {
+          currentSort = sortMap[norm];
+          const sortSelect = document.getElementById('sortSelect');
+          if (sortSelect) sortSelect.value = currentSort;
+        }
+      }
+
+      // 2. Species checklist filter support (?species=wood_duck,shoveler,etc.)
+      const filterParam = params.get('species') || params.get('filter') || params.get('include') || params.get('checklist');
+      if (filterParam) {
+        const tokens = filterParam.toLowerCase().split(/[\s,|+]+/).map(t => t.trim()).filter(Boolean);
+        const matched = new Set();
+
+        const codeMap = {
+          'wood_duck': ['wood_duck_drake', 'wood_duck_hen'],
+          'wood': ['wood_duck_drake', 'wood_duck_hen'],
+          'woodduck': ['wood_duck_drake', 'wood_duck_hen'],
+          'woduck': ['wood_duck_drake', 'wood_duck_hen'],
+          'norsho': ['shoveler_drake', 'shoveler_hen'],
+          'shoveler': ['shoveler_drake', 'shoveler_hen'],
+          'gwteal': ['teal_drake', 'teal_hen'],
+          'teal': ['teal_drake', 'teal_hen'],
+          'gnwtea': ['teal_drake', 'teal_hen'],
+          'amewig': ['wigeon_drake', 'wigeon_hen'],
+          'wigeon': ['wigeon_drake', 'wigeon_hen'],
+          'american_wigeon': ['wigeon_drake', 'wigeon_hen'],
+          'ruddy_duck': ['ruddy_duck_male', 'ruddy_duck_female'],
+          'ruddy': ['ruddy_duck_male', 'ruddy_duck_female'],
+          'rudduc': ['ruddy_duck_male', 'ruddy_duck_female'],
+          'gadwall': ['gadwall_drake', 'gadwall_hen'],
+          'gadwal': ['gadwall_drake', 'gadwall_hen'],
+          'norpin': ['pintail_drake', 'pintail_hen'],
+          'pintail': ['pintail_drake', 'pintail_hen'],
+          'mallard': ['mallard_drake', 'mallard_hen'],
+          'mallar': ['mallard_drake', 'mallard_hen'],
+          'black_duck': ['black_duck'],
+          'ambduc': ['black_duck'],
+          'ring_necked': ['ring_necked_drake', 'ring_necked_hen'],
+          'rinduc': ['ring_necked_drake', 'ring_necked_hen'],
+          'bufflehead': ['bufflehead_drake', 'bufflehead_hen'],
+          'buffle': ['bufflehead_drake', 'bufflehead_hen'],
+          'hooded_merganser': ['hooded_merganser_drake', 'hooded_merganser_hen'],
+          'hoomer': ['hooded_merganser_drake', 'hooded_merganser_hen'],
+          'lesser_scaup': ['scaup_drake', 'scaup_hen'],
+          'scaup': ['scaup_drake', 'scaup_hen'],
+          'lessca': ['scaup_drake', 'scaup_hen'],
+          'tufted_duck': ['tufted_duck_drake', 'tufted_duck_female'],
+          'tufduc': ['tufted_duck_drake', 'tufted_duck_female'],
+          'eurasian_wigeon': ['eurasian_wigeon_drake', 'eurasian_wigeon_female'],
+          'euwig': ['eurasian_wigeon_drake', 'eurasian_wigeon_female']
+        };
+
+        tokens.forEach(tok => {
+          if (codeMap[tok]) {
+            codeMap[tok].forEach(id => matched.add(id));
+          } else {
+            ducks.forEach(d => {
+              const idNorm = d.id.toLowerCase();
+              const nameNorm = d.name.toLowerCase();
+              if (
+                idNorm === tok ||
+                idNorm.replace(/_/g, '') === tok.replace(/_/g, '') ||
+                idNorm.replace(/_/g, '-') === tok ||
+                idNorm.startsWith(tok + '_') ||
+                idNorm.endsWith('_' + tok) ||
+                nameNorm.includes(tok)
+              ) {
+                matched.add(d.id);
+              }
+            });
+          }
+        });
+
+        if (matched.size > 0) {
+          urlSpeciesFilter = matched;
+        }
+      }
+    }
+
+    function clearUrlFilter() {
+      urlSpeciesFilter = null;
+      if (window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('species');
+        url.searchParams.delete('filter');
+        url.searchParams.delete('include');
+        url.searchParams.delete('checklist');
+        window.history.replaceState({}, '', url.pathname + (url.search || '') + (url.hash || ''));
+      }
+      renderFeed();
+    }
+
+    function copyCurrentShareLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('copyShareBtn');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.innerHTML = `<span>Copied!</span>`;
+          setTimeout(() => { btn.innerHTML = orig; }, 2000);
+        }
+      }).catch(() => {});
+    }
 
     function setSort(mode) {
       currentSort = mode;
@@ -161,7 +289,53 @@
       const container = document.getElementById('duckFeed');
       container.innerHTML = '';
 
+      // Render URL filter banner if active
+      const banner = document.getElementById('urlFilterBannerContainer');
+      if (banner) {
+        if (urlSpeciesFilter && urlSpeciesFilter.size > 0) {
+          const allowedList = ducks.filter(d => urlSpeciesFilter.has(d.id));
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden";
+          banner.innerHTML = `
+            <div class="bg-gradient-to-r from-sky-950/90 via-slate-900 to-sky-950/80 border border-sky-500/50 rounded-2xl p-3 sm:p-4 shadow-xl">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0 ring-2 ring-sky-400/30"></span>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="text-xs font-black uppercase tracking-wider text-white">Targeted Checklist Active</span>
+                      <span class="text-[10px] font-mono-num font-bold px-2 py-0.5 rounded bg-sky-900/80 text-sky-200 border border-sky-600/70">
+                        ${allowedList.length} of ${ducks.length} Cards
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 truncate max-w-xl mt-0.5">
+                      ${Array.from(new Set(allowedList.map(d => d.name.replace(/\s*\((Drake|Hen|Winter Male|Hen \/ Imm)\)/, '')))).join(', ')}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <button onclick="copyCurrentShareLink()" id="copyShareBtn" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-200 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Copy Link</span>
+                  </button>
+                  <button onclick="clearUrlFilter()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 transition shadow-sm flex items-center gap-1 cursor-pointer">
+                    <span>Show All (${ducks.length})</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          banner.className = "max-w-6xl mx-auto px-3 sm:px-4 mt-3 max-w-full overflow-hidden hidden";
+          banner.innerHTML = '';
+        }
+      }
+
       const filtered = ducks.filter(d => {
+        // URL Checklist Filter
+        if (urlSpeciesFilter && !urlSpeciesFilter.has(d.id)) return false;
+
         // Dismiss filter
         if (dismissedCards.has(d.id)) return false;
 
@@ -572,7 +746,8 @@
       });
     }
 
-    // Initial render
+    // Initial render with URL filter check
+    initUrlFilter();
     renderFeed();
   </script>
 </body>

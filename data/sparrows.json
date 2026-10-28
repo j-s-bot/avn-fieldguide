@@ -1,0 +1,751 @@
+{
+  "id": "sparrows",
+  "name": "Sparrows",
+  "title": "Sparrow Disambiguation Guide",
+  "count": 11,
+  "maxCategoryLength": 22.0,
+  "maxCategoryBill": 16.0,
+  "meta": {
+    "breastFork": [
+      "all",
+      "streaked",
+      "unstreaked"
+    ],
+    "traitLabels": {
+      "yellow_lores": "Yellow Lores",
+      "eyering": "Eye-Ring",
+      "rufous_cap": "Rufous Cap",
+      "pink_bill": "Pink Bill"
+    },
+    "traitsLookup": {
+      "song_sparrow": {
+        "bill_desc": "12.5 mm \u2022 Medium conical gray-brown bill with dark culmen",
+        "breast_desc": "Coarse heavy brown streaks converging into large central stickpin spot",
+        "crown_desc": "Brown crown split by narrow gray median line; broad gray supercilium",
+        "eye_desc": "Dark eyeline behind eye; NO yellow lores; faint broken eyering",
+        "leg_desc": "Pinkish to pale flesh-tan legs",
+        "wings_desc": "Brown wings without wingbars; warm rufous-edged primaries",
+        "tail_desc": "Long, rounded tail pumped continuously downward in flight; plain wings",
+        "habitat_desc": "Brushy field edges, marshes, hedgerows, suburban shrubbery"
+      },
+      "white_throated_sparrow": {
+        "bill_desc": "11.5 mm \u2022 Dark gray-black conical bill",
+        "breast_desc": "Plain pearl-gray breast contrasting with crisp square snow-white throat bib",
+        "crown_desc": "Bold black & white stripes (white-striped) or tan & brown (tan-striped)",
+        "eye_desc": "Bright lemon-yellow supraloral spot directly in front of and above eye",
+        "leg_desc": "Pinkish to pale flesh legs",
+        "wings_desc": "Two distinct narrow white wingbars; patterned rufous-brown back",
+        "tail_desc": "Long, slightly notched tail without white outer feathers",
+        "habitat_desc": "Boreal forest understory, thickets, leaf litter, winter brush piles"
+      },
+      "swamp_sparrow": {
+        "bill_desc": "11.0 mm \u2022 Dark horn conical bill with pale yellowish base",
+        "breast_desc": "Clean slate-gray breast and neck without streaks; clean whitish throat",
+        "crown_desc": "Solid bright rufous cap with clean contrasting slate-gray collar and nape",
+        "eye_desc": "Dark eyeline behind eye; NO yellow; plain gray face and cheeks",
+        "leg_desc": "Long pinkish to reddish-brown legs and large feet for marsh skulking",
+        "wings_desc": "Solid unbarred rich rufous wings (no white wingbars!); rufous shoulder",
+        "tail_desc": "Rounded tail; unstreaked rufous rump",
+        "habitat_desc": "Damp freshwater marshes, cattails, sedges, soggy wetland borders"
+      },
+      "chipping_sparrow": {
+        "bill_desc": "9.5 mm \u2022 Small bill; black in breeding, pinkish-tan in winter/immature",
+        "breast_desc": "Completely unstreaked plain frosty grayish-white underparts",
+        "crown_desc": "Solid bright rufous cap (breeding) or streaked brown-rufous (fall/winter)",
+        "eye_desc": "Sharp black eyeline running through eye all the way from bill to nape",
+        "leg_desc": "Pale pinkish-tan legs",
+        "wings_desc": "Two thin white wingbars; brown streaked mantle",
+        "tail_desc": "Very slender, petite body with long distinctly notched tail",
+        "habitat_desc": "Open conifer woodlands, parklands, manicured lawns, suburban trees"
+      },
+      "field_sparrow": {
+        "bill_desc": "9.5 mm \u2022 Diagnostic bright candy-pink conical bill (both mandibles)",
+        "breast_desc": "Completely unstreaked, warm buffy wash across breast and flanks",
+        "crown_desc": "Warm rufous cap and plain unstreaked face without dark eyelines",
+        "eye_desc": "Prominent complete bold white eye-ring giving wide-eyed innocent stare",
+        "leg_desc": "Pale pinkish to flesh legs",
+        "wings_desc": "Two narrow white wingbars; warm rufous mantle",
+        "tail_desc": "Relatively long notched tail; slim petite build",
+        "habitat_desc": "Overgrown old fields, brushy pastures, dry upland grassy slopes"
+      },
+      "savannah_sparrow": {
+        "bill_desc": "10.5 mm \u2022 Slender horn/pinkish-tan bill",
+        "breast_desc": "Crisp, neat narrow dark brown streaks on white ground (no central stickpin)",
+        "crown_desc": "Narrow whitish median crown stripe dividing dark streaked cap",
+        "eye_desc": "Diagnostic lemon-yellow supraloral spot in front of and above eye",
+        "leg_desc": "Pale pinkish legs",
+        "wings_desc": "Two thin pale wingbars; neat crisp streaking across back",
+        "tail_desc": "Short, distinctly notched tail; compact body; short flight profile",
+        "habitat_desc": "Open grassy fields, coastal dunes, meadows, agricultural plains"
+      },
+      "white_crowned_sparrow": {
+        "bill_desc": "11.5 mm \u2022 Stout conical pinkish to dull-orange bill",
+        "breast_desc": "Completely plain, smooth, unstreaked pearl-gray breast and neck",
+        "crown_desc": "High-contrast black & white crown (adult) or cinnamon-brown & tan (immature)",
+        "eye_desc": "Black or brown eyeline; NO yellow; clean plain pearl-gray face",
+        "leg_desc": "Dull pink to orange-flesh legs",
+        "wings_desc": "Two crisp white wingbars; bold streaked back",
+        "tail_desc": "Long square/notched tail; large upright posture",
+        "habitat_desc": "Scrubby fields, forest edges, brush piles, roadside hedgerows"
+      },
+      "lincolns_sparrow": {
+        "bill_desc": "10.5 mm \u2022 Slender, sharp grayish-horn conical bill",
+        "breast_desc": "Warm creamy buff chest apron with razor-thin dark pencil-point streaks",
+        "crown_desc": "Fine gray median crown stripe; neat buffy mustache and gray supercilium",
+        "eye_desc": "Narrow whitish eye-ring; neat buffy moustachial stripe; gray lores",
+        "leg_desc": "Pale pinkish-tan legs",
+        "wings_desc": "Warm olive-brown wings without bold wingbars",
+        "tail_desc": "Short rounded tail; clean white belly contrasting with buff chest apron",
+        "habitat_desc": "Dense wet willows, sphagnum bogs, skulking riparian thickets"
+      },
+      "fox_sparrow": {
+        "bill_desc": "13.5 mm \u2022 Heavy bill with dark upper mandible and bright yellow lower mandible",
+        "breast_desc": "Dense triangular rust-red arrowhead chevron spots on whitish ground",
+        "crown_desc": "Gray and brilliant foxy-rust streaked crown, nape, and back",
+        "eye_desc": "Gray face with reddish-brown ear patch and faint pale eye-ring; no yellow",
+        "leg_desc": "Noticeably stout, heavy pinkish-flesh legs and large feet for leaf-scratching",
+        "wings_desc": "Brilliant foxy-rust wings with two faint thin white wingbars",
+        "tail_desc": "Huge Towhee-sized bulky body (18 cm); brilliant foxy-red wings and long tail",
+        "habitat_desc": "Dense forest brush, dense riparian tangles, woodland leaf litter"
+      },
+      "vesper_sparrow": {
+        "bill_desc": "11.5 mm \u2022 Pale pinkish-horn conical bill with darker culmen",
+        "breast_desc": "Crisp brown streaks on whitish ground extending down flanks",
+        "crown_desc": "Streaked brown crown with distinct chestnut/rufous shoulder patch",
+        "eye_desc": "Bold, complete white eye-ring with dusky ear patch bordered in white",
+        "leg_desc": "Pale flesh-colored legs",
+        "wings_desc": "Distinct chestnut/rufous lesser coverts (shoulder patch) at bend of wing",
+        "tail_desc": "Diagnostic flashing clean white outer tail feathers seen in flight",
+        "habitat_desc": "Dry open grasslands, prairie pastures, dirt road borders, gravel fields"
+      },
+      "house_sparrow_female": {
+        "bill_desc": "12.5 mm \u2022 Heavy, stubby, thick conical finch-like yellowish-horn bill",
+        "breast_desc": "Completely plain, unstreaked dingy grayish-buff underparts",
+        "crown_desc": "Plain grayish-brown crown without stripes or rufous color",
+        "eye_desc": "Broad pale creamy-buff eyebrow stripe trailing behind eye; no eye-ring",
+        "leg_desc": "Pale brownish-pink legs",
+        "wings_desc": "Single broad buffy wingbar; unstreaked dingy brown mantle",
+        "tail_desc": "Medium notched tail; unstreaked dingy back; communal posture",
+        "habitat_desc": "Human settlements, farms, city buildings, parking lots, urban feeders"
+      }
+    }
+  },
+  "species": [
+    {
+      "id": "song_sparrow",
+      "rank": 1,
+      "name": "Song Sparrow",
+      "sci": "Melospiza melodia",
+      "prob": "62%",
+      "breast": "streaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "song_sparrow",
+      "primary_photo": "song_sparrow",
+      "photo_variants": [
+        {
+          "label": "Typical Adult",
+          "key": "song_sparrow",
+          "caption": "Coarse streaking, central stickpin, long rounded pumped tail",
+          "src": "assets/sparrows/song_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Breast",
+          "mark": "Coarse heavy streaks merging into large central spot"
+        },
+        {
+          "tract": "Head",
+          "mark": "Broad gray supercilium and dark brown mustache stripe"
+        },
+        {
+          "tract": "Tail",
+          "mark": "Long, rounded tail pumped continuously in flight"
+        }
+      ],
+      "rule_out": "Baseline Little Brown Job. Coarse messy streaks + central stickpin + pumped rounded tail = Song Sparrow.",
+      "length_cm": 15.0,
+      "bill_mm": 12.5,
+      "size_display": "15 cm (5.9\")",
+      "bill_display": "12.5 mm",
+      "plate": "assets/sparrow_plates/song_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/song_sparrow.jpg",
+      "photo_caption": "Coarse streaking, central stickpin, long rounded pumped tail",
+      "crux_photo": "assets/sparrows/song_sparrow.jpg",
+      "crux_caption": "Baseline Little Brown Job. Coarse messy streaks + central stickpin + pumped rounded tail = Song Sparrow.",
+      "traits": [
+        "streaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "white_throated_sparrow",
+      "rank": 2,
+      "name": "White-throated Sparrow",
+      "sci": "Zonotrichia albicollis",
+      "prob": "56%",
+      "breast": "unstreaked",
+      "eyering": false,
+      "yellow": true,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "white_throated_sparrow",
+      "primary_photo": "white_throated_white_striped",
+      "photo_variants": [
+        {
+          "label": "White-Striped",
+          "key": "white_throated_white_striped",
+          "caption": "Crisp black/white crown, bright yellow supraloral spot, stark white throat bib",
+          "src": "assets/sparrows/white_throated_white_striped.jpg"
+        },
+        {
+          "label": "Tan-Striped",
+          "key": "white_throated_tan_striped",
+          "caption": "Tan/brown crown stripes, softer yellow lores, defined white throat",
+          "src": "assets/sparrows/white_throated_tan_striped.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Lores",
+          "mark": "Bright yellow supraloral dot directly in front of eye"
+        },
+        {
+          "tract": "Throat",
+          "mark": "Crisp square snow-white throat bib against gray breast"
+        },
+        {
+          "tract": "Crown",
+          "mark": "Boldly striped head (either black/white or tan/brown)"
+        }
+      ],
+      "rule_out": "Yellow lores + crisp square white throat bib = White-throated Sparrow (both morphs).",
+      "length_cm": 17.0,
+      "bill_mm": 11.5,
+      "size_display": "17 cm (6.7\")",
+      "bill_display": "11.5 mm",
+      "plate": "assets/sparrow_plates/white_throated_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/white_throated_white_striped.jpg",
+      "photo_caption": "Crisp black/white crown, bright yellow supraloral spot, stark white throat bib",
+      "crux_photo": "assets/sparrows/white_throated_white_striped.jpg",
+      "crux_caption": "Yellow lores + crisp square white throat bib = White-throated Sparrow (both morphs).",
+      "traits": [
+        "yellow_lores",
+        "unstreaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "swamp_sparrow",
+      "rank": 3,
+      "name": "Swamp Sparrow",
+      "sci": "Melospiza georgiana",
+      "prob": "24%",
+      "breast": "unstreaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": true,
+      "plate_key": "swamp_sparrow",
+      "primary_photo": "swamp_sparrow",
+      "photo_variants": [
+        {
+          "label": "Adult Profile",
+          "key": "swamp_sparrow",
+          "caption": "Solid unbarred rich rufous wings, clean gray neck and breast, white throat",
+          "src": "assets/sparrows/swamp_sparrow.jpg"
+        },
+        {
+          "label": "In Reeds",
+          "key": "swamp_pd",
+          "caption": "Typical damp skulking posture showing unbarred rusty wings and gray collar",
+          "src": "assets/sparrows/swamp_pd.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Wings",
+          "mark": "Solid bright rich rufous wings without white wingbars"
+        },
+        {
+          "tract": "Neck",
+          "mark": "Clean slate-gray nape and breast band; white throat"
+        },
+        {
+          "tract": "Crown",
+          "mark": "Solid rufous cap (split by gray median line in immatures)"
+        }
+      ],
+      "rule_out": "Solid rusty unbarred wings + clean gray collar + damp wetland habitat = Swamp Sparrow.",
+      "length_cm": 14.0,
+      "bill_mm": 11.0,
+      "size_display": "14 cm (5.5\")",
+      "bill_display": "11.0 mm",
+      "plate": "assets/sparrow_plates/swamp_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/swamp_sparrow.jpg",
+      "photo_caption": "Solid unbarred rich rufous wings, clean gray neck and breast, white throat",
+      "crux_photo": "assets/sparrows/swamp_sparrow.jpg",
+      "crux_caption": "Solid rusty unbarred wings + clean gray collar + damp wetland habitat = Swamp Sparrow.",
+      "traits": [
+        "rufous_cap",
+        "unstreaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "chipping_sparrow",
+      "rank": 4,
+      "name": "Chipping Sparrow",
+      "sci": "Spizella passerina",
+      "prob": "20%",
+      "breast": "unstreaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": true,
+      "plate_key": "chipping_sparrow",
+      "primary_photo": "chipping_sparrow_winter",
+      "photo_variants": [
+        {
+          "label": "Fall / Immature",
+          "key": "chipping_sparrow_winter",
+          "caption": "Brownish-rufous streaked crown, dark line behind eye, unstreaked buffy breast",
+          "src": "assets/sparrows/chipping_sparrow_winter.jpg"
+        },
+        {
+          "label": "Breeding Adult",
+          "key": "chipping_sparrow_breeding",
+          "caption": "Solid bright rufous cap, black eyeline through lores, frosty gray breast",
+          "src": "assets/sparrows/chipping_sparrow_breeding.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Build",
+          "mark": "Very small, slim, petite body with long notched tail"
+        },
+        {
+          "tract": "Underparts",
+          "mark": "Completely unstreaked plain grayish-buff underparts"
+        },
+        {
+          "tract": "Face",
+          "mark": "Dusky eyeline behind eye; streaky brown-rufous crown in fall"
+        }
+      ],
+      "rule_out": "Tiny slim size + unstreaked breast + dark line trailing behind eye + notched tail = Chipping Sparrow.",
+      "length_cm": 13.5,
+      "bill_mm": 9.5,
+      "size_display": "13.5 cm (5.3\")",
+      "bill_display": "9.5 mm",
+      "plate": "assets/sparrow_plates/chipping_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/chipping_sparrow_winter.jpg",
+      "photo_caption": "Brownish-rufous streaked crown, dark line behind eye, unstreaked buffy breast",
+      "crux_photo": "assets/sparrows/chipping_sparrow_winter.jpg",
+      "crux_caption": "Tiny slim size + unstreaked breast + dark line trailing behind eye + notched tail = Chipping Sparrow.",
+      "traits": [
+        "rufous_cap",
+        "unstreaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "field_sparrow",
+      "rank": 5,
+      "name": "Field Sparrow",
+      "sci": "Spizella pusilla",
+      "prob": "14%",
+      "breast": "unstreaked",
+      "eyering": true,
+      "yellow": false,
+      "pink_bill": true,
+      "rufous_crown": true,
+      "plate_key": "field_sparrow",
+      "primary_photo": "field_sparrow",
+      "photo_variants": [
+        {
+          "label": "Adult Profile",
+          "key": "field_sparrow",
+          "caption": "Candy-pink bill, complete white eye-ring, plain innocent face, unstreaked buff breast",
+          "src": "assets/sparrows/field_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Bill",
+          "mark": "Diagnostic bright candy-pink conical bill (both mandibles)"
+        },
+        {
+          "tract": "Face",
+          "mark": "Bold white eye-ring on totally plain unstreaked buffy-gray face"
+        },
+        {
+          "tract": "Breast",
+          "mark": "Completely unstreaked, clean warm buffy wash"
+        }
+      ],
+      "rule_out": "Bright candy-pink bill + prominent white eye-ring on blank innocent face = Field Sparrow.",
+      "length_cm": 14.0,
+      "bill_mm": 9.5,
+      "size_display": "14 cm (5.5\")",
+      "bill_display": "9.5 mm",
+      "plate": "assets/sparrow_plates/field_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/field_sparrow.jpg",
+      "photo_caption": "Candy-pink bill, complete white eye-ring, plain innocent face, unstreaked buff breast",
+      "crux_photo": "assets/sparrows/field_sparrow.jpg",
+      "crux_caption": "Bright candy-pink bill + prominent white eye-ring on blank innocent face = Field Sparrow.",
+      "traits": [
+        "eyering",
+        "rufous_cap",
+        "pink_bill",
+        "unstreaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "savannah_sparrow",
+      "rank": 6,
+      "name": "Savannah Sparrow",
+      "sci": "Passerculus sandwichensis",
+      "prob": "12%",
+      "breast": "streaked",
+      "eyering": false,
+      "yellow": true,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "savannah_sparrow",
+      "primary_photo": "user_photo_savannah",
+      "photo_variants": [
+        {
+          "label": "Your Photo #2",
+          "key": "user_photo_savannah",
+          "caption": "Your photo: Yellow lores, whitish center crown stripe, crisp streaking, short notched tail",
+          "src": "assets/sparrows/user_photo_savannah.jpg"
+        },
+        {
+          "label": "Reference Profile",
+          "key": "savannah_sparrow",
+          "caption": "Sharp lateral view showing distinct yellow supraloral spot and pink legs",
+          "src": "assets/sparrows/savannah_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Lores",
+          "mark": "Lemon-yellow supraloral spot in front of and above eye"
+        },
+        {
+          "tract": "Crown",
+          "mark": "Narrow whitish median crown stripe dividing dark cap"
+        },
+        {
+          "tract": "Structure",
+          "mark": "Compact body, short notched tail, and pinkish legs"
+        }
+      ],
+      "rule_out": "Yellow in front of eye + pale center crown stripe + short notched tail = Savannah Sparrow.",
+      "length_cm": 13.0,
+      "bill_mm": 10.5,
+      "size_display": "13 cm (5.1\")",
+      "bill_display": "10.5 mm",
+      "plate": "assets/sparrow_plates/savannah_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/user_photo_savannah.jpg",
+      "photo_caption": "Your photo: Yellow lores, whitish center crown stripe, crisp streaking, short notched tail",
+      "crux_photo": "assets/sparrows/user_photo_savannah.jpg",
+      "crux_caption": "Yellow in front of eye + pale center crown stripe + short notched tail = Savannah Sparrow.",
+      "traits": [
+        "yellow_lores",
+        "streaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "white_crowned_sparrow",
+      "rank": 7,
+      "name": "White-crowned Sparrow",
+      "sci": "Zonotrichia leucophrys",
+      "prob": "10%",
+      "breast": "unstreaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": true,
+      "rufous_crown": false,
+      "plate_key": "white_crowned_sparrow",
+      "primary_photo": "white_crowned_immature",
+      "photo_variants": [
+        {
+          "label": "1st-Winter Immature",
+          "key": "white_crowned_immature",
+          "caption": "Cinnamon-brown and tan crown stripes, unstreaked pearl-gray breast, pink/orange bill",
+          "src": "assets/sparrows/white_crowned_immature.jpg"
+        },
+        {
+          "label": "Adult Reference",
+          "key": "white_crowned_adult",
+          "caption": "High-contrast black and brilliant white crown stripes, clean gray breast",
+          "src": "assets/sparrows/white_crowned_adult.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Crown",
+          "mark": "Cinnamon-brown and tan stripes (1st-winter) or black/white (adult)"
+        },
+        {
+          "tract": "Bill",
+          "mark": "Stout conical pinkish to dull-orange bill"
+        },
+        {
+          "tract": "Breast",
+          "mark": "Completely plain, smooth, unstreaked pearl-gray breast and neck"
+        }
+      ],
+      "rule_out": "Large upright sparrow + tan/brown crown stripes + plain gray breast + orange/pink bill = White-crowned Sparrow (1st-winter).",
+      "length_cm": 17.5,
+      "bill_mm": 11.5,
+      "size_display": "17.5 cm (6.9\")",
+      "bill_display": "11.5 mm",
+      "plate": "assets/sparrow_plates/white_crowned_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/white_crowned_immature.jpg",
+      "photo_caption": "Cinnamon-brown and tan crown stripes, unstreaked pearl-gray breast, pink/orange bill",
+      "crux_photo": "assets/sparrows/white_crowned_immature.jpg",
+      "crux_caption": "Large upright sparrow + tan/brown crown stripes + plain gray breast + orange/pink bill = White-crowned Sparrow (1st-winter).",
+      "traits": [
+        "pink_bill",
+        "unstreaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "lincolns_sparrow",
+      "rank": 8,
+      "name": "Lincoln's Sparrow",
+      "sci": "Melospiza lincolnii",
+      "prob": "6%",
+      "breast": "streaked",
+      "eyering": true,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "lincolns_sparrow",
+      "primary_photo": "lincolns_sparrow",
+      "photo_variants": [
+        {
+          "label": "Adult Field View",
+          "key": "lincolns_sparrow",
+          "caption": "Warm buff chest band with razor-thin pencil streaks, buff mustache, gray supercilium",
+          "src": "assets/sparrows/lincolns_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Chest",
+          "mark": "Warm creamy buff chest apron contrasting with white belly"
+        },
+        {
+          "tract": "Streaks",
+          "mark": "Needle-fine, razor-sharp dark pencil-point streaks"
+        },
+        {
+          "tract": "Face",
+          "mark": "Slate-gray supercilium, neat buffy mustache, and narrow eye-ring"
+        }
+      ],
+      "rule_out": "Warm buffy chest apron + razor-thin pencil streaks + clean white belly = Lincoln's Sparrow.",
+      "length_cm": 14.0,
+      "bill_mm": 10.5,
+      "size_display": "14 cm (5.5\")",
+      "bill_display": "10.5 mm",
+      "plate": "assets/sparrow_plates/lincolns_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/lincolns_sparrow.jpg",
+      "photo_caption": "Warm buff chest band with razor-thin pencil streaks, buff mustache, gray supercilium",
+      "crux_photo": "assets/sparrows/lincolns_sparrow.jpg",
+      "crux_caption": "Warm buffy chest apron + razor-thin pencil streaks + clean white belly = Lincoln's Sparrow.",
+      "traits": [
+        "eyering",
+        "streaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "fox_sparrow",
+      "rank": 9,
+      "name": "Fox Sparrow",
+      "sci": "Passerella iliaca",
+      "prob": "4%",
+      "breast": "streaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": true,
+      "plate_key": "fox_sparrow",
+      "primary_photo": "fox_sparrow",
+      "photo_variants": [
+        {
+          "label": "Taiga Red Morph",
+          "key": "fox_sparrow",
+          "caption": "Bulky Towhee-sized body, intense foxy-rust wings and tail, heavy triangular red chevrons",
+          "src": "assets/sparrows/fox_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Size",
+          "mark": "Noticeably huge, bulky plump body (largest native sparrow)"
+        },
+        {
+          "tract": "Plumage",
+          "mark": "Intense brilliant foxy-rust wings, rump, and tail"
+        },
+        {
+          "tract": "Breast",
+          "mark": "Dense triangular arrow-head chevron spots of rust-red"
+        },
+        {
+          "tract": "Bill",
+          "mark": "Dark upper bill with bright yellow lower mandible"
+        }
+      ],
+      "rule_out": "Huge size + brilliant foxy-rust color + triangular chevrons + yellow lower bill = Fox Sparrow.",
+      "length_cm": 18.0,
+      "bill_mm": 13.5,
+      "size_display": "18 cm (7.1\")",
+      "bill_display": "13.5 mm",
+      "plate": "assets/sparrow_plates/fox_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/fox_sparrow.jpg",
+      "photo_caption": "Bulky Towhee-sized body, intense foxy-rust wings and tail, heavy triangular red chevrons",
+      "crux_photo": "assets/sparrows/fox_sparrow.jpg",
+      "crux_caption": "Huge size + brilliant foxy-rust color + triangular chevrons + yellow lower bill = Fox Sparrow.",
+      "traits": [
+        "rufous_cap",
+        "streaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "vesper_sparrow",
+      "rank": 10,
+      "name": "Vesper Sparrow",
+      "sci": "Pooecetes gramineus",
+      "prob": "3%",
+      "breast": "streaked",
+      "eyering": true,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "vesper_sparrow",
+      "primary_photo": "user_photo_vesper",
+      "photo_variants": [
+        {
+          "label": "Your Photo #1",
+          "key": "user_photo_vesper",
+          "caption": "Your photo: Bold white eye-ring, chestnut lesser coverts (shoulder), white-bordered ear patch",
+          "src": "assets/sparrows/user_photo_vesper.jpg"
+        },
+        {
+          "label": "Reference Profile",
+          "key": "vesper_sparrow",
+          "caption": "Field view showing whitish underparts with neat brown streaks",
+          "src": "assets/sparrows/vesper_sparrow.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Eye-Ring",
+          "mark": "Bold, complete, distinct white eye-ring with wide-eyed stare"
+        },
+        {
+          "tract": "Shoulder",
+          "mark": "Chestnut/rufous shoulder patch (lesser coverts) at wing bend"
+        },
+        {
+          "tract": "Ear Patch",
+          "mark": "Dusky ear patch cleanly bordered behind by pale white crescent"
+        },
+        {
+          "tract": "Tail",
+          "mark": "Clean white outer tail feathers that flash in flight"
+        }
+      ],
+      "rule_out": "White eye-ring + chestnut shoulder patch + flashing white outer tail = Vesper Sparrow.",
+      "length_cm": 15.5,
+      "bill_mm": 11.5,
+      "size_display": "15.5 cm (6.1\")",
+      "bill_display": "11.5 mm",
+      "plate": "assets/sparrow_plates/vesper_sparrow_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/user_photo_vesper.jpg",
+      "photo_caption": "Your photo: Bold white eye-ring, chestnut lesser coverts (shoulder), white-bordered ear patch",
+      "crux_photo": "assets/sparrows/user_photo_vesper.jpg",
+      "crux_caption": "White eye-ring + chestnut shoulder patch + flashing white outer tail = Vesper Sparrow.",
+      "traits": [
+        "eyering",
+        "streaked"
+      ],
+      "rarity": "common"
+    },
+    {
+      "id": "house_sparrow_female",
+      "rank": 11,
+      "name": "House Sparrow (Female)",
+      "sci": "Passer domesticus",
+      "prob": "Common",
+      "breast": "unstreaked",
+      "eyering": false,
+      "yellow": false,
+      "pink_bill": false,
+      "rufous_crown": false,
+      "plate_key": "house_sparrow_female",
+      "primary_photo": "house_sparrow_female",
+      "photo_variants": [
+        {
+          "label": "Female Profile",
+          "key": "house_sparrow_female",
+          "caption": "Plain unstreaked dirty-buff breast, prominent creamy eyebrow behind eye, heavy stubby bill",
+          "src": "assets/sparrows/house_sparrow_female.jpg"
+        }
+      ],
+      "diagnostics": [
+        {
+          "tract": "Breast",
+          "mark": "Completely plain, unstreaked dingy grayish-buff underparts"
+        },
+        {
+          "tract": "Face",
+          "mark": "Broad pale creamy-buff eyebrow stripe trailing behind eye"
+        },
+        {
+          "tract": "Bill",
+          "mark": "Heavy, stubby, thick conical finch-like bill"
+        }
+      ],
+      "rule_out": "Unstreaked dingy-buff breast + heavy thick bill + plain pale eyebrow around buildings = Female House Sparrow.",
+      "length_cm": 16.0,
+      "bill_mm": 12.5,
+      "size_display": "16 cm (6.3\")",
+      "bill_display": "12.5 mm",
+      "plate": "assets/sparrow_plates/house_sparrow_female_plate.jpg",
+      "plate_caption": "Standard lateral profile (facing right)",
+      "photo": "assets/sparrows/house_sparrow_female.jpg",
+      "photo_caption": "Plain unstreaked dirty-buff breast, prominent creamy eyebrow behind eye, heavy stubby bill",
+      "crux_photo": "assets/sparrows/house_sparrow_female.jpg",
+      "crux_caption": "Unstreaked dingy-buff breast + heavy thick bill + plain pale eyebrow around buildings = Female House Sparrow.",
+      "traits": [
+        "unstreaked"
+      ],
+      "rarity": "common"
+    }
+  ]
+}

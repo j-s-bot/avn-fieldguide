@@ -1,0 +1,626 @@
+{
+  "id": "grebes",
+  "name": "Grebes & Loons",
+  "title": "Grebes & Loons Disambiguation Guide",
+  "count": 14,
+  "maxCategoryLength": 91.0,
+  "maxCategoryBill": 85.0,
+  "meta": {
+    "groupIds": [
+      "all",
+      "grebe",
+      "loon"
+    ],
+    "groupLabels": {
+      "grebe": "Grebe (Podicipedidae)",
+      "loon": "Loon (Gaviidae)"
+    },
+    "rarityOptions": [
+      "all",
+      "common",
+      "uncommon",
+      "rare"
+    ],
+    "traitLabels": {
+      "chicken_bill": "Chicken Bill",
+      "bill_band": "Bill Band",
+      "straight_chisel_bill": "Straight Chisel Bill",
+      "heavy_dagger_bill": "Heavy Dagger Bill",
+      "yellow_dagger_bill": "Yellow Dagger Bill",
+      "thin_upturned_bill": "Thin Upturned Bill",
+      "uptilted_bill": "Uptilted Bill",
+      "yellow_needle_bill": "Yellow Needle Bill",
+      "white_cheek": "Stark White Cheek",
+      "dusky_cheek": "Dusky / Gray Cheek",
+      "eye_in_black": "Eye in Black Cap",
+      "peaked_crest": "Peaked Triangular Crown",
+      "golden_horns": "Golden Ear Tufts",
+      "red_eye": "Brilliant Ruby Eye",
+      "jagged_neck_notch": "Jagged Neck Notch",
+      "swan_neck": "Long Slender Neck",
+      "white_speckled_back": "White-Speckled Back",
+      "checkerboard_back": "Checkerboard Back",
+      "black_throat_bib": "Black Throat Bib",
+      "red_throat_patch": "Red Throat Patch",
+      "rufous_neck": "Rufous Neck"
+    }
+  },
+  "species": [
+    {
+      "id": "pied_billed_grebe_nonbreeding",
+      "rank": 1,
+      "name": "Pied-billed Grebe (Fall / Winter)",
+      "sci": "Podilymbus podiceps",
+      "prob": "65%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "chicken_bill",
+        "brown_body",
+        "dark_eye",
+        "stocky_build"
+      ],
+      "plate": "assets/grebe_plates/pied_billed_grebe_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Stocky rounded body, warm brownish-tan face and neck with faint dusky eyeline, stubby arched chicken-like bill in pale horn (no black band), dark eye, pale fluffy undertail",
+      "photo": "assets/grebes/pied_billed_grebe_nonbreeding_1.jpg",
+      "photo_caption": "Winter pond view: Stocky warm brown profile, pale horn-colored chicken bill, dark eye, solitary skulking diver",
+      "crux_photo": "assets/grebes/pied_billed_grebe_nonbreeding_2.jpg",
+      "crux_caption": "Head closeup: Stubby, strongly curved culmen; bill is plain pale horn with no dark vertical band in winter",
+      "diagnostics": [
+        {
+          "tract": "Bill Shape (Chicken Bill)",
+          "mark": "Short, stubby, laterally compressed arched bill resembling a domestic chicken; pale ivory-horn without black band in winter."
+        },
+        {
+          "tract": "Head & Eye",
+          "mark": "Warm brownish-tan cheeks and throat with faint diffuse dusky eyeline; dark brownish-black eye (never ruby-red)."
+        },
+        {
+          "tract": "Habits & Habitat",
+          "mark": "Freshwater marsh edges, vegetated farm ponds, and tidal ditches; sinks slowly straight down underwater like a submarine."
+        }
+      ],
+      "rule_out": "Stocky brown body + pale unbanded chicken bill + dark eye + solitary freshwater habit = Non-Breeding Pied-billed Grebe.",
+      "rarity": "common",
+      "length_cm": 34.0,
+      "bill_mm": 23.0,
+      "size_display": "34 cm (13.5\")",
+      "bill_display": "23 mm"
+    },
+    {
+      "id": "horned_grebe_nonbreeding",
+      "rank": 2,
+      "name": "Horned Grebe (Non-Breeding / Winter)",
+      "sci": "Podiceps auritus",
+      "prob": "52%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "straight_chisel_bill",
+        "white_cheek",
+        "red_eye",
+        "black_cap"
+      ],
+      "plate": "assets/grebe_plates/horned_grebe_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Striking crisp black-and-white contrast: clean snow-white cheek extending squarely up to eye level, flat-topped black cap, straight dark chisel bill with pale ivory tip, ruby-red eye",
+      "photo": "assets/grebes/horned_grebe_nonbreeding_1.jpg",
+      "photo_caption": "Winter bay view: Crisp black-and-white head pattern, stark white cheek, brilliant ruby-red eye, straight chisel bill",
+      "crux_photo": "assets/grebes/horned_grebe_nonbreeding_2.jpg",
+      "crux_caption": "Head closeup: Sharp horizontal demarcation between flat black cap and pure white cheek; ruby eye and pale bill tip",
+      "diagnostics": [
+        {
+          "tract": "Head Pattern (The Crux)",
+          "mark": "Stark, crisp black-and-white contrast: pure snow-white cheeks cut cleanly in a straight horizontal line below the flat black cap."
+        },
+        {
+          "tract": "Eye & Bill",
+          "mark": "Piercing brilliant ruby-red eye; straight, dark, needle-chisel bill with a distinct tiny pale ivory/yellow tip."
+        },
+        {
+          "tract": "Head Shape",
+          "mark": "Crown is distinctly flat-topped with a blocky, angular nape (unlike the rounded head of Pied-billed or peaked crest of Eared)."
+        }
+      ],
+      "rule_out": "Stark snow-white cheek up to eye level + flat black cap + ruby-red eye + pale-tipped straight bill = Non-Breeding Horned Grebe.",
+      "rarity": "common",
+      "length_cm": 35.0,
+      "bill_mm": 23.0,
+      "size_display": "35 cm (14.0\")",
+      "bill_display": "23 mm"
+    },
+    {
+      "id": "pied_billed_grebe_breeding",
+      "rank": 3,
+      "name": "Pied-billed Grebe (Breeding)",
+      "sci": "Podilymbus podiceps",
+      "prob": "48%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "chicken_bill",
+        "bill_band",
+        "black_throat_bib",
+        "dark_eye"
+      ],
+      "plate": "assets/grebe_plates/pied_billed_grebe_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Diagnostic ivory-white chicken-like bill with a bold vertical black band encircling the middle, jet-black throat bib, brownish-gray body, dark eye with thin whitish eye-ring",
+      "photo": "assets/grebes/pied_billed_grebe_breeding_1.jpg",
+      "photo_caption": "Breeding marsh view: Bold vertical black ring encircling the pale bill, jet-black throat bib, dark brownish body",
+      "crux_photo": "assets/grebes/pied_billed_grebe_breeding_2.jpg",
+      "crux_caption": "Bill & throat: Complete vertical black bar wrapped around arched ivory bill; contrasting velvety black throat patch",
+      "diagnostics": [
+        {
+          "tract": "Bill Ring (The Crux)",
+          "mark": "Diagnostic vertical black band encircling the middle of the stout, arched, ivory-white bill."
+        },
+        {
+          "tract": "Throat Bib",
+          "mark": "Solid jet-black patch (bib) covering chin and upper throat, contrasting with grayish-brown head."
+        },
+        {
+          "tract": "Eye",
+          "mark": "Dark brown eye encircled by a distinct, thin white eye-ring."
+        }
+      ],
+      "rule_out": "Stout arched whitish bill with vertical black ring + black throat bib = Breeding Pied-billed Grebe.",
+      "rarity": "common",
+      "length_cm": 34.0,
+      "bill_mm": 23.0,
+      "size_display": "34 cm (13.5\")",
+      "bill_display": "23 mm"
+    },
+    {
+      "id": "common_loon_nonbreeding",
+      "rank": 4,
+      "name": "Common Loon (Non-Breeding / Winter)",
+      "sci": "Gavia immer",
+      "prob": "45%",
+      "group": "loon",
+      "traits": [
+        "loon",
+        "heavy_dagger_bill",
+        "jagged_neck_notch",
+        "dark_eye_surround",
+        "large_size"
+      ],
+      "plate": "assets/grebe_plates/common_loon_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Large bulky low-slung body, heavy straight dagger-like bill held horizontal, dark eye surround, diagnostic jagged white notch cutting into dark neck from behind, dark scalloped mantle",
+      "photo": "assets/grebes/common_loon_nonbreeding_1.jpg",
+      "photo_caption": "Winter coastal profile: Heavy straight bill held level, jagged white notch in rear neck, dark eye surround, bulky diver",
+      "crux_photo": "assets/grebes/common_loon_nonbreeding_2.jpg",
+      "crux_caption": "Neck & bill crux: Deep white cutout notch indenting the dark neck collar; massive stout straight dagger bill",
+      "diagnostics": [
+        {
+          "tract": "Neck Notch (The Crux)",
+          "mark": "Diagnostic jagged white indentation or 'notch' cutting deeply into the dark collar on the side/rear of the neck."
+        },
+        {
+          "tract": "Bill Structure & Angle",
+          "mark": "Massive, heavy, straight dagger-like bill (grayish with pale tip), held strictly horizontal/level while swimming."
+        },
+        {
+          "tract": "Face & Eye",
+          "mark": "Eye is surrounded by dark plumage; crown and forehead have a steep, blocky profile with a bump over the bill base."
+        }
+      ],
+      "rule_out": "Large bulky diver + heavy horizontal dagger bill + jagged white neck notch from behind = Non-Breeding Common Loon.",
+      "rarity": "common",
+      "length_cm": 81.0,
+      "bill_mm": 82.0,
+      "size_display": "81 cm (32.0\")",
+      "bill_display": "82 mm"
+    },
+    {
+      "id": "red_throated_loon_nonbreeding",
+      "rank": 5,
+      "name": "Red-throated Loon (Non-Breeding / Winter)",
+      "sci": "Gavia stellata",
+      "prob": "32%",
+      "group": "loon",
+      "traits": [
+        "loon",
+        "uptilted_bill",
+        "white_face",
+        "white_speckled_back",
+        "slender_build"
+      ],
+      "plate": "assets/grebe_plates/red_throated_loon_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Slender delicate build, slender bill distinctly uptilted and held at an upward angle, extensive clean white face extending above eye and down throat, fine white speckling/dots across back",
+      "photo": "assets/grebes/red_throated_loon_nonbreeding_1.jpg",
+      "photo_caption": "Ocean surf view: Slender bill tilted upward, extensive clean white face and foreneck, slender neck, speckled gray back",
+      "crux_photo": "assets/grebes/red_throated_loon_nonbreeding_2.jpg",
+      "crux_caption": "Head & bill profile: Slender bill held at diagnostic upward 15-degree tilt; culmen straight with angled lower mandible gonys",
+      "diagnostics": [
+        {
+          "tract": "Bill & Carriage (The Crux)",
+          "mark": "Slender bill with an angled lower mandible, consistently held tilted upward at an elevated angle ('snobbish' posture)."
+        },
+        {
+          "tract": "Face & Neck",
+          "mark": "Extensive clean white plumage covers the entire chin, throat, and face, extending well above and behind the eye."
+        },
+        {
+          "tract": "Mantle Pattern",
+          "mark": "Upperparts are finely spangled with tiny crisp white dots/speckles (unlike the scalloped broad scales of Common Loon)."
+        }
+      ],
+      "rule_out": "Slender uptilted bill held at an angle + extensive white face above eye + speckled white back = Non-Breeding Red-throated Loon.",
+      "rarity": "common",
+      "length_cm": 63.0,
+      "bill_mm": 52.0,
+      "size_display": "63 cm (25.0\")",
+      "bill_display": "52 mm"
+    },
+    {
+      "id": "common_loon_breeding",
+      "rank": 6,
+      "name": "Common Loon (Breeding)",
+      "sci": "Gavia immer",
+      "prob": "22%",
+      "group": "loon",
+      "traits": [
+        "loon",
+        "heavy_dagger_bill",
+        "checkerboard_back",
+        "striped_necklace",
+        "ruby_eye",
+        "large_size"
+      ],
+      "plate": "assets/grebe_plates/common_loon_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Large muscular diver, iridescent black head/neck, bold striped white necklace and choker, brilliant black-and-white checkerboard mantle, heavy black dagger bill held level, ruby-red eye",
+      "photo": "assets/grebes/common_loon_breeding_1.jpg",
+      "photo_caption": "Breeding plumage: Brilliant checkerboard back, striped white necklace, heavy black dagger bill, ruby-red eye",
+      "crux_photo": "assets/grebes/common_loon_breeding_2.jpg",
+      "crux_caption": "Neck & throat detail: Crisp vertical black-and-white pinstripes on neck collar; heavy chisel black bill",
+      "diagnostics": [
+        {
+          "tract": "Plumage Pattern",
+          "mark": "Solid velvety black head/neck with green-purple sheen; striped white neck patches; spectacular black-and-white checkerboard back."
+        },
+        {
+          "tract": "Bill",
+          "mark": "Massive, stout, entirely jet-black dagger bill held horizontal; powerful diving waterbird."
+        },
+        {
+          "tract": "Eye",
+          "mark": "Deep glowing ruby-red eye contrasting with velvety black head."
+        }
+      ],
+      "rule_out": "Velvet black head + striped white necklace + checkerboard back + heavy black dagger bill = Breeding Common Loon.",
+      "rarity": "uncommon",
+      "length_cm": 81.0,
+      "bill_mm": 82.0,
+      "size_display": "81 cm (32.0\")",
+      "bill_display": "82 mm"
+    },
+    {
+      "id": "horned_grebe_breeding",
+      "rank": 7,
+      "name": "Horned Grebe (Breeding)",
+      "sci": "Podiceps auritus",
+      "prob": "18%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "golden_horns",
+        "rufous_neck",
+        "red_eye",
+        "straight_chisel_bill"
+      ],
+      "plate": "assets/grebe_plates/horned_grebe_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Dramatic bright golden-buff ear tufts ('horns') projecting from above eye, puffy black crested head/chin, rich chestnut-rufous neck, chest, and flanks, ruby-red eye, straight dark bill with pale tip",
+      "photo": "assets/grebes/horned_grebe_breeding_1.jpg",
+      "photo_caption": "Spring plumage view: Brilliant golden horns, black puffy hood, rich cinnamon-rufous neck and flanks, ruby-red eye",
+      "crux_photo": "assets/grebes/horned_grebe_breeding_2.jpg",
+      "crux_caption": "Head closeup: Dense golden-yellow ear tufts originating over lores; black chin and crown; pale-tipped chisel bill",
+      "diagnostics": [
+        {
+          "tract": "Golden Horns (The Crux)",
+          "mark": "Broad, brilliant golden-yellow feather tufts ('horns') starting in front of the eye and sweeping back across the dark crown."
+        },
+        {
+          "tract": "Neck & Underparts",
+          "mark": "Rich, intense chestnut-rufous foreneck, chest, and flanks (contrasting with black chin and white belly)."
+        },
+        {
+          "tract": "Bill & Eye",
+          "mark": "Straight, slender black bill with pale ivory tip; blazing ruby-red eye."
+        }
+      ],
+      "rule_out": "Bright golden horns + black puffy hood + rich chestnut-rufous neck and flanks = Breeding Horned Grebe.",
+      "rarity": "uncommon",
+      "length_cm": 35.0,
+      "bill_mm": 23.0,
+      "size_display": "35 cm (14.0\")",
+      "bill_display": "23 mm"
+    },
+    {
+      "id": "red_necked_grebe_nonbreeding",
+      "rank": 8,
+      "name": "Red-necked Grebe (Non-Breeding / Winter)",
+      "sci": "Podiceps grisegena",
+      "prob": "12%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "yellow_dagger_bill",
+        "dusky_cheek",
+        "large_size"
+      ],
+      "plate": "assets/grebe_plates/red_necked_grebe_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Large heavy grebe (nearly twice Horned Grebe's bulk), long stout straight bill with bright yellow base and dark culmen/tip, dingy dusky-gray cheeks (never clean white), dark cap down to eye level",
+      "photo": "assets/grebes/red_necked_grebe_nonbreeding_1.jpg",
+      "photo_caption": "Winter coastal view: Large heavy build, long stout yellow-based dagger bill, dingy grayish cheek patch, dark cap",
+      "crux_photo": "assets/grebes/red_necked_grebe_nonbreeding_2.jpg",
+      "crux_caption": "Head & bill detail: Long heavy bill with extensive bright yellow base; diffuse dirty-gray cheek (lacks Horned's crisp white)",
+      "diagnostics": [
+        {
+          "tract": "Bill Structure & Color (The Crux)",
+          "mark": "Long, heavy, dagger-like bill with extensive bright yellow at base and lower mandible (conspicuously heavier than Horned)."
+        },
+        {
+          "tract": "Cheek Pattern",
+          "mark": "Cheeks are dingy dusky-gray with diffuse borders, blending into a whitish crescent behind ear coverts (never crisp white)."
+        },
+        {
+          "tract": "Size & Silhouette",
+          "mark": "Much larger, longer-necked, and heavier-bodied than Horned Grebe; approaches loon proportions on open water."
+        }
+      ],
+      "rule_out": "Large heavy grebe + stout yellow-based dagger bill + dingy dusky-gray cheek = Non-Breeding Red-necked Grebe.",
+      "rarity": "uncommon",
+      "length_cm": 48.0,
+      "bill_mm": 52.0,
+      "size_display": "48 cm (19.0\")",
+      "bill_display": "52 mm"
+    },
+    {
+      "id": "red_throated_loon_breeding",
+      "rank": 9,
+      "name": "Red-throated Loon (Breeding)",
+      "sci": "Gavia stellata",
+      "prob": "4%",
+      "group": "loon",
+      "traits": [
+        "loon",
+        "uptilted_bill",
+        "red_throat_patch",
+        "striped_hindneck",
+        "slender_build"
+      ],
+      "plate": "assets/grebe_plates/red_throated_loon_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Slender uptilted bill held slightly elevated, smooth velvet slate-gray head and face, diagnostic rich triangular rufous-chestnut throat patch, fine black-and-white pinstripes down hindneck",
+      "photo": "assets/grebes/red_throated_loon_breeding_1.jpg",
+      "photo_caption": "Spring migrant view: Chestnut-red throat patch, velvety slate-gray head, pinstriped hindneck, slender uptilted bill",
+      "crux_photo": "assets/grebes/red_throated_loon_breeding_2.jpg",
+      "crux_caption": "Throat & neck: Rich rufous-red triangular patch on foreneck; neat vertical black-and-white pinstripes on nape",
+      "diagnostics": [
+        {
+          "tract": "Throat Patch (The Crux)",
+          "mark": "Stark triangular patch of rich, glossy chestnut-red on the center of the foreneck."
+        },
+        {
+          "tract": "Head & Hindneck",
+          "mark": "Velvety smooth slate-gray head and face; hindneck features elegant vertical black-and-white pinstripes."
+        },
+        {
+          "tract": "Mantle & Bill",
+          "mark": "Plain unspotted brownish-gray mantle; slender dark bill held tilted upward at an elevated angle."
+        }
+      ],
+      "rule_out": "Chestnut-red throat patch + velvet slate-gray head + pinstriped hindneck + uptilted bill = Breeding Red-throated Loon.",
+      "rarity": "rare",
+      "length_cm": 63.0,
+      "bill_mm": 52.0,
+      "size_display": "63 cm (25.0\")",
+      "bill_display": "52 mm"
+    },
+    {
+      "id": "red_necked_grebe_breeding",
+      "rank": 10,
+      "name": "Red-necked Grebe (Breeding)",
+      "sci": "Podiceps grisegena",
+      "prob": "3%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "yellow_dagger_bill",
+        "rufous_neck",
+        "white_cheek",
+        "large_size"
+      ],
+      "plate": "assets/grebe_plates/red_necked_grebe_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Large crested grebe, rich warm chestnut-rufous neck and upper breast, contrasting stark silvery-white cheeks, flat black cap with slight rear crest, heavy yellow dagger bill with black culmen",
+      "photo": "assets/grebes/red_necked_grebe_breeding_1.jpg",
+      "photo_caption": "Spring profile: Rich chestnut neck, stark silvery-white cheeks, black cap, heavy yellow dagger bill",
+      "crux_photo": "assets/grebes/red_necked_grebe_breeding_2.jpg",
+      "crux_caption": "Head closeup: Crisp silvery-white cheek contrasting sharply with dark cap and fiery chestnut neck; heavy yellow bill",
+      "diagnostics": [
+        {
+          "tract": "Neck & Cheeks (The Crux)",
+          "mark": "Rich, fiery chestnut-rufous neck and upper breast contrasting sharply with bright, clean silvery-white cheeks."
+        },
+        {
+          "tract": "Bill",
+          "mark": "Heavy, stout dagger-like bill, bright yellow with black culmen ridge and sharp tip."
+        },
+        {
+          "tract": "Cap & Crest",
+          "mark": "Glossy black cap with short double rear crest, cleanly separated from white cheeks."
+        }
+      ],
+      "rule_out": "Rich chestnut neck + stark silvery-white cheeks + heavy yellow dagger bill = Breeding Red-necked Grebe.",
+      "rarity": "rare",
+      "length_cm": 48.0,
+      "bill_mm": 52.0,
+      "size_display": "48 cm (19.0\")",
+      "bill_display": "52 mm"
+    },
+    {
+      "id": "eared_grebe_nonbreeding",
+      "rank": 11,
+      "name": "Eared Grebe (Non-Breeding / Winter)",
+      "sci": "Podiceps nigricollis",
+      "prob": "1.5%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "peaked_crest",
+        "thin_upturned_bill",
+        "dusky_ear_smudge",
+        "red_eye"
+      ],
+      "plate": "assets/grebe_plates/eared_grebe_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Distinctive peaked forehead silhouette (head highest directly above eye), slender thin slightly upturned black bill, dusky auricular smudge across ear coverts (diffuse dirty gray cheek, NOT crisp white), ruby-red eye",
+      "photo": "assets/grebes/eared_grebe_nonbreeding_1.jpg",
+      "photo_caption": "Review vagrant view: Peaked forehead crest over eye, thin upturned bill, dusky ear smudge across cheek, dark neck",
+      "crux_photo": "assets/grebes/eared_grebe_nonbreeding_2.jpg",
+      "crux_caption": "Head silhouette: Crown peaks sharply over eye; slender bill curves slightly upward; dirty dusky wash over ear coverts",
+      "diagnostics": [
+        {
+          "tract": "Head Silhouette & Bill (The Crux)",
+          "mark": "Forehead rises steeply with peak of head directly above the eye (triangular puffy crown); bill is thin and slightly upturned."
+        },
+        {
+          "tract": "Cheek Pattern",
+          "mark": "Dusky-gray auricular smudge extends across the ear coverts; cheeks appear dirty and smudged (never clean white like Horned)."
+        },
+        {
+          "tract": "Neck",
+          "mark": "Foreneck is dusky or mottled dark gray, lacking Horned Grebe's clean white throat and foreneck."
+        }
+      ],
+      "rule_out": "Peaked forehead crown + thin upturned bill + diffuse dusky cheek smudge = Non-Breeding Eared Grebe.",
+      "rarity": "rare",
+      "length_cm": 33.0,
+      "bill_mm": 24.0,
+      "size_display": "33 cm (13.0\")",
+      "bill_display": "24 mm"
+    },
+    {
+      "id": "eared_grebe_breeding",
+      "rank": 12,
+      "name": "Eared Grebe (Breeding)",
+      "sci": "Podiceps nigricollis",
+      "prob": "0.5%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "peaked_crest",
+        "golden_fan_plumes",
+        "black_neck",
+        "thin_upturned_bill",
+        "red_eye"
+      ],
+      "plate": "assets/grebe_plates/eared_grebe_breeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Peaked crested forehead, solid jet-black head, neck, and breast, spectacular fan-like spray of golden-yellow plumes radiating across cheek/ear coverts from behind eye, chestnut flanks, thin upturned bill, ruby-red eye",
+      "photo": "assets/grebes/eared_grebe_breeding_1.jpg",
+      "photo_caption": "Breeding profile: Solid black head and neck, radiating fan of golden cheek plumes, rich chestnut flanks, peaked crest",
+      "crux_photo": "assets/grebes/eared_grebe_breeding_2.jpg",
+      "crux_caption": "Head closeup: Golden cheek plumes fan outward across ear coverts; black neck; thin upturned bill",
+      "diagnostics": [
+        {
+          "tract": "Golden Ear Plumes (The Crux)",
+          "mark": "Spectacular fan-like spray of fine golden-yellow plumes radiating outward across the entire cheek from behind eye."
+        },
+        {
+          "tract": "Head & Neck",
+          "mark": "Solid jet-black head, chin, throat, and entire neck (unlike Horned Grebe's rufous neck)."
+        },
+        {
+          "tract": "Bill & Flanks",
+          "mark": "Thin, upturned black needle bill; rich chestnut-rufous flanks and black back."
+        }
+      ],
+      "rule_out": "Solid black neck + radiating golden cheek plumes + peaked forehead + thin upturned bill = Breeding Eared Grebe.",
+      "rarity": "rare",
+      "length_cm": 33.0,
+      "bill_mm": 24.0,
+      "size_display": "33 cm (13.0\")",
+      "bill_display": "24 mm"
+    },
+    {
+      "id": "western_grebe",
+      "rank": 13,
+      "name": "Western Grebe",
+      "sci": "Aechmophorus occidentalis",
+      "prob": "0.5%",
+      "group": "grebe",
+      "traits": [
+        "grebe",
+        "swan_neck",
+        "yellow_needle_bill",
+        "eye_in_black",
+        "large_size",
+        "red_eye"
+      ],
+      "plate": "assets/grebe_plates/western_grebe_plate.jpg",
+      "plate_caption": "Diagnostic plate: Large graceful swan-like structure with very long slender white neck, long sharp dagger-like greenish-yellow needle bill, solid black cap extending DOWN BELOW the bright red eye (eye in black), dark gray back",
+      "photo": "assets/grebes/western_grebe_1.jpg",
+      "photo_caption": "Pelagic review vagrant view: Extremely long swan-like neck, bright greenish-yellow needle bill, red eye completely surrounded by black",
+      "crux_photo": "assets/grebes/western_grebe_2.jpg",
+      "crux_caption": "Head & eye crux: Black cap extends squarely below the eye so the bright red eye is completely surrounded by black (Clark's has eye in white)",
+      "diagnostics": [
+        {
+          "tract": "Eye Placement (The Crux)",
+          "mark": "Black cap extends clearly below the eye; bright red eye is completely encircled by black plumage (unlike Clark's Grebe)."
+        },
+        {
+          "tract": "Neck & Size",
+          "mark": "Huge grebe with an exceptionally long, slender, graceful swan-like neck (pure white in front, narrow black stripe behind)."
+        },
+        {
+          "tract": "Bill",
+          "mark": "Long, straight, sharply pointed greenish-yellow to olive dagger bill."
+        }
+      ],
+      "rule_out": "Long swan-like neck + bright yellow needle bill + red eye completely enclosed in black cap = Western Grebe.",
+      "rarity": "rare",
+      "length_cm": 63.0,
+      "bill_mm": 75.0,
+      "size_display": "63 cm (25.0\")",
+      "bill_display": "75 mm"
+    },
+    {
+      "id": "pacific_loon_nonbreeding",
+      "rank": 14,
+      "name": "Pacific Loon (Non-Breeding / Winter)",
+      "sci": "Gavia pacifica",
+      "prob": "0.5%",
+      "group": "loon",
+      "traits": [
+        "loon",
+        "slender_straight_bill",
+        "velvety_gray_nape",
+        "chinstrap",
+        "clean_neck_demarcation"
+      ],
+      "plate": "assets/grebe_plates/pacific_loon_nonbreeding_plate.jpg",
+      "plate_caption": "Diagnostic plate: Medium-sized loon structure, slender straight dagger bill held horizontal, smooth velvety silvery-ash-gray nape, clean straight demarcation line down neck, diagnostic thin dark 'chinstrap' necklace across throat",
+      "photo": "assets/grebes/pacific_loon_nonbreeding_1.jpg",
+      "photo_caption": "Winter coastal vagrant: Smooth velvety pale gray nape, straight razor-sharp neck demarcation, dark chinstrap line",
+      "crux_photo": "assets/grebes/pacific_loon_nonbreeding_2.jpg",
+      "crux_caption": "Neck & throat detail: Diagnostic thin dark chinstrap bar across lower throat; smooth silvery nape (lacks Common Loon's neck notch)",
+      "diagnostics": [
+        {
+          "tract": "Nape & Neck Line (The Crux)",
+          "mark": "Nape and hindneck are smooth pale velvety silvery-gray; border between dark hindneck and white foreneck is a crisp straight line (no notch!)."
+        },
+        {
+          "tract": "Chinstrap",
+          "mark": "Often displays a thin, neat dark brownish-gray 'chinstrap' or necklace running horizontally across the lower throat."
+        },
+        {
+          "tract": "Bill & Carriage",
+          "mark": "Slender, straight, dagger-like bill held level/horizontal (smaller and more delicate than Common Loon; not uptilted like Red-throated)."
+        }
+      ],
+      "rule_out": "Slender straight bill held level + velvety silvery-gray nape + clean straight neck demarcation + dark chinstrap = Non-Breeding Pacific Loon.",
+      "rarity": "rare",
+      "length_cm": 66.0,
+      "bill_mm": 54.0,
+      "size_display": "66 cm (26.0\")",
+      "bill_display": "54 mm"
+    }
+  ]
+}

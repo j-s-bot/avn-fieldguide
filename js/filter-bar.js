@@ -53,8 +53,18 @@ function buildBeakSwatchesHtml(speciesList, activeBillColors, includeTwoTone) {
 
   const twoToneBtn = hasMulticolor ? `
     <span class="text-slate-700 mx-0.5">|</span>
-    <button data-action="toggle-bill-two-tone" class="filter-chip px-1.5 py-0.5 rounded text-[10px] font-bold border transition flex items-center gap-1 cursor-pointer ${includeTwoTone ? 'bg-sky-950 text-sky-200 border-sky-500/80 shadow-sm' : 'bg-slate-900 text-slate-400 border-slate-700 opacity-60'}" title="${includeTwoTone ? 'Two-tone & patterned bills INCLUDED (click to show solid monochrome only)' : 'Solid monochrome bills ONLY (click to include two-tone)'}">
-      <span>${includeTwoTone ? '✓ ±Two-Tone' : 'Solid Only'}</span>
+    <button data-action="toggle-bill-two-tone" class="filter-chip px-2 py-0.5 rounded-full text-[10px] font-semibold border transition flex items-center gap-1.5 cursor-pointer ${includeTwoTone ? 'bg-sky-950/90 text-sky-200 border-sky-500/80 shadow-sm hover:border-sky-400' : 'bg-amber-950/90 text-amber-200 border-amber-500/80 shadow-sm hover:border-amber-400'}" title="${includeTwoTone ? 'Two-tone & patterned bills included in search. Click to isolate solid monochrome bills only.' : 'Filtering to solid monochrome bills only. Click to include two-tone bills.'}" aria-label="${includeTwoTone ? 'Two-tone bills included. Click for solid only.' : 'Solid only. Click to include two-tone.'}">
+      ${includeTwoTone ? `
+        <svg class="w-3 h-3 text-sky-400 shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        </svg>
+        <span>Include Two-Tone</span>
+      ` : `
+        <svg class="w-3 h-3 text-amber-400 shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="8" cy="8" r="7"/>
+        </svg>
+        <span>Solid Only</span>
+      `}
     </button>
   ` : '';
 

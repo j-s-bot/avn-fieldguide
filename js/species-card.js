@@ -65,7 +65,7 @@ export function renderSpeciesCard(s, options = {}) {
   if (isCompared) {
     card.className = "bg-slate-900 border-2 border-sky-500 rounded-xl overflow-hidden shadow-lg shadow-sky-950/40 ring-1 ring-sky-500 flex flex-col group transition";
   } else if (isRare) {
-    card.className = "bg-slate-900 border-2 border-amber-500/80 rounded-xl overflow-hidden shadow-lg shadow-amber-950/30 ring-1 ring-amber-500/30 transition hover:border-amber-400 flex flex-col group";
+    card.className = "bg-slate-900/80 border border-slate-800/90 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
   } else {
     card.className = "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm hover:border-slate-700/80 transition flex flex-col group";
   }
@@ -98,15 +98,14 @@ export function renderSpeciesCard(s, options = {}) {
   let rarityCallout = '';
   if (isRare) {
     frequencyBadge = `
-      <span class="text-[11px] font-black px-2 py-0.5 rounded border border-amber-500/80 bg-amber-500/20 text-amber-300 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-        <span class="bg-amber-400 text-slate-950 font-black px-1 rounded-[2px] text-[10px]">R</span>
-        Rare Vagrant
+      <span class="text-[11px] font-mono text-slate-400 bg-slate-950 border border-slate-800 px-2 py-0.5 rounded flex items-center gap-1" title="Low probability eBird vagrant (<0.1% checklists)">
+        <span class="text-slate-600 font-bold">⊘</span> Unlikely Vagrant (&lt;0.1%)
       </span>
     `;
     rarityCallout = `
-      <div class="mt-2 text-[11px] text-amber-200/90 bg-amber-950/30 border border-amber-500/40 rounded p-2 flex items-center justify-between flex-wrap gap-2">
-        <span><strong class="text-amber-300 font-bold">eBird Review Species:</strong> Rare regional vagrant. Detailed documentation required.</span>
-        <span class="text-amber-400 font-mono text-[10px] font-bold">&lt;0.1% eBird freq</span>
+      <div class="mt-2 text-[11px] text-slate-400 bg-slate-950/80 border border-slate-800/80 rounded p-2 flex items-center justify-between flex-wrap gap-2">
+        <span><strong class="text-slate-300 font-semibold">Low-probability vagrant:</strong> Rule out common candidates first.</span>
+        <span class="text-slate-500 font-mono text-[10px]">eBird Review</span>
       </div>
     `;
   } else {

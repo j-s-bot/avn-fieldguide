@@ -250,7 +250,7 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
           <button data-rarity="all" title="Show all eBird status levels" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'all', false)}">All Status</button>
           <button data-rarity="common" title="eBird Common: Expected species (>15% checklists)" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'common')}">Common</button>
           <button data-rarity="uncommon" title="eBird Uncommon: Regular seasonal migrants (1% - 15% checklists)" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'uncommon')}">Uncommon</button>
-          <button data-rarity="rare" title="eBird Rare / Review Species: Vagrants requiring documentation" class="filter-chip px-2 py-1 rounded text-xs font-medium shrink-0 transition cursor-pointer ${activeRarity === 'rare' ? 'bg-amber-500 text-slate-950 font-black ring-1 ring-amber-400 shadow-sm' : 'bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400'}">&#9733; Rare</button>
+          <button data-rarity="rare" title="Low-probability vagrants (<0.1% eBird checklists)" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer flex items-center gap-1 ${activeRarity === 'rare' ? 'bg-slate-800 text-slate-200 border border-slate-600 font-semibold' : 'bg-slate-950 text-slate-500 border border-slate-800/80 hover:text-slate-300 hover:border-slate-700'}"><span class="text-slate-600 font-mono text-[10px]">⊘</span> Unlikely Vagrant</button>
 
           <span class="text-slate-700">|</span>
 
@@ -340,7 +340,7 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
             <button data-rarity="all" class="filter-chip px-2 py-0.5 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'all', false)}">All Status</button>
             <button data-rarity="common" class="filter-chip px-2 py-0.5 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'common')}">Common</button>
             <button data-rarity="uncommon" class="filter-chip px-2 py-0.5 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'uncommon')}">Uncommon</button>
-            <button data-rarity="rare" class="filter-chip px-2 py-0.5 rounded text-xs font-medium shrink-0 transition cursor-pointer ${activeRarity === 'rare' ? 'bg-amber-500 text-slate-950 font-black ring-1 ring-amber-400 shadow-sm' : 'bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400'}">&#9733; Rare</button>
+            <button data-rarity="rare" title="Low-probability vagrants (<0.1% eBird checklists)" class="filter-chip px-2 py-0.5 rounded text-xs shrink-0 transition cursor-pointer flex items-center gap-1 ${activeRarity === 'rare' ? 'bg-slate-800 text-slate-200 border border-slate-600 font-semibold' : 'bg-slate-950 text-slate-500 border border-slate-800/80 hover:text-slate-300 hover:border-slate-700'}"><span class="text-slate-600 font-mono text-[10px]">⊘</span> Unlikely Vagrant</button>
           </div>
 
           ${legSwatchesHtml ? `<span class="text-slate-700">|</span>${legSwatchesHtml}` : ''}

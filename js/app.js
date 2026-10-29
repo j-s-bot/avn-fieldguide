@@ -35,9 +35,10 @@ class FieldguideApp {
     this.activeGroup = 'all'; // shorebirds, terns, grebes, swans
     this.activeRarity = 'all';
     this.activeTraits = new Set();
-    this.activeBillColors = new Set(); // Beak color triage (ducks, terns, swans, shorebirds)
-    this.activeLegColors = new Set(); // Leg color triage (shorebirds)
+    this.activeBillColors = new Set(); // Beak color triage (ducks, terns, swans, shorebirds, gulls)
+    this.activeLegColors = new Set(); // Leg color triage (shorebirds, gulls, terns)
     this.includeTwoTone = true; // Two-tone enabled by default
+    this.openFilterTray = null; // 'group' | 'color' | 'marks' | null
     this.urlSpeciesFilter = null; // Set of allowed species IDs or null
     this.currentSort = 'freq-desc';
 
@@ -65,21 +66,35 @@ class FieldguideApp {
         });
       });
 
+      const hadController = Boolean(navigator.serviceWorker.controller);
       let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (!refreshing) {
+        if (hadController && !refreshing) {
           refreshing = true;
           window.location.reload();
         }
       });
     }
 
-    // Hotkey listener (P for flipping asset mode, Esc handled in lightbox/comparison modal)
+    // Close open filter popover tray when clicking outside #appFilterContainer
+    document.addEventListener('click', (e) => {
+      if (this.openFilterTray && this.filterContainerEl && !this.filterContainerEl.contains(e.target)) {
+        this.openFilterTray = null;
+        this.render();
+      }
+    });
+
+    // Hotkey listener (P for flipping asset mode, Esc closes open filter tray if modals closed)
     window.addEventListener('keydown', (e) => {
       if (e.target && ['input', 'select', 'textarea'].includes(e.target.tagName.toLowerCase())) return;
       const isLightboxOpen = document.getElementById('imageLightboxModal') && !document.getElementById('imageLightboxModal').classList.contains('hidden');
       const isCompareModalOpen = document.getElementById('comparisonModal') && !document.getElementById('comparisonModal').classList.contains('hidden');
       if (isLightboxOpen || isCompareModalOpen) return;
+      if (e.key === 'Escape' && this.openFilterTray) {
+        this.openFilterTray = null;
+        this.render();
+        return;
+      }
       if (e.key === 'p' || e.key === 'P') {
         e.preventDefault();
         this.cycleAssetMode();
@@ -220,6 +235,9 @@ class FieldguideApp {
     this.activeRarity = 'all';
     this.activeTraits.clear();
     this.activeBillColors.clear();
+    this.activeLegColors.clear();
+    this.includeTwoTone = true;
+    this.openFilterTray = null;
     clearComparison();
   }
 
@@ -367,7 +385,7 @@ class FieldguideApp {
         if (s.bill_multicolor) return false;
       }
 
-      // 8b. Leg Color Triage Filter (Shorebirds)
+      // 8b. Leg Color Triage Filter (Shorebirds, Gulls, Terns)
       if (this.activeLegColors.size > 0) {
         const hasMatchingLeg = s.leg_colors && s.leg_colors.some(c => this.activeLegColors.has(c));
         if (!hasMatchingLeg) return false;
@@ -427,7 +445,7 @@ class FieldguideApp {
 
     const filteredSpecies = this.getFilteredSpecies();
 
-    // 1. Render Header
+    // 1. Render Header (Tier 1)
     renderHeader(this.headerEl, {
       activeGuide: this.activeGuideId,
       activeAssetMode: this.currentAssetMode,
@@ -445,7 +463,7 @@ class FieldguideApp {
       onUnhideAll: () => this.unhideAll()
     });
 
-    // 2. Render Filter Bar
+    // 2. Render Anatomical HUD Filter Bar (Tier 2)
     renderFilterBar(this.filterContainerEl, this.guideData, {
       activeBreastFork: this.activeBreastFork,
       activeSex: this.activeSex,
@@ -456,7 +474,10 @@ class FieldguideApp {
       activeBillColors: this.activeBillColors,
       activeLegColors: this.activeLegColors,
       includeTwoTone: this.includeTwoTone,
-      urlSpeciesFilter: this.urlSpeciesFilter
+      urlSpeciesFilter: this.urlSpeciesFilter,
+      openTray: this.openFilterTray,
+      matchCount: filteredSpecies.length,
+      dismissedCount: this.dismissedIds.size
     }, {
       onSetBreastFork: (fork) => {
         this.activeBreastFork = fork;
@@ -475,6 +496,7 @@ class FieldguideApp {
       },
       onSetGroup: (grp) => {
         this.activeGroup = grp;
+        this.openFilterTray = null;
         updateUrlParam('group', grp === 'all' ? null : grp, true, this.activeGuideId);
         this.render();
       },
@@ -513,10 +535,29 @@ class FieldguideApp {
         updateUrlParam('twotone', this.includeTwoTone ? null : 'false', true, this.activeGuideId);
         this.render();
       },
+      onSetTwoTone: (val) => {
+        this.includeTwoTone = Boolean(val);
+        updateUrlParam('twotone', this.includeTwoTone ? null : 'false', true, this.activeGuideId);
+        this.render();
+      },
+      onClearColors: () => {
+        this.activeBillColors.clear();
+        this.activeLegColors.clear();
+        this.includeTwoTone = true;
+        removeUrlParams(['beak', 'bill', 'billcolor', 'beakcolor', 'legs', 'leg', 'legcolor', 'twotone', 'multicolor']);
+        this.render();
+      },
+      onSetOpenTray: (trayId) => {
+        this.openFilterTray = trayId;
+        this.render();
+      },
+      onUnhideAll: () => this.unhideAll(),
       onResetAllFilters: () => {
         this.resetGuideSpecificFilters();
         removeUrlParams([
           'beak', 'bill', 'billcolor', 'beakcolor',
+          'legs', 'leg', 'legcolor',
+          'twotone', 'multicolor',
           'sex', 'gender',
           'rarity', 'status',
           'breast', 'fork', 'underparts',
@@ -529,7 +570,7 @@ class FieldguideApp {
       onCopyShareLink: () => this.copyShareLink()
     });
 
-    // 3. Render Feed
+    // 3. Render Feed (Tier 3)
     this.renderFeedOnly(filteredSpecies);
   }
 
@@ -548,14 +589,9 @@ class FieldguideApp {
 
     // Match Counter update
     const counter = document.getElementById('matchCounter');
+    const totalCount = (this.guideData.species || []).length;
     if (counter) {
-      let label = `${filteredSpecies.length} shown`;
-      if (this.activeGuideId === 'ducks') {
-        if (this.activeRarity === 'rare') label = `${filteredSpecies.length} rare vagrants shown`;
-        else if (this.activeSex === 'drake') label = `${filteredSpecies.length} drakes shown`;
-        else if (this.activeSex === 'hen') label = `${filteredSpecies.length} hens shown`;
-        else label = `${filteredSpecies.length} variants shown`;
-      }
+      let label = `${filteredSpecies.length} / ${totalCount} shown`;
       if (this.dismissedIds.size > 0) {
         label += ` (${this.dismissedIds.size} hidden)`;
       }
@@ -578,7 +614,9 @@ class FieldguideApp {
       this.feedEl.className = 'max-w-3xl mx-auto';
       this.feedEl.innerHTML = `
         <div class="text-center py-16 px-4 bg-slate-900/50 border border-slate-800 rounded-2xl shadow-xl">
-          <div class="text-3xl mb-2">🔍</div>
+          <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
           <h3 class="text-base font-semibold text-slate-200">No species match the active combination</h3>
           <p class="text-xs text-slate-400 mt-1.5">Try deselecting some traits or resetting the filters to view more species.</p>
           <button id="emptyResetBtn" class="mt-4 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white hover:bg-sky-500 transition cursor-pointer">
@@ -593,6 +631,8 @@ class FieldguideApp {
         removeUrlParams([
           'species', 'filter', 'include', 'checklist',
           'beak', 'bill', 'billcolor', 'beakcolor',
+          'legs', 'leg', 'legcolor',
+          'twotone', 'multicolor',
           'sex', 'gender',
           'rarity', 'status',
           'breast', 'fork', 'underparts',

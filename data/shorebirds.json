@@ -121,7 +121,15 @@
       "bill_mm": 20.0,
       "size_display": "26 cm (10.5\")",
       "bill_display": "20 mm",
-      "ebird_code": "kildee"
+      "ebird_code": "kildee",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "semipalmated_plover",
@@ -162,7 +170,17 @@
       "bill_mm": 13.0,
       "size_display": "18 cm (7.0\")",
       "bill_display": "13 mm",
-      "ebird_code": "semplo"
+      "ebird_code": "semplo",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "orange",
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "piping_plover",
@@ -203,7 +221,16 @@
       "bill_mm": 12.0,
       "size_display": "18 cm (7.0\")",
       "bill_display": "12 mm",
-      "ebird_code": "pipplo"
+      "ebird_code": "pipplo",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "orange"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_bellied_plover",
@@ -245,7 +272,15 @@
       "bill_mm": 29.0,
       "size_display": "29 cm (11.5\")",
       "bill_display": "29 mm",
-      "ebird_code": "bkbplo"
+      "ebird_code": "bkbplo",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "american_golden_plover",
@@ -285,7 +320,15 @@
       "bill_mm": 22.0,
       "size_display": "26 cm (10.5\")",
       "bill_display": "22 mm",
-      "ebird_code": "amgplo"
+      "ebird_code": "amgplo",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "greater_yellowlegs",
@@ -325,7 +368,15 @@
       "bill_mm": 56.0,
       "size_display": "36 cm (14.0\")",
       "bill_display": "56 mm",
-      "ebird_code": "greyel"
+      "ebird_code": "greyel",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "lesser_yellowlegs",
@@ -365,7 +416,15 @@
       "bill_mm": 37.0,
       "size_display": "26 cm (10.5\")",
       "bill_display": "37 mm",
-      "ebird_code": "lesyel"
+      "ebird_code": "lesyel",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "solitary_sandpiper",
@@ -406,7 +465,15 @@
       "bill_mm": 30.0,
       "size_display": "21 cm (8.5\")",
       "bill_display": "30 mm",
-      "ebird_code": "solsan"
+      "ebird_code": "solsan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "green"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "spotted_sandpiper_breeding",
@@ -446,7 +513,17 @@
       "bill_mm": 24.0,
       "size_display": "19 cm (7.5\")",
       "bill_display": "24 mm",
-      "ebird_code": "sposan"
+      "ebird_code": "sposan",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "yellow",
+        "orange"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "spotted_sandpiper_nonbreeding",
@@ -486,7 +563,15 @@
       "bill_mm": 24.0,
       "size_display": "19 cm (7.5\")",
       "bill_display": "24 mm",
-      "ebird_code": "sposan"
+      "ebird_code": "sposan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "least_sandpiper",
@@ -526,7 +611,16 @@
       "bill_mm": 18.0,
       "size_display": "14 cm (5.5\")",
       "bill_display": "18 mm",
-      "ebird_code": "leasan"
+      "ebird_code": "leasan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "green",
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "semipalmated_sandpiper",
@@ -566,7 +660,15 @@
       "bill_mm": 19.0,
       "size_display": "15 cm (6.0\")",
       "bill_display": "19 mm",
-      "ebird_code": "semsan"
+      "ebird_code": "semsan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "western_sandpiper",
@@ -606,7 +708,15 @@
       "bill_mm": 25.0,
       "size_display": "16 cm (6.3\")",
       "bill_display": "25 mm",
-      "ebird_code": "wessan"
+      "ebird_code": "wessan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "white_rumped_sandpiper",
@@ -647,7 +757,16 @@
       "bill_mm": 23.0,
       "size_display": "19 cm (7.5\")",
       "bill_display": "23 mm",
-      "ebird_code": "whrsan"
+      "ebird_code": "whrsan",
+      "bill_colors": [
+        "black",
+        "orange"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "sanderling",
@@ -688,7 +807,15 @@
       "bill_mm": 25.0,
       "size_display": "20 cm (8.0\")",
       "bill_display": "25 mm",
-      "ebird_code": "sander"
+      "ebird_code": "sander",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "pectoral_sandpiper",
@@ -729,7 +856,17 @@
       "length_cm": 21.0,
       "bill_mm": 28.5,
       "size_display": "21 cm (8.3\")",
-      "bill_display": "28.5 mm"
+      "bill_display": "28.5 mm",
+      "bill_colors": [
+        "yellow",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "yellow",
+        "green"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "dunlin",
@@ -769,7 +906,15 @@
       "bill_mm": 38.0,
       "size_display": "21 cm (8.5\")",
       "bill_display": "38 mm",
-      "ebird_code": "dunlin"
+      "ebird_code": "dunlin",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "short_billed_dowitcher",
@@ -810,7 +955,16 @@
       "bill_mm": 60.0,
       "size_display": "28 cm (11.0\")",
       "bill_display": "60 mm",
-      "ebird_code": "sbldow"
+      "ebird_code": "sbldow",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "green",
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "long_billed_dowitcher",
@@ -851,7 +1005,16 @@
       "bill_mm": 70.0,
       "size_display": "29 cm (11.5\")",
       "bill_display": "70 mm",
-      "ebird_code": "lobdow"
+      "ebird_code": "lobdow",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "green",
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "stilt_sandpiper",
@@ -892,7 +1055,16 @@
       "bill_mm": 39.0,
       "size_display": "22 cm (8.7\")",
       "bill_display": "39 mm",
-      "ebird_code": "stisan"
+      "ebird_code": "stisan",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "green",
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "willet",
@@ -933,7 +1105,15 @@
       "bill_mm": 57.0,
       "size_display": "38 cm (15.0\")",
       "bill_display": "57 mm",
-      "ebird_code": "willet"
+      "ebird_code": "willet",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "slate"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "hudsonian_godwit",
@@ -975,7 +1155,16 @@
       "bill_mm": 80.0,
       "size_display": "39 cm (15.5\")",
       "bill_display": "80 mm",
-      "ebird_code": "hudgod"
+      "ebird_code": "hudgod",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     }
   ]
 }

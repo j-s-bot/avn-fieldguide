@@ -90,7 +90,12 @@
       "length_cm": 132.0,
       "bill_mm": 95.0,
       "size_display": "132 cm (52.0\")",
-      "bill_display": "95 mm"
+      "bill_display": "95 mm",
+      "bill_colors": [
+        "black",
+        "yellow"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "mute_swan_adult",
@@ -132,7 +137,12 @@
       "length_cm": 150.0,
       "bill_mm": 88.0,
       "size_display": "150 cm (59.0\")",
-      "bill_display": "88 mm"
+      "bill_display": "88 mm",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "tundra_swan_juvenile",
@@ -173,7 +183,11 @@
       "length_cm": 125.0,
       "bill_mm": 90.0,
       "size_display": "125 cm (49.0\")",
-      "bill_display": "90 mm"
+      "bill_display": "90 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "mute_swan_juvenile",
@@ -213,7 +227,11 @@
       "length_cm": 140.0,
       "bill_mm": 84.0,
       "size_display": "140 cm (55.0\")",
-      "bill_display": "84 mm"
+      "bill_display": "84 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "trumpeter_swan_adult",
@@ -261,7 +279,11 @@
       "length_cm": 158.0,
       "bill_mm": 115.0,
       "size_display": "158 cm (62.0\")",
-      "bill_display": "115 mm"
+      "bill_display": "115 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "tundra_swan_black_lores",
@@ -304,7 +326,11 @@
       "length_cm": 132.0,
       "bill_mm": 95.0,
       "size_display": "132 cm (52.0\")",
-      "bill_display": "95 mm"
+      "bill_display": "95 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "trumpeter_swan_juvenile",
@@ -346,7 +372,11 @@
       "length_cm": 145.0,
       "bill_mm": 110.0,
       "size_display": "145 cm (57.0\")",
-      "bill_display": "110 mm"
+      "bill_display": "110 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "trumpeter_swan_yellow_fleck",
@@ -390,7 +420,12 @@
       "length_cm": 158.0,
       "bill_mm": 115.0,
       "size_display": "158 cm (62.0\")",
-      "bill_display": "115 mm"
+      "bill_display": "115 mm",
+      "bill_colors": [
+        "black",
+        "yellow"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "whooper_swan",
@@ -432,7 +467,12 @@
       "length_cm": 152.0,
       "bill_mm": 105.0,
       "size_display": "152 cm (60.0\")",
-      "bill_display": "105 mm"
+      "bill_display": "105 mm",
+      "bill_colors": [
+        "yellow",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "bewicks_swan",
@@ -474,7 +514,12 @@
       "length_cm": 127.0,
       "bill_mm": 90.0,
       "size_display": "127 cm (50.0\")",
-      "bill_display": "90 mm"
+      "bill_display": "90 mm",
+      "bill_colors": [
+        "yellow",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "black_swan",
@@ -514,7 +559,11 @@
       "length_cm": 130.0,
       "bill_mm": 72.0,
       "size_display": "130 cm (51.0\")",
-      "bill_display": "72 mm"
+      "bill_display": "72 mm",
+      "bill_colors": [
+        "red"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "mute_swan_polish",
@@ -554,7 +603,11 @@
       "length_cm": 140.0,
       "bill_mm": 84.0,
       "size_display": "140 cm (55.0\")",
-      "bill_display": "84 mm"
+      "bill_display": "84 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "snow_goose",
@@ -595,7 +648,11 @@
       "length_cm": 71.0,
       "bill_mm": 58.0,
       "size_display": "71 cm (28.0\")",
-      "bill_display": "58 mm"
+      "bill_display": "58 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "domestic_white_goose",
@@ -635,7 +692,11 @@
       "length_cm": 80.0,
       "bill_mm": 65.0,
       "size_display": "80 cm (31.5\")",
-      "bill_display": "65 mm"
+      "bill_display": "65 mm",
+      "bill_colors": [
+        "orange"
+      ],
+      "bill_multicolor": false
     }
   ]
 }

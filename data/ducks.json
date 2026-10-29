@@ -254,7 +254,8 @@
       "bill_display": "55 mm",
       "bill_colors": [
         "yellow"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "mallard_hen",
@@ -296,7 +297,8 @@
       "bill_colors": [
         "orange",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "black_duck",
@@ -337,7 +339,8 @@
       "bill_display": "54 mm",
       "bill_colors": [
         "yellow"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "gadwall_drake",
@@ -379,7 +382,8 @@
       "bill_display": "42 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "gadwall_hen",
@@ -422,7 +426,8 @@
       "bill_colors": [
         "orange",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "wood_duck_drake",
@@ -466,7 +471,8 @@
       "bill_colors": [
         "red",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "wood_duck_hen",
@@ -508,7 +514,8 @@
       "bill_display": "33 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "teal_drake",
@@ -550,7 +557,8 @@
       "bill_display": "36 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "teal_hen",
@@ -591,7 +599,8 @@
       "bill_display": "35 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "ring_necked_drake",
@@ -633,7 +642,8 @@
       "bill_display": "45 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "ring_necked_hen",
@@ -676,7 +686,8 @@
       "bill_display": "44 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "ruddy_duck_male",
@@ -719,7 +730,8 @@
       "bill_display": "41 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "ruddy_duck_female",
@@ -761,7 +773,8 @@
       "bill_display": "40 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "bufflehead_drake",
@@ -804,7 +817,8 @@
       "bill_colors": [
         "blue",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "bufflehead_hen",
@@ -846,7 +860,8 @@
       "bill_display": "26 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "hooded_merganser_drake",
@@ -889,7 +904,8 @@
       "bill_display": "39 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "hooded_merganser_hen",
@@ -932,7 +948,8 @@
       "bill_colors": [
         "orange",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "pintail_drake",
@@ -974,7 +991,8 @@
       "bill_colors": [
         "blue",
         "black"
-      ]
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "pintail_hen",
@@ -1015,7 +1033,8 @@
       "bill_display": "48 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "shoveler_drake",
@@ -1058,7 +1077,8 @@
       "bill_display": "66 mm",
       "bill_colors": [
         "black"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "shoveler_hen",
@@ -1100,7 +1120,8 @@
       "bill_display": "63 mm",
       "bill_colors": [
         "orange"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "wigeon_drake",
@@ -1142,7 +1163,8 @@
       "bill_display": "35 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "wigeon_hen",
@@ -1183,7 +1205,8 @@
       "bill_display": "34 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "scaup_drake",
@@ -1224,7 +1247,8 @@
       "bill_display": "40 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "scaup_hen",
@@ -1266,7 +1290,8 @@
       "bill_display": "39 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "tufted_duck_drake",
@@ -1308,7 +1333,8 @@
       "bill_display": "41 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "tufted_duck_female",
@@ -1351,7 +1377,8 @@
       "bill_display": "40 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "eurasian_wigeon_drake",
@@ -1392,7 +1419,8 @@
       "bill_display": "34 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "eurasian_wigeon_female",
@@ -1433,7 +1461,8 @@
       "bill_display": "33 mm",
       "bill_colors": [
         "blue"
-      ]
+      ],
+      "bill_multicolor": false
     }
   ]
 }

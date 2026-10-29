@@ -95,7 +95,12 @@
       "length_cm": 36.0,
       "bill_mm": 39.0,
       "size_display": "36 cm (14.0\")",
-      "bill_display": "39 mm"
+      "bill_display": "39 mm",
+      "bill_colors": [
+        "orange",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "forsters_tern_nonbreeding",
@@ -137,7 +142,11 @@
       "length_cm": 36.0,
       "bill_mm": 39.0,
       "size_display": "36 cm (14.0\")",
-      "bill_display": "39 mm"
+      "bill_display": "39 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "royal_tern",
@@ -180,7 +189,11 @@
       "length_cm": 50.0,
       "bill_mm": 63.0,
       "size_display": "50 cm (20.0\")",
-      "bill_display": "63 mm"
+      "bill_display": "63 mm",
+      "bill_colors": [
+        "orange"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "common_tern_breeding",
@@ -222,7 +235,12 @@
       "length_cm": 35.0,
       "bill_mm": 36.0,
       "size_display": "35 cm (13.5\")",
-      "bill_display": "36 mm"
+      "bill_display": "36 mm",
+      "bill_colors": [
+        "red",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "common_tern_nonbreeding",
@@ -265,7 +283,11 @@
       "length_cm": 35.0,
       "bill_mm": 36.0,
       "size_display": "35 cm (13.5\")",
-      "bill_display": "36 mm"
+      "bill_display": "36 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "caspian_tern",
@@ -307,7 +329,12 @@
       "length_cm": 53.0,
       "bill_mm": 68.0,
       "size_display": "53 cm (21.0\")",
-      "bill_display": "68 mm"
+      "bill_display": "68 mm",
+      "bill_colors": [
+        "red",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "least_tern",
@@ -349,7 +376,12 @@
       "length_cm": 23.0,
       "bill_mm": 28.0,
       "size_display": "23 cm (9.0\")",
-      "bill_display": "28 mm"
+      "bill_display": "28 mm",
+      "bill_colors": [
+        "yellow",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "black_skimmer",
@@ -391,7 +423,12 @@
       "length_cm": 46.0,
       "bill_mm": 75.0,
       "size_display": "46 cm (18.0\")",
-      "bill_display": "75 mm"
+      "bill_display": "75 mm",
+      "bill_colors": [
+        "red",
+        "black"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "black_tern_breeding",
@@ -432,7 +469,11 @@
       "length_cm": 24.0,
       "bill_mm": 27.0,
       "size_display": "24 cm (9.5\")",
-      "bill_display": "27 mm"
+      "bill_display": "27 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "black_tern_nonbreeding",
@@ -472,7 +513,11 @@
       "length_cm": 24.0,
       "bill_mm": 27.0,
       "size_display": "24 cm (9.5\")",
-      "bill_display": "27 mm"
+      "bill_display": "27 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "gull_billed_tern",
@@ -513,7 +558,11 @@
       "length_cm": 36.0,
       "bill_mm": 34.0,
       "size_display": "36 cm (14.0\")",
-      "bill_display": "34 mm"
+      "bill_display": "34 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "sandwich_tern",
@@ -556,7 +605,12 @@
       "length_cm": 41.0,
       "bill_mm": 52.0,
       "size_display": "41 cm (16.0\")",
-      "bill_display": "52 mm"
+      "bill_display": "52 mm",
+      "bill_colors": [
+        "black",
+        "yellow"
+      ],
+      "bill_multicolor": true
     },
     {
       "id": "roseate_tern",
@@ -590,7 +644,7 @@
         },
         {
           "tract": "Mantle & Underparts",
-          "mark": "Palest of all medium terns\u2014frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."
+          "mark": "Palest of all medium terns—frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."
         }
       ],
       "rule_out": "Tail streamers extending far beyond wingtips at rest + all-black slender bill + frosty pale mantle = Roseate Tern.",
@@ -598,7 +652,11 @@
       "length_cm": 36.0,
       "bill_mm": 38.0,
       "size_display": "36 cm (14.0\")",
-      "bill_display": "38 mm"
+      "bill_display": "38 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "arctic_tern",
@@ -641,7 +699,11 @@
       "length_cm": 36.0,
       "bill_mm": 31.0,
       "size_display": "36 cm (14.0\")",
-      "bill_display": "31 mm"
+      "bill_display": "31 mm",
+      "bill_colors": [
+        "red"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "sooty_tern",
@@ -683,7 +745,11 @@
       "length_cm": 42.0,
       "bill_mm": 44.0,
       "size_display": "42 cm (16.5\")",
-      "bill_display": "44 mm"
+      "bill_display": "44 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     },
     {
       "id": "bridled_tern",
@@ -724,7 +790,11 @@
       "length_cm": 37.0,
       "bill_mm": 40.0,
       "size_display": "37 cm (14.5\")",
-      "bill_display": "40 mm"
+      "bill_display": "40 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false
     }
   ]
 }

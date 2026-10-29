@@ -8,7 +8,9 @@ const DOT_MAP = {
   'blue': 'bg-sky-400',
   'orange': 'bg-orange-400',
   'yellow': 'bg-yellow-400',
+  'green': 'bg-emerald-400',
   'black': 'bg-slate-400 border border-slate-600',
+  'slate': 'bg-slate-400',
   'red': 'bg-rose-500'
 };
 
@@ -124,6 +126,17 @@ export function renderSpeciesCard(s, options = {}) {
       <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border flex items-center gap-1.5 ${currentSort.startsWith('bill') ? 'bg-sky-950/80 text-sky-300 border-sky-500/80 font-bold' : 'bg-slate-800/80 text-slate-300 border-slate-700/80'}" title="Beak length: ${s.bill_display || (s.bill_mm + ' mm')}">
         ${dots ? `<span class="flex items-center gap-0.5 shrink-0">${dots}</span>` : ''}
         <span>${s.bill_display || (s.bill_mm + ' mm')} beak</span>
+      </span>
+    `;
+  }
+
+  let legPill = '';
+  if (s.leg_colors && s.leg_colors.length > 0) {
+    const dots = s.leg_colors.map(c => `<span class="inline-block w-2 h-2 rounded-full ${DOT_MAP[c] || 'bg-slate-400'} shrink-0" title="Legs: ${c}"></span>`).join('');
+    legPill = `
+      <span class="text-[11px] font-semibold tabular-nums px-2 py-0.5 rounded-full border flex items-center gap-1.5 bg-slate-800/80 text-slate-300 border-slate-700/80" title="Leg color: ${s.leg_colors.join(', ')}">
+        <span class="flex items-center gap-0.5 shrink-0">${dots}</span>
+        <span>legs</span>
       </span>
     `;
   }
@@ -309,6 +322,7 @@ export function renderSpeciesCard(s, options = {}) {
               ${frequencyBadge}
               ${sizePill}
               ${billPill}
+                  ${legPill}
               <span class="text-[10px] font-mono-num font-bold text-sky-400/90 bg-sky-950/90 border border-sky-800/50 px-1.5 py-0.5 rounded-full hidden sm:inline" title="Proportion of Category Maximum Stature">${lenPct}% Max</span>
               ${compareBtnHtml}
               <button data-action="dismiss" data-species-id="${s.id}" title="Dismiss this species (rule it out from view)" aria-label="Dismiss ${s.name}" class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-800/60 transition ml-0.5 cursor-pointer">

@@ -19,6 +19,86 @@ function forkBtnClass(isActive) {
   return 'py-2 px-3 rounded-lg text-xs font-bold transition flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 cursor-pointer bg-slate-950 text-slate-400 hover:text-slate-200 hover:bg-slate-900';
 }
 
+function buildBeakSwatchesHtml(speciesList, activeBillColors, includeTwoTone) {
+  const colorsPresent = new Set();
+  let hasMulticolor = false;
+  speciesList.forEach(s => {
+    (s.bill_colors || []).forEach(c => colorsPresent.add(c));
+    if (s.bill_multicolor) hasMulticolor = true;
+  });
+
+  if (colorsPresent.size === 0) return '';
+
+  const colorMeta = [
+    { id: 'blue', name: 'Blue', dotBg: 'bg-sky-400', border: 'border-sky-300/40' },
+    { id: 'orange', name: 'Orange', dotBg: 'bg-orange-400', border: 'border-orange-300/40' },
+    { id: 'yellow', name: 'Yellow', dotBg: 'bg-yellow-400', border: 'border-yellow-300/40' },
+    { id: 'red', name: 'Red', dotBg: 'bg-rose-500', border: 'border-rose-400/40' },
+    { id: 'black', name: 'Dark/Slate', dotBg: 'bg-slate-400', border: 'border-slate-300/50' }
+  ].filter(c => colorsPresent.has(c.id));
+
+  const anyActive = activeBillColors.size > 0;
+
+  const dotsHtml = colorMeta.map(bc => {
+    const isSelected = activeBillColors.has(bc.id);
+    const count = speciesList.filter(s => (s.bill_colors || []).includes(bc.id) && (includeTwoTone || !s.bill_multicolor)).length;
+    const activeStyle = isSelected
+      ? 'ring-2 ring-white scale-125 shadow-lg opacity-100'
+      : (anyActive ? 'opacity-35 hover:opacity-90' : 'opacity-80 hover:opacity-100 hover:scale-125');
+    return `
+      <button data-beak="${bc.id}" title="${bc.name} Beak (${count} matching species) - click to filter" class="w-4 h-4 rounded-full ${bc.dotBg} ${bc.border} transition-all shadow cursor-pointer shrink-0 ${activeStyle}" aria-label="${bc.name} beak"></button>
+    `;
+  }).join('');
+
+  const twoToneBtn = hasMulticolor ? `
+    <span class="text-slate-700 mx-0.5">|</span>
+    <button data-action="toggle-bill-two-tone" class="filter-chip px-1.5 py-0.5 rounded text-[10px] font-bold border transition flex items-center gap-1 cursor-pointer ${includeTwoTone ? 'bg-sky-950 text-sky-200 border-sky-500/80 shadow-sm' : 'bg-slate-900 text-slate-400 border-slate-700 opacity-60'}" title="${includeTwoTone ? 'Two-tone & patterned bills INCLUDED (click to show solid monochrome only)' : 'Solid monochrome bills ONLY (click to include two-tone)'}">
+      <span>${includeTwoTone ? '✓ ±Two-Tone' : 'Solid Only'}</span>
+    </button>
+  ` : '';
+
+  return `
+    <div class="flex items-center gap-1.5 bg-slate-950/90 border border-slate-800 rounded-full px-2 py-1 shrink-0" title="Filter by Beak Color">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none mr-0.5">Beak:</span>
+      ${dotsHtml}
+      ${twoToneBtn}
+    </div>
+  `;
+}
+
+function buildLegSwatchesHtml(speciesList, activeLegColors) {
+  const colorsPresent = new Set();
+  speciesList.forEach(s => (s.leg_colors || []).forEach(c => colorsPresent.add(c)));
+  if (colorsPresent.size === 0) return '';
+
+  const legMeta = [
+    { id: 'yellow', name: 'Yellow Legs', dotBg: 'bg-amber-400', border: 'border-amber-300/40' },
+    { id: 'green', name: 'Green / Olive Legs', dotBg: 'bg-emerald-400', border: 'border-emerald-300/40' },
+    { id: 'orange', name: 'Orange Legs', dotBg: 'bg-orange-400', border: 'border-orange-300/40' },
+    { id: 'black', name: 'Dark / Black Legs', dotBg: 'bg-slate-400', border: 'border-slate-300/50' }
+  ].filter(c => colorsPresent.has(c.id));
+
+  const anyActive = activeLegColors.size > 0;
+
+  const dotsHtml = legMeta.map(lc => {
+    const isSelected = activeLegColors.has(lc.id);
+    const count = speciesList.filter(s => (s.leg_colors || []).includes(lc.id)).length;
+    const activeStyle = isSelected
+      ? 'ring-2 ring-white scale-125 shadow-lg opacity-100'
+      : (anyActive ? 'opacity-35 hover:opacity-90' : 'opacity-80 hover:opacity-100 hover:scale-125');
+    return `
+      <button data-leg="${lc.id}" title="${lc.name} (${count} matching species) - click to filter" class="w-4 h-4 rounded-full ${lc.dotBg} ${lc.border} transition-all shadow cursor-pointer shrink-0 ${activeStyle}" aria-label="${lc.name}"></button>
+    `;
+  }).join('');
+
+  return `
+    <div class="flex items-center gap-1.5 bg-slate-950/90 border border-slate-800 rounded-full px-2 py-1 shrink-0" title="Filter by Leg Color">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none mr-0.5">Legs:</span>
+      ${dotsHtml}
+    </div>
+  `;
+}
+
 export function renderFilterBar(container, guideData, filterState, callbacks = {}) {
   const {
     activeBreastFork = 'all',
@@ -28,6 +108,8 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
     activeRarity = 'all',
     activeTraits = new Set(),
     activeBillColors = new Set(),
+    activeLegColors = new Set(),
+    includeTwoTone = true,
     urlSpeciesFilter = null
   } = filterState;
 
@@ -39,6 +121,8 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
     onSetRarity = () => {},
     onToggleTrait = () => {},
     onToggleBillColor = () => {},
+    onToggleLegColor = () => {},
+    onToggleTwoTone = () => {},
     onResetAllFilters = () => {},
     onClearUrlFilter = () => {},
     onCopyShareLink = () => {}
@@ -90,54 +174,40 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
       </div>
     `;
 
-    const copyBtn = banner.querySelector('#copyShareBtn');
-    if (copyBtn) copyBtn.onclick = onCopyShareLink;
-    const clearBtn = banner.querySelector('#clearChecklistBtn');
-    if (clearBtn) clearBtn.onclick = onClearUrlFilter;
-
+    banner.querySelector('#copyShareBtn').onclick = onCopyShareLink;
+    banner.querySelector('#clearChecklistBtn').onclick = onClearUrlFilter;
     container.appendChild(banner);
   }
 
   // 2. Guide-Specific Filter Panel
-  const panel = document.createElement('section');
-  panel.className = "max-w-7xl mx-auto px-3 sm:px-6 pt-3 pb-1 select-none";
+  const panel = document.createElement('div');
+  panel.className = "max-w-7xl mx-auto px-3 sm:px-6 pt-3";
+
+  const beakSwatchesHtml = buildBeakSwatchesHtml(speciesList, activeBillColors, includeTwoTone);
+  const legSwatchesHtml = buildLegSwatchesHtml(speciesList, activeLegColors);
 
   if (guideId === 'sparrows') {
+    // SPARROWS LAYOUT
     panel.innerHTML = `
-      <div class="bg-slate-900/60 border border-slate-800/90 rounded-2xl p-2.5 sm:p-3 shadow-xl">
-        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-          <!-- Left: Guidance -->
-          <div class="flex items-center gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center font-bold text-xs shrink-0">1</span>
-            <div>
-              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-200">First Field Fork: Underparts</div>
-              <div class="text-[11px] text-slate-400">Look at breast/belly: is it heavily striped or plain?</div>
-            </div>
-          </div>
-
-          <!-- Center: Master Binary Segmented Control -->
-          <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-950/80 rounded-xl flex-1 max-w-xl">
+      <div class="bg-slate-900/60 border border-slate-800/90 rounded-2xl p-2.5 sm:p-3 shadow-xl space-y-2.5">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+          <div class="grid grid-cols-3 gap-1.5 flex-1 bg-slate-950 p-1 rounded-xl border border-slate-800/80">
             <button data-fork="all" class="${forkBtnClass(activeBreastFork === 'all')}">
-              <span>All Sparrows</span>
+              <span>All 11 Sparrows</span>
             </button>
             <button data-fork="streaked" class="${forkBtnClass(activeBreastFork === 'streaked')}">
-              <span>Streaked</span>
+              <span>⚡ Streaked (5)</span>
             </button>
             <button data-fork="unstreaked" class="${forkBtnClass(activeBreastFork === 'unstreaked')}">
-              <span>Clean / Plain</span>
+              <span>🛡️ Plain (6)</span>
             </button>
           </div>
-
-          <!-- Right: Clear Filters -->
-          <div class="flex items-center justify-end">
-            <button id="resetFiltersBtn" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800 transition cursor-pointer">
-              Reset Filters
-            </button>
-          </div>
+          <button id="resetFiltersBtn" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800 transition cursor-pointer self-end sm:self-center">
+            Reset
+          </button>
         </div>
 
-        <!-- Trait Pills Secondary Row -->
-        <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs">
+        <div class="pt-2 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs">
           <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 shrink-0 select-none pl-0.5">Crux Traits:</span>
           ${[
             { id: 'yellow_lores', label: 'Yellow Lores' },
@@ -161,23 +231,15 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
     });
 
   } else if (guideId === 'ducks') {
-    // TWO-ROW DUCK FILTER LAYOUT with 5-color beak swatches
-    const billColorsMeta = meta.billColorsMeta || [
-      { id: 'blue', name: 'Blue Beak', tooltip: 'Blue / Lead-blue Beak (12 species: Scaup, Wigeon, Ring-necked, Pintail Drake, Bufflehead Drake)', dotBg: 'bg-sky-400', border: 'border-sky-300/40' },
-      { id: 'orange', name: 'Orange Beak', tooltip: 'Orange / Two-tone Beak (4 species: Mallard Hen, Gadwall Hen, Shoveler Hen, Merganser Hen)', dotBg: 'bg-orange-400', border: 'border-orange-300/40' },
-      { id: 'yellow', name: 'Yellow Beak', tooltip: 'Yellow / Olive Beak (2 species: Mallard Drake, Black Duck)', dotBg: 'bg-yellow-400', border: 'border-yellow-300/40' },
-      { id: 'black', name: 'Dark / Slate Beak', tooltip: 'Dark / Slate Beak (16 species: Gadwall Drake, Teal, Shoveler Drake, Pintail Hen, etc.)', dotBg: 'bg-slate-400', border: 'border-slate-300/50' },
-      { id: 'red', name: 'Red Beak', tooltip: 'Red / Tri-color Beak (1 species: Wood Duck Drake)', dotBg: 'bg-rose-500', border: 'border-rose-400/40' }
-    ];
-
+    // TWO-ROW DUCK FILTER LAYOUT with 5-color beak swatches & Two-Tone Toggle
     panel.innerHTML = `
       <div class="bg-slate-900/60 border border-slate-800/90 rounded-2xl p-2.5 sm:p-3 shadow-xl space-y-2">
-        <!-- Row 1: Primary Triage (Sex, Rarity, Guild, Beak Color Palette) -->
+        <!-- Row 1: Primary Triage (Sex, Rarity, Guild, Beak Color Palette, Two-Tone Toggle) -->
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
           <!-- Sex filters -->
           <button data-sex="all" title="Show all 29 drake and hen cards" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeSex === 'all')}">All 29</button>
           <button data-sex="drake" title="Filter to male / drake variants only" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeSex === 'drake')}">Drake</button>
-          <button data-sex="hen" title="Filter to female / hen variants only" class="filter-chip px-2.5 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeSex === 'hen')}">Hen (Female)</button>
+          <button data-sex="hen" title="Filter to female / hen variants only" class="filter-chip px-2 py-1 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeSex === 'hen')}">Hen (Female)</button>
 
           <span class="text-slate-700">|</span>
 
@@ -195,17 +257,8 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
 
           <span class="text-slate-700">|</span>
 
-          <!-- 5-Color Beak Swatches (Standalone dots with mouseover tooltips) -->
-          <div class="flex items-center gap-1.5 bg-slate-950/90 border border-slate-800 rounded-full px-2 py-1 shrink-0" title="Filter by Beak Color (hover for species details)">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none mr-0.5">Beak:</span>
-            ${billColorsMeta.map(bc => {
-              const isSelected = activeBillColors.has(bc.id);
-              const activeStyle = isSelected ? 'ring-2 ring-white scale-125 shadow-lg' : 'hover:scale-125 opacity-90 hover:opacity-100';
-              return `
-                <button data-beak="${bc.id}" title="${bc.tooltip || bc.name}" class="w-4 h-4 rounded-full ${bc.dotBg} ${bc.border || 'border border-white/30'} transition-all shadow cursor-pointer shrink-0 ${activeStyle}" aria-label="${bc.name}"></button>
-              `;
-            }).join('')}
-          </div>
+          <!-- Beak Swatches + Two-Tone Toggle -->
+          ${beakSwatchesHtml}
 
           <!-- Reset Button on Far Right -->
           <div class="ml-auto pl-2 shrink-0">
@@ -242,9 +295,6 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
     panel.querySelectorAll('[data-sex]').forEach(btn => {
       btn.onclick = () => onSetSex(btn.getAttribute('data-sex'));
     });
-    panel.querySelectorAll('[data-beak]').forEach(btn => {
-      btn.onclick = () => onToggleBillColor(btn.getAttribute('data-beak'));
-    });
 
   } else {
     // Universal Layout for Gulls, Shorebirds, Terns, Grebes, Swans
@@ -278,7 +328,7 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
 
     panel.innerHTML = `
       <div class="bg-slate-900/60 border border-slate-800/90 rounded-2xl p-2.5 sm:p-3 shadow-xl space-y-2">
-        <!-- Row 1: Groups / Ages & Rarity -->
+        <!-- Row 1: Groups / Ages & Rarity, Legs & Beak Swatches, Two-Tone Toggle -->
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
           ${groupChipsHtml}
 
@@ -289,6 +339,9 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
             <button data-rarity="uncommon" class="filter-chip px-2 py-0.5 rounded text-xs shrink-0 transition cursor-pointer ${chipClass(activeRarity === 'uncommon')}">Uncommon</button>
             <button data-rarity="rare" class="filter-chip px-2 py-0.5 rounded text-xs font-medium shrink-0 transition cursor-pointer ${activeRarity === 'rare' ? 'bg-amber-500 text-slate-950 font-black ring-1 ring-amber-400 shadow-sm' : 'bg-slate-900 text-amber-300 border border-amber-500/50 hover:border-amber-400'}">&#9733; Rare</button>
           </div>
+
+          ${legSwatchesHtml ? `<span class="text-slate-700">|</span>${legSwatchesHtml}` : ''}
+          ${beakSwatchesHtml ? `<span class="text-slate-700">|</span>${beakSwatchesHtml}` : ''}
 
           <!-- Reset Button on Far Right -->
           <div class="ml-auto pl-2 shrink-0">
@@ -328,6 +381,16 @@ export function renderFilterBar(container, guideData, filterState, callbacks = {
   panel.querySelectorAll('[data-trait]').forEach(btn => {
     btn.onclick = () => onToggleTrait(btn.getAttribute('data-trait'));
   });
+  panel.querySelectorAll('[data-beak]').forEach(btn => {
+    btn.onclick = () => onToggleBillColor(btn.getAttribute('data-beak'));
+  });
+  panel.querySelectorAll('[data-leg]').forEach(btn => {
+    btn.onclick = () => onToggleLegColor(btn.getAttribute('data-leg'));
+  });
+  panel.querySelectorAll('[data-action="toggle-bill-two-tone"]').forEach(btn => {
+    btn.onclick = () => onToggleTwoTone();
+  });
+
   const resetBtn = panel.querySelector('#resetFiltersBtn');
   if (resetBtn) resetBtn.onclick = onResetAllFilters;
 

@@ -35,7 +35,9 @@ class FieldguideApp {
     this.activeGroup = 'all'; // shorebirds, terns, grebes, swans
     this.activeRarity = 'all';
     this.activeTraits = new Set();
-    this.activeBillColors = new Set(); // ducks 5-color beak triage
+    this.activeBillColors = new Set(); // Beak color triage (ducks, terns, swans, shorebirds)
+    this.activeLegColors = new Set(); // Leg color triage (shorebirds)
+    this.includeTwoTone = true; // Two-tone enabled by default
     this.urlSpeciesFilter = null; // Set of allowed species IDs or null
     this.currentSort = 'freq-desc';
 
@@ -106,11 +108,27 @@ class FieldguideApp {
     // Apply sort from URL if present
     this.currentSort = routeState.sort || 'freq-desc';
 
-    // Apply beak colors from URL if present (ducks guide only)
-    if (this.activeGuideId === 'ducks' && routeState.billColors && routeState.billColors.length > 0) {
+    // Apply beak colors from URL if present
+    const guideHasBeak = (this.guideData.species || []).some(s => s.bill_colors && s.bill_colors.length > 0);
+    if (guideHasBeak && routeState.billColors && routeState.billColors.length > 0) {
       this.activeBillColors = new Set(routeState.billColors);
-    } else {
+    } else if (isGuideChanged) {
       this.activeBillColors.clear();
+    }
+
+    // Apply two-tone toggle from URL
+    if (routeState.includeTwoTone !== undefined) {
+      this.includeTwoTone = routeState.includeTwoTone;
+    } else if (isGuideChanged) {
+      this.includeTwoTone = true;
+    }
+
+    // Apply leg colors from URL
+    const guideHasLegs = (this.guideData.species || []).some(s => s.leg_colors && s.leg_colors.length > 0);
+    if (guideHasLegs && routeState.legColors && routeState.legColors.length > 0) {
+      this.activeLegColors = new Set(routeState.legColors);
+    } else if (isGuideChanged) {
+      this.activeLegColors.clear();
     }
 
     // Apply rarity from URL if present
@@ -330,10 +348,21 @@ class FieldguideApp {
         if (s.rarity !== this.activeRarity) return false;
       }
 
-      // 8. Ducks 5-Color Beak Triage Filter (OR logic: match if duck has ANY active color)
-      if (this.activeGuideId === 'ducks' && this.activeBillColors.size > 0) {
+      // 8. Beak Color Triage Filter & Two-Tone (Multicolor) Logic
+      if (this.activeBillColors.size > 0) {
         const hasMatchingColor = s.bill_colors && s.bill_colors.some(c => this.activeBillColors.has(c));
         if (!hasMatchingColor) return false;
+        // If Two-Tone is disabled (Solid Only), exclude multi-colored bills
+        if (!this.includeTwoTone && s.bill_multicolor) return false;
+      } else if (!this.includeTwoTone) {
+        // No specific color picked, but user clicked "Solid Only"
+        if (s.bill_multicolor) return false;
+      }
+
+      // 8b. Leg Color Triage Filter (Shorebirds)
+      if (this.activeLegColors.size > 0) {
+        const hasMatchingLeg = s.leg_colors && s.leg_colors.some(c => this.activeLegColors.has(c));
+        if (!hasMatchingLeg) return false;
       }
 
       // 9. Crux Traits (AND logic: must match all selected traits)
@@ -417,6 +446,8 @@ class FieldguideApp {
       activeRarity: this.activeRarity,
       activeTraits: this.activeTraits,
       activeBillColors: this.activeBillColors,
+      activeLegColors: this.activeLegColors,
+      includeTwoTone: this.includeTwoTone,
       urlSpeciesFilter: this.urlSpeciesFilter
     }, {
       onSetBreastFork: (fork) => {
@@ -461,6 +492,17 @@ class FieldguideApp {
         if (this.activeBillColors.has(color)) this.activeBillColors.delete(color);
         else this.activeBillColors.add(color);
         updateUrlParam('beak', this.activeBillColors.size > 0 ? Array.from(this.activeBillColors) : null, true, this.activeGuideId);
+        this.render();
+      },
+      onToggleLegColor: (color) => {
+        if (this.activeLegColors.has(color)) this.activeLegColors.delete(color);
+        else this.activeLegColors.add(color);
+        updateUrlParam('legs', this.activeLegColors.size > 0 ? Array.from(this.activeLegColors) : null, true, this.activeGuideId);
+        this.render();
+      },
+      onToggleTwoTone: () => {
+        this.includeTwoTone = !this.includeTwoTone;
+        updateUrlParam('twotone', this.includeTwoTone ? null : 'false', true, this.activeGuideId);
         this.render();
       },
       onResetAllFilters: () => {

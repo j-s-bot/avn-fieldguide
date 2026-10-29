@@ -30,11 +30,6 @@
       "rare"
     ],
     "traitLabels": {
-      "orange_black_bill": "Orange/Red + Black Tip",
-      "all_black_bill": "All-Black Bill",
-      "carrot_orange_bill": "Carrot-Orange Bill",
-      "blood_red_bill": "Blood-Red Coral Bill",
-      "yellow_tip_bill": "Yellow-Tipped Bill",
       "thick_black_bill": "Thick Gull-like Bill",
       "knife_bill": "Unequal Knife Bill",
       "black_body": "Black Body / Head",
@@ -47,11 +42,7 @@
       "pale_primaries": "Silvery Pale Primaries",
       "dark_primaries": "Dark Outer Primaries",
       "long_streamers": "Deep Tail Streamers",
-      "white_triangle": "White Underwing Triangle",
-      "orange_red_legs": "Orange-Red Legs",
-      "black_legs": "Black Legs",
-      "yellow_legs": "Yellow Legs",
-      "short_legs": "Very Short Red Legs"
+      "white_triangle": "White Underwing Triangle"
     }
   },
   "species": [
@@ -100,7 +91,12 @@
         "orange",
         "black"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "orange",
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "forsters_tern_nonbreeding",
@@ -146,7 +142,12 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "orange",
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "royal_tern",
@@ -193,7 +194,11 @@
       "bill_colors": [
         "orange"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "common_tern_breeding",
@@ -240,7 +245,12 @@
         "red",
         "black"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "red",
+        "orange"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "common_tern_nonbreeding",
@@ -287,7 +297,12 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red",
+        "orange"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "caspian_tern",
@@ -334,7 +349,11 @@
         "red",
         "black"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "least_tern",
@@ -381,7 +400,11 @@
         "yellow",
         "black"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_skimmer",
@@ -428,7 +451,12 @@
         "red",
         "black"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "red",
+        "orange"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_tern_breeding",
@@ -473,7 +501,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_tern_nonbreeding",
@@ -517,7 +549,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "gull_billed_tern",
@@ -562,7 +598,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "sandwich_tern",
@@ -610,7 +650,11 @@
         "black",
         "yellow"
       ],
-      "bill_multicolor": true
+      "bill_multicolor": true,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "roseate_tern",
@@ -644,7 +688,7 @@
         },
         {
           "tract": "Mantle & Underparts",
-          "mark": "Palest of all medium terns—frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."
+          "mark": "Palest of all medium terns\u2014frosty silvery-white mantle; breast shows a delicate faint pinkish-rose blush in spring."
         }
       ],
       "rule_out": "Tail streamers extending far beyond wingtips at rest + all-black slender bill + frosty pale mantle = Roseate Tern.",
@@ -656,7 +700,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "arctic_tern",
@@ -703,7 +751,11 @@
       "bill_colors": [
         "red"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "sooty_tern",
@@ -749,7 +801,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "bridled_tern",
@@ -794,7 +850,11 @@
       "bill_colors": [
         "black"
       ],
-      "bill_multicolor": false
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     }
   ]
 }

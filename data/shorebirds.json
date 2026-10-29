@@ -51,18 +51,6 @@
       [
         "upturned_bill",
         "droop_bill"
-      ],
-      [
-        "yellow_legs",
-        "dark_legs"
-      ],
-      [
-        "yellow_legs",
-        "orange_legs"
-      ],
-      [
-        "dark_legs",
-        "orange_legs"
       ]
     ],
     "traitLabels": {
@@ -70,9 +58,6 @@
       "long_straight_bill": "Long Straight Bill",
       "upturned_bill": "Upturned Bill",
       "droop_bill": "Droop-Tipped Bill",
-      "yellow_legs": "Yellow Legs",
-      "dark_legs": "Dark / Black Legs",
-      "orange_legs": "Orange Legs",
       "white_rump": "White Rump Patch",
       "bold_wing_stripe": "Bold Wing Stripe",
       "black_axillaries": "Black Armpits",

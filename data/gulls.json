@@ -40,14 +40,7 @@
       "dark_mantle": "Dark Slate Mantle",
       "black_mantle": "Jet-Black Mantle",
       "white_mantle": "Pure White Mantle",
-      "pink_legs": "Pink Legs",
-      "yellow_legs": "Yellow Legs",
-      "black_legs": "Black Legs",
-      "red_legs": "Red Legs",
-      "bill_ring": "Black Bill Ring",
       "red_spot": "Red Gonys Spot",
-      "black_bill": "All-Black Bill",
-      "two_toned_bill": "Two-Toned Bill",
       "black_hood": "Full Dark Hood",
       "ear_spot": "Dark Ear Spot",
       "tar_collar": "Black Hindneck Collar",
@@ -99,7 +92,16 @@
       "length_cm": 45.0,
       "bill_mm": 40.0,
       "size_display": "45 cm (17.5\")",
-      "bill_display": "40 mm"
+      "bill_display": "40 mm",
+      "bill_colors": [
+        "yellow",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "ring_billed_gull_immature",
@@ -140,7 +142,16 @@
       "length_cm": 45.0,
       "bill_mm": 40.0,
       "size_display": "45 cm (17.5\")",
-      "bill_display": "40 mm"
+      "bill_display": "40 mm",
+      "bill_colors": [
+        "pink",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "herring_gull_adult",
@@ -183,7 +194,16 @@
       "length_cm": 61.0,
       "bill_mm": 56.0,
       "size_display": "61 cm (24.0\")",
-      "bill_display": "56 mm"
+      "bill_display": "56 mm",
+      "bill_colors": [
+        "yellow",
+        "red"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "herring_gull_immature",
@@ -223,7 +243,15 @@
       "length_cm": 61.0,
       "bill_mm": 56.0,
       "size_display": "61 cm (24.0\")",
-      "bill_display": "56 mm"
+      "bill_display": "56 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "great_black_backed_gull_adult",
@@ -265,7 +293,16 @@
       "length_cm": 75.0,
       "bill_mm": 65.0,
       "size_display": "75 cm (30.0\")",
-      "bill_display": "65 mm"
+      "bill_display": "65 mm",
+      "bill_colors": [
+        "yellow",
+        "red"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "great_black_backed_gull_immature",
@@ -305,7 +342,16 @@
       "length_cm": 75.0,
       "bill_mm": 65.0,
       "size_display": "75 cm (30.0\")",
-      "bill_display": "65 mm"
+      "bill_display": "65 mm",
+      "bill_colors": [
+        "pink",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "laughing_gull_breeding",
@@ -347,7 +393,16 @@
       "length_cm": 41.0,
       "bill_mm": 41.0,
       "size_display": "41 cm (16.0\")",
-      "bill_display": "41 mm"
+      "bill_display": "41 mm",
+      "bill_colors": [
+        "red",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "laughing_gull_winter",
@@ -389,7 +444,15 @@
       "length_cm": 41.0,
       "bill_mm": 41.0,
       "size_display": "41 cm (16.0\")",
-      "bill_display": "41 mm"
+      "bill_display": "41 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "bonapartes_gull_adult",
@@ -432,7 +495,15 @@
       "length_cm": 33.0,
       "bill_mm": 24.0,
       "size_display": "33 cm (13.0\")",
-      "bill_display": "24 mm"
+      "bill_display": "24 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "bonapartes_gull_immature",
@@ -474,7 +545,15 @@
       "length_cm": 33.0,
       "bill_mm": 24.0,
       "size_display": "33 cm (13.0\")",
-      "bill_display": "24 mm"
+      "bill_display": "24 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "lesser_black_backed_gull_adult",
@@ -517,7 +596,16 @@
       "length_cm": 53.0,
       "bill_mm": 52.0,
       "size_display": "53 cm (21.0\")",
-      "bill_display": "52 mm"
+      "bill_display": "52 mm",
+      "bill_colors": [
+        "yellow",
+        "red"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "yellow"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "lesser_black_backed_gull_immature",
@@ -558,7 +646,15 @@
       "length_cm": 53.0,
       "bill_mm": 52.0,
       "size_display": "53 cm (21.0\")",
-      "bill_display": "52 mm"
+      "bill_display": "52 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "iceland_gull_adult",
@@ -601,7 +697,16 @@
       "length_cm": 55.0,
       "bill_mm": 42.0,
       "size_display": "55 cm (21.5\")",
-      "bill_display": "42 mm"
+      "bill_display": "42 mm",
+      "bill_colors": [
+        "yellow",
+        "red"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "iceland_gull_immature",
@@ -642,7 +747,15 @@
       "length_cm": 55.0,
       "bill_mm": 42.0,
       "size_display": "55 cm (21.5\")",
-      "bill_display": "42 mm"
+      "bill_display": "42 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "glaucous_gull_adult",
@@ -684,7 +797,16 @@
       "length_cm": 68.0,
       "bill_mm": 60.0,
       "size_display": "68 cm (27.0\")",
-      "bill_display": "60 mm"
+      "bill_display": "60 mm",
+      "bill_colors": [
+        "yellow",
+        "red"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "glaucous_gull_immature",
@@ -726,7 +848,16 @@
       "length_cm": 68.0,
       "bill_mm": 60.0,
       "size_display": "68 cm (27.0\")",
-      "bill_display": "60 mm"
+      "bill_display": "60 mm",
+      "bill_colors": [
+        "pink",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "pink"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_headed_gull_adult",
@@ -768,7 +899,16 @@
       "length_cm": 37.0,
       "bill_mm": 34.0,
       "size_display": "37 cm (14.5\")",
-      "bill_display": "34 mm"
+      "bill_display": "34 mm",
+      "bill_colors": [
+        "red",
+        "black"
+      ],
+      "bill_multicolor": true,
+      "leg_colors": [
+        "red"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_legged_kittiwake_adult",
@@ -810,7 +950,15 @@
       "length_cm": 41.0,
       "bill_mm": 36.0,
       "size_display": "41 cm (16.0\")",
-      "bill_display": "36 mm"
+      "bill_display": "36 mm",
+      "bill_colors": [
+        "yellow"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     },
     {
       "id": "black_legged_kittiwake_immature",
@@ -853,7 +1001,15 @@
       "length_cm": 41.0,
       "bill_mm": 36.0,
       "size_display": "41 cm (16.0\")",
-      "bill_display": "36 mm"
+      "bill_display": "36 mm",
+      "bill_colors": [
+        "black"
+      ],
+      "bill_multicolor": false,
+      "leg_colors": [
+        "black"
+      ],
+      "leg_multicolor": false
     }
   ]
 }

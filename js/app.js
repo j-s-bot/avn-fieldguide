@@ -64,6 +64,14 @@ class FieldguideApp {
           console.debug('ServiceWorker registration skipped:', err);
         });
       });
+
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
     }
 
     // Hotkey listener (P for flipping asset mode, Esc handled in lightbox/comparison modal)

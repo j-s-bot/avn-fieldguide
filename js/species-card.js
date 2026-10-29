@@ -11,7 +11,8 @@ const DOT_MAP = {
   'green': 'bg-emerald-400',
   'black': 'bg-slate-400 border border-slate-600',
   'slate': 'bg-slate-400',
-  'red': 'bg-rose-500'
+  'red': 'bg-rose-500',
+  'pink': 'bg-rose-300 border border-rose-200/40'
 };
 
 function variantBtnClass(isActive) {

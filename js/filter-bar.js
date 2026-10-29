@@ -34,6 +34,7 @@ function buildBeakSwatchesHtml(speciesList, activeBillColors, includeTwoTone) {
     { id: 'orange', name: 'Orange', dotBg: 'bg-orange-400', border: 'border-orange-300/40' },
     { id: 'yellow', name: 'Yellow', dotBg: 'bg-yellow-400', border: 'border-yellow-300/40' },
     { id: 'red', name: 'Red', dotBg: 'bg-rose-500', border: 'border-rose-400/40' },
+    { id: 'pink', name: 'Pink', dotBg: 'bg-rose-300', border: 'border-rose-200/40' },
     { id: 'black', name: 'Dark/Slate', dotBg: 'bg-slate-400', border: 'border-slate-300/50' }
   ].filter(c => colorsPresent.has(c.id));
 
@@ -75,6 +76,8 @@ function buildLegSwatchesHtml(speciesList, activeLegColors) {
     { id: 'yellow', name: 'Yellow Legs', dotBg: 'bg-amber-400', border: 'border-amber-300/40' },
     { id: 'green', name: 'Green / Olive Legs', dotBg: 'bg-emerald-400', border: 'border-emerald-300/40' },
     { id: 'orange', name: 'Orange Legs', dotBg: 'bg-orange-400', border: 'border-orange-300/40' },
+    { id: 'pink', name: 'Pink / Flesh Legs', dotBg: 'bg-rose-300', border: 'border-rose-200/40' },
+    { id: 'red', name: 'Red Legs', dotBg: 'bg-rose-500', border: 'border-rose-400/40' },
     { id: 'black', name: 'Dark / Black Legs', dotBg: 'bg-slate-400', border: 'border-slate-300/50' }
   ].filter(c => colorsPresent.has(c.id));
 
